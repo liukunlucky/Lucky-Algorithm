@@ -1,10 +1,50 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/monkey/.ohos/config/default_Lucky_Algorithm_Ki8GD1tAYfdd3QUv1F06cPYoM-n2bXD4Cc-J1rVLb9w=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B9BE73FBA72F11F12B6215B52474A5AC77B1BCB7E1016AFA32C5A327A5F28B67FF237E4AB89E0F4",
+          "profile": "/Users/monkey/.ohos/config/default_Lucky_Algorithm_Ki8GD1tAYfdd3QUv1F06cPYoM-n2bXD4Cc-J1rVLb9w=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/monkey/.ohos/config/default_Lucky_Algorithm_Ki8GD1tAYfdd3QUv1F06cPYoM-n2bXD4Cc-J1rVLb9w=.p12",
+          "storePassword": "0000001B03E3698C7134E84D33910EEE8D544D6429250C77431C090028887F41D9701CAE57E8D05558D70A"
+        }
+      },
+      {
+        "name": "release",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/release.p12",
+          "storePassword": "0000001FFC6D822EAEF8FD4D7301AA664898FD76792647E5FACDCF8B88E164AAF230E5F6A1B69E3FF0AAB2E9EB0260",
+          "keyAlias": "lucky_algorithm",
+          "keyPassword": "0000001F2D708F337085DFB2D2A506239D4785177F5C9998A6CC06E11B3EE90452E29B0F151B53845815507D9FF027",
+          "signAlg": "SHA256withECDSA",
+          "profile": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/algorithm-profileRelease.p7b",
+          "certpath": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/algorithm_release.cer"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
         "signingConfig": "default",
+        "targetSdkVersion": "5.0.5(17)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      },
+      {
+        "name": "release",
+        "signingConfig": "release",
         "targetSdkVersion": "5.0.5(17)",
         "compatibleSdkVersion": "5.0.5(17)",
         "runtimeOS": "HarmonyOS",
@@ -33,7 +73,8 @@
         {
           "name": "default",
           "applyToProducts": [
-            "default"
+            "default",
+            "release"
           ]
         }
       ]

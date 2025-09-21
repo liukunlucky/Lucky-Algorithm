@@ -1,0 +1,23 @@
+#!/bin/bash
+# HarmonyOS hvigorw wrapper script
+
+# Check if DevEco Studio is installed and use its hvigor
+if [ -d "/Applications/DevEco Studio.app" ]; then
+    DEVECO_PATH="/Applications/DevEco Studio.app/Contents/tools/hvigor"
+    if [ -f "$DEVECO_PATH/hvigor" ]; then
+        exec "$DEVECO_PATH/hvigor" "$@"
+    fi
+fi
+
+# Try to use npx hvigor
+if command -v npx >/dev/null 2>&1; then
+    exec npx hvigor "$@"
+fi
+
+# Try to use local node_modules
+if [ -f "./node_modules/.bin/hvigor" ]; then
+    exec "./node_modules/.bin/hvigor" "$@"
+fi
+
+echo "Error: hvigor not found. Please install DevEco Studio or run 'npm install @ohos/hvigor'"
+exit 1

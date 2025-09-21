@@ -1,13 +1,29 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { DatabaseHelper } from '../database/DatabaseHelper';
+import { WindowAbility } from './WindowAbility';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
+  onCreate(_want: Want, _launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+    this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
+    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+    WindowAbility.getInstance().initContext(this.context);
+    // 初始化数据库
+    this.initDatabase();
+  }
+
+  private async initDatabase(): Promise<void> {
+    try {
+      const dbHelper = DatabaseHelper.getInstance();
+      await dbHelper.initDatabase(this.context);
+      hilog.info(DOMAIN, 'testTag', '%{public}s', 'Database initialized successfully');
+    } catch (error) {
+      hilog.error(DOMAIN, 'testTag', 'Failed to initialize database: %{public}s', JSON.stringify(error));
+    }
   }
 
   onDestroy(): void {
