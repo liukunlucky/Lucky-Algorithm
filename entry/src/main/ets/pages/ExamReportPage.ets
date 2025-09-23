@@ -1,23 +1,79 @@
 import router from '@ohos.router';
-import { ExamRecordModel, ExamProblemResult } from '../model/ExamRecordModel';
+import { ExamRecordModel, ExamProblemResult, ExamMode } from '../model/ExamRecordModel';
 import { ProblemModel, ChoiceOption } from '../model/ProblemModel';
 
 interface ExamReportParams {
   examRecord: ExamRecordModel;
 }
 
+interface ExamRecordData {
+  id: number;
+  date: string;
+  mode: ExamMode;
+  score: number;
+  duration: number;
+  problemResults: ExamProblemResult[];
+  totalProblems: number;
+  correctCount: number;
+  timeUsed: number;
+  startTime: string;
+  endTime: string;
+}
+
 @Entry
 @Component
 struct ExamReportPage {
   @State examRecord: ExamRecordModel | null = null;
-  @State showProblemDetail: boolean = false;
-  @State selectedProblem: ExamProblemResult | null = null;
 
   aboutToAppear() {
-    const params = router.getParams() as ExamReportParams;
-    if (params && params.examRecord) {
-      this.examRecord = params.examRecord;
-      console.info(`ExamReportPage: Loaded examRecord with score=${this.examRecord.score}, accuracy=${this.examRecord.getAccuracyRate()}%`);
+    try {
+      const params = router.getParams() as Record<string, object>;
+      console.log('lucky exam report params = ' + JSON.stringify(params));
+
+      if (params && params.examRecord) {
+        // 将JSON对象转换为ExamRecordModel实例
+        const recordData = params.examRecord as ExamRecordData;
+        const examRecord = new ExamRecordModel();
+
+        // 安全地复制所有属性
+        examRecord.id = recordData.id || 0;
+        examRecord.date = recordData.date || '';
+        examRecord.mode = recordData.mode || ExamMode.QUICK;
+        examRecord.score = recordData.score || 0;
+        examRecord.duration = recordData.duration || 0;
+        examRecord.problemResults = recordData.problemResults || [];
+        examRecord.totalProblems = recordData.totalProblems || 0;
+        examRecord.correctCount = recordData.correctCount || 0;
+        examRecord.timeUsed = recordData.timeUsed || 0;
+
+        // 安全地处理日期转换
+        if (recordData.startTime) {
+          try {
+            examRecord.startTime = new Date(recordData.startTime);
+          } catch (e) {
+            examRecord.startTime = new Date();
+          }
+        } else {
+          examRecord.startTime = new Date();
+        }
+
+        if (recordData.endTime) {
+          try {
+            examRecord.endTime = new Date(recordData.endTime);
+          } catch (e) {
+            examRecord.endTime = new Date();
+          }
+        } else {
+          examRecord.endTime = new Date();
+        }
+
+        this.examRecord = examRecord;
+        console.info(`ExamReportPage: Loaded examRecord with score=${this.examRecord.score}, accuracy=${this.examRecord.getAccuracyRate()}%`);
+      } else {
+        console.error('ExamReportPage: No examRecord found in params');
+      }
+    } catch (error) {
+      console.error('ExamReportPage: Error loading examRecord:', error);
     }
   }
 
@@ -34,37 +90,39 @@ struct ExamReportPage {
         .justifyContent(FlexAlign.Center)
         .alignItems(HorizontalAlign.Center)
       } else {
-      Column({ space: 0 }) {
-        // 顶部导航栏
-        this.buildHeader()
+        Column({ space: 0 }) {
+          // 顶部导航栏
+          this.buildHeader()
 
-        Scroll() {
-          Column({ space: 16 }) {
-            // 成绩概览卡片
-            this.buildScoreOverview()
+          Scroll() {
+            Column({ space: 16 }) {
+              // 成绩概览卡片
+              this.buildScoreOverview()
 
-            // 详细统计卡片
-            this.buildDetailedStats()
+              // 详细统计卡片
+              this.buildDetailedStats()
 
-            // 题目结果列表
-            this.buildProblemResults()
+              // 题目结果列表
+              this.buildProblemResults()
 
-            // 操作按钮
-            this.buildActions()
+              // 操作按钮
+              this.buildActions()
+            }
+            .width('100%')
+            .padding({
+              left: 16,
+              right: 16,
+              top: 16,
+              bottom: 16
+            })
           }
-          .width('100%')
-          .padding({ left: 16, right: 16, top: 16, bottom: 16 })
+          .layoutWeight(1)
         }
-        .layoutWeight(1)
-      }
-      .width('100%')
-      .height('100%')
-      .backgroundColor('#f5f5f5')
+        .width('100%')
+        .height('100%')
+        .backgroundColor('#f5f5f5')
 
-      // 题目详情对话框
-      if (this.showProblemDetail && this.selectedProblem) {
-        this.buildProblemDetailDialog()
-      }
+        // 题目详情对话框已移除，点击直接跳转到题目详情页面
       }
     }
     .width('100%')
@@ -75,37 +133,39 @@ struct ExamReportPage {
   buildHeader() {
     Row() {
       Button() {
-        Image($r('app.media.arrow_left_icon'))
-          .width(20)
-          .height(20)
-          .fillColor('#1890ff')
+        Image($r('app.media.icon_back'))
+          .width(24)
+          .height(24)
       }
       .backgroundColor('transparent')
       .onClick(() => {
         router.back();
       })
 
-      Blank()
-
       Text('考核报告')
         .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor('#333333')
+        .layoutWeight(1)
+        .textAlign(TextAlign.Center)
 
-      Blank()
 
-      Button('分享')
-        .fontSize(16)
-        .fontColor('#1890ff')
-        .backgroundColor('transparent')
-        .onClick(() => {
-          this.shareReport();
-        })
+      Blank().width(20)
     }
     .width('100%')
-    .padding({ left: 16, right: 16, top: 12, bottom: 12 })
+    .padding({
+      left: 16,
+      right: 16,
+      top: 12,
+      bottom: 12
+    })
     .backgroundColor('#ffffff')
-    .shadow({ radius: 2, color: '#00000010', offsetX: 0, offsetY: 1 })
+    .shadow({
+      radius: 2,
+      color: '#00000010',
+      offsetX: 0,
+      offsetY: 1
+    })
   }
 
   @Builder
@@ -127,7 +187,12 @@ struct ExamReportPage {
           .fontWeight(FontWeight.Medium)
           .fontColor(this.getScoreColor())
           .backgroundColor(this.getScoreColor() + '20')
-          .padding({ left: 12, right: 12, top: 6, bottom: 6 })
+          .padding({
+            left: 12,
+            right: 12,
+            top: 6,
+            bottom: 6
+          })
           .borderRadius(16)
       }
       .justifyContent(FlexAlign.Center)
@@ -135,11 +200,6 @@ struct ExamReportPage {
 
       // 模式信息
       Row({ space: 8 }) {
-        Image(this.getModeIcon())
-          .width(20)
-          .height(20)
-          .fillColor('#333333')
-
         Text(this.examRecord!.getModeText())
           .fontSize(16)
           .fontWeight(FontWeight.Medium)
@@ -158,23 +218,24 @@ struct ExamReportPage {
     .padding(24)
     .backgroundColor('#ffffff')
     .borderRadius(12)
-    .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .shadow({
+      radius: 4,
+      color: '#00000010',
+      offsetX: 0,
+      offsetY: 2
+    })
   }
 
   @Builder
   buildDetailedStats() {
     Column({ space: 12 }) {
       Row({ space: 8 }) {
-          Image($r('app.media.chart_icon'))
-            .width(16)
-            .height(16)
-            .fillColor('#333333')
-          Text('详细统计')
-            .fontSize(18)
-            .fontWeight(FontWeight.Bold)
-            .fontColor('#333333')
-        }
-        .alignSelf(ItemAlign.Start)
+        Text('详细统计')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+      }
+      .alignSelf(ItemAlign.Start)
 
       Row({ space: 12 }) {
         // 正确率
@@ -213,14 +274,19 @@ struct ExamReportPage {
     .padding(16)
     .backgroundColor('#ffffff')
     .borderRadius(12)
-    .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .shadow({
+      radius: 4,
+      color: '#00000010',
+      offsetX: 0,
+      offsetY: 2
+    })
   }
 
   @Builder
   buildStatCard(title: string, value: string, color: string) {
     Column({ space: 4 }) {
       Text(value)
-        .fontSize(20)
+        .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor(color)
 
@@ -229,9 +295,10 @@ struct ExamReportPage {
         .fontColor('#666666')
     }
     .layoutWeight(1)
-    .padding(12)
-    .backgroundColor(color + '10')
+    .padding(16)
+    .backgroundColor('#f8f9fa') // 统一使用浅灰色背景
     .borderRadius(8)
+    .border({ width: 1, color: color + '60' }) // 加深边框颜色，提高可见度
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
   }
@@ -240,16 +307,12 @@ struct ExamReportPage {
   buildProblemResults() {
     Column({ space: 12 }) {
       Row({ space: 8 }) {
-          Image($r('app.media.note_icon'))
-            .width(16)
-            .height(16)
-            .fillColor('#333333')
-          Text('题目详情')
-            .fontSize(18)
-            .fontWeight(FontWeight.Bold)
-            .fontColor('#333333')
-        }
-        .alignSelf(ItemAlign.Start)
+        Text('题目详情')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+      }
+      .alignSelf(ItemAlign.Start)
 
       List({ space: 8 }) {
         ForEach(this.examRecord!.problemResults, (problem: ExamProblemResult, index: number) => {
@@ -260,12 +323,21 @@ struct ExamReportPage {
       }
       .width('100%')
       .height(300)
+      .nestedScroll({
+        scrollForward: NestedScrollMode.PARENT_FIRST,
+        scrollBackward: NestedScrollMode.PARENT_FIRST
+      }) // 优化嵌套滚动
     }
     .width('100%')
     .padding(16)
     .backgroundColor('#ffffff')
     .borderRadius(12)
-    .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .shadow({
+      radius: 4,
+      color: '#00000010',
+      offsetX: 0,
+      offsetY: 2
+    })
   }
 
   @Builder
@@ -308,23 +380,20 @@ struct ExamReportPage {
       .layoutWeight(1)
       .alignItems(HorizontalAlign.Start)
 
-      // 查看按钮
-      Button('查看')
-        .fontSize(12)
-        .fontColor('#1890ff')
-        .backgroundColor('#1890ff20')
-        .borderRadius(4)
-        .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-        .onClick(() => {
-          this.selectedProblem = problem;
-          this.showProblemDetail = true;
-        })
+      // 右箭头图标
+      Text('>')
+        .fontSize(16)
+        .fontColor('#cccccc')
     }
     .width('100%')
     .padding(12)
-    .backgroundColor('#f8f9fa')
+    .backgroundColor('#fafbfc')
     .borderRadius(8)
     .alignItems(VerticalAlign.Center)
+    .onClick(() => {
+      console.info('点击题目卡片，跳转到题目详情页面:', problem.problemId);
+      this.navigateToProblemDetail(problem.problemId);
+    })
   }
 
   @Builder
@@ -333,7 +402,7 @@ struct ExamReportPage {
       Button('再来一次')
         .width('100%')
         .height(44)
-        .backgroundColor('#1890ff')
+        .backgroundColor('#F34F40')
         .fontColor('#ffffff')
         .borderRadius(8)
         .onClick(() => {
@@ -343,7 +412,7 @@ struct ExamReportPage {
       Button('返回首页')
         .width('100%')
         .height(44)
-        .backgroundColor('#f5f5f5')
+        .backgroundColor('#fafafa')
         .fontColor('#666666')
         .borderRadius(8)
         .onClick(() => {
@@ -355,171 +424,50 @@ struct ExamReportPage {
     .padding(16)
     .backgroundColor('#ffffff')
     .borderRadius(12)
-    .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .shadow({
+      radius: 4,
+      color: '#00000010',
+      offsetX: 0,
+      offsetY: 2
+    })
   }
 
-  @Builder
-  buildProblemDetailDialog() {
-    if (this.selectedProblem) {
-      Column() {
-      // 遮罩层
-      Column()
-        .width('100%')
-        .height('100%')
-        .backgroundColor('#00000080')
-        .onClick(() => {
-          this.showProblemDetail = false;
-          this.selectedProblem = null;
-        })
-
-      // 对话框内容
-      Column({ space: 16 }) {
-        // 标题
-        Row() {
-          Text('题目详情')
-            .fontSize(18)
-            .fontWeight(FontWeight.Bold)
-            .fontColor('#333333')
-
-          Blank()
-
-          Button('✕')
-            .fontSize(16)
-            .fontColor('#666666')
-            .backgroundColor('transparent')
-            .onClick(() => {
-              this.showProblemDetail = false;
-              this.selectedProblem = null;
-            })
-        }
-        .width('100%')
-
-        // 题目信息
-        Column({ space: 8 }) {
-          Text(this.selectedProblem.problemTitle)
-            .fontSize(16)
-            .fontWeight(FontWeight.Medium)
-            .fontColor('#333333')
-
-          Row({ space: 8 }) {
-            Text(this.getProblemStatusText(this.selectedProblem))
-              .fontSize(12)
-              .fontColor('#ffffff')
-              .backgroundColor(this.getProblemStatusColor(this.selectedProblem))
-              .padding({ left: 6, right: 6, top: 2, bottom: 2 })
-              .borderRadius(4)
-
-            Text(`用时: ${this.formatTime(this.selectedProblem.timeSpent)}`)
-              .fontSize(12)
-              .fontColor('#666666')
-          }
-          .justifyContent(FlexAlign.Start)
-        }
-        .alignItems(HorizontalAlign.Start)
-
-        // 答案对比
-        Column({ space: 12 }) {
-          Row({ space: 8 }) {
-            Image($r('app.media.note_icon'))
-              .width(14)
-              .height(14)
-              .fillColor('#333333')
-            Text('答案对比')
-              .fontSize(14)
-              .fontWeight(FontWeight.Medium)
-              .fontColor('#333333')
-          }
-          .alignSelf(ItemAlign.Start)
-
-          // 用户答案
-          Column({ space: 6 }) {
-            Text('你的答案:')
-              .fontSize(12)
-              .fontColor('#666666')
-              .alignSelf(ItemAlign.Start)
-
-            Text(this.formatUserAnswer(this.selectedProblem))
-              .fontSize(14)
-              .fontColor(this.selectedProblem.isCorrect ? '#52c41a' : '#f5222d')
-              .backgroundColor('#f8f9fa')
-              .padding(8)
-              .borderRadius(6)
-              .width('100%')
-          }
-          .alignItems(HorizontalAlign.Start)
-
-          // 正确答案
-          Column({ space: 6 }) {
-            Text('正确答案:')
-              .fontSize(12)
-              .fontColor('#666666')
-              .alignSelf(ItemAlign.Start)
-
-            Text(this.formatCorrectAnswer(this.selectedProblem))
-              .fontSize(14)
-              .fontColor('#52c41a')
-              .backgroundColor('#f6ffed')
-              .padding(8)
-              .borderRadius(6)
-              .width('100%')
-          }
-          .alignItems(HorizontalAlign.Start)
-        }
-        .alignItems(HorizontalAlign.Start)
-
-        // 操作按钮
-        Row({ space: 12 }) {
-          Button('重新练习')
-            .layoutWeight(1)
-            .height(40)
-            .backgroundColor('#1890ff')
-            .fontColor('#ffffff')
-            .borderRadius(6)
-            .onClick(() => {
-              this.practiceAgain();
-            })
-
-          Button('查看解析')
-            .layoutWeight(1)
-            .height(40)
-            .backgroundColor('#52c41a')
-            .fontColor('#ffffff')
-            .borderRadius(6)
-            .onClick(() => {
-              this.viewSolution();
-            })
-        }
-        .width('100%')
-      }
-      .width('90%')
-      .width('90%')
-      .height('80%')
-      .padding(20)
-      .backgroundColor('#ffffff')
-      .borderRadius(12)
-      .shadow({ radius: 20, color: '#00000020', offsetX: 0, offsetY: 10 })
-    }
-    .width('100%')
-    .height('100%')
-    .justifyContent(FlexAlign.Center)
-    .alignItems(HorizontalAlign.Center)
-    }
+  /**
+   * 跳转到题目详情页面
+   */
+  private navigateToProblemDetail(problemId: number): void {
+    router.pushUrl({
+      url: 'pages/ProblemDetailPage',
+      params: { problemId: problemId }
+    }).catch((error: Error) => {
+      console.error('Failed to navigate to problem detail:', error);
+    });
   }
 
   private getScoreColor(): string {
     const score = this.examRecord!.score;
-    if (score >= 90) return '#52c41a';
-    if (score >= 80) return '#1890ff';
-    if (score >= 60) return '#fa8c16';
-    return '#f5222d';
+    if (score >= 90) {
+      return '#52c41a';
+    }
+    if (score >= 80) {
+      return '#1890ff';
+    }
+    if (score >= 60) {
+      return '#fa8c16';
+    }
+    return '#ff7875'; // 不及格颜色调整为更柔和的红色
   }
 
   private getModeIcon(): Resource {
     switch (this.examRecord!.mode) {
-      case 'quick': return $r('app.media.star_icon');
-      case 'standard': return $r('app.media.note_icon');
-      case 'hard': return $r('app.media.star_icon');
-      default: return $r('app.media.note_icon');
+      case 'quick':
+        return $r('app.media.star_icon');
+      case 'standard':
+        return $r('app.media.note_icon');
+      case 'hard':
+        return $r('app.media.star_icon');
+      default:
+        return $r('app.media.note_icon');
     }
   }
 
@@ -529,7 +477,8 @@ struct ExamReportPage {
     const day = date.getDate().toString().padStart(2, '0');
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${month}月${day}日 ${hours}:${minutes}`;
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    return `${month}月${day}日 ${hours}:${minutes}:${seconds}`;
   }
 
   private getCorrectCount(): number {
@@ -556,17 +505,23 @@ struct ExamReportPage {
   }
 
   private getProblemStatusIcon(problem: ExamProblemResult): string {
-    if (!this.hasAnswer(problem)) return '⭕';
+    if (!this.hasAnswer(problem)) {
+      return '⭕';
+    }
     return problem.isCorrect ? '✅' : '❌';
   }
 
   private getProblemStatusText(problem: ExamProblemResult): string {
-    if (!this.hasAnswer(problem)) return '未答';
+    if (!this.hasAnswer(problem)) {
+      return '未答';
+    }
     return problem.isCorrect ? '正确' : '错误';
   }
 
   private getProblemStatusColor(problem: ExamProblemResult): string {
-    if (!this.hasAnswer(problem)) return '#999999';
+    if (!this.hasAnswer(problem)) {
+      return '#999999';
+    }
     return problem.isCorrect ? '#52c41a' : '#f5222d';
   }
 
@@ -603,20 +558,4 @@ struct ExamReportPage {
     router.back();
   }
 
-  private practiceAgain(): void {
-    if (!this.selectedProblem) return;
-    
-    // TODO: 跳转到题目详情页面重新练习
-    router.pushUrl({
-      url: 'pages/ProblemDetailPage',
-      params: { problemId: this.selectedProblem.problemId }
-    });
-  }
-
-  private viewSolution(): void {
-    if (!this.selectedProblem) return;
-    
-    // TODO: 显示题目解析
-    console.info('View solution for problem:', this.selectedProblem.problemId);
-  }
 }

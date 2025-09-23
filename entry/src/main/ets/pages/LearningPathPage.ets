@@ -27,36 +27,45 @@ interface PathConfig {
   color: string;
 }
 
-@Entry
 @Component
 export struct LearningPathPage {
   @State learningPaths: LearningPath[] = [];
   @State selectedPath: LearningPath | null = null;
   @State isLoading: boolean = true;
+  @State lastRefreshTime: number = 0; // 记录上次刷新时间
   @StorageLink('learningPathRefreshTrigger') @Watch('onRefreshTriggerChange') refreshTrigger: number = 0;
   
   // 使用mock数据，不再需要数据库实例
   private userProgressDao: UserProgressDao = new UserProgressDao();
+  private static readonly REFRESH_INTERVAL = 30000; // 30秒内不重复刷新
 
   aboutToAppear() {
     this.loadLearningPaths();
   }
 
   /**
-   * 监听refreshTrigger变化，实现Tab切换时自动刷新
+   * 监听refreshTrigger变化，智能刷新机制
    */
   onRefreshTriggerChange() {
-    if (this.refreshTrigger > 0) {
+    const currentTime = Date.now();
+    // 只有在间隔超过REFRESH_INTERVAL时才真正刷新
+    if (this.refreshTrigger > 0 && (currentTime - this.lastRefreshTime) > LearningPathPage.REFRESH_INTERVAL) {
+      console.info('学习路线页面数据刷新');
       this.loadLearningPaths();
+      this.lastRefreshTime = currentTime;
+    } else {
+      console.info('学习路线页面跳过刷新，距离上次刷新时间过短');
     }
   }
 
   /**
    * 刷新学习路线数据
-   * 供外部调用，用于Tab切换时更新数据
+   * 供外部调用，用于必要时手动刷新数据
    */
   refreshData(): void {
+    console.info('手动刷新学习路线数据');
     this.loadLearningPaths();
+    this.lastRefreshTime = Date.now();
   }
 
   build() {
@@ -242,7 +251,7 @@ export struct LearningPathPage {
       for (const config of pathConfigs) {
         const allProblems = ProblemMockData.getAllProblems();
         const totalProblems = allProblems.filter(p => p.category === config.category).length;
-        const completedProblems = await this.userProgressDao.getCompletedCountByCategory(config.category);
+        const studiedProblems = await this.userProgressDao.getStudyProgressCountByCategory(config.category); // 修改：使用学习进度数
         
         const path: LearningPath = {
           category: config.category,
@@ -250,7 +259,7 @@ export struct LearningPathPage {
           description: config.description,
           icon: config.icon,
           totalProblems: totalProblems,
-          completedProblems: completedProblems,
+          completedProblems: studiedProblems, // 修改：使用学习进度数（包括答对和答错）
           difficulty: config.difficulty,
           estimatedTime: config.estimatedTime,
           color: config.color
@@ -363,6 +372,129 @@ export struct LearningPathPage {
     };
     
     configs.push(config1, config2, config3, config4, config5, config6, config7, config8, config9);
+    
+    // 补充剩余的12个分类配置
+    const config10: PathConfig = {
+      category: ProblemCategory.HASH_TABLE,
+      title: '哈希表',
+      description: '学习哈希表的设计原理，掌握快速查找和去重技巧',
+      icon: $r('app.media.chart_icon'),
+      difficulty: '基础',
+      estimatedTime: '1-2周',
+      color: '#2f54eb'
+    };
+    
+    const config11: PathConfig = {
+      category: ProblemCategory.BACKTRACKING,
+      title: '回溯算法',
+      description: '掌握回溯算法的思想，解决排列、组合、子集等经典问题',
+      icon: $r('app.media.target_icon'),
+      difficulty: '进阶',
+      estimatedTime: '2-3周',
+      color: '#722ed1'
+    };
+    
+    const config12: PathConfig = {
+      category: ProblemCategory.GREEDY,
+      title: '贪心算法',
+      description: '学习贪心策略的设计和应用，解决区间调度、最小生成树等问题',
+      icon: $r('app.media.computer_icon'),
+      difficulty: '进阶',
+      estimatedTime: '2-3周',
+      color: '#52c41a'
+    };
+    
+    const config13: PathConfig = {
+      category: ProblemCategory.BIT_MANIPULATION,
+      title: '位运算',
+      description: '掌握位运算的技巧，学习位掩码、位移位等高效算法',
+      icon: $r('app.media.note_icon'),
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#13c2c2'
+    };
+    
+    const config14: PathConfig = {
+      category: ProblemCategory.DESIGN,
+      title: '设计题',
+      description: '学习数据结构的设计和实现，提升系统设计能力',
+      icon: $r('app.media.book_icon'),
+      difficulty: '高级',
+      estimatedTime: '2-3周',
+      color: '#fa8c16'
+    };
+    
+    const config15: PathConfig = {
+      category: ProblemCategory.DIVIDE_CONQUER,
+      title: '分治算法',
+      description: '掌握分治思想，学习归并排序、快速排序等经典算法',
+      icon: $r('app.media.target_icon'),
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#eb2f96'
+    };
+    
+    const config16: PathConfig = {
+      category: ProblemCategory.SLIDING_WINDOW,
+      title: '滑动窗口',
+      description: '学习滑动窗口技巧，解决子数组、子字符串等问题',
+      icon: $r('app.media.search_icon'),
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#f5222d'
+    };
+    
+    const config17: PathConfig = {
+      category: ProblemCategory.PREFIX_SUM,
+      title: '前缀和',
+      description: '掌握前缀和技巧，快速计算区间和和子数组问题',
+      icon: $r('app.media.chart_icon'),
+      difficulty: '基础',
+      estimatedTime: '1周',
+      color: '#fa541c'
+    };
+    
+    const config18: PathConfig = {
+      category: ProblemCategory.MONOTONIC_STACK,
+      title: '单调栈',
+      description: '学习单调栈的应用，解决下一个更大元素等问题',
+      icon: $r('app.media.book_icon'),
+      difficulty: '进阶',
+      estimatedTime: '1周',
+      color: '#1890ff'
+    };
+    
+    const config19: PathConfig = {
+      category: ProblemCategory.TRIE,
+      title: '字典树',
+      description: '学习字典树的构建和应用，解决字符串搜索问题',
+      icon: $r('app.media.note_icon'),
+      difficulty: '进阶',
+      estimatedTime: '1周',
+      color: '#722ed1'
+    };
+    
+    const config20: PathConfig = {
+      category: ProblemCategory.GRAPH,
+      title: '图算法',
+      description: '掌握图的遍历和搜索，学习DFS、BFS、最短路径等算法',
+      icon: $r('app.media.target_icon'),
+      difficulty: '高级',
+      estimatedTime: '2周',
+      color: '#13c2c2'
+    };
+    
+    const config21: PathConfig = {
+      category: ProblemCategory.SORT,
+      title: '排序算法',
+      description: '学习各种排序算法的原理和应用，掌握时间复杂度分析',
+      icon: $r('app.media.computer_icon'),
+      difficulty: '基础',
+      estimatedTime: '1周',
+      color: '#52c41a'
+    };
+    
+    configs.push(config10, config11, config12, config13, config14, config15, config16, config17, config18, config19, config20, config21);
     return configs;
   }
 
@@ -477,7 +609,151 @@ export struct LearningPathPage {
       color: '#52c41a'
     };
     
-    paths.push(path1, path2, path3, path4, path5, path6, path7, path8, path9);
+    const path10: LearningPath = {
+      category: ProblemCategory.HASH_TABLE,
+      title: '哈希表',
+      description: '学习哈希表的设计原理，掌握快速查找和去重技巧',
+      icon: $r('app.media.chart_icon'),
+      totalProblems: 15,
+      completedProblems: 0,
+      difficulty: '基础',
+      estimatedTime: '1-2周',
+      color: '#2f54eb'
+    };
+    
+    const path11: LearningPath = {
+      category: ProblemCategory.BACKTRACKING,
+      title: '回溯算法',
+      description: '掌握回溯算法的思想，解决排列、组合、子集等经典问题',
+      icon: $r('app.media.target_icon'),
+      totalProblems: 15,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '2-3周',
+      color: '#722ed1'
+    };
+    
+    const path12: LearningPath = {
+      category: ProblemCategory.GREEDY,
+      title: '贪心算法',
+      description: '学习贪心策略的设计和应用，解决区间调度、最小生成树等问题',
+      icon: $r('app.media.computer_icon'),
+      totalProblems: 15,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '2-3周',
+      color: '#52c41a'
+    };
+    
+    const path13: LearningPath = {
+      category: ProblemCategory.BIT_MANIPULATION,
+      title: '位运算',
+      description: '掌握位运算的技巧，学习位掩码、位移位等高效算法',
+      icon: $r('app.media.note_icon'),
+      totalProblems: 12,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#13c2c2'
+    };
+    
+    const path14: LearningPath = {
+      category: ProblemCategory.DESIGN,
+      title: '设计题',
+      description: '学习数据结构的设计和实现，提升系统设计能力',
+      icon: $r('app.media.book_icon'),
+      totalProblems: 10,
+      completedProblems: 0,
+      difficulty: '高级',
+      estimatedTime: '2-3周',
+      color: '#fa8c16'
+    };
+    
+    const path15: LearningPath = {
+      category: ProblemCategory.DIVIDE_CONQUER,
+      title: '分治算法',
+      description: '掌握分治思想，学习归并排序、快速排序等经典算法',
+      icon: $r('app.media.target_icon'),
+      totalProblems: 10,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#eb2f96'
+    };
+    
+    const path16: LearningPath = {
+      category: ProblemCategory.SLIDING_WINDOW,
+      title: '滑动窗口',
+      description: '学习滑动窗口技巧，解决子数组、子字符串等问题',
+      icon: $r('app.media.search_icon'),
+      totalProblems: 12,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '1-2周',
+      color: '#f5222d'
+    };
+    
+    const path17: LearningPath = {
+      category: ProblemCategory.PREFIX_SUM,
+      title: '前缀和',
+      description: '掌握前缀和技巧，快速计算区间和和子数组问题',
+      icon: $r('app.media.chart_icon'),
+      totalProblems: 8,
+      completedProblems: 0,
+      difficulty: '基础',
+      estimatedTime: '1周',
+      color: '#fa541c'
+    };
+    
+    const path18: LearningPath = {
+      category: ProblemCategory.MONOTONIC_STACK,
+      title: '单调栈',
+      description: '学习单调栈的应用，解决下一个更大元素等问题',
+      icon: $r('app.media.book_icon'),
+      totalProblems: 8,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '1周',
+      color: '#1890ff'
+    };
+    
+    const path19: LearningPath = {
+      category: ProblemCategory.TRIE,
+      title: '字典树',
+      description: '学习字典树的构建和应用，解决字符串搜索问题',
+      icon: $r('app.media.note_icon'),
+      totalProblems: 6,
+      completedProblems: 0,
+      difficulty: '进阶',
+      estimatedTime: '1周',
+      color: '#722ed1'
+    };
+    
+    const path20: LearningPath = {
+      category: ProblemCategory.GRAPH,
+      title: '图算法',
+      description: '掌握图的遍历和搜索，学习DFS、BFS、最短路径等算法',
+      icon: $r('app.media.target_icon'),
+      totalProblems: 8,
+      completedProblems: 0,
+      difficulty: '高级',
+      estimatedTime: '2周',
+      color: '#13c2c2'
+    };
+    
+    const path21: LearningPath = {
+      category: ProblemCategory.SORT,
+      title: '排序算法',
+      description: '学习各种排序算法的原理和应用，掌握时间复杂度分析',
+      icon: $r('app.media.computer_icon'),
+      totalProblems: 8,
+      completedProblems: 0,
+      difficulty: '基础',
+      estimatedTime: '1周',
+      color: '#52c41a'
+    };
+    
+    paths.push(path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, path13, path14, path15, path16, path17, path18, path19, path20, path21);
     return paths;
   }
 
@@ -497,13 +773,17 @@ export struct LearningPathPage {
   }
 
   private showPathDetail(path: LearningPath): void {
-    // 切换到练习中心Tab，并传递分类参数
-    const tabNavigationService = TabNavigationService.getInstance();
-    tabNavigationService.switchToPracticeCenter();
+    console.info('学习路线查看详情点击，分类：', path.category);
     
     // 使用AppStorage来传递参数到练习中心页面
     AppStorage.setOrCreate('selectedCategory', path.category);
     AppStorage.setOrCreate('selectedCategoryTitle', path.title);
+    
+    // 切换到练习中心Tab
+    const tabNavigationService = TabNavigationService.getInstance();
+    tabNavigationService.switchToPracticeCenter();
+    
+    console.info('已设置分类参数，准备切换到练习中心');
   }
 
   private async startLearning(path: LearningPath): Promise<void> {

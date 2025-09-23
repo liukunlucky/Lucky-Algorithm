@@ -1,7 +1,5 @@
 import { ProblemModel, ChoiceOption } from '../model/ProblemModel';
-import { UserProgressModel } from '../model/UserProgressModel';
 import { UserNoteModel } from '../model/UserNoteModel';
-import { ProblemDao } from '../dao/ProblemDao';
 import { UserProgressDao } from '../dao/UserProgressDao';
 import { UserNoteDao } from '../dao/UserNoteDao';
 import { ProblemMockData } from '../mock/ProblemMockData';
@@ -29,7 +27,6 @@ struct FavoritesPage {
 
   
   private userProgressDao: UserProgressDao = new UserProgressDao();
-  private problemDao: ProblemDao = new ProblemDao();
   private userNoteDao: UserNoteDao = new UserNoteDao();
 
   onPageShow(): void {
@@ -208,8 +205,8 @@ struct FavoritesPage {
               .fontSize(12)
               .fontColor('#FFFFFF')
               .backgroundColor('#787408')
-              .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-              .borderRadius(6)
+              .padding({ left: 6, right: 6, top: 2, bottom: 2 })
+              .borderRadius(4)
           }
           .justifyContent(FlexAlign.Start)
         }
@@ -570,6 +567,7 @@ struct ProblemDetailDialog {
                 text: this.userNote
               })
                 .width('100%')
+                .placeholderColor('#D5DBDB')
                 .height(100)
                 .fontSize(14)
                 .backgroundColor('#f8f9fa')

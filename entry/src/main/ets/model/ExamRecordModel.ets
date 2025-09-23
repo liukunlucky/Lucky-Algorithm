@@ -121,7 +121,17 @@ export class ExamRecordModel {
   calculateScore(): void {
     const accuracy = this.getAccuracyRate();
     const config = this.getModeConfig();
-    const timeBonus = Math.max(0, (config.timeLimit - this.duration) / config.timeLimit * 20);
-    this.score = Math.round(accuracy * 0.8 + timeBonus);
+    
+    // 基础分数：正确率 * 80分
+    const baseScore = accuracy * 0.8;
+    
+    // 时间奖励：只有在有正确答案时才给时间奖励，最多20分
+    let timeBonus = 0;
+    if (accuracy > 0) {
+      timeBonus = Math.max(0, (config.timeLimit - this.duration) / config.timeLimit * 20);
+    }
+    
+    // 总分数 = 基础分数 + 时间奖励，确保不超过100分
+    this.score = Math.min(100, Math.round(baseScore + timeBonus));
   }
 }

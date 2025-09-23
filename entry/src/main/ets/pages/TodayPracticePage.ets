@@ -5,28 +5,33 @@ import { UserProgressDao } from '../dao/UserProgressDao';
 import { TabNavigationService } from '../service/TabNavigationService';
 import router from '@ohos.router';
 
-interface StudyStats {
-  continuousDays: number;
-  totalSolved: number;
-  todayCompleted: number;
-}
-
 @Component
 export struct TodayPracticePage {
   @State dailyProblem: ProblemModel | null = null;
   @State reviewProblem: ProblemModel | null = null;
-  @State studyStats: StudyStats = {
-    continuousDays: 0,
-    totalSolved: 0,
-    todayCompleted: 0
-  };
+  @State continuousDays: number = 0;
+  @State totalSolved: number = 0;
+  @State todayCompleted: number = 0;
   @State isDailyProblemCompleted: boolean = false;
-  
+  @StorageLink('refreshTodayPage') @Watch('onRefreshTrigger') refreshTrigger: number = 0;
+
   // 使用mock数据，不再需要数据库实例
   private userProgressDao: UserProgressDao = new UserProgressDao();
 
-  aboutToAppear() {
+  async aboutToAppear() {
     this.loadTodayData();
+  }
+
+  /**
+   * 监听页面刷新触发器
+   */
+  onRefreshTrigger() {
+    if (this.refreshTrigger > 0) {
+      console.info('首页数据刷新触发');
+      this.loadTodayData();
+      // 清除触发器
+      AppStorage.setOrCreate('refreshTodayPage', 0);
+    }
   }
 
   build() {
@@ -95,9 +100,9 @@ export struct TodayPracticePage {
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
         }
-        
+
         Blank()
-        
+
         Text('推荐')
           .fontSize(12)
           .fontColor('#ffffff')
@@ -147,7 +152,7 @@ export struct TodayPracticePage {
                 .width(16)
                 .height(16)
                 .fillColor('#52c41a')
-              
+
               Text('今日已完成')
                 .fontSize(14)
                 .fontColor('#52c41a')
@@ -159,27 +164,6 @@ export struct TodayPracticePage {
             .backgroundColor('#f6ffed')
             .borderRadius(8)
             .border({ width: 1, color: '#b7eb8f' })
-
-            Button('查看详情')
-              .width('100%')
-              .height(40)
-              .backgroundColor('#52c41a')
-              .fontColor('#ffffff')
-              .borderRadius(8)
-              .margin({ top: 8 })
-              .onClick(() => {
-                this.navigateToDailyProblem(this.dailyProblem!.id);
-              })
-          } else {
-            // 未完成状态的UI
-            Button('开始挑战')
-              .width('100%')
-              .height(40)
-              .backgroundColor('#F34F40')
-              .borderRadius(8)
-              .onClick(() => {
-                this.navigateToDailyProblem(this.dailyProblem!.id);
-              })
           }
         }
         .alignItems(HorizontalAlign.Start)
@@ -214,9 +198,9 @@ export struct TodayPracticePage {
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
         }
-        
+
         Blank()
-        
+
         if (this.reviewProblem) {
           Text('来自错题本')
             .fontSize(12)
@@ -261,15 +245,7 @@ export struct TodayPracticePage {
           .width('100%')
           .alignItems(HorizontalAlign.Start)
 
-          Button('开始复习')
-            .width('100%')
-            .height(40)
-            .backgroundColor('#F34F40')
-            .borderRadius(8)
-            .onClick(() => {
-              this.navigateToProblemDetail(this.reviewProblem!.id);
-            })
-        }
+        }    
         .alignItems(HorizontalAlign.Start)
       } else {
         Column({ space: 8 }) {
@@ -293,6 +269,11 @@ export struct TodayPracticePage {
     .backgroundColor('#ffffff')
     .borderRadius(12)
     .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .onClick(() => {
+      if (this.reviewProblem) {
+        this.navigateToProblemDetail(this.reviewProblem.id);
+      }
+    })
   }
 
   @Builder
@@ -307,9 +288,9 @@ export struct TodayPracticePage {
       .alignSelf(ItemAlign.Start)
 
       Row({ space: 16 }) {
-        this.buildStatItem('连续学习', this.studyStats.continuousDays + '天', '#ff6b35')
-        this.buildStatItem('总攻克题数', this.studyStats.totalSolved + '题', '#1890ff')
-        this.buildStatItem('今日完成', this.studyStats.todayCompleted + '题', '#52c41a')
+        this.buildContinuousDayStatItem('连续学习', '#ff6b35')
+        this.buildTotalSoledStatItem('总攻克题数', '#1890ff')
+        this.buildTodayCompletedStatItem('今日完成', '#52c41a')
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
@@ -326,9 +307,39 @@ export struct TodayPracticePage {
   }
 
   @Builder
-  buildStatItem(title: string, value: string, color: string) {
+  buildContinuousDayStatItem(title: string, color: string) {
     Column({ space: 4 }) {
-      Text(value)
+      Text(`${this.continuousDays}天`)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(color)
+
+      Text(title)
+        .fontSize(12)
+        .fontColor('#666666')
+    }
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildTotalSoledStatItem(title: string, color: string) {
+    Column({ space: 4 }) {
+      Text(`${this.totalSolved}题`)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(color)
+
+      Text(title)
+        .fontSize(12)
+        .fontColor('#666666')
+    }
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildTodayCompletedStatItem(title: string, color: string) {
+    Column({ space: 4 }) {
+      Text(`${this.todayCompleted}题`)
         .fontSize(20)
         .fontWeight(FontWeight.Bold)
         .fontColor(color)
@@ -351,6 +362,7 @@ export struct TodayPracticePage {
       }
       .alignSelf(ItemAlign.Start)
 
+      // 第一行
       Row({ space: 16 }) {
         this.buildQuickActionItem($r('app.media.icon_like'), '收藏夹', () => {
           this.navigateToPage('pages/FavoritesPage');
@@ -360,15 +372,37 @@ export struct TodayPracticePage {
           this.navigateToPage('pages/WrongProblemsPage');
         })
 
-        this.buildQuickActionItem($r('app.media.icon_train_center'), '专项练习', () => {
-          const tabNavigationService = TabNavigationService.getInstance();
-          tabNavigationService.switchToPracticeCenter();
+        this.buildQuickActionItem($r('app.media.icon_note'), '学习笔记', () => {
+          this.navigateToPage('pages/StudyNotesPage');
         })
 
         this.buildQuickActionItem($r('app.media.icon_exam'), '模拟考试', () => {
+          console.info('点击模拟考试');
           const tabNavigationService = TabNavigationService.getInstance();
           tabNavigationService.switchToExam();
         })
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceAround)
+
+      // 第二行
+      Row({ space: 16 }) {
+        this.buildQuickActionItem($r('app.media.icon_tj'), '数据统计', () => {
+          this.navigateToPage('pages/StatisticsPage');
+        })
+
+        // 占位符，保持对齐
+        Column()
+          .width(60)
+          .height(60)
+
+        Column()
+          .width(60)
+          .height(60)
+
+        Column()
+          .width(60)
+          .height(60)
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
@@ -409,20 +443,23 @@ export struct TodayPracticePage {
     const day = now.getDate();
     const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
     const weekday = weekdays[now.getDay()];
-    
+
     return `${year}年${month}月${day}日 ${weekday}`;
   }
 
   private async loadTodayData(): Promise<void> {
     try {
+      console.info('开始加载首页数据');
       // 加载每日题目
       await this.loadDailyProblem();
-      
+
       // 加载复习题目
       await this.loadReviewProblem();
-      
+
       // 加载学习统计
       await this.loadStudyStats();
+
+      console.info('首页数据加载完成');
     } catch (error) {
       console.error('Failed to load today data:', error);
     }
@@ -436,14 +473,14 @@ export struct TodayPracticePage {
         this.dailyProblem = this.createDefaultProblem();
         return;
       }
-      
+
       // 根据日期生成每日题目索引（使用实际题目数量）
       const today = new Date();
       const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000);
       const problemIndex = dayOfYear % allProblems.length;
-      
+
       this.dailyProblem = allProblems[problemIndex];
-      
+
       // 如果仍然没有找到题目，使用第一题作为默认
       if (!this.dailyProblem) {
         this.dailyProblem = allProblems[0];
@@ -463,7 +500,7 @@ export struct TodayPracticePage {
   // 检查每日题目完成状态
   private async checkDailyProblemStatus(): Promise<void> {
     if (!this.dailyProblem) return;
-    
+
     try {
       const progress = await this.userProgressDao.getUserProgress(this.dailyProblem.id);
       // 检查今天是否已经完成该题目
@@ -484,41 +521,69 @@ export struct TodayPracticePage {
 
   private async loadReviewProblem(): Promise<void> {
     try {
+      console.info('🔄 开始加载复习题目');
       // 获取用户做错的题目进行复习
       const wrongProblems = await this.userProgressDao.getWrongProblems();
+      console.info(`📊 错题数量：${wrongProblems.length}`);
+      console.info('📝 错题列表：', wrongProblems.map(p => `ID:${p.problemId}, 状态:${p.status}`));
+
       if (wrongProblems.length > 0) {
         // 随机选择一个错题
         const randomIndex = Math.floor(Math.random() * wrongProblems.length);
-        const problemId = wrongProblems[randomIndex].problemId;
+        const selectedWrongProblem = wrongProblems[randomIndex];
+        const problemId = selectedWrongProblem.problemId;
+        console.info(`🎯 随机选中错题ID: ${problemId} (索引: ${randomIndex})`);
+
         this.reviewProblem = ProblemMockData.getProblemById(problemId);
+        if (this.reviewProblem) {
+          console.info(`✅ 复习题目加载成功: ${this.reviewProblem.title}`);
+        } else {
+          console.error(`❌ 找不到题目ID ${problemId} 对应的题目信息`);
+          this.reviewProblem = null;
+        }
+      } else {
+        this.reviewProblem = null;
+        console.info('🔴 暂无错题需要复习');
       }
     } catch (error) {
-      console.error('Failed to load review problem:', error);
+      console.error('❌ 加载复习题目失败:', error);
+      this.reviewProblem = null;
     }
   }
 
   private async loadStudyStats(): Promise<void> {
     try {
+      console.info('📊 开始加载学习统计数据');
       // 获取用户学习统计
-      const totalSolved = await this.userProgressDao.getCompletedCount();
-      const todayCompleted = await this.userProgressDao.getTodayCompletedCount();
-      const continuousDays = await this.userProgressDao.getContinuousDays();
-      
-      const stats: StudyStats = {
-        continuousDays: continuousDays,
-        totalSolved: totalSolved,
-        todayCompleted: todayCompleted
-      };
-      this.studyStats = stats;
+      const totalSolvedResult = await this.userProgressDao.getCompletedCount();
+      const todayCompletedResult = await this.userProgressDao.getTodayCompletedCount();
+      const continuousDaysResult = await this.userProgressDao.getContinuousDays();
+
+      console.info('📋 查询结果 - 连续天数:', continuousDaysResult, '类型:', typeof continuousDaysResult);
+      console.info('📋 查询结果 - 总题数:', totalSolvedResult, '类型:', typeof totalSolvedResult);
+      console.info('📋 查询结果 - 今日完成:', todayCompletedResult, '类型:', typeof todayCompletedResult);
+
+      console.info('🔄 更新前的数据:', `连续:${this.continuousDays}, 总数:${this.totalSolved}, 今日:${this.todayCompleted}`);
+
+      // 直接更新各个状态变量
+      this.continuousDays = parseInt(String(continuousDaysResult)) || 0;
+      this.totalSolved = parseInt(String(totalSolvedResult)) || 0;
+      this.todayCompleted = parseInt(String(todayCompletedResult)) || 0;
+
+      console.info('✅ 更新后的数据:', `连续:${this.continuousDays}, 总数:${this.totalSolved}, 今日:${this.todayCompleted}`);
+
+      console.info('学习统计：连续天数', this.continuousDays);
+      console.info('学习统计：总题数', this.totalSolved);
+      console.info('学习统计：今日完成', this.todayCompleted);
+
+      // const all = await this.userProgressDao.getAllUserProgress()
+      // console.log('lucky all haha' + JSON.stringify(all) )
     } catch (error) {
-      console.error('Failed to load study stats:', error);
+      console.error('❌ 加载学习统计失败:', error);
       // 使用默认数据
-      const defaultStats: StudyStats = {
-        continuousDays: 1,
-        totalSolved: 0,
-        todayCompleted: 0
-      };
-      this.studyStats = defaultStats;
+      this.continuousDays = 1;
+      this.totalSolved = 0;
+      this.todayCompleted = 0;
     }
   }
 

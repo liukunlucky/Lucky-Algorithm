@@ -33,28 +33,24 @@ struct ExamRecordsPage {
   buildHeader() {
     Row() {
       Button() {
-        Image($r('app.media.arrow_left_icon'))
-          .width(20)
-          .height(20)
-          .fillColor('#1890ff')
+        Image($r('app.media.icon_back'))
+          .width(24)
+          .height(24)
       }
       .backgroundColor('transparent')
       .onClick(() => {
         router.back();
       })
 
-      Blank()
 
       Text('考核记录')
         .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor('#333333')
+        .layoutWeight(1).textAlign(TextAlign.Center)
 
-      Blank()
+      Blank().width(20)
 
-      // 占位，保持标题居中
-      Column()
-        .width(40)
     }
     .width('100%')
     .padding({ left: 16, right: 16, top: 12, bottom: 12 })
@@ -80,11 +76,11 @@ struct ExamRecordsPage {
       .fontSize(14)
       .fontColor(this.selectedFilter === filter ? '#ffffff' : '#666666')
       .padding({ left: 16, right: 16, top: 8, bottom: 8 })
-      .backgroundColor(this.selectedFilter === filter ? '#1890ff' : '#ffffff')
+      .backgroundColor(this.selectedFilter === filter ? '#F34F40' : '#ffffff')
       .borderRadius(20)
       .border({
         width: 1,
-        color: this.selectedFilter === filter ? '#1890ff' : '#e0e0e0'
+        color: this.selectedFilter === filter ? '#F34F40' : '#e0e0e0'
       })
       .onClick(() => {
         this.selectedFilter = filter;
@@ -105,8 +101,8 @@ struct ExamRecordsPage {
     } else if (this.getFilteredRecords().length === 0) {
       Column({ space: 8 }) {
         Image($r('app.media.icon_empty'))
-          .width(58)
-          .height(42)
+          .width(173)
+          .height(128)
 
         Text('暂无考核记录')
           .fontSize(16)
@@ -117,7 +113,7 @@ struct ExamRecordsPage {
           .fontColor('#cccccc')
       }
       .width('100%')
-      .height(200)
+      .height('90%')
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
     } else {
@@ -244,13 +240,21 @@ struct ExamRecordsPage {
     const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
     
     if (diffDays === 0) {
-      return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+      return '今天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     } else if (diffDays === 1) {
-      return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+      return '昨天 ' + date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     } else if (diffDays < 7) {
-      return diffDays + '天前';
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `${diffDays}天前 ${hours}:${minutes}:${seconds}`;
     } else {
-      return `${date.getMonth() + 1}月${date.getDate()}日`;
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `${month}月${day}日 ${hours}:${minutes}:${seconds}`;
     }
   }
 

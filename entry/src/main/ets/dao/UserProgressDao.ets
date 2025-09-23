@@ -220,7 +220,7 @@ export class UserProgressDao {
     console.log('Wrong problem record deleted for problemId:', problemId);
   }
 
-  // 获取已完成题目数量
+  // 获取已完成题目数量（仅答对的题目）
   async getCompletedCount(): Promise<number> {
     const store = this.dbHelper.getStore();
     if (!store) {
@@ -238,7 +238,25 @@ export class UserProgressDao {
     return 0;
   }
 
-  // 根据分类获取已完成题目数量
+  // 获取学习进度数量（包括答对和答错的题目）
+  async getStudyProgressCount(): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE (status = ? OR status = ?)';
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG]);
+    
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      return result.getLong(result.getColumnIndex('count'));
+    }
+
+    return 0;
+  }
+
+  // 根据分类获取已完成题目数量（仅答对的题目）
   async getCompletedCountByCategory(category: ProblemCategory): Promise<number> {
     const store = this.dbHelper.getStore();
     if (!store) {
@@ -261,7 +279,60 @@ export class UserProgressDao {
     return 0;
   }
 
-  // 获取今日完成题目数量
+  // 根据分类获取学习进度数量（包括答对和答错的题目）
+  async getStudyProgressCountByCategory(category: ProblemCategory): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = `
+      SELECT COUNT(*) as count 
+      FROM user_progress up 
+      JOIN problems p ON up.problem_id = p.id 
+      WHERE (up.status = ? OR up.status = ?) AND p.category = ?
+    `;
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, category]);
+    
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      return result.getLong(result.getColumnIndex('count'));
+    }
+
+    return 0;
+  }
+
+  // 根据分类获取正确率
+  async getAccuracyByCategory(category: ProblemCategory): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = `
+      SELECT 
+        SUM(success_count) as total_success,
+        SUM(attempt_count) as total_attempts
+      FROM user_progress up 
+      JOIN problems p ON up.problem_id = p.id 
+      WHERE p.category = ? AND (up.status = ? OR up.status = ?)
+    `;
+    const result = await store.querySql(sql, [category, ProblemStatus.COMPLETED, ProblemStatus.WRONG]);
+    
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      const totalSuccess = result.getLong(result.getColumnIndex('total_success'));
+      const totalAttempts = result.getLong(result.getColumnIndex('total_attempts'));
+      
+      if (totalAttempts > 0) {
+        return Math.round((totalSuccess / totalAttempts) * 100);
+      }
+    }
+
+    return 0;
+  }
+
+  // 获取今日学习题目数量（包括答对和答错）
   async getTodayCompletedCount(): Promise<number> {
     const store = this.dbHelper.getStore();
     if (!store) {
@@ -269,8 +340,27 @@ export class UserProgressDao {
     }
 
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD格式
-    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE status = ? AND DATE(last_attempted) = ?';
-    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, today]);
+    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE (status = ? OR status = ?) AND DATE(last_attempted) = ?';
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, today]);
+
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      return result.getLong(result.getColumnIndex('count'));
+    }
+
+    return 0;
+  }
+
+  // 根据日期获取完成题目数量
+  async getCompletedCountByDate(date: Date): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD格式
+    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE (status = ? OR status = ?) AND DATE(last_attempted) = ?';
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, dateStr]);
 
     if (result.rowCount > 0) {
       result.goToRow(0);
@@ -287,14 +377,14 @@ export class UserProgressDao {
       throw new Error('数据库未初始化');
     }
 
-    // 获取最近的学习记录，按日期分组
+    // 获取最近的学习记录，按日期分组（包括答对和答错的题目）
     const sql = `
       SELECT DISTINCT DATE(last_attempted) as study_date 
       FROM user_progress 
-      WHERE status = ? AND last_attempted IS NOT NULL 
+      WHERE (status = ? OR status = ?) AND last_attempted IS NOT NULL 
       ORDER BY study_date DESC
     `;
-    const result = await store.querySql(sql, [ProblemStatus.COMPLETED]);
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG]);
 
     if (result.rowCount === 0) {
       return 0;

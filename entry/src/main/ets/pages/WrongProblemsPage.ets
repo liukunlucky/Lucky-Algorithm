@@ -1,8 +1,6 @@
-import { ProblemModel, ProblemDifficulty, ProblemCategory } from '../model/ProblemModel';
-import { UserProgressModel, ProblemStatus } from '../model/UserProgressModel';
-import { ProblemDao } from '../dao/ProblemDao';
+import { ProblemModel, ProblemCategory } from '../model/ProblemModel';
 import { UserProgressDao } from '../dao/UserProgressDao';
-import { TabNavigationService } from '../service/TabNavigationService';
+import { ProblemMockData } from '../mock/ProblemMockData';
 import router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
 
@@ -23,7 +21,6 @@ struct WrongProblemsPage {
   @State selectedCategory: ProblemCategory | null = null;
   
   private userProgressDao: UserProgressDao = new UserProgressDao();
-  private problemDao: ProblemDao = new ProblemDao();
 
   aboutToAppear() {
     this.loadWrongProblems();
@@ -115,9 +112,9 @@ struct WrongProblemsPage {
   @Builder
   buildStatsBar() {
     Row({ space: 16 }) {
-      this.buildStatItem('总错题', this.wrongProblems.length + '题', '#ff4d4f')
-      this.buildStatItem('待重做', this.getRetryCount() + '题', '#faad14')
-      this.buildStatItem('已重做', this.getRetriedCount() + '题', '#52c41a')
+      this.buildTotalWrongStatItem('总错题', '#ff4d4f')
+      this.buildRetryStatItem('待重做', '#faad14')
+      this.buildRetriedStatItem('已重做', '#52c41a')
     }
     .width('100%')
     .padding({ left: 16, right: 16, bottom: 16 })
@@ -125,9 +122,39 @@ struct WrongProblemsPage {
   }
 
   @Builder
-  buildStatItem(title: string, value: string, color: string) {
+  buildTotalWrongStatItem(title: string, color: string) {
     Column({ space: 4 }) {
-      Text(value)
+      Text(`${this.wrongProblems.length}题`)
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(color)
+
+      Text(title)
+        .fontSize(12)
+        .fontColor('#666666')
+    }
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildRetryStatItem(title: string, color: string) {
+    Column({ space: 4 }) {
+      Text(`${this.getRetryCount()}题`)
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(color)
+
+      Text(title)
+        .fontSize(12)
+        .fontColor('#666666')
+    }
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildRetriedStatItem(title: string, color: string) {
+    Column({ space: 4 }) {
+      Text(`${this.getRetriedCount()}题`)
         .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontColor(color)
@@ -219,8 +246,8 @@ struct WrongProblemsPage {
               .fontSize(12)
               .fontColor('#FFFFFF')
               .backgroundColor('#787408')
-              .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-              .borderRadius(6)
+              .padding({ left: 6, right: 6, top: 2, bottom: 2 })
+              .borderRadius(4)
 
             Text(`错${wrongInfo.wrongCount}次`)
               .fontSize(12)
@@ -283,12 +310,16 @@ struct WrongProblemsPage {
       
       // 从数据库获取错题进度
       const wrongProgress = await this.userProgressDao.getWrongProblems();
+      console.log('lucky wrong problem is ' + JSON.stringify(wrongProgress))
       
       // 根据题目ID获取完整的题目信息并构建错题信息
       const wrongProblemsInfo: WrongProblemInfo[] = [];
       for (const progress of wrongProgress) {
-        const problem = await this.problemDao.getProblemById(progress.problemId);
+        console.log(`正在查找错题ID: ${progress.problemId}`);
+        // 优先从Mock数据获取题目信息，确保能找到所有题目
+        const problem = ProblemMockData.getProblemById(progress.problemId);
         if (problem) {
+          console.log(`找到错题: ${problem.title}`);
           const wrongInfo: WrongProblemInfo = {
             problem: problem,
             wrongCount: progress.attemptCount - progress.successCount,
@@ -296,9 +327,12 @@ struct WrongProblemsPage {
             isRetried: progress.successCount > 0
           };
           wrongProblemsInfo.push(wrongInfo);
+        } else {
+          console.error(`找不到错题ID ${progress.problemId} 对应的题目信息`);
         }
       }
       
+      console.log(`最终加载了 ${wrongProblemsInfo.length} 道错题`);
       this.wrongProblems = wrongProblemsInfo;
       this.filteredProblems = this.wrongProblems;
       this.isLoading = false;

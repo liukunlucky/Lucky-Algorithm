@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "算法天天练"
+    },
+    {
+      "name": "version",
+      "value": "%s: %s"
     }
   ]
 }

@@ -1,6 +1,8 @@
 import router from '@ohos.router';
 import { ExamMode, ExamRecordModel, ExamProblemResult } from '../model/ExamRecordModel';
 import { ProblemModel, ChoiceOption, ProblemType } from '../model/ProblemModel';
+import { ExamService } from '../service/ExamService';
+import { TabNavigationService } from '../service/TabNavigationService';
 
 interface ExamParams {
   mode: ExamMode;
@@ -217,7 +219,7 @@ struct ExamConductPage {
       Column({ space: 8 }) {
         ForEach(this.getCurrentProblemOptions(), (option: ChoiceOption) => {
           this.buildOptionItem(option)
-        }, (option: ChoiceOption) => option.id)
+        }, (option: ChoiceOption) => `${this.currentProblemIndex}-${option.id}`)
       }
       .width('100%')
     }
@@ -232,7 +234,7 @@ struct ExamConductPage {
       // 选择框
       if (this.getCurrentProblemType() === ProblemType.MULTIPLE_CHOICE) {
         // 多选框
-        Checkbox({ name: option.id, group: 'choices' })
+        Checkbox({ name: option.id, group: `choices-${this.currentProblemIndex}` })
           .select(this.isOptionSelected(option.id))
           .selectedColor('#F34F40')
           .onChange((value: boolean) => {
@@ -240,7 +242,7 @@ struct ExamConductPage {
           })
       } else {
         // 单选框
-        Radio({ value: option.id, group: 'choices' })
+        Radio({ value: option.id, group: `choices-${this.currentProblemIndex}` })
           .checked(this.isOptionSelected(option.id))
           .radioStyle({ checkedBackgroundColor: '#F34F40' })
           .onChange((isChecked: boolean) => {
@@ -582,15 +584,41 @@ struct ExamConductPage {
     
     console.info(`ExamRecord created: score=${examRecord.score}, accuracy=${examRecord.getAccuracyRate()}%`);
 
-    // 跳转到考核报告页面
-    router.pushUrl({
-      url: 'pages/ExamReportPage',
-      params: { 
-        examRecord: examRecord
-      }
-    }).catch((error: Error) => {
-      console.error('Failed to navigate to exam report:', error);
-    });
+    // 保存考核记录到数据库
+    this.saveExamRecordAndNavigate(examRecord);
+  }
+
+  // 保存考核记录并跳转到报告页面
+  private async saveExamRecordAndNavigate(examRecord: ExamRecordModel): Promise<void> {
+    try {
+      // 保存考核记录到数据库
+      await ExamService.getInstance().saveExamRecord(examRecord);
+      console.info('Exam record saved to database successfully');
+      
+      // 触发考核完成事件，通知ExamPage刷新数据
+      TabNavigationService.triggerExamCompleted();
+      
+      // 替换当前页面为考核报告页面，避免考核页面留在页面栈中
+      router.replaceUrl({
+        url: 'pages/ExamReportPage',
+        params: { 
+          examRecord: examRecord
+        }
+      }).catch((error: Error) => {
+        console.error('Failed to navigate to exam report:', error);
+      });
+    } catch (error) {
+      console.error('Failed to save exam record:', error);
+      // 即使保存失败，也要替换到报告页面，确保用户能看到结果
+      router.replaceUrl({
+        url: 'pages/ExamReportPage',
+        params: { 
+          examRecord: examRecord
+        }
+      }).catch((navError: Error) => {
+        console.error('Failed to navigate to exam report after save error:', navError);
+      });
+    }
   }
 
   // 获取难度文本的辅助方法

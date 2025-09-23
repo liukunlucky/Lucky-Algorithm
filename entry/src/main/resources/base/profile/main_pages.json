@@ -7,7 +7,8 @@
     "pages/ExamReportPage",
     "pages/FavoritesPage",
     "pages/WrongProblemsPage",
-    "pages/LearningPathPage",
-    "pages/StatisticsPage"
+    "pages/ExamRecordsPage",
+    "pages/StatisticsPage",
+    "pages/StudyNotesPage"
   ]
 }

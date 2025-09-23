@@ -713,6 +713,7 @@ struct ProblemDetailPage {
             .width('100%')
             .height(300)
             .fontSize(14)
+            .placeholderColor('#D5DBDB')
             .backgroundColor('#ffffff')
             .borderRadius(8)
             .border({ width: 1, color: '#e0e0e0' })
@@ -1502,6 +1503,10 @@ struct ProblemDetailPage {
       this.userProgress = await this.userProgressDao.getUserProgress(this.problemId);
       
       this.isSubmitted = true;
+      
+      // 触发首页数据刷新
+      AppStorage.setOrCreate('refreshTodayPage', Date.now());
+      console.info('题目提交后触发首页刷新');
       
       // 显示答题结果对话框
       this.showResultDialog = true;

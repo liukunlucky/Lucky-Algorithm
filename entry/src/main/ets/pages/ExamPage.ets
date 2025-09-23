@@ -36,12 +36,25 @@ export struct ExamPage {
   @State showStartDialog: boolean = false;
   @State difficultyConfigs: DifficultyConfig[] = [];
   @State selectedDifficulty: DifficultyLevel = DifficultyLevel.MIXED;
+  
+  @StorageLink('examDataRefreshTrigger') @Watch('onRefreshTriggerChange') refreshTrigger: number = 0;
 
   aboutToAppear() {
     this.initExamModes();
     this.initDifficultyConfigs();
     this.loadRecentRecords();
   }
+
+  aboutToDisappear() {
+    // AppStorage会自动管理，无需手动取消订阅
+  }
+
+  onRefreshTriggerChange() {
+    if (this.refreshTrigger > 0) {
+      this.loadRecentRecords();
+    }
+  }
+
 
   build() {
     Stack() {
@@ -76,11 +89,11 @@ export struct ExamPage {
       height: 530,
       showClose: false,
       dragBar: false,
+      preferType:SheetType.CENTER,
       onDisappear: () => {
         this.showStartDialog = false;
         this.selectedMode = null;
-      },
-      preferType: SheetType.CENTER,
+      }
     })
   }
 
@@ -338,7 +351,7 @@ export struct ExamPage {
 
         Text('查看全部')
           .fontSize(14)
-          .fontColor('#1890ff')
+          .fontColor('#F34F40')
           .onClick(() => {
             this.showAllRecords();
           })
@@ -592,12 +605,7 @@ export struct ExamPage {
   private async loadRecentRecords(): Promise<void> {
     try {
       // 从ExamService加载最近的考核记录
-      const allRecords = await ExamService.getInstance().getExamRecords();
-      
-      // 按时间排序，取最近的5条记录
-      this.recentRecords = allRecords
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 5);
+      this.recentRecords = await ExamService.getInstance().getRecentExamRecords(5);
         
       console.info('Loaded recent records:', this.recentRecords.length);
     } catch (error) {
@@ -612,13 +620,27 @@ export struct ExamPage {
     const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
     
     if (diffDays === 0) {
-      return '今天';
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `今天 ${hours}:${minutes}:${seconds}`;
     } else if (diffDays === 1) {
-      return '昨天';
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `昨天 ${hours}:${minutes}:${seconds}`;
     } else if (diffDays < 7) {
-      return diffDays + '天前';
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `${diffDays}天前 ${hours}:${minutes}:${seconds}`;
     } else {
-      return `${date.getMonth() + 1}月${date.getDate()}日`;
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return `${month}月${day}日 ${hours}:${minutes}:${seconds}`;
     }
   }
 

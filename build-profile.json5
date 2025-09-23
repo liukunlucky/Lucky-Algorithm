@@ -19,9 +19,9 @@
         "type": "HarmonyOS",
         "material": {
           "storeFile": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/release.p12",
-          "storePassword": "0000001FFC6D822EAEF8FD4D7301AA664898FD76792647E5FACDCF8B88E164AAF230E5F6A1B69E3FF0AAB2E9EB0260",
-          "keyAlias": "lucky_algorithm",
-          "keyPassword": "0000001F2D708F337085DFB2D2A506239D4785177F5C9998A6CC06E11B3EE90452E29B0F151B53845815507D9FF027",
+          "storePassword": "0000001905E4C3198C3E3CE00C0D70AB976410C7EC9DF265F5B5BB6908B362967F57790F0F3E20240D",
+          "keyAlias": "zl_reader",
+          "keyPassword": "0000001965A4BE0FD6FA06C965157C775760D566A27357F01A7259559778F2848B3A369B4E22FDA9F5",
           "signAlg": "SHA256withECDSA",
           "profile": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/algorithm-profileRelease.p7b",
           "certpath": "/Users/monkey/Documents/Harmony/发布相关/算法天天练/algorithm_release.cer"

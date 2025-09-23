@@ -1,6 +1,7 @@
 import { ExamMode, ExamRecordModel } from '../model/ExamRecordModel';
 import { ProblemModel, ProblemDifficulty, ProblemCategory, TestCase, ProblemType, ChoiceOption } from '../model/ProblemModel';
 import { ProblemMockData } from '../mock/ProblemMockData';
+import { ExamRecordDao } from '../dao/ExamRecordDao';
 
 enum DifficultyLevel {
   EASY = 'easy',
@@ -16,8 +17,11 @@ interface ChoiceOptionsResult {
 
 export class ExamService {
   private static instance: ExamService;
+  private examRecordDao: ExamRecordDao;
 
-  private constructor() {}
+  private constructor() {
+    this.examRecordDao = new ExamRecordDao();
+  }
 
   public static getInstance(): ExamService {
     if (!ExamService.instance) {
@@ -248,62 +252,14 @@ export class ExamService {
     return problems;
   }
 
-  /**
-   * 保存考核记录
-   */
-  public async saveExamRecord(record: ExamRecordModel): Promise<boolean> {
-    try {
-      // 这里应该保存到数据库，目前先保存到本地存储
-      const records = await this.getExamRecords();
-      records.push(record);
-      
-      // 保存到本地存储
-      const recordsJson = JSON.stringify(records);
-      // 注意：这里需要使用HarmonyOS的存储API，暂时用模拟实现
-      console.info('Saving exam record:', recordsJson);
-      
-      return true;
-    } catch (error) {
-      console.error('Failed to save exam record:', error);
-      return false;
-    }
-  }
+
 
   /**
    * 获取考核记录列表
    */
   public async getExamRecords(): Promise<ExamRecordModel[]> {
     try {
-      // 这里应该从数据库读取，目前返回模拟数据
-      const records: ExamRecordModel[] = [];
-      
-      // 模拟一些历史记录
-      const record1 = new ExamRecordModel();
-      record1.id = 1;
-      record1.mode = ExamMode.QUICK;
-      record1.score = 85;
-      record1.totalProblems = 5;
-      record1.correctCount = 4;
-      record1.timeUsed = 12 * 60; // 12分钟
-      record1.duration = 12 * 60; // 设置duration属性
-      record1.startTime = new Date(Date.now() - 24 * 60 * 60 * 1000); // 昨天
-      record1.endTime = new Date(Date.now() - 24 * 60 * 60 * 1000 + 12 * 60 * 1000);
-      record1.date = record1.startTime.toISOString(); // 设置date属性
-      
-      const record2 = new ExamRecordModel();
-      record2.id = 2;
-      record2.mode = ExamMode.STANDARD;
-      record2.score = 92;
-      record2.totalProblems = 10;
-      record2.correctCount = 9;
-      record2.timeUsed = 25 * 60; // 25分钟
-      record2.duration = 25 * 60; // 设置duration属性
-      record2.startTime = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 一周前
-      record2.endTime = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 25 * 60 * 1000);
-      record2.date = record2.startTime.toISOString(); // 设置date属性
-      
-      records.push(record1, record2);
-      return records;
+      return await this.examRecordDao.getAllExamRecords();
     } catch (error) {
       console.error('Failed to get exam records:', error);
       return [];
@@ -315,12 +271,35 @@ export class ExamService {
    */
   public async getExamRecordById(id: number): Promise<ExamRecordModel | null> {
     try {
-      const records = await this.getExamRecords();
-      const record = records.find(r => r.id === id);
-      return record || null;
+      return await this.examRecordDao.getExamRecordById(id);
     } catch (error) {
       console.error('Failed to get exam record by id:', error);
       return null;
+    }
+  }
+
+  /**
+   * 保存考核记录
+   */
+  public async saveExamRecord(record: ExamRecordModel): Promise<void> {
+    try {
+      await this.examRecordDao.saveExamRecord(record);
+      console.info('Exam record saved successfully');
+    } catch (error) {
+      console.error('Failed to save exam record:', error);
+      throw new Error('Failed to save exam record');
+    }
+  }
+
+  /**
+   * 获取最近的考核记录
+   */
+  public async getRecentExamRecords(limit: number = 5): Promise<ExamRecordModel[]> {
+    try {
+      return await this.examRecordDao.getRecentExamRecords(limit);
+    } catch (error) {
+      console.error('Failed to get recent exam records:', error);
+      return [];
     }
   }
 }

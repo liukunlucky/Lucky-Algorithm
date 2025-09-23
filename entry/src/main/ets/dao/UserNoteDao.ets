@@ -54,8 +54,30 @@ export class UserNoteDao {
     }
   }
 
-  // 删除笔记
-  async deleteNote(problemId: number): Promise<void> {
+  // 获取所有笔记
+  async getAllNotes(): Promise<UserNoteModel[]> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = 'SELECT * FROM user_notes ORDER BY updated_at DESC';
+    const result = await store.querySql(sql);
+    const notes: UserNoteModel[] = [];
+
+    if (result.rowCount > 0) {
+      for (let i = 0; i < result.rowCount; i++) {
+        result.goToRow(i);
+        const note = this.mapResultToNote(result);
+        notes.push(note);
+      }
+    }
+
+    return notes;
+  }
+
+  // 删除笔记（根据题目ID）
+  async deleteNoteByProblemId(problemId: number): Promise<void> {
     const store = this.dbHelper.getStore();
     if (!store) {
       throw new Error('数据库未初始化');
@@ -63,6 +85,17 @@ export class UserNoteDao {
 
     const sql = 'DELETE FROM user_notes WHERE problem_id = ?';
     await store.executeSql(sql, [problemId]);
+  }
+
+  // 删除笔记（根据ID）
+  async deleteNote(noteId: number): Promise<void> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = 'DELETE FROM user_notes WHERE id = ?';
+    await store.executeSql(sql, [noteId]);
   }
 
   private mapResultToNote(result: relationalStore.ResultSet): UserNoteModel {
