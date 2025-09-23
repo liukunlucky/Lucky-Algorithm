@@ -33,6 +33,7 @@ export struct LearningPathPage {
   @State learningPaths: LearningPath[] = [];
   @State selectedPath: LearningPath | null = null;
   @State isLoading: boolean = true;
+  @StorageLink('learningPathRefreshTrigger') @Watch('onRefreshTriggerChange') refreshTrigger: number = 0;
   
   // 使用mock数据，不再需要数据库实例
   private userProgressDao: UserProgressDao = new UserProgressDao();
@@ -41,8 +42,20 @@ export struct LearningPathPage {
     this.loadLearningPaths();
   }
 
-  onPageShow() {
-    // 每次页面显示时重新加载学习进度，确保数据实时更新
+  /**
+   * 监听refreshTrigger变化，实现Tab切换时自动刷新
+   */
+  onRefreshTriggerChange() {
+    if (this.refreshTrigger > 0) {
+      this.loadLearningPaths();
+    }
+  }
+
+  /**
+   * 刷新学习路线数据
+   * 供外部调用，用于Tab切换时更新数据
+   */
+  refreshData(): void {
     this.loadLearningPaths();
   }
 
@@ -212,6 +225,9 @@ export struct LearningPathPage {
     .backgroundColor('#ffffff')
     .borderRadius(12)
     .shadow({ radius: 4, color: '#00000010', offsetX: 0, offsetY: 2 })
+    .onClick(() => {
+      this.showPathDetail(path);
+    })
   }
 
   private async loadLearningPaths(): Promise<void> {
@@ -336,7 +352,17 @@ export struct LearningPathPage {
       color: '#fa541c'
     };
     
-    configs.push(config1, config2, config3, config4, config5, config6, config7, config8);
+    const config9: PathConfig = {
+      category: ProblemCategory.STACK,
+      title: '栈与队列',
+      description: '掌握栈和队列的基本操作，学习单调栈、优先队列等高级应用',
+      icon: $r('app.media.book_icon'),
+      difficulty: '基础',
+      estimatedTime: '2-3周',
+      color: '#52c41a'
+    };
+    
+    configs.push(config1, config2, config3, config4, config5, config6, config7, config8, config9);
     return configs;
   }
 
@@ -439,7 +465,19 @@ export struct LearningPathPage {
       color: '#fa541c'
     };
     
-    paths.push(path1, path2, path3, path4, path5, path6, path7, path8);
+    const path9: LearningPath = {
+      category: ProblemCategory.STACK,
+      title: '栈与队列',
+      description: '掌握栈和队列的基本操作，学习单调栈、优先队列等高级应用',
+      icon: $r('app.media.book_icon'),
+      totalProblems: 20,
+      completedProblems: 0,
+      difficulty: '基础',
+      estimatedTime: '2-3周',
+      color: '#52c41a'
+    };
+    
+    paths.push(path1, path2, path3, path4, path5, path6, path7, path8, path9);
     return paths;
   }
 
@@ -463,8 +501,7 @@ export struct LearningPathPage {
     const tabNavigationService = TabNavigationService.getInstance();
     tabNavigationService.switchToPracticeCenter();
     
-    // TODO: 需要在练习中心页面添加接收分类参数的机制
-    // 暂时使用AppStorage来传递参数
+    // 使用AppStorage来传递参数到练习中心页面
     AppStorage.setOrCreate('selectedCategory', path.category);
     AppStorage.setOrCreate('selectedCategoryTitle', path.title);
   }

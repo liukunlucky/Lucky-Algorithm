@@ -77,6 +77,11 @@ struct Index {
     .onChange((index: number) => {
       this.currentTabIndex = index;
       this.tabNavigationService.updateCurrentTabIndex(index);
+      
+      // 当切换到学习路线Tab时，触发数据刷新
+      if (index === 1) {
+        AppStorage.setOrCreate('learningPathRefreshTrigger', Date.now());
+      }
     })
   }
 

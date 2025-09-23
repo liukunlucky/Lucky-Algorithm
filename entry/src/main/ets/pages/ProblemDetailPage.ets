@@ -1,4 +1,4 @@
-import { ProblemModel, TestCase, ChoiceOption, ProblemType } from '../model/ProblemModel';
+import { ProblemModel, TestCase, ChoiceOption, ProblemType, ProgrammingLanguage } from '../model/ProblemModel';
 import { UserProgressModel, ProblemStatus } from '../model/UserProgressModel';
 import { UserNoteModel } from '../model/UserNoteModel';
 import { ProblemMockData } from '../mock/ProblemMockData';
@@ -7,7 +7,7 @@ import { UserNoteDao } from '../dao/UserNoteDao';
 import { AppButton, AppButtonType } from '../components/AppButton';
 import router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
-import pasteboard from '@ohos.pasteboard';
+import { pasteboard } from '@kit.BasicServicesKit';
 
 interface TestResult {
   id: string;
@@ -41,6 +41,7 @@ struct ProblemDetailPage {
   @State noteContent: string = '';
   @State isEditingNote: boolean = false;
   @State relatedProblems: ProblemModel[] = [];
+  @State currentLanguage: ProgrammingLanguage = ProgrammingLanguage.JAVA;
   
   // 使用mock数据，不再需要数据库实例
   private userProgressDao: UserProgressDao = new UserProgressDao();
@@ -997,29 +998,9 @@ struct ProblemDetailPage {
 
       // 语言选择
       Row({ space: 8 }) {
-        Text('Java')
-          .fontSize(12)
-          .fontColor('#1890ff')
-          .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-          .backgroundColor('#e6f7ff')
-          .borderRadius(4)
-          .border({ width: 1, color: '#1890ff' })
-
-        Text('Python')
-          .fontSize(12)
-          .fontColor('#666666')
-          .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-          .backgroundColor('#f5f5f5')
-          .borderRadius(4)
-          .border({ width: 1, color: '#d9d9d9' })
-
-        Text('C++')
-          .fontSize(12)
-          .fontColor('#666666')
-          .padding({ left: 8, right: 8, top: 4, bottom: 4 })
-          .backgroundColor('#f5f5f5')
-          .borderRadius(4)
-          .border({ width: 1, color: '#d9d9d9' })
+        this.buildLanguageTab(ProgrammingLanguage.JAVA)
+        this.buildLanguageTab(ProgrammingLanguage.PYTHON)
+        this.buildLanguageTab(ProgrammingLanguage.CPP)
       }
       .alignSelf(ItemAlign.Start)
 
@@ -1046,7 +1027,7 @@ struct ProblemDetailPage {
         }
         .width('100%')
 
-        Text(this.problem?.solutionCode || this.getDefaultSolutionCode())
+        Text(this.getCurrentLanguageCode())
           .fontSize(12)
           .fontColor('#ffffff')
           .backgroundColor('#1e1e1e')
@@ -1712,6 +1693,97 @@ struct ProblemDetailPage {
     } catch (error) {
       console.error('Failed to load related problems:', error);
       this.relatedProblems = [];
+    }
+  }
+
+  /**
+   * 构建语言选择标签
+   */
+  @Builder
+  buildLanguageTab(language: ProgrammingLanguage) {
+    Text(ProblemModel.getLanguageDisplayName(language))
+      .fontSize(12)
+      .fontColor(this.currentLanguage === language ? '#1890ff' : '#666666')
+      .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+      .backgroundColor(this.currentLanguage === language ? '#e6f7ff' : '#f5f5f5')
+      .borderRadius(4)
+      .border({ width: 1, color: this.currentLanguage === language ? '#1890ff' : '#d9d9d9' })
+      .onClick(() => {
+        this.currentLanguage = language;
+      })
+  }
+
+  /**
+   * 获取当前语言的代码
+   */
+  private getCurrentLanguageCode(): string {
+    if (!this.problem) {
+      return this.getDefaultSolutionCode();
+    }
+    
+    const code = this.problem.getCodeByLanguage(this.currentLanguage);
+    return code || this.getDefaultCodeByLanguage(this.currentLanguage);
+  }
+
+  /**
+   * 获取默认的多语言代码
+   */
+  private getDefaultCodeByLanguage(language: ProgrammingLanguage): string {
+    switch (language) {
+      case ProgrammingLanguage.JAVA:
+        return this.getDefaultSolutionCode();
+      case ProgrammingLanguage.PYTHON:
+        return `def two_sum(nums, target):
+    """
+    给定一个整数数组 nums 和一个整数目标值 target，
+    请你在该数组中找出和为目标值 target 的那两个整数，
+    并返回它们的数组下标。
+    """
+    # 使用哈希表存储数组值和索引
+    num_map = {}
+    
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    
+    return []
+
+# 时间复杂度: O(n)
+# 空间复杂度: O(n)`;
+      case ProgrammingLanguage.CPP:
+        return `#include <vector>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    /**
+     * 给定一个整数数组 nums 和一个整数目标值 target，
+     * 请你在该数组中找出和为目标值 target 的那两个整数，
+     * 并返回它们的数组下标。
+     */
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // 使用哈希表存储数组值和索引
+        unordered_map<int, int> numMap;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            if (numMap.find(complement) != numMap.end()) {
+                return {numMap[complement], i};
+            }
+            numMap[nums[i]] = i;
+        }
+        
+        return {};
+    }
+};
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)`;
+      default:
+        return this.getDefaultSolutionCode();
     }
   }
 

@@ -45,30 +45,43 @@ export struct ExamPage {
 
   build() {
     Stack() {
-      Column({ space: 16 }) {
-        // 页面标题
-        this.buildHeader()
+      Scroll() {
+        Column({ space: 16 }) {
+          // 页面标题
+          // this.buildHeader()
 
-        // 考核模式选择
-        this.buildExamModes()
+          // 考核模式选择
+          this.buildExamModes()
 
-        // 最近考核记录
-        this.buildRecentRecords()
+          // 最近考核记录
+          this.buildRecentRecords()
 
-        Blank()
+          // 底部间距
+          Column()
+            .height(20)
+        }
+        .width('100%')
+        .padding({ left: 16, right: 16, top: 16, bottom: 16 })
       }
       .width('100%')
       .height('100%')
-      .padding({ left: 16, right: 16, top: 16, bottom: 16 })
       .backgroundColor('#f5f5f5')
-
-      // 开始考核确认对话框
-      if (this.showStartDialog) {
-        this.buildStartDialog()
-      }
+      .scrollable(ScrollDirection.Vertical)
+      .scrollBar(BarState.Auto)
+      .edgeEffect(EdgeEffect.Spring)
     }
     .width('100%')
     .height('100%')
+    .bindSheet(this.showStartDialog, this.buildStartDialog(), {
+      height: 530,
+      showClose: false,
+      dragBar: false,
+      onDisappear: () => {
+        this.showStartDialog = false;
+        this.selectedMode = null;
+      },
+      preferType: SheetType.CENTER,
+    })
   }
 
   @Builder
@@ -100,10 +113,6 @@ export struct ExamPage {
   buildExamModes() {
     Column({ space: 12 }) {
       Row({ space: 8 }) {
-          Image($r('app.media.note_icon'))
-            .width(16)
-            .height(16)
-            .fillColor('#333333')
           Text('选择考核模式')
             .fontSize(18)
             .fontWeight(FontWeight.Bold)
@@ -123,13 +132,6 @@ export struct ExamPage {
     Column({ space: 12 }) {
       // 卡片头部
       Row({ space: 12 }) {
-        Image(mode.icon)
-          .width(32)
-          .height(32)
-          .fillColor('#333333')
-          .margin(9)
-          .backgroundColor(mode.color + '20')
-          .borderRadius(25)
 
         Column({ space: 4 }) {
           Text(mode.title)
@@ -206,19 +208,7 @@ export struct ExamPage {
 
   @Builder
   buildStartDialog() {
-    Stack() {
-      // 遮罩层
-      Column()
-        .width('100%')
-        .height('100%')
-        .backgroundColor('#00000080')
-        .onClick(() => {
-          this.showStartDialog = false;
-          this.selectedMode = null;
-        })
-
-      // 对话框内容
-      Column({ space: 20 }) {
+    Column({ space: 20 }) {
         // 标题
         Text('开始' + (this.selectedMode?.title || ''))
           .fontSize(20)
@@ -228,18 +218,6 @@ export struct ExamPage {
         // 模式信息
         if (this.selectedMode) {
           Column({ space: 12 }) {
-            Row({ space: 8 }) {
-              Image(this.selectedMode.icon)
-                .width(24)
-                .height(24)
-                .fillColor('#333333')
-
-              Text(this.selectedMode.title)
-                .fontSize(18)
-                .fontWeight(FontWeight.Medium)
-                .fontColor('#333333')
-            }
-            .justifyContent(FlexAlign.Center)
 
             Text(this.selectedMode.description)
               .fontSize(14)
@@ -321,7 +299,7 @@ export struct ExamPage {
           Button('取消')
             .layoutWeight(1)
             .height(44)
-            .backgroundColor('#f5f5f5')
+            .backgroundColor('#FFFFFF')
             .fontColor('#666666')
             .borderRadius(8)
             .onClick(() => {
@@ -332,7 +310,7 @@ export struct ExamPage {
           Button('开始考核')
             .layoutWeight(1)
             .height(44)
-            .backgroundColor(this.selectedMode?.color || '#1890ff')
+            .backgroundColor(this.selectedMode?.color || '#F34F40')
             .fontColor('#ffffff')
             .borderRadius(8)
             .onClick(() => {
@@ -341,14 +319,8 @@ export struct ExamPage {
         }
         .width('100%')
       }
-      .width('90%')
+      .width('100%')
       .padding(24)
-      .backgroundColor('#ffffff')
-      .borderRadius(16)
-      .shadow({ radius: 20, color: '#00000020', offsetX: 0, offsetY: 10 })
-    }
-    .width('100%')
-    .height('100%')
   }
 
   @Builder
@@ -356,10 +328,6 @@ export struct ExamPage {
     Column({ space: 12 }) {
       Row() {
         Row({ space: 8 }) {
-          Image($r('app.media.chart_icon'))
-            .width(16)
-            .height(16)
-            .fillColor('#333333')
           Text('最近考核记录')
             .fontSize(18)
             .fontWeight(FontWeight.Bold)
@@ -379,10 +347,9 @@ export struct ExamPage {
 
       if (this.recentRecords.length === 0) {
         Column({ space: 8 }) {
-          Image($r('app.media.note_icon'))
-              .width(48)
-              .height(48)
-              .fillColor('#cccccc')
+          Image($r('app.media.icon_empty'))
+              .width(58)
+              .height(42)
 
           Text('暂无考核记录')
             .fontSize(14)
@@ -624,10 +591,18 @@ export struct ExamPage {
 
   private async loadRecentRecords(): Promise<void> {
     try {
-      // TODO: 从数据库加载最近的考核记录
-      this.recentRecords = [];
+      // 从ExamService加载最近的考核记录
+      const allRecords = await ExamService.getInstance().getExamRecords();
+      
+      // 按时间排序，取最近的5条记录
+      this.recentRecords = allRecords
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 5);
+        
+      console.info('Loaded recent records:', this.recentRecords.length);
     } catch (error) {
       console.error('Failed to load recent records:', error);
+      this.recentRecords = [];
     }
   }
 
@@ -663,13 +638,33 @@ export struct ExamPage {
   }
 
   private showAllRecords(): void {
-    // TODO: 显示所有考核记录
-    console.info('Show all records');
+    try {
+      // 跳转到考核记录列表页面
+      router.pushUrl({
+        url: 'pages/ExamRecordsPage'
+      }).catch((error: Error) => {
+        console.error('Failed to navigate to exam records page:', error);
+      });
+    } catch (error) {
+      console.error('Failed to show all records:', error);
+    }
   }
 
   private showRecordDetail(record: ExamRecordModel): void {
-    // TODO: 显示考核记录详情
-    console.info('Show record detail:', record.id);
+    try {
+      // 跳转到考核报告页面显示详情
+      router.pushUrl({
+        url: 'pages/ExamReportPage',
+        params: { 
+          examRecord: record,
+          fromHistory: true 
+        }
+      }).catch((error: Error) => {
+        console.error('Failed to navigate to exam report:', error);
+      });
+    } catch (error) {
+      console.error('Failed to show record detail:', error);
+    }
   }
 
   /**

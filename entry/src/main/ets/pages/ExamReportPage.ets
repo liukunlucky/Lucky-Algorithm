@@ -17,6 +17,7 @@ struct ExamReportPage {
     const params = router.getParams() as ExamReportParams;
     if (params && params.examRecord) {
       this.examRecord = params.examRecord;
+      console.info(`ExamReportPage: Loaded examRecord with score=${this.examRecord.score}, accuracy=${this.examRecord.getAccuracyRate()}%`);
     }
   }
 

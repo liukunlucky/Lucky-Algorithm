@@ -80,6 +80,71 @@ export class ProblemMockData {
     ];
     twoSum.explanation = '最优解法是使用哈希表。遍历数组时，对于每个元素nums[i]，计算target - nums[i]，然后在哈希表中查找这个值。如果找到，返回两个索引；如果没找到，将当前元素和索引存入哈希表。这样只需要一次遍历，时间复杂度为O(n)，空间复杂度为O(n)。';
     twoSum.hint = '考虑使用哈希表来存储已经遍历过的元素及其索引';
+    
+    // 添加多语言代码
+    twoSum.multiLanguageCode = {
+      java: `public int[] twoSum(int[] nums, int target) {
+    // 使用哈希表存储数组值和索引
+    Map<Integer, Integer> map = new HashMap<>();
+    
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[]{map.get(complement), i};
+        }
+        map.put(nums[i], i);
+    }
+    
+    return new int[0];
+}
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)`,
+      python: `def two_sum(nums, target):
+    """
+    给定一个整数数组 nums 和一个整数目标值 target，
+    请你在该数组中找出和为目标值 target 的那两个整数，
+    并返回它们的数组下标。
+    """
+    # 使用哈希表存储数组值和索引
+    num_map = {}
+    
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return [num_map[complement], i]
+        num_map[num] = i
+    
+    return []
+
+# 时间复杂度: O(n)
+# 空间复杂度: O(n)`,
+      cpp: `#include <vector>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // 使用哈希表存储数组值和索引
+        unordered_map<int, int> numMap;
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            if (numMap.find(complement) != numMap.end()) {
+                return {numMap[complement], i};
+            }
+            numMap[nums[i]] = i;
+        }
+        
+        return {};
+    }
+};
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(n)`
+    };
+    
     problems.push(twoSum);
     
     // 三数之和
@@ -114,6 +179,67 @@ export class ProblemMockData {
     ];
     maxSubArray.explanation = 'Kadane算法是最优解法。维护两个变量：当前子数组的最大和(currentSum)和全局最大和(maxSum)。遍历数组，对于每个元素，选择是加入当前子数组还是重新开始一个新的子数组。状态转移方程：currentSum = max(nums[i], currentSum + nums[i])。时间复杂度O(n)，空间复杂度O(1)。';
     maxSubArray.hint = '考虑动态规划，当前位置的最大子数组和只依赖于前一个位置';
+    
+    // 添加多语言代码
+    maxSubArray.multiLanguageCode = {
+      java: `public int maxSubArray(int[] nums) {
+    // Kadane算法 - 动态规划
+    int maxSum = nums[0];
+    int currentSum = nums[0];
+    
+    for (int i = 1; i < nums.length; i++) {
+        // 选择是加入当前子数组还是重新开始
+        currentSum = Math.max(nums[i], currentSum + nums[i]);
+        maxSum = Math.max(maxSum, currentSum);
+    }
+    
+    return maxSum;
+}
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)`,
+      python: `def max_sub_array(nums):
+    """
+    使用Kadane算法找到最大子数组和
+    """
+    # 初始化最大和和当前和
+    max_sum = nums[0]
+    current_sum = nums[0]
+    
+    for i in range(1, len(nums)):
+        # 选择是加入当前子数组还是重新开始
+        current_sum = max(nums[i], current_sum + nums[i])
+        max_sum = max(max_sum, current_sum)
+    
+    return max_sum
+
+# 时间复杂度: O(n)
+# 空间复杂度: O(1)`,
+      cpp: `#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // Kadane算法 - 动态规划
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+        
+        for (int i = 1; i < nums.size(); i++) {
+            // 选择是加入当前子数组还是重新开始
+            currentSum = max(nums[i], currentSum + nums[i]);
+            maxSum = max(maxSum, currentSum);
+        }
+        
+        return maxSum;
+    }
+};
+
+// 时间复杂度: O(n)
+// 空间复杂度: O(1)`
+    };
+    
     problems.push(maxSubArray);
     
     // 合并两个有序数组
@@ -131,6 +257,98 @@ export class ProblemMockData {
     ];
     mergeSortedArray.explanation = '从后往前合并是最优解法。由于nums1有足够的空间，从两个数组的末尾开始比较，将较大的元素放到nums1的末尾。这样避免了覆盖nums1中未处理的元素。时间复杂度O(m+n)，空间复杂度O(1)。';
     mergeSortedArray.hint = '从后往前合并，避免覆盖未处理的元素';
+    mergeSortedArray.multiLanguageCode = {
+      java: `class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // 从后往前合并，避免覆盖未处理的元素
+        int i = m - 1;  // nums1的最后一个有效元素
+        int j = n - 1;  // nums2的最后一个元素
+        int k = m + n - 1;  // 合并后数组的最后位置
+        
+        // 从后往前比较并放置元素
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--;
+        }
+        
+        // 如果nums2还有剩余元素，复制到nums1
+        while (j >= 0) {
+            nums1[k] = nums2[j];
+            j--;
+            k--;
+        }
+        // nums1的剩余元素已经在正确位置，无需处理
+    }
+}
+
+// 时间复杂度: O(m + n)
+// 空间复杂度: O(1)`,
+      python: `def merge(nums1, m, nums2, n):
+    """
+    从后往前合并两个有序数组
+    """
+    # 三个指针：i指向nums1有效元素末尾，j指向nums2末尾，k指向合并位置
+    i, j, k = m - 1, n - 1, m + n - 1
+    
+    # 从后往前比较并放置元素
+    while i >= 0 and j >= 0:
+        if nums1[i] > nums2[j]:
+            nums1[k] = nums1[i]
+            i -= 1
+        else:
+            nums1[k] = nums2[j]
+            j -= 1
+        k -= 1
+    
+    # 如果nums2还有剩余元素，复制到nums1
+    while j >= 0:
+        nums1[k] = nums2[j]
+        j -= 1
+        k -= 1
+
+# 时间复杂度: O(m + n)
+# 空间复杂度: O(1)`,
+      cpp: `#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        // 从后往前合并，避免覆盖
+        int i = m - 1;  // nums1的最后一个有效元素
+        int j = n - 1;  // nums2的最后一个元素
+        int k = m + n - 1;  // 合并后数组的最后位置
+        
+        // 从后往前比较并放置元素
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--;
+        }
+        
+        // 如果nums2还有剩余元素，复制到nums1
+        while (j >= 0) {
+            nums1[k] = nums2[j];
+            j--;
+            k--;
+        }
+    }
+};
+
+// 时间复杂度: O(m + n)
+// 空间复杂度: O(1)`
+    };
     problems.push(mergeSortedArray);
     
     // 移除元素
@@ -165,6 +383,83 @@ export class ProblemMockData {
     ];
     searchInsert.explanation = '由于数组已排序，使用二分搜索是最优解法。如果找到目标值，返回其索引；如果没找到，left指针的位置就是插入位置。时间复杂度O(logn)，空间复杂度O(1)。';
     searchInsert.hint = '利用数组已排序的特性，使用二分搜索';
+    searchInsert.multiLanguageCode = {
+      java: `class Solution {
+    public int searchInsert(int[] nums, int target) {
+        // 二分搜索找到插入位置
+        int left = 0;
+        int right = nums.length - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (nums[mid] == target) {
+                return mid;  // 找到目标值，返回索引
+            } else if (nums[mid] < target) {
+                left = mid + 1;  // 目标值在右半部分
+            } else {
+                right = mid - 1;  // 目标值在左半部分
+            }
+        }
+        
+        // 没找到目标值，left就是插入位置
+        return left;
+    }
+}
+
+// 时间复杂度: O(log n)
+// 空间复杂度: O(1)`,
+      python: `def search_insert(nums, target):
+    """
+    使用二分搜索找到目标值或插入位置
+    """
+    left, right = 0, len(nums) - 1
+    
+    while left <= right:
+        mid = left + (right - left) // 2
+        
+        if nums[mid] == target:
+            return mid  # 找到目标值
+        elif nums[mid] < target:
+            left = mid + 1  # 目标值在右半部分
+        else:
+            right = mid - 1  # 目标值在左半部分
+    
+    # 没找到目标值，left就是插入位置
+    return left
+
+# 时间复杂度: O(log n)
+# 空间复杂度: O(1)`,
+      cpp: `#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        // 二分搜索
+        int left = 0;
+        int right = nums.size() - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (nums[mid] == target) {
+                return mid;  // 找到目标值
+            } else if (nums[mid] < target) {
+                left = mid + 1;  // 目标值在右半部分
+            } else {
+                right = mid - 1;  // 目标值在左半部分
+            }
+        }
+        
+        // 没找到目标值，left就是插入位置
+        return left;
+    }
+};
+
+// 时间复杂度: O(log n)
+// 空间复杂度: O(1)`
+    };
     problems.push(searchInsert);
     
     // 加一

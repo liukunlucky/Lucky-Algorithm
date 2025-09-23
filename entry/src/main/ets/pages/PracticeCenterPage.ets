@@ -18,7 +18,7 @@ export struct PracticeCenterPage {
   @State isLoading: boolean = false;
   @State selectedCategory: ProblemCategory | null = null;
   @State selectedDifficulty: ProblemDifficulty | null = null;
-  @StorageLink('selectedCategory') externalSelectedCategory: ProblemCategory | null = null;
+  @StorageLink('selectedCategory') @Watch('onExternalCategoryChange') externalSelectedCategory: ProblemCategory | null = null;
   @StorageLink('selectedCategoryTitle') externalSelectedCategoryTitle: string = '';
   
   // 使用mock数据，不再需要数据库实例
@@ -33,8 +33,22 @@ export struct PracticeCenterPage {
       this.loadProblems();
       
       // 清除参数，避免下次进入时还保持选中状态
-      AppStorage.setOrCreate('selectedCategory', null);
-      AppStorage.setOrCreate('selectedCategoryTitle', '');
+      AppStorage.set('selectedCategory', null);
+      AppStorage.set('selectedCategoryTitle', '');
+    }
+  }
+
+  /**
+   * 监听外部分类变化，实现学习路线跳转时自动切换分类
+   */
+  onExternalCategoryChange() {
+    if (this.externalSelectedCategory) {
+      this.selectedCategory = this.externalSelectedCategory;
+      this.loadProblems();
+      
+      // 清除参数，避免下次进入时还保持选中状态
+       AppStorage.set('selectedCategory', null);
+       AppStorage.set('selectedCategoryTitle', '');
     }
   }
 
@@ -267,8 +281,9 @@ export struct PracticeCenterPage {
     const config6: CategoryConfig = { category: ProblemCategory.BINARY_SEARCH, name: '二分查找', icon: $r('app.media.search_icon'), color: '#eb2f96' };
     const config7: CategoryConfig = { category: ProblemCategory.MATH, name: '数学', icon: $r('app.media.computer_icon'), color: '#f5222d' };
     const config8: CategoryConfig = { category: ProblemCategory.DYNAMIC_PROGRAMMING, name: '动态规划', icon: $r('app.media.target_icon'), color: '#fa541c' };
+    const config9: CategoryConfig = { category: ProblemCategory.STACK, name: '栈与队列', icon: $r('app.media.book_icon'), color: '#52c41a' };
     
-    configs.push(config1, config2, config3, config4, config5, config6, config7, config8);
+    configs.push(config1, config2, config3, config4, config5, config6, config7, config8, config9);
     return configs;
   }
 

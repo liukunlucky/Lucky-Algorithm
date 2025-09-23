@@ -24,6 +24,7 @@ struct ExamConductPage {
   aboutToAppear() {
     const params = router.getParams() as ExamParams;
     if (params) {
+      console.log('lucky exam info is ' + JSON.stringify(params))
       this.examParams = params;
       this.timeRemaining = params.timeLimit;
       this.userAnswers = new Array(params.problems.length).fill(null).map(() => []);
@@ -81,38 +82,42 @@ struct ExamConductPage {
     Row() {
       // 返回按钮
       Button() {
-        Image($r('app.media.close_icon'))
-          .width(16)
-          .height(16)
+        Image($r('app.media.icon_back'))
+          .width(24)
+          .height(24)
           .fillColor('#666666')
       }
-      .backgroundColor('#f0f0f0')
+      .width(100)
+      .height(40)
+      .align(Alignment.Start)
+      .backgroundColor(Color.Transparent)
       .borderRadius(6)
       .padding({ left: 12, right: 12, top: 6, bottom: 6 })
       .onClick(() => {
         this.showExitConfirm();
       })
 
-      Blank()
-
       // 题目进度
-      Text(`${this.currentProblemIndex + 1}/${this.examParams!.problems.length}`)
+      Text(this.examParams && this.examParams.problems ? 
+        `${this.currentProblemIndex + 1}/${this.examParams.problems.length}` : '0/0')
         .fontSize(16)
         .fontWeight(FontWeight.Medium)
         .fontColor('#333333')
-
-      Blank()
+        .layoutWeight(1)
+        .textAlign(TextAlign.Center)
 
       // 倒计时
       Row({ space: 4 }) {
-        Text('⏰')
-          .fontSize(14)
+        Image($r('app.media.icon_clock'))
+          .width(24).height(24)
 
         Text(this.formatTime(this.timeRemaining))
           .fontSize(16)
           .fontWeight(FontWeight.Bold)
           .fontColor(this.timeRemaining < 300 ? '#f5222d' : '#333333') // 少于5分钟显示红色
       }
+      .width(100)
+      .justifyContent(FlexAlign.End)
       .padding({ left: 8, right: 8, top: 4, bottom: 4 })
       .backgroundColor('#ffffff')
       .borderRadius(8)
@@ -125,7 +130,18 @@ struct ExamConductPage {
 
   @Builder
   buildProblemContent() {
-    Column({ space: 12 }) {
+    if (!this.examParams || !this.examParams.problems || this.currentProblemIndex >= this.examParams.problems.length) {
+      Column() {
+        Text('题目加载中...')
+          .fontSize(16)
+          .fontColor('#666666')
+      }
+      .width('100%')
+      .height(200)
+      .justifyContent(FlexAlign.Center)
+      .alignItems(HorizontalAlign.Center)
+    } else if (this.currentProblemIndex >= 0 && this.currentProblemIndex < this.examParams.problems.length && this.examParams.problems[this.currentProblemIndex]) {
+        Column({ space: 12 }) {
       // 题目标题
       Row({ space: 8 }) {
         Text(`${this.currentProblemIndex + 1}.`)
@@ -133,16 +149,16 @@ struct ExamConductPage {
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
 
-        Text(this.examParams!.problems[this.currentProblemIndex].title)
+        Text(this.examParams.problems[this.currentProblemIndex].title)
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
           .layoutWeight(1)
 
-        Text(this.examParams!.problems[this.currentProblemIndex].getDifficultyText())
+        Text(this.getDifficultyText(this.examParams.problems[this.currentProblemIndex].difficulty))
           .fontSize(12)
           .fontColor('#ffffff')
-          .backgroundColor(this.examParams!.problems[this.currentProblemIndex].getDifficultyColor())
+          .backgroundColor(this.getDifficultyColor(this.examParams.problems[this.currentProblemIndex].difficulty))
           .padding({ left: 6, right: 6, top: 2, bottom: 2 })
           .borderRadius(4)
       }
@@ -151,7 +167,7 @@ struct ExamConductPage {
 
       // 题目描述
       Scroll() {
-        Text(this.examParams!.problems[this.currentProblemIndex].description)
+        Text(this.examParams.problems[this.currentProblemIndex].description)
           .fontSize(14)
           .fontColor('#333333')
           .lineHeight(20)
@@ -161,16 +177,27 @@ struct ExamConductPage {
       .backgroundColor('#ffffff')
       .borderRadius(8)
       .padding(12)
+        }
+        .width('100%')
+        .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+    } else {
+      Column() {
+        Text('题目不存在')
+          .fontSize(16)
+          .fontColor('#666666')
+      }
+      .width('100%')
+      .height(200)
+      .justifyContent(FlexAlign.Center)
+      .alignItems(HorizontalAlign.Center)
     }
-    .width('100%')
-    .padding({ left: 16, right: 16, top: 8, bottom: 8 })
   }
 
   @Builder
   buildChoiceOptions() {
     Column({ space: 12 }) {
       Row() {
-        Text('📝 请选择答案')
+        Text('请选择答案')
           .fontSize(16)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
@@ -203,39 +230,24 @@ struct ExamConductPage {
   buildOptionItem(option: ChoiceOption) {
     Row({ space: 12 }) {
       // 选择框
-      if (this.getCurrentProblemType() === ProblemType.SINGLE_CHOICE) {
-        // 单选框
-        Stack() {
-          Circle({ width: 20, height: 20 })
-            .fill(this.isOptionSelected(option.id) ? '#1890ff' : '#ffffff')
-            .border({
-              width: 2,
-              color: this.isOptionSelected(option.id) ? '#1890ff' : '#d9d9d9'
-            })
-          
-          if (this.isOptionSelected(option.id)) {
-            Circle({ width: 8, height: 8 })
-              .fill('#ffffff')
-          }
-        }
-      } else {
+      if (this.getCurrentProblemType() === ProblemType.MULTIPLE_CHOICE) {
         // 多选框
-        Stack() {
-          Rect({ width: 20, height: 20 })
-            .fill(this.isOptionSelected(option.id) ? '#1890ff' : '#ffffff')
-            .border({
-              width: 2,
-              color: this.isOptionSelected(option.id) ? '#1890ff' : '#d9d9d9'
-            })
-            .borderRadius(4)
-          
-          if (this.isOptionSelected(option.id)) {
-            Text('✓')
-              .fontSize(12)
-              .fontColor('#ffffff')
-              .fontWeight(FontWeight.Bold)
-          }
-        }
+        Checkbox({ name: option.id, group: 'choices' })
+          .select(this.isOptionSelected(option.id))
+          .selectedColor('#F34F40')
+          .onChange((value: boolean) => {
+            this.selectOption(option.id);
+          })
+      } else {
+        // 单选框
+        Radio({ value: option.id, group: 'choices' })
+          .checked(this.isOptionSelected(option.id))
+          .radioStyle({ checkedBackgroundColor: '#F34F40' })
+          .onChange((isChecked: boolean) => {
+            if (isChecked) {
+              this.selectOption(option.id);
+            }
+          })
       }
 
       // 选项内容
@@ -250,7 +262,7 @@ struct ExamConductPage {
     .padding(12)
     .backgroundColor(this.isOptionSelected(option.id) ? '#e6f7ff' : '#ffffff')
     .borderRadius(8)
-    .border({ width: 1, color: this.isOptionSelected(option.id) ? '#1890ff' : '#e8e8e8' })
+    .border({ width: 1, color: this.isOptionSelected(option.id) ? '#F34F40' : '#e0e0e0' })
     .onClick(() => {
       this.selectOption(option.id);
     })
@@ -274,14 +286,16 @@ struct ExamConductPage {
         })
 
       // 下一题按钮
-      Button(this.currentProblemIndex < this.examParams!.problems.length - 1 ? '下一题' : '完成考核')
+      Button(this.examParams && this.examParams.problems && 
+        this.currentProblemIndex < this.examParams.problems.length - 1 ? '下一题' : '完成考核')
         .layoutWeight(2)
         .height(44)
-        .backgroundColor(this.currentProblemIndex < this.examParams!.problems.length - 1 ? '#1890ff' : '#52c41a')
+        .backgroundColor('#F34F40')
         .fontColor('#ffffff')
         .borderRadius(8)
         .onClick(() => {
-          if (this.currentProblemIndex < this.examParams!.problems.length - 1) {
+          if (this.examParams && this.examParams.problems && 
+            this.currentProblemIndex < this.examParams.problems.length - 1) {
             this.currentProblemIndex++;
           } else {
             this.showSubmitDialog = true;
@@ -296,95 +310,94 @@ struct ExamConductPage {
 
   @Builder
   buildSubmitDialog() {
-    Column() {
-      // 遮罩层
-      Column()
-        .width('100%')
-        .height('100%')
-        .backgroundColor('#00000080')
-        .onClick(() => {
-          this.showSubmitDialog = false;
-        })
+    // 遮罩层
+    Column()
+      .width('100%')
+      .height('100%')
+      .backgroundColor('rgba(0, 0, 0, 0.5)')
+      .onClick(() => {
+        this.showSubmitDialog = false;
+      })
+      .position({ x: 0, y: 0 })
+      .zIndex(999)
 
-      // 对话框内容
-      Column({ space: 20 }) {
-        Text('提交考核')
-          .fontSize(20)
-          .fontWeight(FontWeight.Bold)
+    // 对话框内容
+    Column({ space: 20 }) {
+      Text('提交考核')
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+
+      Column({ space: 12 }) {
+        Text('确定要提交考核吗？')
+          .fontSize(16)
           .fontColor('#333333')
+          .textAlign(TextAlign.Center)
 
-        Column({ space: 12 }) {
-          Text('确定要提交考核吗？')
-            .fontSize(16)
-            .fontColor('#333333')
-            .textAlign(TextAlign.Center)
+        Text('提交后将无法修改答案')
+          .fontSize(14)
+          .fontColor('#666666')
+          .textAlign(TextAlign.Center)
 
-          Text('提交后将无法修改答案')
-            .fontSize(14)
-            .fontColor('#666666')
-            .textAlign(TextAlign.Center)
+        // 答题统计
+        Row({ space: 16 }) {
+          Column({ space: 4 }) {
+            Text(this.getAnsweredCount().toString())
+              .fontSize(24)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#52c41a')
 
-          // 答题统计
-          Row({ space: 16 }) {
-            Column({ space: 4 }) {
-              Text(this.getAnsweredCount().toString())
-                .fontSize(24)
-                .fontWeight(FontWeight.Bold)
-                .fontColor('#52c41a')
-
-              Text('已答题')
-                .fontSize(12)
-                .fontColor('#666666')
-            }
-
-            Column({ space: 4 }) {
-              Text((this.examParams!.problems.length - this.getAnsweredCount()).toString())
-                .fontSize(24)
-                .fontWeight(FontWeight.Bold)
-                .fontColor('#f5222d')
-
-              Text('未答题')
-                .fontSize(12)
-                .fontColor('#666666')
-            }
+            Text('已答题')
+              .fontSize(12)
+              .fontColor('#666666')
           }
-          .justifyContent(FlexAlign.Center)
-        }
 
-        // 按钮组
-        Row({ space: 12 }) {
-          Button('继续答题')
-            .layoutWeight(1)
-            .height(44)
-            .backgroundColor('#f5f5f5')
-            .fontColor('#666666')
-            .borderRadius(8)
-            .onClick(() => {
-              this.showSubmitDialog = false;
-            })
+          Column({ space: 4 }) {
+            Text((this.examParams!.problems.length - this.getAnsweredCount()).toString())
+              .fontSize(24)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#f5222d')
 
-          Button('确定提交')
-            .layoutWeight(1)
-            .height(44)
-            .backgroundColor('#52c41a')
-            .fontColor('#ffffff')
-            .borderRadius(8)
-            .onClick(() => {
-              this.submitExam();
-            })
+            Text('未答题')
+              .fontSize(12)
+              .fontColor('#666666')
+          }
         }
-        .width('100%')
+        .justifyContent(FlexAlign.Center)
       }
-      .width('90%')
-      .padding(24)
-      .backgroundColor('#ffffff')
-      .borderRadius(16)
-      .shadow({ radius: 20, color: '#00000020', offsetX: 0, offsetY: 10 })
+
+      // 按钮组
+      Row({ space: 12 }) {
+        Button('继续答题')
+          .layoutWeight(1)
+          .height(44)
+          .backgroundColor('#f5f5f5')
+          .fontColor('#666666')
+          .borderRadius(8)
+          .onClick(() => {
+            this.showSubmitDialog = false;
+          })
+
+        Button('确定提交')
+          .layoutWeight(1)
+          .height(44)
+          .backgroundColor('#52c41a')
+          .fontColor('#ffffff')
+          .borderRadius(8)
+          .onClick(() => {
+            this.submitExam();
+          })
+      }
+      .width('100%')
     }
-    .width('100%')
-    .height('100%')
-    .justifyContent(FlexAlign.Center)
-    .alignItems(HorizontalAlign.Center)
+    .width(320)
+    .padding(24)
+    .backgroundColor('#ffffff')
+    .borderRadius(16)
+    .shadow({ radius: 8, color: '#00000020', offsetX: 0, offsetY: 4 })
+    .position({ x: '50%', y: '50%' })
+    .translate({ x: '-50%', y: '-50%' })
+    .zIndex(1000)
   }
 
   private startTimer(): void {
@@ -398,28 +411,47 @@ struct ExamConductPage {
   }
 
   private getCurrentProblemTypeText(): string {
-    if (!this.examParams) return '';
+    if (!this.examParams || !this.examParams.problems || this.currentProblemIndex >= this.examParams.problems.length) {
+      return '';
+    }
     const currentProblem = this.examParams.problems[this.currentProblemIndex];
+    if (!currentProblem) return '';
     return currentProblem.type === ProblemType.SINGLE_CHOICE ? '单选题' : '多选题';
   }
 
   private getCurrentProblemOptions(): ChoiceOption[] {
-    if (!this.examParams) return [];
+    if (!this.examParams || !this.examParams.problems || this.currentProblemIndex >= this.examParams.problems.length) {
+      return [];
+    }
     const currentProblem = this.examParams.problems[this.currentProblemIndex];
+    if (!currentProblem) return [];
     return currentProblem.choices || [];
   }
 
   private getCurrentProblemType(): ProblemType {
-    if (!this.examParams) return ProblemType.SINGLE_CHOICE;
-    return this.examParams.problems[this.currentProblemIndex].type;
+    if (!this.examParams || !this.examParams.problems || this.currentProblemIndex >= this.examParams.problems.length) {
+      return ProblemType.SINGLE_CHOICE;
+    }
+    const currentProblem = this.examParams.problems[this.currentProblemIndex];
+    if (!currentProblem) return ProblemType.SINGLE_CHOICE;
+    return currentProblem.type;
   }
 
   private isOptionSelected(optionId: string): boolean {
+    if (this.currentProblemIndex < 0 || this.currentProblemIndex >= this.userAnswers.length) {
+      return false;
+    }
     return this.userAnswers[this.currentProblemIndex].includes(optionId);
   }
 
   private selectOption(optionId: string) {
-    const currentProblem = this.examParams!.problems[this.currentProblemIndex];
+    if (!this.examParams || !this.examParams.problems || this.currentProblemIndex >= this.examParams.problems.length) {
+      return;
+    }
+    
+    const currentProblem = this.examParams.problems[this.currentProblemIndex];
+    if (!currentProblem) return;
+    
     const currentAnswers = this.userAnswers[this.currentProblemIndex];
     
     if (currentProblem.type === ProblemType.SINGLE_CHOICE) {
@@ -473,8 +505,23 @@ struct ExamConductPage {
   }
 
   private showExitConfirm(): void {
-    // TODO: 显示退出确认对话框
-    router.back();
+    AlertDialog.show({
+      title: '确认退出',
+      message: '确定要退出当前考核吗？退出后答题进度将丢失。',
+      primaryButton: {
+        value: '取消',
+        action: () => {
+          console.info('User canceled exit exam');
+        }
+      },
+      secondaryButton: {
+        value: '确认退出',
+        action: () => {
+          this.stopTimer();
+          router.back();
+        }
+      }
+    });
   }
 
   private submitExam(): void {
@@ -487,7 +534,16 @@ struct ExamConductPage {
 
     const problemResults: ExamProblemResult[] = this.examParams!.problems.map((problem, index) => {
       const userAnswer = this.userAnswers[index];
-      const correctOptions = problem.getCorrectOptions();
+      // 添加防御性检查
+      let correctOptions: ChoiceOption[] = [];
+      try {
+        if (problem && typeof problem.getCorrectOptions === 'function') {
+          correctOptions = problem.getCorrectOptions();
+        }
+      } catch (error) {
+        console.error('Error getting correct options for problem:', problem.id, error);
+        correctOptions = [];
+      }
       const correctAnswer = correctOptions.map(option => option.id);
       
       // 判断答案是否正确
@@ -514,15 +570,54 @@ struct ExamConductPage {
     examRecord.date = new Date().toISOString();
     examRecord.mode = this.examParams!.mode;
     examRecord.duration = totalDuration;
+    examRecord.timeUsed = totalDuration; // 设置timeUsed属性
     examRecord.problemResults = problemResults;
+    examRecord.totalProblems = problemResults.length; // 设置总题目数
+    examRecord.correctCount = problemResults.filter(result => result.isCorrect).length; // 设置正确题目数
+    examRecord.startTime = new Date(Date.now() - totalDuration * 1000); // 设置开始时间
+    examRecord.endTime = new Date(); // 设置结束时间
+    
+    // 计算分数
     examRecord.calculateScore();
+    
+    console.info(`ExamRecord created: score=${examRecord.score}, accuracy=${examRecord.getAccuracyRate()}%`);
 
     // 跳转到考核报告页面
     router.pushUrl({
       url: 'pages/ExamReportPage',
-      params: { examRecord: examRecord }
+      params: { 
+        examRecord: examRecord
+      }
     }).catch((error: Error) => {
       console.error('Failed to navigate to exam report:', error);
     });
+  }
+
+  // 获取难度文本的辅助方法
+  private getDifficultyText(difficulty: number): string {
+    switch (difficulty) {
+      case 0:
+        return '简单';
+      case 1:
+        return '中等';
+      case 2:
+        return '困难';
+      default:
+        return '未知';
+    }
+  }
+
+  // 获取难度颜色的辅助方法
+  private getDifficultyColor(difficulty: number): string {
+    switch (difficulty) {
+      case 0:
+        return '#52c41a';
+      case 1:
+        return '#fa8c16';
+      case 2:
+        return '#f5222d';
+      default:
+        return '#666666';
+    }
   }
 }

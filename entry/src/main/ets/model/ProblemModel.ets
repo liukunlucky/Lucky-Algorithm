@@ -50,6 +50,20 @@ export interface TestCase {
   description?: string;
 }
 
+// 编程语言枚举
+export enum ProgrammingLanguage {
+  JAVA = 'java',
+  PYTHON = 'python',
+  CPP = 'cpp'
+}
+
+// 多语言代码接口
+export interface MultiLanguageCode {
+  java: string;
+  python: string;
+  cpp: string;
+}
+
 // 题目模型
 export class ProblemModel {
   id: number = 0;
@@ -63,6 +77,11 @@ export class ProblemModel {
   constraints: string = '';
   hint: string = '';
   solutionCode: string = '';
+  multiLanguageCode: MultiLanguageCode = {
+    java: '',
+    python: '',
+    cpp: ''
+  };
   testCases: TestCase[] = [];
 
   constructor() {}
@@ -209,7 +228,11 @@ export class ProblemModel {
 
   // 获取正确答案选项
   getCorrectOptions(): ChoiceOption[] {
-    return this.choices.filter((option: ChoiceOption) => option.isCorrect);
+    if (!this.choices || !Array.isArray(this.choices)) {
+      console.error('Problem choices is not a valid array:', this.choices);
+      return [];
+    }
+    return this.choices.filter((option: ChoiceOption) => option && option.isCorrect);
   }
 
   // 检查用户答案是否正确
@@ -234,5 +257,33 @@ export class ProblemModel {
   getCorrectAnswerText(): string {
     const correctOptions = this.getCorrectOptions();
     return correctOptions.map((option: ChoiceOption) => option.id).join(', ');
+  }
+
+  // 获取指定语言的代码
+  getCodeByLanguage(language: ProgrammingLanguage): string {
+    switch (language) {
+      case ProgrammingLanguage.JAVA:
+        return this.multiLanguageCode.java || this.solutionCode;
+      case ProgrammingLanguage.PYTHON:
+        return this.multiLanguageCode.python;
+      case ProgrammingLanguage.CPP:
+        return this.multiLanguageCode.cpp;
+      default:
+        return this.solutionCode;
+    }
+  }
+
+  // 获取语言显示名称
+  static getLanguageDisplayName(language: ProgrammingLanguage): string {
+    switch (language) {
+      case ProgrammingLanguage.JAVA:
+        return 'Java';
+      case ProgrammingLanguage.PYTHON:
+        return 'Python';
+      case ProgrammingLanguage.CPP:
+        return 'C++';
+      default:
+        return 'Java';
+    }
   }
 }
