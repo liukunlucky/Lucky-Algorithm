@@ -27,7 +27,10 @@ export enum ProblemCategory {
   MONOTONIC_STACK = 'monotonic_stack',
   TRIE = 'trie',
   GRAPH = 'graph',
-  SORT = 'sort'
+  SORT = 'sort',
+  RECURSION = 'recursion',
+  HEAP = 'heap',
+  QUEUE = 'queue'
 }
 
 // 题目类型枚举
@@ -159,6 +162,10 @@ export class ProblemModel {
         return '图';
       case ProblemCategory.SORT:
         return '排序';
+      case ProblemCategory.RECURSION:
+        return '递归'
+      case ProblemCategory.HEAP:
+        return "堆"
       default:
         return '未知';
     }

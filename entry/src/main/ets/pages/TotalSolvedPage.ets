@@ -569,7 +569,10 @@ struct TotalSolvedPage {
       { category: ProblemCategory.MONOTONIC_STACK, name: '单调栈', icon: $r('app.media.chart_icon'), color: '#1890ff' },
       { category: ProblemCategory.TRIE, name: '字典树', icon: $r('app.media.book_icon'), color: '#fa8c16' },
       { category: ProblemCategory.GRAPH, name: '图', icon: $r('app.media.computer_icon'), color: '#13c2c2' },
-      { category: ProblemCategory.SORT, name: '排序', icon: $r('app.media.star_icon'), color: '#722ed1' }
+      { category: ProblemCategory.SORT, name: '排序', icon: $r('app.media.star_icon'), color: '#722ed1' },
+      { category: ProblemCategory.RECURSION, name: '递归', icon: $r('app.media.note_icon'), color: '#722ed1' },
+      { category: ProblemCategory.HEAP, name: '堆', icon: $r('app.media.target_icon'), color: '#13c2c2' },
+      { category: ProblemCategory.QUEUE, name: '队列', icon: $r('app.media.computer_icon'), color: '#52c41a' }
     ];
 
     const stats: CategoryStats[] = [];

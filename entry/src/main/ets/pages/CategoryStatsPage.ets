@@ -12,16 +12,24 @@ interface CategoryStats {
   color: string;
 }
 
+interface TotalStats {
+  totalProblems: number;
+  completedProblems: number;
+  overallAccuracy: number;
+}
+
+interface CategoryConfig {
+  type: ProblemCategory;
+  name: string;
+  color: string;
+}
+
 @Entry
 @Component
 struct CategoryStatsPage {
   @State categoryStats: CategoryStats[] = [];
   @State isLoading: boolean = true;
-  @State totalStats: {
-    totalProblems: number;
-    completedProblems: number;
-    overallAccuracy: number;
-  } = {
+  @State totalStats: TotalStats = {
     totalProblems: 0,
     completedProblems: 0,
     overallAccuracy: 0
@@ -312,7 +320,7 @@ struct CategoryStatsPage {
     }
   }
 
-  private getAllCategories() {
+  private getAllCategories(): CategoryConfig[] {
     return [
       { type: ProblemCategory.ARRAY, name: '数组', color: '#1890ff' },
       { type: ProblemCategory.STRING, name: '字符串', color: '#52c41a' },
@@ -334,7 +342,9 @@ struct CategoryStatsPage {
       { type: ProblemCategory.MONOTONIC_STACK, name: '单调栈', color: '#1890ff' },
       { type: ProblemCategory.TRIE, name: '字典树', color: '#722ed1' },
       { type: ProblemCategory.GRAPH, name: '图论', color: '#13c2c2' },
-      { type: ProblemCategory.SORT, name: '排序算法', color: '#52c41a' }
+      { type: ProblemCategory.SORT, name: '排序算法', color: '#52c41a' },
+      { type: ProblemCategory.HEAP, name: '堆', color: '#13c2c2' },
+      { type: ProblemCategory.RECURSION, name: '递归', color: '#52c41a' }
     ];
   }
 

@@ -382,8 +382,12 @@ export struct PracticeCenterPage {
     const config19: CategoryConfig = { category: ProblemCategory.TRIE, name: '字典树', icon: $r('app.media.note_icon'), color: '#722ed1' };
     const config20: CategoryConfig = { category: ProblemCategory.GRAPH, name: '图论', icon: $r('app.media.target_icon'), color: '#13c2c2' };
     const config21: CategoryConfig = { category: ProblemCategory.SORT, name: '排序算法', icon: $r('app.media.computer_icon'), color: '#52c41a' };
+    const config22: CategoryConfig = { category: ProblemCategory.RECURSION, name: '递归', icon: $r('app.media.note_icon'), color: '#722ed1' };
+    const config23: CategoryConfig = { category: ProblemCategory.HEAP, name: '堆', icon: $r('app.media.target_icon'), color: '#13c2c2' };
+    const config24: CategoryConfig = { category: ProblemCategory.QUEUE, name: '队列', icon: $r('app.media.computer_icon'), color: '#52c41a' };
     
-    configs.push(config1, config2, config3, config4, config5, config6, config7, config8, config9, config10, config11, config12, config13, config14, config15, config16, config17, config18, config19, config20, config21);
+    configs.push(config1, config2, config3, config4, config5, config6, config7, config8, config9, config10, config11,
+      config12, config13, config14, config15, config16, config17, config18, config19, config20, config21, config22, config23, config24);
     return configs;
   }
 

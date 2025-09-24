@@ -785,7 +785,10 @@ struct StatisticsPage {
         { category: ProblemCategory.MONOTONIC_STACK, name: '单调栈', icon: $r('app.media.book_icon'), color: '#52c41a' },
         { category: ProblemCategory.TRIE, name: '字典树', icon: $r('app.media.tree_icon'), color: '#13c2c2' },
         { category: ProblemCategory.GRAPH, name: '图', icon: $r('app.media.map_icon'), color: '#722ed1' },
-        { category: ProblemCategory.SORT, name: '排序', icon: $r('app.media.target_icon'), color: '#eb2f96' }
+        { category: ProblemCategory.SORT, name: '排序', icon: $r('app.media.target_icon'), color: '#eb2f96' },
+        { category: ProblemCategory.RECURSION, name: '递归', icon: $r('app.media.note_icon'), color: '#722ed1' },
+        { category: ProblemCategory.HEAP, name: '堆', icon: $r('app.media.target_icon'), color: '#13c2c2' },
+        { category: ProblemCategory.QUEUE, name: '队列', icon: $r('app.media.computer_icon'), color: '#52c41a' }
       ];
       
       const progressList: CategoryProgress[] = [];
