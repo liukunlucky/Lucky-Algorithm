@@ -1,3 +1,5 @@
+import { TimeUtils } from '../utils/TimeUtils';
+
 // 题目状态枚举
 export enum ProblemStatus {
   NOT_ATTEMPTED = 0,
@@ -55,7 +57,7 @@ export class UserProgressModel {
 
   // 更新最后尝试时间
   updateLastAttempted(): void {
-    this.lastAttempted = new Date().toISOString();
+    this.lastAttempted = TimeUtils.getLocalISOString();
   }
 
   // 记录尝试

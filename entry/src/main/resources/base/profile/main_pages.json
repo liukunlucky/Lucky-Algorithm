@@ -12,6 +12,10 @@
     "pages/StudyNotesPage",
     "pages/ContinuousStudyPage",
     "pages/TotalSolvedPage",
-    "pages/TodayCompletedPage"
+    "pages/TodayCompletedPage",
+    "pages/StudyDiaryPage",
+    "pages/StudyGoalsPage",
+    "pages/AddEditStudyDiaryPage",
+    "pages/AddEditStudyGoalPage"
   ]
 }

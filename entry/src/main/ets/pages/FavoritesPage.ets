@@ -363,11 +363,13 @@ struct FavoritesPage {
       return '未知时间';
     }
     
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
+    // 确保使用本地时间显示
+    const localDate = new Date(date.getTime());
+    const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = localDate.getDate().toString().padStart(2, '0');
+    const hours = localDate.getHours().toString().padStart(2, '0');
+    const minutes = localDate.getMinutes().toString().padStart(2, '0');
+    const seconds = localDate.getSeconds().toString().padStart(2, '0');
     const result = `${month}-${day} ${hours}:${minutes}:${seconds}`;
     console.log('formatDate result:', result);
     return result;

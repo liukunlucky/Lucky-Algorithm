@@ -105,11 +105,44 @@ export class DatabaseHelper {
         FOREIGN KEY (problem_id) REFERENCES problems (id)
       )
     `;
-
+    
+    // 创建学习日记表
+    const createStudyDiaryTable = `
+      CREATE TABLE IF NOT EXISTS study_diary (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        mood TEXT NOT NULL DEFAULT 'normal',
+        study_duration INTEGER DEFAULT 0,
+        problems_solved INTEGER DEFAULT 0,
+        tags TEXT DEFAULT '',
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )
+    `;
+    
+    // 创建学习目标表
+    const createStudyGoalsTable = `
+      CREATE TABLE IF NOT EXISTS study_goals (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT,
+        type TEXT NOT NULL,
+        target_value INTEGER NOT NULL,
+        current_value INTEGER DEFAULT 0,
+        status TEXT DEFAULT 'active',
+        start_date TEXT,
+        end_date TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )
+    `;
     await this.store.executeSql(createProblemsTable);
     await this.store.executeSql(createUserProgressTable);
     await this.store.executeSql(createExamRecordsTable);
     await this.store.executeSql(createUserNotesTable);
+    await this.store.executeSql(createStudyDiaryTable);
+    await this.store.executeSql(createStudyGoalsTable);
   }
 
   // 初始化默认数据

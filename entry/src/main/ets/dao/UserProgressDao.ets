@@ -3,6 +3,7 @@ import { UserProgressModel, ProblemStatus } from '../model/UserProgressModel';
 import { ProblemCategory } from '../model/ProblemModel';
 import { DatabaseHelper } from '../database/DatabaseHelper';
 import { ProblemMockData } from '../mock/ProblemMockData';
+import { TimeUtils } from '../utils/TimeUtils';
 
 interface UserStatistics {
   totalAttempted: number;
@@ -417,7 +418,7 @@ export class UserProgressDao {
       throw new Error('数据库未初始化');
     }
 
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD格式
+    const today = TimeUtils.getLocalDateString(); // YYYY-MM-DD格式
     const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE (status = ? OR status = ?) AND DATE(last_attempted) = ?';
     const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, today]);
 
@@ -436,7 +437,7 @@ export class UserProgressDao {
       throw new Error('数据库未初始化');
     }
 
-    const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD格式
+    const dateStr = TimeUtils.getLocalDateString(date); // YYYY-MM-DD格式
     const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE (status = ? OR status = ?) AND DATE(last_attempted) = ?';
     const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, dateStr]);
 
@@ -583,7 +584,7 @@ export class UserProgressDao {
       throw new Error('数据库未初始化');
     }
 
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD格式
+    const today = TimeUtils.getLocalDateString(); // YYYY-MM-DD格式
     const sql = 'SELECT * FROM user_progress WHERE (status = ? OR status = ?) AND DATE(last_attempted) = ? ORDER BY last_attempted DESC';
     const result = await store.querySql(sql, [ProblemStatus.COMPLETED, ProblemStatus.WRONG, today]);
     const progressList: UserProgressModel[] = [];

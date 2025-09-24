@@ -3,6 +3,7 @@ import { UserProgressModel, ProblemStatus } from '../model/UserProgressModel';
 import { ProblemMockData } from '../mock/ProblemMockData';
 import { UserProgressDao } from '../dao/UserProgressDao';
 import { AppButton, AppButtonType } from '../components/AppButton';
+import { TimeUtils } from '../utils/TimeUtils';
 import router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
 
@@ -763,7 +764,7 @@ struct DailyProblemPage {
       progress.problemId = this.problemId;
       progress.status = isCorrect ? ProblemStatus.COMPLETED : ProblemStatus.WRONG;
       progress.isFavorite = this.isFavorite;
-      progress.lastAttempted = new Date().toISOString();
+      progress.lastAttempted = TimeUtils.getLocalISOString();
       progress.attemptCount = (this.userProgress?.attemptCount || 0) + 1;
 
       // 记录答题尝试
@@ -789,7 +790,7 @@ struct DailyProblemPage {
         progress.problemId = this.problemId;
         progress.status = ProblemStatus.NOT_ATTEMPTED;
         progress.isFavorite = this.isFavorite;
-        progress.lastAttempted = new Date().toISOString();
+        progress.lastAttempted = TimeUtils.getLocalISOString();
         progress.attemptCount = 0;
         
         await this.userProgressDao.saveUserProgress(progress);

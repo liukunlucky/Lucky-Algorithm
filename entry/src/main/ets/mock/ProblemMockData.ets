@@ -5300,25 +5300,6 @@ public:
   private static getSortProblems(): ProblemModel[] {
     const problems: ProblemModel[] = [];
 
-    // 1505. 移除元素（LeetCode 26）
-    const removeElement = new ProblemModel();
-    removeElement.id = 1505;
-    removeElement.title = '移除元素';
-    removeElement.description =
-      '给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。\n\n不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。';
-    removeElement.difficulty = ProblemDifficulty.EASY;
-    removeElement.category = ProblemCategory.ARRAY;
-    removeElement.choices = [
-      { id: 'A', text: '使用双指针（快慢指针），快指针遍历数组，慢指针记录有效元素位置', isCorrect: true },
-      { id: 'B', text: '使用for循环遍历，遇到val时直接删除元素（如splice）', isCorrect: false },
-      { id: 'C', text: '先对数组排序，再用二分查找定位val的范围并删除', isCorrect: false },
-      { id: 'D', text: '使用哈希表统计非val元素的数量，再重新构造数组', isCorrect: false }
-    ];
-    removeElement.explanation =
-      '双指针解法核心：慢指针（slow）初始为0，快指针（fast）遍历数组。当nums[fast] != val时，将nums[fast]赋值给nums[slow]，并让slow自增；当nums[fast] == val时，fast直接跳过。遍历结束后，slow的值即为新数组长度。时间复杂度O(n)，空间复杂度O(1)，完全满足原地修改要求。';
-    removeElement.hint = '双指针的关键是「用慢指针维护有效区间」，避免元素的重复移动';
-    problems.push(removeElement);
-
     // 1506. 有序数组的平方（LeetCode 977）
     const sortedSquares = new ProblemModel();
     sortedSquares.id = 1506;
@@ -5491,146 +5472,6 @@ public:
     removeNthFromEnd.hint = '双指针的关键是「让快慢指针间距为n」，一次遍历即可定位目标节点前驱';
     problems.push(removeNthFromEnd);
 
-
-
-    // 1519. 二叉树的前序遍历（LeetCode 144）
-    const preorderTraversal = new ProblemModel();
-    preorderTraversal.id = 1519;
-    preorderTraversal.title = '二叉树的前序遍历';
-    preorderTraversal.description =
-      '给你二叉树的根节点 root ，返回它节点值的 前序 遍历。前序遍历定义为：访问根节点 → 遍历左子树 → 遍历右子树。';
-    preorderTraversal.difficulty = ProblemDifficulty.EASY;
-    preorderTraversal.category = ProblemCategory.BINARY_TREE;
-    preorderTraversal.choices = [
-      { id: 'A', text: '使用迭代（栈），先压右子节点，再压左子节点，弹出时访问节点（根→左→右）', isCorrect: true },
-      { id: 'B', text: '使用递归，递归函数先访问根节点，再递归左子树，最后递归右子树', isCorrect: false },
-      { id: 'C', text: '使用队列（BFS），按层遍历节点，顺序调整为前序', isCorrect: false },
-      { id: 'D', text: '使用 Morris 遍历，通过线索化二叉树实现常数空间遍历', isCorrect: false }
-    ];
-    preorderTraversal.explanation =
-      '迭代栈解法（避免递归栈溢出）：①初始化栈（stack）和结果数组（res），若root不为null则将root压入栈；②循环当栈不为空时：弹出栈顶节点（curr），将curr.val加入res；若curr.right不为null则压入栈（右子树后访问，先压栈）；若curr.left不为null则压入栈（左子树先访问，后压栈）；③循环结束返回res。时间复杂度O(n)（遍历所有节点），空间复杂度O(n)（栈最坏情况存储所有节点，如斜树），递归解法虽简洁但存在栈溢出风险（树深度大时）。';
-    preorderTraversal.hint = '迭代的关键是「栈的先进后出特性」，通过调整子节点压栈顺序实现前序';
-    problems.push(preorderTraversal);
-
-    // 1520. 二叉树的中序遍历（LeetCode 94）
-    const inorderTraversal = new ProblemModel();
-    inorderTraversal.id = 1520;
-    inorderTraversal.title = '二叉树的中序遍历';
-    inorderTraversal.description =
-      '给你二叉树的根节点 root ，返回它节点值的 中序 遍历。中序遍历定义为：遍历左子树 → 访问根节点 → 遍历右子树。';
-    inorderTraversal.difficulty = ProblemDifficulty.EASY;
-    inorderTraversal.category = ProblemCategory.BINARY_TREE;
-    inorderTraversal.choices = [
-      { id: 'A', text: '使用迭代（栈），先将左子树所有节点压栈，弹出时访问节点并处理右子树', isCorrect: true },
-      { id: 'B', text: '使用递归，递归函数先递归左子树，再访问根节点，最后递归右子树', isCorrect: false },
-      { id: 'C', text: '使用队列（BFS），按层遍历后调整顺序为中序', isCorrect: false },
-      { id: 'D', text: '使用哈希表记录节点是否访问过，未访问则压左子树，已访问则访问并压右子树', isCorrect: false }
-    ];
-    inorderTraversal.explanation =
-      '迭代栈解法：①初始化栈（stack）、结果数组（res）、当前节点（curr=root）；②循环当curr不为null或栈不为空时：将curr的所有左子节点压入栈（直到curr=null）；弹出栈顶节点（curr），将curr.val加入res；curr=curr.right（处理右子树）；③循环结束返回res。时间复杂度O(n)，空间复杂度O(n)，解决了递归栈溢出问题。Morris遍历虽能实现O(1)空间，但代码复杂度高，不适用于基础练习。';
-    inorderTraversal.hint = '迭代的关键是「先处理完左子树，再访问根节点，最后处理右子树」';
-    problems.push(inorderTraversal);
-
-    // 1521. 二叉树的后序遍历（LeetCode 145）
-    const postorderTraversal = new ProblemModel();
-    postorderTraversal.id = 1521;
-    postorderTraversal.title = '二叉树的后序遍历';
-    postorderTraversal.description =
-      '给你二叉树的根节点 root ，返回它节点值的 后序 遍历。后序遍历定义为：遍历左子树 → 遍历右子树 → 访问根节点。';
-    postorderTraversal.difficulty = ProblemDifficulty.EASY;
-    postorderTraversal.category = ProblemCategory.BINARY_TREE;
-    postorderTraversal.choices = [
-      { id: 'A', text: '使用迭代（栈），记录节点是否已访问，未访问则压右→左子树并标记，已访问则访问', isCorrect: true },
-      { id: 'B', text: '使用递归，递归函数先递归左子树，再递归右子树，最后访问根节点', isCorrect: false },
-      { id: 'C', text: '将前序遍历（根→左→右）改为根→右→左，再反转结果得到后序', isCorrect: false },
-      { id: 'D', text: '使用队列（BFS），按层逆序遍历后调整顺序为后序', isCorrect: false }
-    ];
-    postorderTraversal.explanation =
-      '迭代栈（标记法）解法：①初始化栈（存储[节点, 是否访问]）、结果数组（res），若root不为null则将[root, false]压入栈；②循环当栈不为空时：弹出栈顶元素[ curr, visited ]；若!visited：将[ curr, true ]压回栈（标记为待访问），若curr.right不为null则压[ curr.right, false ]，若curr.left不为null则压[ curr.left, false ]（先右后左，确保弹出时左→右）；若visited：将curr.val加入res；③循环结束返回res。时间复杂度O(n)，空间复杂度O(n)，逻辑清晰且避免递归风险。';
-    postorderTraversal.hint = '标记法的关键是「区分节点是否已处理子树」，确保子树处理完后再访问根';
-    problems.push(postorderTraversal);
-
-    // 1523. 对称二叉树（LeetCode 101）
-    const isSymmetric = new ProblemModel();
-    isSymmetric.id = 1523;
-    isSymmetric.title = '对称二叉树';
-    isSymmetric.description = '给你一个二叉树的根节点 root ， 检查它是否轴对称。';
-    isSymmetric.difficulty = ProblemDifficulty.EASY;
-    isSymmetric.category = ProblemCategory.BINARY_TREE;
-    isSymmetric.choices = [
-      { id: 'A', text: '使用迭代（队列），每次入队对称位置的两个节点，出队时比较值和子节点对称性', isCorrect: true },
-      {
-        id: 'B',
-        text: '使用递归，判断左子树的右子树与右子树的左子树、左子树的左子树与右子树的右子树是否对称',
-        isCorrect: false
-      },
-      { id: 'C', text: '层序遍历二叉树，检查每一层的节点值是否为回文序列', isCorrect: false },
-      { id: 'D', text: '前序遍历和后序遍历二叉树，比较遍历序列是否对称', isCorrect: false }
-    ];
-    isSymmetric.explanation =
-      '迭代队列解法：①初始化队列（queue），若root不为null则将root.left和root.right入队；②循环当队列不为空时：出队两个节点（p、q）；若p和q都为null则继续；若p或q其中一个为null则返回false；若p.val != q.val则返回false；将p.left和q.right入队（对称位置1），将p.right和q.left入队（对称位置2）；③循环结束返回true。时间复杂度O(n)，空间复杂度O(n)，避免递归栈溢出，且逻辑直观。层序遍历法可能因「空节点未记录」导致误判（如一层有节点但对应位置空节点未计入）。';
-    isSymmetric.hint = '迭代的关键是「成对处理对称节点」，确保左右子树的对称位置同步比较';
-    problems.push(isSymmetric);
-
-    // 1525. 平衡二叉树（LeetCode 110）
-    const isBalanced = new ProblemModel();
-    isBalanced.id = 1525;
-    isBalanced.title = '平衡二叉树';
-    isBalanced.description =
-      '给定一个二叉树，判断它是否是高度平衡的二叉树。本题中，一棵高度平衡二叉树定义为：一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。';
-    isBalanced.difficulty = ProblemDifficulty.EASY;
-    isBalanced.category = ProblemCategory.BINARY_TREE;
-    isBalanced.choices = [
-      { id: 'A', text: '使用后序遍历（迭代），计算每个节点子树高度，同时判断平衡性', isCorrect: true },
-      { id: 'B', text: '递归计算每个节点左右子树高度，判断高度差是否≤1，再递归判断子树', isCorrect: false },
-      { id: 'C', text: '层序遍历计算每个节点的深度，比较左右子树深度差', isCorrect: false },
-      { id: 'D', text: '前序遍历每个节点，计算其左右子树高度并判断', isCorrect: false }
-    ];
-    isBalanced.explanation =
-      '后序迭代解法（避免重复计算高度）：①初始化栈（存储[节点, 是否访问, 高度]）、结果（isBalanced=true），若root不为null则将[root, false, 0]压入栈；②循环当栈不为空且isBalanced时：弹出[ curr, visited, height ]；若!visited：将[ curr, true, 0 ]压回栈，标记为待处理；分别压入右子树[ curr.right, false, 0 ]和左子树[ curr.left, false, 0 ]（后序：左→右→根）；若visited：获取左右子树高度（栈中已处理的左右节点高度），若高度差>1则isBalanced=false；否则设置curr的高度=1+max(左高, 右高)；③循环结束返回isBalanced。时间复杂度O(n)，空间复杂度O(n)，避免了递归的重复计算（递归法在最坏情况会重复计算节点高度，时间O(n²)）。';
-    isBalanced.hint = '后序遍历的关键是「先计算子树高度，再判断当前节点平衡性」，减少重复计算';
-    problems.push(isBalanced);
-
-
-    // 1528. 从中序与后序遍历序列构造二叉树（LeetCode 106）
-    const buildTreePostIn = new ProblemModel();
-    buildTreePostIn.id = 1528;
-    buildTreePostIn.title = '从中序与后序遍历序列构造二叉树';
-    buildTreePostIn.description =
-      '给定两个整数数组 inorder 和 postorder ，其中 inorder 是二叉树的中序遍历， postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树 。';
-    buildTreePostIn.difficulty = ProblemDifficulty.MEDIUM;
-    buildTreePostIn.category = ProblemCategory.BINARY_TREE;
-    buildTreePostIn.choices = [
-      { id: 'A', text: '用哈希表存储中序遍历的「值-索引」，后序遍历最后一个元素为根，分割中序为左右子树', isCorrect: true },
-      { id: 'B', text: '递归分割中序和后序数组，每次找根节点并构造左右子树', isCorrect: false },
-      { id: 'C', text: '层序遍历构造，通过中序和后序确定每层节点', isCorrect: false },
-      { id: 'D', text: '前序遍历构造，将后序遍历转为前序遍历后再构建', isCorrect: false }
-    ];
-    buildTreePostIn.explanation =
-      '哈希表+迭代解法：①用哈希表（inMap）存储inorder的val→index，便于快速定位根节点；②初始化栈（存储节点）、后序指针（postIdx=postorder.length-1）、前驱节点（prev=null）；③循环当postIdx ≥0时：创建当前根节点（rootVal=postorder[postIdx]，root=new TreeNode(rootVal)）；若prev不为null且inMap.get(root.val) > inMap.get(prev.val)：root.left=prev（prev是root的左子树）；否则：若栈不为空，栈顶节点.right=root（root是栈顶的右子树）；栈.push(root)；prev=root；postIdx--；④循环结束返回栈底节点（根节点）。时间复杂度O(n)，空间复杂度O(n)（哈希表+栈），避免递归数组拷贝的开销（递归法每次分割数组会产生O(n)空间）。';
-    buildTreePostIn.hint = '核心是「后序最后一个元素为根，中序分割左右子树」，哈希表加速定位';
-    problems.push(buildTreePostIn);
-
-    // 1529. 从前序与中序遍历序列构造二叉树（LeetCode 105）
-    const buildTreePreIn = new ProblemModel();
-    buildTreePreIn.id = 1529;
-    buildTreePreIn.title = '从前序与中序遍历序列构造二叉树';
-    buildTreePreIn.description =
-      '给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的前序遍历， inorder 是同一棵树的中序遍历，请你构造并返回这颗 二叉树 。';
-    buildTreePreIn.difficulty = ProblemDifficulty.MEDIUM;
-    buildTreePreIn.category = ProblemCategory.BINARY_TREE;
-    buildTreePreIn.choices = [
-      { id: 'A', text: '用哈希表存储中序「值-索引」，前序第一个元素为根，分割中序为左右子树，迭代构建', isCorrect: true },
-      { id: 'B', text: '递归分割前序和中序数组，每次找根节点并构造左右子树', isCorrect: false },
-      { id: 'C', text: '层序遍历构造，通过前序和中序确定每层节点', isCorrect: false },
-      { id: 'D', text: '后序遍历构造，将前序遍历转为后序遍历后再构建', isCorrect: false }
-    ];
-    buildTreePreIn.explanation =
-      '哈希表+迭代解法：①哈希表（inMap）存储inorder的val→index；②初始化栈（存储节点）、前序指针（preIdx=0）、当前节点（root=new TreeNode(preorder[preIdx++])）；栈.push(root)；③循环当preIdx < preorder.length时：栈顶节点（top）为当前父节点；若preorder[preIdx]在inMap中的索引 < inMap.get(top.val)：当前节点是top的左子树（top.left=new TreeNode(preorder[preIdx++])），栈.push(top.left)；否则：弹出top，直到栈为空或preorder[preIdx]索引 > inMap.get(栈顶.val)；当前节点是top的右子树（top.right=new TreeNode(preorder[preIdx++])），栈.push(top.right)；④循环结束返回root。时间复杂度O(n)，空间复杂度O(n)，效率高于递归（避免数组拷贝）。';
-    buildTreePreIn.hint = '核心是「前序第一个元素为根，中序分割左右子树」，栈维护父节点关系';
-    problems.push(buildTreePreIn);
-
-
     // 1535. 二分查找（LeetCode 704）
     const search = new ProblemModel();
     search.id = 1535;
@@ -5667,23 +5508,6 @@ public:
       ' 二分查找解法：①若 x < 2：直接返回 x（0 的平方根是 0，1 的平方根是 1）；②初始化左指针（left=2）、右指针（right=x）、结果（res=0）；③循环当 left ≤ right 时：mid = left + Math.floor ((right-left)/2)；square = mid * mid；若 square == x：返回 mid；若 square < x：res=mid（可能是候选解），left=mid+1（寻找更大的 mid）；若 square > x：right=mid-1；④循环结束返回 res。时间复杂度 O (log x)，空间复杂度 O (1)，避免了暴力法的 O (√x) 时间开销，且符合题目禁用内置函数的要求。';
     mySqrt.hint = ' 核心是「寻找满足 mid² ≤ x 的最大整数 mid」，二分查找范围可优化为 [0, x/2+1]';
     problems.push(mySqrt);
-    // 1537. 搜索旋转排序数组（LeetCode 33）
-    const searchRotated = new ProblemModel();
-    searchRotated.id = 1537;
-    searchRotated.title = ' 搜索旋转排序数组 ';
-    searchRotated.description =
-      ' 整数数组 nums 按升序排列，数组中的值 互不相同 。在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，使数组变为 [nums [k], nums [k+1], ..., nums [n-1], nums [0], nums [1], ..., nums [k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。\n\n 给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。你必须设计一个时间复杂度为 O (log n) 的算法解决此问题。';
-    searchRotated.difficulty = ProblemDifficulty.MEDIUM;
-    searchRotated.category = ProblemCategory.BINARY_SEARCH;
-    searchRotated.choices =
-      [{ id: 'A', text: ' 二分查找，判断左右半部分哪个是有序的，在有序半部分中确定目标值是否存在 ', isCorrect: true },
-        { id: 'B', text: ' 先找到旋转点（最小值位置），再在两个有序子数组中分别二分查找 ', isCorrect: false },
-        { id: 'C', text: ' 将数组恢复为升序后再二分查找 ', isCorrect: false },
-        { id: 'D', text: ' 遍历数组寻找目标值，时间复杂度 O (n)', isCorrect: false }];
-    searchRotated.explanation =
-      ' 一次二分查找解法：①初始化 left=0，right=nums.length-1；②循环当 left <= right 时：mid = Math.floor ((left+right)/2)；若 nums [mid] == target：返回 mid；若 nums [left] <= nums [mid]（左半部分有序）：若 nums [left] <= target < nums [mid]：right=mid-1（目标在左半部分）；else：left=mid+1；else（右半部分有序）：若 nums [mid] < target <= nums [right]：left=mid+1（目标在右半部分）；else：right=mid-1；③循环结束返回 - 1。时间复杂度 O (log n)，空间复杂度 O (1)，一次二分完成搜索，无需额外步骤。';
-    searchRotated.hint = ' 关键是「判断哪部分有序」，利用有序部分的单调性缩小搜索范围 ';
-    problems.push(searchRotated);
     // 1538. 寻找旋转排序数组中的最小值（LeetCode 153）
     const findMin = new ProblemModel();
     findMin.id = 1538;
@@ -5701,25 +5525,6 @@ public:
       ' 二分查找解法：①初始化 left=0，right=nums.length-1；②循环当 left < right 时：mid = Math.floor ((left+right)/2)；若 nums [mid] < nums [right]（右半部分有序，最小值在左半部分）：right=mid；else（左半部分有序，最小值在右半部分）：left=mid+1；③循环结束时 left == right，即为最小值索引，返回 nums [left]。时间复杂度 O (log n)，空间复杂度 O (1)，利用旋转后数组的特性（至少一半是有序的）快速定位最小值。';
     findMin.hint = ' 核心是「与右边界比较」，确定最小值所在的无序半部分 ';
     problems.push(findMin);
-    // 1539. 在排序数组中查找元素的第一个和最后一个位置（LeetCode 34）
-    const searchRange = new ProblemModel();
-    searchRange.id = 1539;
-    searchRange.title = ' 在排序数组中查找元素的第一个和最后一个位置 ';
-    searchRange.description =
-      ' 给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。如果数组中不存在目标值 target，返回 [-1, -1]。你必须设计并实现时间复杂度为 O (log n) 的算法解决此问题。';
-    searchRange.difficulty = ProblemDifficulty.MEDIUM;
-    searchRange.category = ProblemCategory.BINARY_SEARCH;
-    searchRange.choices = [{
-      id: 'A',
-      text: ' 两次二分查找，分别寻找第一个大于等于 target 的位置和第一个大于 target 的位置减一 ',
-      isCorrect: true
-    }, { id: 'B', text: ' 一次二分找到目标值后，向左右扩展寻找边界 ', isCorrect: false },
-      { id: 'C', text: ' 先找到目标值的任意位置，再用二分查找左右边界 ', isCorrect: false },
-      { id: 'D', text: ' 遍历数组记录目标值的首次和末次出现位置 ', isCorrect: false }];
-    searchRange.explanation =
-      ' 两次二分解法：①定义辅助函数 findBound (nums, target, isFirst)：若 isFirst 为 true，寻找第一个 >=target 的索引；否则寻找第一个 > target 的索引；②首次出现位置 = findBound (nums, target, true)；③若首次出现位置越界或 nums [首次]!=target：返回 [-1,-1]；④末次出现位置 = findBound (nums, target, false)-1；⑤返回 [首次，末次]。辅助函数逻辑：left=0，right=nums.length；循环当 left < right 时：mid=Math.floor ((left+right)/2)；若 nums [mid] > target 或 (isFirst && nums [mid] == target)：right=mid；else：left=mid+1；返回 left。时间复杂度 O (log n)，空间复杂度 O (1)，严格满足题目时间要求。';
-    searchRange.hint = ' 关键是「用二分查找边界」，首次出现是第一个 >=target 的位置，末次是第一个 > target 的位置减一 ';
-    problems.push(searchRange);
     // 1540. 两数相加（LeetCode 2）
     const addTwoNumbers = new ProblemModel();
     addTwoNumbers.id = 1540;
@@ -5769,40 +5574,6 @@ public:
       ' 排序 + 双指针解法：①排序数组；②初始化最接近和（res = nums [0]+nums [1]+nums [2]）；③遍历固定第一个数 i（0 <= i < n-2）：左指针（left=i+1），右指针（right=n-1）；循环当 left < right 时：sum = nums [i] + nums [left] + nums [right]；若 sum == target：直接返回 target（最接近）；若 Math.abs (sum-target) < Math.abs (res-target)：更新 res=sum；若 sum < target：left++；else：right--；④遍历结束返回 res。时间复杂度 O (n²)，空间复杂度 O (log n)（排序），比暴力法（O (n³)）高效得多，且能确保找到最优解。';
     threeSumClosest.hint = ' 核心是「通过双指针动态调整三数和」，向 target 逼近并记录最小值 ';
     problems.push(threeSumClosest);
-    // 1549. 组合总和 II（LeetCode 40）
-    const combinationSum2 = new ProblemModel();
-    combinationSum2.id = 1549;
-    combinationSum2.title = ' 组合总和 II';
-    combinationSum2.description =
-      ' 给定一个候选人编号的集合 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的每个数字在每个组合中只能使用 一次 。\n\n 注意：解集不能包含重复的组合。';
-    combinationSum2.difficulty = ProblemDifficulty.MEDIUM;
-    combinationSum2.category = ProblemCategory.BACKTRACKING;
-    combinationSum2.choices =
-      [{ id: 'A', text: ' 先排序，回溯时跳过相同元素且确保每个元素只使用一次，超过 target 时剪枝 ', isCorrect: true },
-        { id: 'B', text: ' 使用哈希表记录元素出现次数，回溯时控制使用次数，避免重复 ', isCorrect: false },
-        { id: 'C', text: ' 回溯生成所有可能组合后，用 set 去重 ', isCorrect: false },
-        { id: 'D', text: ' 动态规划存储和为 i 的组合，加入新元素时去重 ', isCorrect: false }];
-    combinationSum2.explanation =
-      ' 排序 + 回溯去重解法：①排序 candidates（相同元素相邻）；②初始化 res、path、sum=0、used 数组；③回溯函数 backtrack (start)：若 sum == target：res.push ([...path])；return；若 sum > target：return；遍历 i 从 start 到 candidates.length-1：若 used [i]：continue；若 i>start 且 candidates [i] == candidates [i-1]（去重：相同元素只在第一个未使用时选取）：continue；used [i] = true；sum += candidates [i]；path.push (candidates [i])；backtrack (i+1)（元素只能用一次，故 i+1）；path.pop ()；sum -= candidates [i]；used [i] = false；④调用 backtrack (0)，返回 res。时间复杂度 O (2^n × n)（n 为元素数），空间复杂度 O (n)，通过排序和条件判断有效去重。';
-    combinationSum2.hint = ' 去重关键是「相同元素只在第一个未使用时选取」，且每个元素只能用一次 ';
-    problems.push(combinationSum2);
-
-    // 1551. 爬楼梯（LeetCode 70）
-    const climbStairs = new ProblemModel();
-    climbStairs.id = 1551;
-    climbStairs.title = '爬楼梯';
-    climbStairs.description = '假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？';
-    climbStairs.difficulty = ProblemDifficulty.EASY;
-    climbStairs.category = ProblemCategory.DYNAMIC_PROGRAMMING;
-    climbStairs.choices = [
-      { id: 'A', text: '动态规划，dp[i] = dp[i-1] + dp[i-2]，初始状态dp[1]=1, dp[2]=2', isCorrect: true },
-      { id: 'B', text: '递归解法，直接计算f(n) = f(n-1) + f(n-2)', isCorrect: false },
-      { id: 'C', text: '数学公式，利用斐波那契数列的通项公式计算', isCorrect: false },
-      { id: 'D', text: '贪心算法，优先选择爬2个台阶', isCorrect: false }
-    ];
-    climbStairs.explanation = '动态规划解法：①分析问题：爬到第n阶的方法数 = 爬到第n-1阶（再爬1阶） + 爬到第n-2阶（再爬2阶）；②定义dp数组：dp[i]表示爬到第i阶的方法数；③初始化：dp[1] = 1, dp[2] = 2；④迭代计算：for (let i = 3; i <= n; i++) { dp[i] = dp[i-1] + dp[i-2]; }；⑤返回dp[n]。时间复杂度O(n)，空间复杂度O(1)（可优化为变量存储），避免递归的重复计算问题。';
-    climbStairs.hint = '本质是斐波那契数列问题，关键是找到状态转移方程';
-    problems.push(climbStairs);
 
     // 1554. 分发饼干（LeetCode 455）
     const findContentChildren = new ProblemModel();
@@ -5854,73 +5625,7 @@ public:
     buildTree.explanation = '递归解法：①若preorder为空：返回null；②根节点值rootVal = preorder[0]；在inorder中找到rootVal的索引index；③左子树节点数leftSize = index；④左子树前序：preorder.slice(1, 1+leftSize)，左子树中序：inorder.slice(0, index)；⑤右子树前序：preorder.slice(1+leftSize)，右子树中序：inorder.slice(index+1)；⑥构造根节点，递归设置root.left = buildTree(左前序, 左中序)，root.right = buildTree(右前序, 右中序)；⑦返回root。时间复杂度O(n)（优化后用哈希表查index），空间复杂度O(n)（存储中序索引+递归栈），利用遍历特性递归构建。';
     buildTree.hint = '关键是「前序定根，中序分左右」，通过根节点在中序中的位置分割子树';
     problems.push(buildTree);
-    // 1559. 反转链表（LeetCode 206）
-    const reverseList = new ProblemModel();
-    reverseList.id = 1559;
-    reverseList.title = '反转链表';
-    reverseList.description = '给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。';
-    reverseList.difficulty = ProblemDifficulty.EASY;
-    reverseList.category = ProblemCategory.LINKED_LIST;
-    reverseList.choices = [
-      { id: 'A', text: '迭代法，使用三个指针反转节点间的指向关系', isCorrect: true },
-      { id: 'B', text: '递归法，从最后一个节点开始反向建立链接', isCorrect: false },
-      { id: 'C', text: '将链表值存入数组，再重新构建反转链表', isCorrect: false },
-      { id: 'D', text: '使用栈存储节点，再弹出重构链表', isCorrect: false }
-    ];
-    reverseList.explanation = '迭代解法：①初始化前驱节点prev=null，当前节点curr=head；②循环当curr不为null时：保存后继节点next=curr.next；反转指针curr.next=prev；移动前驱prev=curr；移动当前curr=next；③循环结束后prev即为新头节点，返回prev。时间复杂度O(n)，空间复杂度O(1)，高效且易于理解，是反转链表的最优解法。';
-    reverseList.hint = '核心是「改变节点的next指向」，通过三个指针完成迭代反转';
-    problems.push(reverseList);
 
-    // 1560. 括号生成（LeetCode 22）
-    const generateParenthesis = new ProblemModel();
-    generateParenthesis.id = 1560;
-    generateParenthesis.title = '括号生成';
-    generateParenthesis.description = '数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。';
-    generateParenthesis.difficulty = ProblemDifficulty.MEDIUM;
-    generateParenthesis.category = ProblemCategory.BACKTRACKING;
-    generateParenthesis.choices = [
-      { id: 'A', text: '回溯法，控制左括号数量不超过n，右括号数量不超过左括号', isCorrect: true },
-      { id: 'B', text: '生成所有可能组合后过滤有效括号', isCorrect: false },
-      { id: 'C', text: '动态规划，基于n-1的结果生成n的有效括号', isCorrect: false },
-      { id: 'D', text: '使用卡特兰数公式直接计算组合数', isCorrect: false }
-    ];
-    generateParenthesis.explanation = '回溯解法：①初始化结果数组res；②定义回溯函数backtrack(str, left, right)：若str长度为2n：res.push(str)；return；若left < n（可添加左括号）：backtrack(str+"(", left+1, right)；若right < left（可添加右括号）：backtrack(str+")", left, right+1)；③调用backtrack("", 0, 0)，返回res。时间复杂度O(4^n / √n)（卡特兰数增长），空间复杂度O(n)（递归栈深度），通过剪枝避免无效组合，效率远高于生成后过滤。';
-    generateParenthesis.hint = '关键是「左括号优先添加，右括号数量不超过左括号」';
-    problems.push(generateParenthesis);
-
-    // 1561. 合并两个有序链表（LeetCode 21）
-    const mergeTwoLists = new ProblemModel();
-    mergeTwoLists.id = 1561;
-    mergeTwoLists.title = '合并两个有序链表';
-    mergeTwoLists.description = '将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。';
-    mergeTwoLists.difficulty = ProblemDifficulty.EASY;
-    mergeTwoLists.category = ProblemCategory.LINKED_LIST;
-    mergeTwoLists.choices = [
-      { id: 'A', text: '迭代法，使用虚拟头节点，比较两链表节点值，较小者接入结果', isCorrect: true },
-      { id: 'B', text: '递归法，比较头节点，较小者的next指向剩余节点的合并结果', isCorrect: false },
-      { id: 'C', text: '将两链表值存入数组排序后，重新构建链表', isCorrect: false },
-      { id: 'D', text: '将一个链表插入另一个链表的合适位置', isCorrect: false }
-    ];
-    mergeTwoLists.explanation = '迭代解法：①创建虚拟头节点dummy，当前指针curr=dummy；②循环当l1和l2都不为null时：若l1.val <= l2.val：curr.next=l1；l1=l1.next；else：curr.next=l2；l2=l2.next；curr=curr.next；③将剩余非空链表接入curr.next；④返回dummy.next。时间复杂度O(m+n)（m、n为两链表长度），空间复杂度O(1)，原地合并无需额外空间，是最优解法。';
-    mergeTwoLists.hint = '核心是「双指针比较+虚拟头节点」，避免处理头节点特殊情况';
-    problems.push(mergeTwoLists);
-
-    // 1562. 有效的括号（LeetCode 20）
-    const isValid = new ProblemModel();
-    isValid.id = 1562;
-    isValid.title = '有效的括号';
-    isValid.description = '给定一个只包括 \'(\'，\')\'，\'{\'，\'}\'，\'[\'，\']\' 的字符串 s ，判断字符串是否有效。有效字符串需满足：1. 左括号必须用相同类型的右括号闭合。2. 左括号必须以正确的顺序闭合。';
-    isValid.difficulty = ProblemDifficulty.EASY;
-    isValid.category = ProblemCategory.STACK;
-    isValid.choices = [
-      { id: 'A', text: '使用栈，遇到左括号入栈，右括号则与栈顶比较是否匹配', isCorrect: true },
-      { id: 'B', text: '替换法，反复替换成对的括号直到无法替换，检查是否为空', isCorrect: false },
-      { id: 'C', text: '计数法，统计每种括号的数量是否相等', isCorrect: false },
-      { id: 'D', text: '递归检查，找到最内层的匹配括号后去除再检查剩余部分', isCorrect: false }
-    ];
-    isValid.explanation = '栈解法：①创建哈希表map存储右→左括号映射：{")":"(", "}":"{", "]":"["}；②初始化栈stack；③遍历s每个字符c：若c是右括号（map有键）：若栈为空或栈顶≠map.get(c)：return false；否则栈顶出栈；else（左括号）：入栈；④遍历结束后返回stack.isEmpty()。时间复杂度O(n)，空间复杂度O(n)（最坏情况全是左括号），高效判断括号有效性。';
-    isValid.hint = '关键是「栈的先进后出特性」，确保括号的嵌套顺序正确';
-    problems.push(isValid);
 
     // 1563. LRU 缓存（LeetCode 146）
     const LRUCache = new ProblemModel();
@@ -5938,74 +5643,6 @@ public:
     LRUCache.explanation = '哈希表+双向链表解法：①双向链表节点存储key、value，维护最近使用顺序（头部是最近使用，尾部是最久未使用）；②哈希表map存储key→节点的映射，实现O(1)访问；③get操作：若key存在，将节点移到链表头部，返回value；否则返回-1；④put操作：若key存在，更新value并移到头部；否则创建新节点插入头部，若超出容量，删除链表尾部节点并从map中移除；⑤所有操作均为O(1)时间复杂度。空间复杂度O(capacity)，严格满足题目要求。';
     LRUCache.hint = '核心是「两种数据结构结合」，哈希表提供快速访问，链表维护使用顺序';
     problems.push(LRUCache);
-
-    // 1564. 二叉树的最大深度（LeetCode 104）
-    const maxDepth = new ProblemModel();
-    maxDepth.id = 1564;
-    maxDepth.title = '二叉树的最大深度';
-    maxDepth.description = '给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。';
-    maxDepth.difficulty = ProblemDifficulty.EASY;
-    maxDepth.category = ProblemCategory.BINARY_TREE;
-    maxDepth.choices = [
-      { id: 'A', text: '递归法，树的最大深度=1+max(左子树深度, 右子树深度)', isCorrect: true },
-      { id: 'B', text: 'BFS层序遍历，记录层数即为最大深度', isCorrect: false },
-      { id: 'C', text: 'DFS迭代，使用栈记录节点和当前深度', isCorrect: false },
-      { id: 'D', text: '计算所有根到叶子的路径长度，取最大值', isCorrect: false }
-    ];
-    maxDepth.explanation = '递归解法：①若根节点为null：返回0；②递归计算左子树深度leftDepth = maxDepth(root.left)；③递归计算右子树深度rightDepth = maxDepth(root.right)；④返回1 + Math.max(leftDepth, rightDepth)。时间复杂度O(n)（每个节点访问一次），空间复杂度O(h)（h为树高，递归栈深度），实现简洁直观，是二叉树深度计算的经典解法。';
-    maxDepth.hint = '关键是「分治思想」，将树的深度分解为左右子树深度的最大值加一';
-    problems.push(maxDepth);
-
-    // 1565. 路径总和（LeetCode 112）
-    const hasPathSum = new ProblemModel();
-    hasPathSum.id = 1565;
-    hasPathSum.title = '路径总和';
-    hasPathSum.description = '给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。叶子节点 是指没有子节点的节点。';
-    hasPathSum.difficulty = ProblemDifficulty.EASY;
-    hasPathSum.category = ProblemCategory.BINARY_TREE;
-    hasPathSum.choices = [
-      { id: 'A', text: '递归法，从根到叶子递减目标和，叶子节点时判断是否为0', isCorrect: true },
-      { id: 'B', text: 'BFS层序遍历，记录每条路径的当前和，叶子节点时判断', isCorrect: false },
-      { id: 'C', text: 'DFS迭代，使用栈存储节点和当前路径和', isCorrect: false },
-      { id: 'D', text: '计算所有根到叶子的路径和，检查是否包含目标和', isCorrect: false }
-    ];
-    hasPathSum.explanation = '递归解法：①若root为null：返回false；②若root是叶子节点（无左右子树）：return root.val === targetSum；③递归检查左子树：hasPathSum(root.left, targetSum - root.val)；④递归检查右子树：hasPathSum(root.right, targetSum - root.val)；⑤返回左右子树检查结果的或运算。时间复杂度O(n)，空间复杂度O(h)（递归栈），直接在递归过程中递减目标和，叶子节点时判断，高效简洁。';
-    hasPathSum.hint = '核心是「递减目标和」，在叶子节点处判断是否刚好减为0';
-    problems.push(hasPathSum);
-
-    // 1566. 两数之和（LeetCode 1）
-    const twoSum = new ProblemModel();
-    twoSum.id = 1566;
-    twoSum.title = '两数之和';
-    twoSum.description = '给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。';
-    twoSum.difficulty = ProblemDifficulty.EASY;
-    twoSum.category = ProblemCategory.HASH_TABLE;
-    twoSum.choices = [
-      { id: 'A', text: '哈希表，存储已遍历元素的值和索引，查找target-当前值是否存在', isCorrect: true },
-      { id: 'B', text: '暴力双重循环，检查所有可能的两数组合', isCorrect: false },
-      { id: 'C', text: '先排序，再用双指针寻找目标和', isCorrect: false },
-      { id: 'D', text: '使用数组存储元素，通过indexOf查找目标值', isCorrect: false }
-    ];
-    twoSum.explanation = '哈希表解法：①创建哈希表map；②遍历数组nums，索引i，值num：计算补数complement = target - num；若map中存在complement：return [map.get(complement), i]；否则map.set(num, i)；③遍历结束后无结果（题目假设必有答案）。时间复杂度O(n)，空间复杂度O(n)，一次遍历完成，比暴力法O(n²)高效得多，是最优解法。';
-    twoSum.hint = '关键是「用哈希表记录已访问元素」，将查找时间从O(n)降至O(1)';
-    problems.push(twoSum);
-
-    // 1567. 移动零（LeetCode 283）
-    const moveZeroes = new ProblemModel();
-    moveZeroes.id = 1567;
-    moveZeroes.title = '移动零';
-    moveZeroes.description = '给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。请注意 ，必须在不复制数组的情况下原地对数组进行操作。';
-    moveZeroes.difficulty = ProblemDifficulty.EASY;
-    moveZeroes.category = ProblemCategory.ARRAY;
-    moveZeroes.choices = [
-      { id: 'A', text: '双指针，慢指针记录非零元素位置，快指针遍历，最后补零', isCorrect: true },
-      { id: 'B', text: '遇到零则与后面第一个非零元素交换', isCorrect: false },
-      { id: 'C', text: '统计零的数量，先收集非零元素再添加对应数量的零', isCorrect: false },
-      { id: 'D', text: '冒泡排序思想，将零逐步交换到末尾', isCorrect: false }
-    ];
-    moveZeroes.explanation = '双指针解法：①初始化慢指针slow=0；②快指针fast遍历数组：若nums[fast] != 0：将nums[fast]赋值给nums[slow]，slow++；③遍历结束后，从slow到数组末尾全部填充0；④原地修改数组，无需额外空间。时间复杂度O(n)（两次遍历），空间复杂度O(1)，高效且满足原地操作要求，优于交换法的O(n²)最坏情况。';
-    moveZeroes.hint = '核心是「先处理非零元素，再补充零」，避免不必要的交换操作';
-    problems.push(moveZeroes);
 
     // 1568. 盛最多水的容器（LeetCode 11）
     const maxArea = new ProblemModel();
@@ -6109,22 +5746,6 @@ public:
     findTheDifference.hint = '核心是「异或的抵消特性」，相同字符异或结果为0，最终剩余的就是目标字符';
     problems.push(findTheDifference);
 
-    // 1574. 数组中的第K个最大元素（LeetCode 215）
-    const findKthLargest = new ProblemModel();
-    findKthLargest.id = 1574;
-    findKthLargest.title = '数组中的第K个最大元素';
-    findKthLargest.description = '给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。';
-    findKthLargest.difficulty = ProblemDifficulty.MEDIUM;
-    findKthLargest.category = ProblemCategory.HEAP;
-    findKthLargest.choices = [
-      { id: 'A', text: '最小堆，维护大小为k的堆，堆顶即为第k个最大元素', isCorrect: true },
-      { id: 'B', text: '快速选择算法，基于快速排序的分区思想', isCorrect: false },
-      { id: 'C', text: '排序数组后取第n-k个元素', isCorrect: false },
-      { id: 'D', text: '最大堆，弹出k-1个元素后堆顶即为结果', isCorrect: false }
-    ];
-    findKthLargest.explanation = '最小堆解法：①初始化大小为k的最小堆；②遍历数组元素：若堆大小<k：直接入堆；else若当前元素>堆顶：弹出堆顶，当前元素入堆；③遍历结束后，堆顶元素即为第k个最大元素。时间复杂度O(n log k)（n为数组长度，每次堆操作O(log k)），空间复杂度O(k)，适合大数据量场景，优于排序的O(n log n)。';
-    findKthLargest.hint = '关键是「用小堆存储最大的k个元素」，堆顶自然是这k个中的最小值，即第k大元素';
-    problems.push(findKthLargest);
 
     // 1575. Pow(x, n)（LeetCode 50）
     const myPow = new ProblemModel();
@@ -6143,22 +5764,6 @@ public:
     myPow.hint = '核心是「指数二分」，通过x^n = (x^2)^(n/2) 减少计算步骤';
     problems.push(myPow);
 
-    // 1576. 二叉搜索树的最近公共祖先（LeetCode 235）
-    const lowestCommonAncestorBST = new ProblemModel();
-    lowestCommonAncestorBST.id = 1576;
-    lowestCommonAncestorBST.title = '二叉搜索树的最近公共祖先';
-    lowestCommonAncestorBST.description = '给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”';
-    lowestCommonAncestorBST.difficulty = ProblemDifficulty.EASY;
-    lowestCommonAncestorBST.category = ProblemCategory.BINARY_TREE;
-    lowestCommonAncestorBST.choices = [
-      { id: 'A', text: '利用BST特性，若当前节点值在p和q之间，则为最近公共祖先', isCorrect: true },
-      { id: 'B', text: '递归查找，记录每个节点的路径，再找路径交点', isCorrect: false },
-      { id: 'C', text: '先找到p的所有祖先，再检查q的祖先中是否存在', isCorrect: false },
-      { id: 'D', text: '将BST转为有序数组，利用数组特性查找', isCorrect: false }
-    ];
-    lowestCommonAncestorBST.explanation = 'BST特性解法：①若当前节点val > p.val且当前节点val > q.val：说明p、q在左子树，递归左子树；②若当前节点val < p.val且当前节点val < q.val：说明p、q在右子树，递归右子树；③否则：当前节点即为最近公共祖先（要么在中间，要么其中一个是当前节点）。时间复杂度O(h)（h为树高），空间复杂度O(h)（递归栈），充分利用BST的有序性，无需额外空间记录路径。';
-    lowestCommonAncestorBST.hint = '关键是「BST的左小右大特性」，通过节点值比较确定查找方向';
-    problems.push(lowestCommonAncestorBST);
 
     // 1577. 二叉树的最近公共祖先（LeetCode 236）
     const lowestCommonAncestorBT = new ProblemModel();
@@ -6245,22 +5850,6 @@ public:
     longestPalindrome.hint = '核心是「回文的中心对称性」，考虑奇数和偶数长度两种情况';
     problems.push(longestPalindrome);
 
-    // 1582. 组合总和（LeetCode 39）
-    const combinationSum = new ProblemModel();
-    combinationSum.id = 1582;
-    combinationSum.title = '组合总和';
-    combinationSum.description = '给你一个 无重复元素 的整数数组 candidates 和一个目标整数 target ，找出 candidates 中可以使数字和为目标数 target 的 所有 不同组合 ，candidates 中的数字可以无限制重复被选取。注意：解集不能包含重复的组合。';
-    combinationSum.difficulty = ProblemDifficulty.MEDIUM;
-    combinationSum.category = ProblemCategory.BACKTRACKING;
-    combinationSum.choices = [
-      { id: 'A', text: '回溯法，排序数组后通过控制起始索引避免重复组合', isCorrect: true },
-      { id: 'B', text: '动态规划，记录每个目标值的所有组合方式', isCorrect: false },
-      { id: 'C', text: '递归枚举所有可能的组合，使用Set去重', isCorrect: false },
-      { id: 'D', text: '贪心算法，优先选择大数值元素', isCorrect: false }
-    ];
-    combinationSum.explanation = '回溯解法：①排序candidates数组（便于剪枝和去重）；②初始化结果数组和路径数组；③定义回溯函数backtrack(start, remain)：若remain=0：将路径加入结果；return；遍历i从start到candidates.length-1：若candidates[i] > remain：break（剪枝）；路径加入candidates[i]；backtrack(i, remain - candidates[i])（允许重复使用，故i不变）；路径弹出最后元素；④调用backtrack(0, target)，返回结果。时间复杂度O(n^(target/min))（n为数组长度，min为最小元素），空间复杂度O(target/min)（递归栈深度），通过排序和控制起始索引高效去重。';
-    combinationSum.hint = '关键是「排序+控制起始索引」，避免同一组合的不同排列被重复计算';
-    problems.push(combinationSum);
 
     // 1584. 全排列（LeetCode 46）
     const permute = new ProblemModel();
@@ -6330,39 +5919,6 @@ public:
     findMedianSortedArrays.hint = '核心是「寻找正确的分割点」，使分割后左半部分元素均小于等于右半部分';
     problems.push(findMedianSortedArrays);
 
-    // 1588. 颜色分类（LeetCode 75）
-    const sortColors = new ProblemModel();
-    sortColors.id = 1588;
-    sortColors.title = '颜色分类';
-    sortColors.description = '给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。必须在不使用库内置的 sort 函数的情况下解决这个问题。';
-    sortColors.difficulty = ProblemDifficulty.MEDIUM;
-    sortColors.category = ProblemCategory.ARRAY;
-    sortColors.choices = [
-      { id: 'A', text: '双指针，p0指向0的右边界，p2指向2的左边界，遍历交换', isCorrect: true },
-      { id: 'B', text: '计数排序，统计0、1、2的个数后重新填充数组', isCorrect: false },
-      { id: 'C', text: '快速排序，选择1作为 pivot 进行分区', isCorrect: false },
-      { id: 'D', text: '冒泡排序，将2冒泡到末尾，0冒泡到开头', isCorrect: false }
-    ];
-    sortColors.explanation = '双指针解法：①初始化p0=0（0的右边界），p2=n-1（2的左边界），当前指针i=0；②遍历数组当i<=p2时：若nums[i]==0：与nums[p0]交换，p0++，i++；若nums[i]==2：与nums[p2]交换，p2--（i不变，需重新检查交换来的元素）；若nums[i]==1：i++；③遍历结束后数组已按0、1、2排序。时间复杂度O(n)，空间复杂度O(1)，一次遍历完成排序，原地操作效率高。';
-    sortColors.hint = '关键是「双指针分区」，p0确保左侧都是0，p2确保右侧都是2，中间自然是1';
-    problems.push(sortColors);
-
-    // 1589. 子集（LeetCode 78）
-    const subsets = new ProblemModel();
-    subsets.id = 1589;
-    subsets.title = '子集';
-    subsets.description = '给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。';
-    subsets.difficulty = ProblemDifficulty.MEDIUM;
-    subsets.category = ProblemCategory.BACKTRACKING;
-    subsets.choices = [
-      { id: 'A', text: '回溯法，每个元素选择加入或不加入当前子集', isCorrect: true },
-      { id: 'B', text: '迭代法，从空集开始，每次添加一个元素到现有所有子集中', isCorrect: false },
-      { id: 'C', text: '二进制位运算，每个位表示元素是否在子集中', isCorrect: false },
-      { id: 'D', text: '递归生成所有可能的长度为k的子集，k从0到n', isCorrect: false }
-    ];
-    subsets.explanation = '回溯解法：①初始化结果数组；②定义回溯函数backtrack(start, path)：将path加入结果；遍历i从start到nums.length-1：path加入nums[i]；backtrack(i+1, path)（下一个元素从i+1开始，避免重复）；path弹出最后元素；③调用backtrack(0, [])，返回结果。时间复杂度O(n×2^n)（每个元素有选或不选两种可能，共2^n个子集，每个子集处理时间O(n)），空间复杂度O(n)（递归栈深度），直观生成所有子集。';
-    subsets.hint = '关键是「控制元素选择顺序」，通过start索引确保子集元素按原数组顺序选取，避免重复';
-    problems.push(subsets);
 
     // 1590. 最小覆盖子串（LeetCode 76）
     const minWindow = new ProblemModel();
@@ -6380,23 +5936,6 @@ public:
     minWindow.explanation = '滑动窗口解法：①创建哈希表记录t中字符频率；②初始化左右指针left=0，right=0，有效字符数valid=0，最小长度minLen= Infinity，结果起始索引start=0；③右移right扩大窗口：若字符在t中，更新窗口内频率，若达到t中的频率则valid++；④当valid等于t中不同字符数时：尝试左移left缩小窗口；更新最小窗口信息；若移除的是t中字符且频率低于t中的，则valid--；⑤返回最小窗口或空串。时间复杂度O(m+n)（m、n分别为s和t的长度），空间复杂度O(k)（k为t中不同字符数），高效找到最小覆盖子串。';
     minWindow.hint = '核心是「扩大窗口找可行解，缩小窗口求最优解」，通过哈希表跟踪字符匹配情况';
     problems.push(minWindow);
-
-    // 1591. 课程表 II（LeetCode 210）
-    const findOrder = new ProblemModel();
-    findOrder.id = 1591;
-    findOrder.title = '课程表 II';
-    findOrder.description = '现在你总共有 numCourses 门课需要学习，记为 0 到 numCourses - 1。给你一个数组 prerequisites ，其中 prerequisites[i] = [ai, bi] ，表示在选修课程 ai 前 必须 先选修 bi 。请你返回一个可以学完所有课程的顺序。可能会有多个正确的顺序，你只要返回 任意一个 就可以了。如果不可能完成所有课程，返回 一个空数组 。';
-    findOrder.difficulty = ProblemDifficulty.MEDIUM;
-    findOrder.category = ProblemCategory.GRAPH;
-    findOrder.choices = [
-      { id: 'A', text: '拓扑排序（Kahn算法），记录入度为0的节点顺序', isCorrect: true },
-      { id: 'B', text: 'DFS递归，后序遍历记录节点，检测到环则返回空', isCorrect: false },
-      { id: 'C', text: 'BFS，随机选择无依赖的课程加入结果', isCorrect: false },
-      { id: 'D', text: '贪心算法，每次选择依赖最少的课程', isCorrect: false }
-    ];
-    findOrder.explanation = 'Kahn算法解法：①构建邻接表和入度数组；②初始化队列存储入度为0的节点；③结果数组result；④循环当队列不为空时：节点u出队，加入result；遍历u的邻接节点v：入度[v]--，若入度[v]==0则入队；⑤若result长度不等于numCourses：返回空数组（有环）；else返回result。时间复杂度O(n+m)，空间复杂度O(n+m)，不仅能判断是否有解，还能返回拓扑排序结果。';
-    findOrder.hint = '关键是「记录入度为0的节点顺序」，这就是合法的课程学习顺序';
-    problems.push(findOrder);
 
     // 1592. 比特位计数（LeetCode 338）
     const countBits = new ProblemModel();
@@ -6550,22 +6089,6 @@ public:
     canCompleteCircuit.hint = '关键是「总油量足够时必有解」，且若从start到i无法到达，则中间任何点都不能作为起点';
     problems.push(canCompleteCircuit);
 
-    // 1601. 二叉树的层序遍历（LeetCode 102）
-    const levelOrder = new ProblemModel();
-    levelOrder.id = 1601;
-    levelOrder.title = '二叉树的层序遍历';
-    levelOrder.description = '给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。';
-    levelOrder.difficulty = ProblemDifficulty.MEDIUM;
-    levelOrder.category = ProblemCategory.BINARY_TREE;
-    levelOrder.choices = [
-      { id: 'A', text: 'BFS，使用队列存储每一层的节点，逐层遍历', isCorrect: true },
-      { id: 'B', text: 'DFS，记录节点所在层数，递归收集结果', isCorrect: false },
-      { id: 'C', text: '递归前序遍历，按层存储节点值', isCorrect: false },
-      { id: 'D', text: '使用栈模拟队列实现层序遍历', isCorrect: false }
-    ];
-    levelOrder.explanation = 'BFS解法：①初始化队列和结果数组；②若根节点不为空，入队；③循环当队列不为空时：获取当前层节点数size；创建当前层数组；循环size次：出队节点，加入当前层数组；若左孩子存在则入队；若右孩子存在则入队；④当前层数组加入结果；⑤返回结果。时间复杂度O(n)，空间复杂度O(n)（队列最多存储一层节点），直观实现层序遍历。';
-    levelOrder.hint = '核心是「分层处理」，通过记录每一层的节点数量实现逐层遍历';
-    problems.push(levelOrder);
 
     // 1602. 旋转图像（LeetCode 48）
     const rotate = new ProblemModel();
@@ -6584,22 +6107,6 @@ public:
     rotate.hint = '关键是「分解旋转操作」，转置+行反转的组合等价于顺时针旋转90度';
     problems.push(rotate);
 
-    // 1603. 全排列 II（LeetCode 47）
-    const permuteUnique = new ProblemModel();
-    permuteUnique.id = 1603;
-    permuteUnique.title = '全排列 II';
-    permuteUnique.description = '给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。';
-    permuteUnique.difficulty = ProblemDifficulty.MEDIUM;
-    permuteUnique.category = ProblemCategory.BACKTRACKING;
-    permuteUnique.choices = [
-      { id: 'A', text: '回溯法，排序数组后跳过重复元素，确保相同元素按顺序使用', isCorrect: true },
-      { id: 'B', text: '普通回溯生成所有排列后用Set去重', isCorrect: false },
-      { id: 'C', text: '递归交换元素，同时记录已交换的元素避免重复', isCorrect: false },
-      { id: 'D', text: '动态规划，基于前n-1个元素的排列生成n个元素的排列', isCorrect: false }
-    ];
-    permuteUnique.explanation = '回溯解法：①排序nums数组（使重复元素相邻）；②初始化结果数组、路径数组、used数组；③定义回溯函数：若路径长度等于nums长度：加入结果；return；遍历数组：若used[i]为true：跳过；若i>0且nums[i]==nums[i-1]且!used[i-1]：跳过（避免重复）；标记used[i]为true；路径加入nums[i]；回溯；路径弹出；取消标记；④调用回溯函数，返回结果。时间复杂度O(n×n!)，空间复杂度O(n)，通过排序和条件判断高效去重。';
-    permuteUnique.hint = '核心是「排序+跳过重复元素」，确保相同元素只有在前一个被使用后才能使用';
-    problems.push(permuteUnique);
 
     // 1604. 不同路径（LeetCode 62）
     const uniquePaths = new ProblemModel();
@@ -7059,6 +6566,1542 @@ public:
     Trie.explanation = '前缀树实现：①节点结构：children数组（26个元素，对应a-z），isEnd标志；②insert：从根节点开始，对每个字符：计算索引=charCode-97；若children[index]不存在则创建新节点；移动到该节点；最后标记isEnd=true；③search：类似insert，若任何字符不存在则返回false；最后检查isEnd；④startsWith：类似search，但无需检查isEnd，只要所有字符存在即可。时间复杂度O(L)（L为字符串长度），空间复杂度O(L×n)（n为插入的字符串数），高效支持前缀相关操作。';
     Trie.hint = '关键是「字符的分层存储」，每个节点代表一个字符，路径形成字符串，isEnd标志完整单词';
     problems.push(Trie);
+    // 1631. 爬楼梯（LeetCode 70）
+    const climbStairs = new ProblemModel();
+    climbStairs.id = 1631;
+    climbStairs.title = '爬楼梯';
+    climbStairs.description = '假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？';
+    climbStairs.difficulty = ProblemDifficulty.EASY;
+    climbStairs.category = ProblemCategory.DYNAMIC_PROGRAMMING;
+    climbStairs.choices = [
+      { id: 'A', text: '动态规划，dp[i] = dp[i-1] + dp[i-2]，初始dp[1]=1, dp[2]=2', isCorrect: true },
+      { id: 'B', text: '递归+记忆化，缓存子问题结果', isCorrect: false },
+      { id: 'C', text: '斐波那契数列公式直接计算', isCorrect: false },
+      { id: 'D', text: '暴力枚举所有可能的步数组合', isCorrect: false }
+    ];
+    climbStairs.explanation = '动态规划解法：①若n<=2：return n；②初始化dp数组，dp[1]=1，dp[2]=2；③遍历i从3到n：dp[i] = dp[i-1] + dp[i-2]；④返回dp[n]。空间优化：只需保存前两个值，空间复杂度O(1)。时间复杂度O(n)，高效计算爬楼梯的方法数，基于每个台阶的方法数是前两个台阶之和的原理。';
+    climbStairs.hint = '关键是「状态转移关系」，到达第i阶的方法数等于到达i-1阶和i-2阶的方法数之和';
+    problems.push(climbStairs);
+
+    // 1632. 买卖股票的最佳时机（LeetCode 121）
+    const maxProfitI = new ProblemModel();
+    maxProfitI.id = 1632;
+    maxProfitI.title = '买卖股票的最佳时机';
+    maxProfitI.description = '给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。';
+    maxProfitI.difficulty = ProblemDifficulty.EASY;
+    maxProfitI.category = ProblemCategory.GREEDY;
+    maxProfitI.choices = [
+      { id: 'A', text: '一次遍历，记录最低价格，计算当前价格与最低价的利润并更新最大值', isCorrect: true },
+      { id: 'B', text: '暴力法，计算所有可能的买卖组合利润', isCorrect: false },
+      { id: 'C', text: '动态规划，记录每天的最大利润', isCorrect: false },
+      { id: 'D', text: '先找到最小值，再找其后的最大值', isCorrect: false }
+    ];
+    maxProfitI.explanation = '贪心解法：①初始化最低价格minPrice为Infinity，最大利润maxProfit为0；②遍历每天价格price：若price < minPrice：更新minPrice = price；else：计算利润profit = price - minPrice；若profit > maxProfit：更新maxProfit；③返回maxProfit。时间复杂度O(n)，空间复杂度O(1)，一次遍历完成，高效找到最大利润。';
+    maxProfitI.hint = '核心是「低买高卖」，通过记录历史最低价，实时计算当前可能的最大利润';
+    problems.push(maxProfitI);
+
+    // 1633. 买卖股票的最佳时机 II（LeetCode 122）
+    const maxProfitII = new ProblemModel();
+    maxProfitII.id = 1633;
+    maxProfitII.title = '买卖股票的最佳时机 II';
+    maxProfitII.description = '给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。返回 你能获得的 最大 利润 。';
+    maxProfitII.difficulty = ProblemDifficulty.EASY;
+    maxProfitII.category = ProblemCategory.GREEDY;
+    maxProfitII.choices = [
+      { id: 'A', text: '贪心，累加所有上涨的差价（price[i] > price[i-1]则加）', isCorrect: true },
+      { id: 'B', text: '动态规划，记录每天持有和不持有的最大利润', isCorrect: false },
+      { id: 'C', text: '找到所有上升区间，计算总利润', isCorrect: false },
+      { id: 'D', text: '暴力枚举所有可能的买卖组合', isCorrect: false }
+    ];
+    maxProfitII.explanation = '贪心解法：①初始化利润profit=0；②遍历i从1到prices.length-1：若prices[i] > prices[i-1]：profit += prices[i] - prices[i-1]；③返回profit。原理：多次买卖的总利润等于所有上升区间的差价之和。时间复杂度O(n)，空间复杂度O(1)，简单高效计算最大利润。';
+    maxProfitII.hint = '关键是「抓住所有上涨机会」，每次上涨都进行一次买卖，总利润最大';
+    problems.push(maxProfitII);
+
+    // 1634. 有效的括号（LeetCode 20）
+    const isValid = new ProblemModel();
+    isValid.id = 1634;
+    isValid.title = '有效的括号';
+    isValid.description = '给定一个只包括 \'(\'，\')\'，\'{\'，\'}\'，\'[\'，\']\' 的字符串 s ，判断字符串是否有效。有效字符串需满足：1. 左括号必须用相同类型的右括号闭合。2. 左括号必须以正确的顺序闭合。';
+    isValid.difficulty = ProblemDifficulty.EASY;
+    isValid.category = ProblemCategory.STACK;
+    isValid.choices = [
+      { id: 'A', text: '栈，遇到左括号入栈，右括号则与栈顶比较，不匹配则无效', isCorrect: true },
+      { id: 'B', text: '替换法，反复替换成对的括号直到无法替换，检查是否为空', isCorrect: false },
+      { id: 'C', text: '计数法，统计每种括号的数量是否匹配', isCorrect: false },
+      { id: 'D', text: '递归检查，找到最内层的括号对并移除，重复直到完成', isCorrect: false }
+    ];
+    isValid.explanation = '栈解法：①创建映射表，右括号对应左括号；②初始化栈；③遍历每个字符：若为左括号：入栈；若为右括号：若栈为空或栈顶 != 映射值：return false；否则栈顶出栈；④遍历结束后，若栈为空：return true；else false。时间复杂度O(n)，空间复杂度O(n)，准确判断括号的有效性和顺序。';
+    isValid.hint = '核心是「栈的匹配特性」，右括号必须与最近的左括号匹配，栈能保持这种顺序关系';
+    problems.push(isValid);
+
+    // 1635. 合并两个有序链表（LeetCode 21）
+    const mergeTwoLists = new ProblemModel();
+    mergeTwoLists.id = 1635;
+    mergeTwoLists.title = '合并两个有序链表';
+    mergeTwoLists.description = '将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。';
+    mergeTwoLists.difficulty = ProblemDifficulty.EASY;
+    mergeTwoLists.category = ProblemCategory.LINKED_LIST;
+    mergeTwoLists.choices = [
+      { id: 'A', text: '迭代，创建虚拟头节点，比较两链表节点值，小的先连接', isCorrect: true },
+      { id: 'B', text: '递归，比较头节点，较小的节点的next指向剩余节点的合并结果', isCorrect: false },
+      { id: 'C', text: '转换为数组排序后重建链表', isCorrect: false },
+      { id: 'D', text: '插入法，将一个链表的节点插入到另一个链表的正确位置', isCorrect: false }
+    ];
+    mergeTwoLists.explanation = '迭代解法：①创建虚拟头节点dummy，当前指针curr = dummy；②循环当l1和l2都不为空：若l1.val <= l2.val：curr.next = l1；l1 = l1.next；else：curr.next = l2；l2 = l2.next；curr = curr.next；③将剩余的非空链表连接到curr.next；④返回dummy.next。时间复杂度O(m+n)，空间复杂度O(1)，原地合并两个有序链表。';
+    mergeTwoLists.hint = '关键是「有序合并」，通过比较节点值，按顺序连接，保持升序特性';
+    problems.push(mergeTwoLists);
+
+    // 1636. 反转链表（LeetCode 206）
+    const reverseList = new ProblemModel();
+    reverseList.id = 1636;
+    reverseList.title = '反转链表';
+    reverseList.description = '给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。';
+    reverseList.difficulty = ProblemDifficulty.EASY;
+    reverseList.category = ProblemCategory.LINKED_LIST;
+    reverseList.choices = [
+      { id: 'A', text: '迭代，使用三个指针反转节点指向', isCorrect: true },
+      { id: 'B', text: '递归，反转子链表后调整指针', isCorrect: false },
+      { id: 'C', text: '转换为数组后反向重建链表', isCorrect: false },
+      { id: 'D', text: '使用栈存储节点后重新连接', isCorrect: false }
+    ];
+    reverseList.explanation = '迭代解法：①初始化前驱节点prev = null，当前节点curr = head；②循环当curr不为空：保存下一个节点next = curr.next；curr.next = prev；prev = curr；curr = next；③循环结束后prev为新头节点，返回prev。时间复杂度O(n)，空间复杂度O(1)，原地反转链表，高效且简单。';
+    reverseList.hint = '核心是「改变指针方向」，每个节点的next指向其前驱，逐步完成整个链表的反转';
+    problems.push(reverseList);
+
+    // 1637. 二叉树的最大深度（LeetCode 104）
+    const maxDepth = new ProblemModel();
+    maxDepth.id = 1637;
+    maxDepth.title = '二叉树的最大深度';
+    maxDepth.description = '给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。';
+    maxDepth.difficulty = ProblemDifficulty.EASY;
+    maxDepth.category = ProblemCategory.BINARY_TREE;
+    maxDepth.choices = [
+      { id: 'A', text: '递归，树的深度=1+max(左子树深度, 右子树深度)', isCorrect: true },
+      { id: 'B', text: 'BFS，层序遍历记录层数', isCorrect: false },
+      { id: 'C', text: 'DFS，迭代记录最大深度', isCorrect: false },
+      { id: 'D', text: '计算左右子树的节点数，取最大值', isCorrect: false }
+    ];
+    maxDepth.explanation = '递归解法：①若root为null：return 0；②左深度leftDepth = maxDepth(root.left)；③右深度rightDepth = maxDepth(root.right)；④返回1 + Math.max(leftDepth, rightDepth)。时间复杂度O(n)，空间复杂度O(h)（递归栈），简洁直观计算树的最大深度。';
+    maxDepth.hint = '关键是「递归定义」，树的深度由左右子树的最大深度决定，加1是当前节点';
+    problems.push(maxDepth);
+
+    // 1638. 对称二叉树（LeetCode 101）
+    const isSymmetric = new ProblemModel();
+    isSymmetric.id = 1638;
+    isSymmetric.title = '对称二叉树';
+    isSymmetric.description = '给你一个二叉树的根节点 root ， 检查它是否轴对称。';
+    isSymmetric.difficulty = ProblemDifficulty.EASY;
+    isSymmetric.category = ProblemCategory.BINARY_TREE;
+    isSymmetric.choices = [
+      { id: 'A', text: '递归，检查左子树的右节点与右子树的左节点是否对称', isCorrect: true },
+      { id: 'B', text: '迭代，使用队列层次比较对称位置的节点', isCorrect: false },
+      { id: 'C', text: '先反转左子树，再比较与右子树是否相同', isCorrect: false },
+      { id: 'D', text: '中序遍历后检查序列是否对称', isCorrect: false }
+    ];
+    isSymmetric.explanation = '递归解法：①定义辅助函数isMirror(a, b)：若a和b都为null：return true；若其中一个为null：return false；若a.val != b.val：return false；②递归检查a.left与b.right，a.right与b.left，返回两者的与结果；③调用isMirror(root, root)。时间复杂度O(n)，空间复杂度O(h)，通过比较对称位置的节点值判断是否对称。';
+    isSymmetric.hint = '核心是「对称条件」，左子树的左节点需与右子树的右节点对称，左子树的右节点需与右子树的左节点对称';
+    problems.push(isSymmetric);
+
+    // 1640. 二叉树的最近公共祖先（LeetCode 236）
+    const lowestCommonAncestor = new ProblemModel();
+    lowestCommonAncestor.id = 1640;
+    lowestCommonAncestor.title = '二叉树的最近公共祖先';
+    lowestCommonAncestor.description = '给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”';
+    lowestCommonAncestor.difficulty = ProblemDifficulty.MEDIUM;
+    lowestCommonAncestor.category = ProblemCategory.BINARY_TREE;
+    lowestCommonAncestor.choices = [
+      { id: 'A', text: '递归，若当前节点是p或q则返回，否则递归左右子树，根据返回值判断', isCorrect: true },
+      { id: 'B', text: '存储父节点，从p向上标记祖先，再从q向上查找第一个标记的祖先', isCorrect: false },
+      { id: 'C', text: '先找到p和q的路径，再找路径的最后一个公共节点', isCorrect: false },
+      { id: 'D', text: 'BFS层序遍历，记录每个节点的祖先', isCorrect: false }
+    ];
+    lowestCommonAncestor.explanation = '递归解法：①若root为null或root == p或root == q：return root；②左子树查找left = lowestCommonAncestor(root.left, p, q)；③右子树查找right = lowestCommonAncestor(root.right, p, q)；④若left和right都不为null：return root（当前节点是LCA）；⑤若left不为null：return left；else return right。时间复杂度O(n)，空间复杂度O(h)，通过递归后序遍历，利用返回值判断公共祖先。';
+    lowestCommonAncestor.hint = '核心是「递归返回条件」，若左右子树分别找到p和q，则当前节点为最近公共祖先';
+    problems.push(lowestCommonAncestor);
+
+    // 1641. 二叉搜索树的最近公共祖先（LeetCode 235）
+    const lowestCommonAncestorBST = new ProblemModel();
+    lowestCommonAncestorBST.id = 1641;
+    lowestCommonAncestorBST.title = '二叉搜索树的最近公共祖先';
+    lowestCommonAncestorBST.description = '给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。” 二叉搜索树有以下特性：节点的左子树只包含小于当前节点的数。节点的右子树只包含大于当前节点的数。所有左子树和右子树自身也是二叉搜索树。';
+    lowestCommonAncestorBST.difficulty = ProblemDifficulty.EASY;
+    lowestCommonAncestorBST.category = ProblemCategory.BINARY_TREE;
+    lowestCommonAncestorBST.choices = [
+      { id: 'A', text: '利用BST特性，若当前节点值在p和q之间，则为LCA；否则递归左或右子树', isCorrect: true },
+      { id: 'B', text: '同普通二叉树的LCA解法', isCorrect: false },
+      { id: 'C', text: '先找到p和q的路径，再找路径的最后一个公共节点', isCorrect: false },
+      { id: 'D', text: '迭代，根据节点值大小移动指针直到找到LCA', isCorrect: false }
+    ];
+    lowestCommonAncestorBST.explanation = '递归解法：①若root.val > p.val且root.val > q.val：return 左子树的LCA；②若root.val < p.val且root.val < q.val：return 右子树的LCA；③else：return root（当前节点为LCA）。时间复杂度O(h)，空间复杂度O(h)，利用BST左小右大的特性，无需遍历整棵树，高效找到最近公共祖先。';
+    lowestCommonAncestorBST.hint = '关键是「BST的有序性」，最近公共祖先的值必然在p和q的值之间（或等于其中一个）';
+    problems.push(lowestCommonAncestorBST);
+
+    // 1642. 路径总和（LeetCode 112）
+    const hasPathSum = new ProblemModel();
+    hasPathSum.id = 1642;
+    hasPathSum.title = '路径总和';
+    hasPathSum.description = '给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。叶子节点 是指没有子节点的节点。';
+    hasPathSum.difficulty = ProblemDifficulty.EASY;
+    hasPathSum.category = ProblemCategory.BINARY_TREE;
+    hasPathSum.choices = [
+      { id: 'A', text: '递归，减去当前节点值，到达叶子节点时检查是否等于剩余值', isCorrect: true },
+      { id: 'B', text: 'BFS，记录每个节点的路径和，到达叶子节点时检查', isCorrect: false },
+      { id: 'C', text: 'DFS迭代，使用栈存储节点和当前路径和', isCorrect: false },
+      { id: 'D', text: '计算所有根到叶子的路径和，检查是否包含目标和', isCorrect: false }
+    ];
+    hasPathSum.explanation = '递归解法：①若root为null：return false；②剩余目标和remaining = targetSum - root.val；③若root是叶子节点（无左右孩子）：return remaining == 0；④递归检查左子树或右子树：return hasPathSum(root.left, remaining) || hasPathSum(root.right, remaining)。时间复杂度O(n)，空间复杂度O(h)，在遍历过程中实时计算路径和，提前返回结果。';
+    hasPathSum.hint = '核心是「递归递减目标和」，到达叶子节点时判断剩余值是否为0';
+    problems.push(hasPathSum);
+
+    // 1643. 二叉树的所有路径（LeetCode 257）
+    const binaryTreePaths = new ProblemModel();
+    binaryTreePaths.id = 1643;
+    binaryTreePaths.title = '二叉树的所有路径';
+    binaryTreePaths.description = '给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。叶子节点 是指没有子节点的节点。';
+    binaryTreePaths.difficulty = ProblemDifficulty.EASY;
+    binaryTreePaths.category = ProblemCategory.BINARY_TREE;
+    binaryTreePaths.choices = [
+      { id: 'A', text: '回溯法，记录当前路径，到达叶子节点时加入结果', isCorrect: true },
+      { id: 'B', text: 'BFS，记录每个节点的路径', isCorrect: false },
+      { id: 'C', text: '递归，拼接当前节点值到子树路径前', isCorrect: false },
+      { id: 'D', text: '先序遍历，使用字符串拼接路径', isCorrect: false }
+    ];
+    binaryTreePaths.explanation = '回溯解法：①初始化结果数组；②定义回溯函数backtrack(node, path)：若node为null：return；③path += node.val；④若node是叶子节点：结果加入path；return；⑤path += "->"；⑥递归左子树backtrack(node.left, path)；⑦递归右子树backtrack(node.right, path)；⑧调用backtrack(root, "")，返回结果。时间复杂度O(n)，空间复杂度O(h)，通过回溯记录并拼接路径，收集所有根到叶子的路径。';
+    binaryTreePaths.hint = '关键是「路径拼接」，到达非叶子节点时添加箭头，叶子节点则直接加入结果';
+    problems.push(binaryTreePaths);
+
+    // 1644. 翻转二叉树（LeetCode 226）
+    const invertTree = new ProblemModel();
+    invertTree.id = 1644;
+    invertTree.title = '翻转二叉树';
+    invertTree.description = '给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。';
+    invertTree.difficulty = ProblemDifficulty.EASY;
+    invertTree.category = ProblemCategory.BINARY_TREE;
+    invertTree.choices = [
+      { id: 'A', text: '递归，交换左右子树，再分别翻转左右子树', isCorrect: true },
+      { id: 'B', text: 'BFS，层序遍历中交换每个节点的左右孩子', isCorrect: false },
+      { id: 'C', text: 'DFS迭代，使用栈处理节点并交换左右孩子', isCorrect: false },
+      { id: 'D', text: '先序遍历收集节点，再反向重建二叉树', isCorrect: false }
+    ];
+    invertTree.explanation = '递归解法：①若root为null：return null；②交换左右子树：const temp = root.left；root.left = root.right；root.right = temp；③递归翻转左子树invertTree(root.left)；④递归翻转右子树invertTree(root.right)；⑤返回root。时间复杂度O(n)，空间复杂度O(h)，简洁直观地实现二叉树翻转。';
+    invertTree.hint = '核心是「交换左右子树」，对每个节点都执行左右子树的交换操作';
+    problems.push(invertTree);
+
+    // 1645. 相同的树（LeetCode 100）
+    const isSameTree = new ProblemModel();
+    isSameTree.id = 1645;
+    isSameTree.title = '相同的树';
+    isSameTree.description = '给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。';
+    isSameTree.difficulty = ProblemDifficulty.EASY;
+    isSameTree.category = ProblemCategory.BINARY_TREE;
+    isSameTree.choices = [
+      { id: 'A', text: '递归，比较当前节点值，再递归比较左右子树', isCorrect: true },
+      { id: 'B', text: 'BFS，层序遍历同时比较两个树的节点', isCorrect: false },
+      { id: 'C', text: '先序遍历两个树，比较遍历结果', isCorrect: false },
+      { id: 'D', text: '计算两棵树的节点数和值之和，若相同则认为相同', isCorrect: false }
+    ];
+    isSameTree.explanation = '递归解法：①若p和q都为null：return true；②若其中一个为null：return false；③若p.val != q.val：return false；④递归比较左子树和右子树：return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)。时间复杂度O(n)，空间复杂度O(h)，逐层比较两棵树的结构和节点值。';
+    isSameTree.hint = '关键是「同步比较」，同时检查节点是否都存在、值是否相同，以及左右子树是否相同';
+    problems.push(isSameTree);
+
+    // 1646. 对称的二叉树（LeetCode 剑指 Offer 28）
+    const isSymmetricTree = new ProblemModel();
+    isSymmetricTree.id = 1646;
+    isSymmetricTree.title = '对称的二叉树';
+    isSymmetricTree.description = '请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。';
+    isSymmetricTree.difficulty = ProblemDifficulty.EASY;
+    isSymmetricTree.category = ProblemCategory.BINARY_TREE;
+    isSymmetricTree.choices = [
+      { id: 'A', text: '递归，比较左子树的右节点与右子树的左节点是否对称', isCorrect: true },
+      { id: 'B', text: '先翻转左子树，再比较与右子树是否相同', isCorrect: false },
+      { id: 'C', text: 'BFS，使用队列按对称顺序存储节点并比较', isCorrect: false },
+      { id: 'D', text: '中序遍历后检查序列是否回文', isCorrect: false }
+    ];
+    isSymmetricTree.explanation = '递归解法：①若root为null：return true；②定义辅助函数isMirror(a, b)：若a和b都为null：return true；若其中一个为null：return false；若a.val != b.val：return false；③返回isMirror(a.left, b.right) && isMirror(a.right, b.left)；④调用isMirror(root.left, root.right)。时间复杂度O(n)，空间复杂度O(h)，通过比较对称位置的节点判断是否对称。';
+    isSymmetricTree.hint = '核心是「镜像对称条件」，左子树的结构和值需与右子树的镜像一致';
+    problems.push(isSymmetricTree);
+
+    // 1647. 二叉树的镜像（LeetCode 剑指 Offer 27）
+    const mirrorTree = new ProblemModel();
+    mirrorTree.id = 1647;
+    mirrorTree.title = '二叉树的镜像';
+    mirrorTree.description = '请完成一个函数，输入一棵二叉树，该函数输出它的镜像。';
+    mirrorTree.difficulty = ProblemDifficulty.EASY;
+    mirrorTree.category = ProblemCategory.BINARY_TREE;
+    mirrorTree.choices = [
+      { id: 'A', text: '递归，交换左右子树，再分别递归处理左右子树', isCorrect: true },
+      { id: 'B', text: 'BFS，层序遍历中交换每个节点的左右孩子', isCorrect: false },
+      { id: 'C', text: 'DFS迭代，使用栈处理节点并交换左右孩子', isCorrect: false },
+      { id: 'D', text: '先序遍历收集节点值，再反向构建镜像树', isCorrect: false }
+    ];
+    mirrorTree.explanation = '递归解法：①若root为null：return null；②交换左右子树：const temp = root.left；root.left = root.right；root.right = temp；③递归处理左子树mirrorTree(root.left)；④递归处理右子树mirrorTree(root.right)；⑤返回root。时间复杂度O(n)，空间复杂度O(h)，与翻转二叉树解法相同，本质是同一问题。';
+    mirrorTree.hint = '关键是「交换左右子树」，对每个节点执行左右孩子的交换操作';
+    problems.push(mirrorTree);
+
+    // 1648. 平衡二叉树（LeetCode 110）
+    const isBalanced = new ProblemModel();
+    isBalanced.id = 1648;
+    isBalanced.title = '平衡二叉树';
+    isBalanced.description = '给定一个二叉树，判断它是否是高度平衡的二叉树。本题中，一棵高度平衡二叉树定义为：一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。';
+    isBalanced.difficulty = ProblemDifficulty.EASY;
+    isBalanced.category = ProblemCategory.BINARY_TREE;
+    isBalanced.choices = [
+      { id: 'A', text: '后序遍历，计算每个节点的左右子树高度，同时判断是否平衡', isCorrect: true },
+      { id: 'B', text: '先序遍历，对每个节点计算左右子树高度并比较', isCorrect: false },
+      { id: 'C', text: 'BFS，层序遍历中检查每个节点的子树高度', isCorrect: false },
+      { id: 'D', text: '计算整棵树的高度，再检查左右子树高度差', isCorrect: false }
+    ];
+    isBalanced.explanation = '后序遍历解法：①定义辅助函数getHeight(node)：若node为null：return 0；②左高度left = getHeight(node.left)；若left == -1：return -1（左子树不平衡）；③右高度right = getHeight(node.right)；若right == -1：return -1（右子树不平衡）；④若Math.abs(left - right) > 1：return -1（当前节点不平衡）；⑤return 1 + Math.max(left, right)；⑥调用getHeight(root) != -1。时间复杂度O(n)，空间复杂度O(h)，一次遍历同时计算高度和判断平衡，避免重复计算。';
+    isBalanced.hint = '核心是「后序遍历+剪枝」，在计算高度的同时判断是否平衡，发现不平衡立即返回';
+    problems.push(isBalanced);
+
+    // 1649. 二叉树的最小深度（LeetCode 111）
+    const minDepth = new ProblemModel();
+    minDepth.id = 1649;
+    minDepth.title = '二叉树的最小深度';
+    minDepth.description = '给定一个二叉树，找出其最小深度。最小深度是从根节点到最近叶子节点的最短路径上的节点数量。说明：叶子节点是指没有子节点的节点。';
+    minDepth.difficulty = ProblemDifficulty.EASY;
+    minDepth.category = ProblemCategory.BINARY_TREE;
+    minDepth.choices = [
+      { id: 'A', text: 'BFS，层序遍历，遇到第一个叶子节点时返回当前层数', isCorrect: true },
+      { id: 'B', text: '递归，树的最小深度=1+min(左子树最小深度, 右子树最小深度)，注意处理单侧为空的情况', isCorrect: false },
+      { id: 'C', text: 'DFS，记录最小深度并更新', isCorrect: false },
+      { id: 'D', text: '计算左右子树的深度，取最小值', isCorrect: false }
+    ];
+    minDepth.explanation = 'BFS解法：①若root为null：return 0；②初始化队列，加入root；深度depth=1；③循环当队列不为空：获取当前层节点数size；④循环size次：出队节点；若为叶子节点（无左右孩子）：return depth；⑤左右孩子入队；⑥depth++；⑦返回depth。时间复杂度O(n)，空间复杂度O(n)，找到最近的叶子节点后立即返回，无需遍历整棵树。';
+    minDepth.hint = '关键是「层序遍历的特性」，先遇到的叶子节点所在的层即为最小深度';
+    problems.push(minDepth);
+
+    // 1650. 左叶子之和（LeetCode 404）
+    const sumOfLeftLeaves = new ProblemModel();
+    sumOfLeftLeaves.id = 1650;
+    sumOfLeftLeaves.title = '左叶子之和';
+    sumOfLeftLeaves.description = '给定二叉树的根节点 root ，返回所有左叶子之和。';
+    sumOfLeftLeaves.difficulty = ProblemDifficulty.EASY;
+    sumOfLeftLeaves.category = ProblemCategory.BINARY_TREE;
+    sumOfLeftLeaves.choices = [
+      { id: 'A', text: '递归，判断左孩子是否为叶子节点，若是则累加其值，否则递归处理', isCorrect: true },
+      { id: 'B', text: 'BFS，层序遍历中检查左叶子节点并累加', isCorrect: false },
+      { id: 'C', text: 'DFS迭代，使用栈处理节点，识别左叶子并累加', isCorrect: false },
+      { id: 'D', text: '先序遍历收集所有左叶子，再求和', isCorrect: false }
+    ];
+    sumOfLeftLeaves.explanation = '递归解法：①若root为null：return 0；②初始化和sum=0；③若root.left不为null且是叶子节点（无左右孩子）：sum += root.left.val；④else：sum += sumOfLeftLeaves(root.left)；⑤sum += sumOfLeftLeaves(root.right)；⑥返回sum。时间复杂度O(n)，空间复杂度O(h)，准确识别左叶子节点并累加其值。';
+    sumOfLeftLeaves.hint = '核心是「左叶子的定义」，既是左孩子又是叶子节点（无左右子树）';
+    problems.push(sumOfLeftLeaves);
+
+    // 1651. 二叉树的坡度（LeetCode 563）
+    const findTilt = new ProblemModel();
+    findTilt.id = 1651;
+    findTilt.title = '二叉树的坡度';
+    findTilt.description = '给定一个二叉树，计算 整个树 的坡度 。一个树的 节点的坡度 定义为，该节点左子树的节点之和和右子树节点之和的 绝对差 。如果没有左子树，左子树的节点之和为 0 ；没有右子树同理。整个树的坡度就是所有节点的坡度之和。';
+    findTilt.difficulty = ProblemDifficulty.EASY;
+    findTilt.category = ProblemCategory.BINARY_TREE;
+    findTilt.choices = [
+      { id: 'A', text: '后序遍历，计算每个节点的子树和，同时累加坡度', isCorrect: true },
+      { id: 'B', text: '先计算每个节点的左右子树和，再求坡度和', isCorrect: false },
+      { id: 'C', text: 'BFS，层序遍历中计算每个节点的坡度', isCorrect: false },
+      { id: 'D', text: '递归计算坡度，再递归计算子树和', isCorrect: false }
+    ];
+    findTilt.explanation = '后序遍历解法：①初始化总坡度totalTilt=0；②定义辅助函数sum(node)：若node为null：return 0；③左和leftSum = sum(node.left)；④右和rightSum = sum(node.right)；⑤当前坡度Math.abs(leftSum - rightSum)加入totalTilt；⑥返回node.val + leftSum + rightSum；⑦调用sum(root)，返回totalTilt。时间复杂度O(n)，空间复杂度O(h)，一次遍历同时计算子树和与坡度和。';
+    findTilt.hint = '关键是「后序遍历的顺序」，先计算子树和，再计算当前节点的坡度并累加';
+    problems.push(findTilt);
+
+    // 1652. 二叉搜索树的范围和（LeetCode 938）
+    const rangeSumBST = new ProblemModel();
+    rangeSumBST.id = 1652;
+    rangeSumBST.title = '二叉搜索树的范围和';
+    rangeSumBST.description = '给定二叉搜索树的根结点 root，返回值位于范围 [low, high] 之间的所有结点的值的和。';
+    rangeSumBST.difficulty = ProblemDifficulty.EASY;
+    rangeSumBST.category = ProblemCategory.BINARY_TREE;
+    rangeSumBST.choices = [
+      { id: 'A', text: '利用BST特性递归，若当前节点值小于low则只遍历右子树，大于high则只遍历左子树', isCorrect: true },
+      { id: 'B', text: '中序遍历得到有序数组，再计算范围内的和', isCorrect: false },
+      { id: 'C', text: 'BFS遍历所有节点，累加范围内的值', isCorrect: false },
+      { id: 'D', text: '递归遍历所有节点，累加范围内的值', isCorrect: false }
+    ];
+    rangeSumBST.explanation = 'BST特性解法：①若root为null：return 0；②sum=0；③若root.val >= low && root.val <= high：sum += root.val；④若root.val > low：sum += rangeSumBST(root.left, low, high)；⑤若root.val < high：sum += rangeSumBST(root.right, low, high)；⑥返回sum。时间复杂度O(n)（最坏情况），平均O(log n)，利用BST特性减少不必要的遍历。';
+    rangeSumBST.hint = '核心是「BST的有序性」，通过节点值与范围的比较，剪枝不需要遍历的子树';
+    problems.push(rangeSumBST);
+
+    // 1653. 二叉树的层平均值（LeetCode 637）
+    const averageOfLevels = new ProblemModel();
+    averageOfLevels.id = 1653;
+    averageOfLevels.title = '二叉树的层平均值';
+    averageOfLevels.description = '给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10^-5 以内的答案可以被接受。';
+    averageOfLevels.difficulty = ProblemDifficulty.EASY;
+    averageOfLevels.category = ProblemCategory.BINARY_TREE;
+    averageOfLevels.choices = [
+      { id: 'A', text: 'BFS层序遍历，计算每层的节点和与数量，求平均值', isCorrect: true },
+      { id: 'B', text: 'DFS，记录每层的节点值，最后计算平均值', isCorrect: false },
+      { id: 'C', text: '递归，传递层数参数，收集每层节点值', isCorrect: false },
+      { id: 'D', text: '先计算每层节点数，再计算总和', isCorrect: false }
+    ];
+    averageOfLevels.explanation = 'BFS解法：①初始化队列和结果数组；②若root不为空，入队；③循环当队列不为空：获取当前层节点数size；层和sum=0；④循环size次：出队节点，sum += node.val；左右孩子入队；⑤平均值sum/size加入结果；⑥返回结果。时间复杂度O(n)，空间复杂度O(n)，逐层计算平均值，直观高效。';
+    averageOfLevels.hint = '关键是「分层处理」，通过层序遍历分别计算每层的总和与节点数';
+    problems.push(averageOfLevels);
+
+    // 1654. 二叉树中第二小的节点（LeetCode 671）
+    const findSecondMinimumValue = new ProblemModel();
+    findSecondMinimumValue.id = 1654;
+    findSecondMinimumValue.title = '二叉树中第二小的节点';
+    findSecondMinimumValue.description = '给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。如果一个节点有两个子节点的话，那么该节点的值等于两个子节点中较小的一个。更正式地说，即 root.val = min(root.left.val, root.right.val) 总成立。找出二叉树中第二小的值。如果第二小的值不存在，输出 -1 。';
+    findSecondMinimumValue.difficulty = ProblemDifficulty.EASY;
+    findSecondMinimumValue.category = ProblemCategory.BINARY_TREE;
+    findSecondMinimumValue.choices = [
+      { id: 'A', text: '递归，寻找比根节点大的最小值，即为第二小', isCorrect: true },
+      { id: 'B', text: 'BFS遍历所有节点，记录最小值和第二小值', isCorrect: false },
+      { id: 'C', text: '中序遍历得到有序数组，取第二个元素', isCorrect: false },
+      { id: 'D', text: '利用树的特性，只检查与根节点值不同的子树', isCorrect: false }
+    ];
+    findSecondMinimumValue.explanation = '递归解法：①若root为null：return -1；②定义辅助函数findMin(node, val)：寻找以node为根且大于val的最小值；③若node为null：return -1；④若node.val > val：return node.val；⑤左结果left = findMin(node.left, val)；⑥右结果right = findMin(node.right, val)；⑦若left != -1且right != -1：return Math.min(left, right)；⑧else return left != -1 ? left : right；⑨调用findMin(root, root.val)。时间复杂度O(n)，空间复杂度O(h)，利用树的特性减少不必要的搜索。';
+    findSecondMinimumValue.hint = '核心是「树的特性」，根节点是最小值，第二小的值是第一个比根节点大的值';
+    problems.push(findSecondMinimumValue);
+
+    // 1655. 二叉树的右视图（LeetCode 199）
+    const rightSideView = new ProblemModel();
+    rightSideView.id = 1655;
+    rightSideView.title = '二叉树的右视图';
+    rightSideView.description = '给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。';
+    rightSideView.difficulty = ProblemDifficulty.MEDIUM;
+    rightSideView.category = ProblemCategory.BINARY_TREE;
+    rightSideView.choices = [
+      { id: 'A', text: 'BFS层序遍历，记录每层的最后一个节点值', isCorrect: true },
+      { id: 'B', text: 'DFS，优先遍历右子树，每个深度只记录第一个节点', isCorrect: false },
+      { id: 'C', text: '递归，传递深度参数，记录每个深度的最右节点', isCorrect: false },
+      { id: 'D', text: '先序遍历，记录每个深度的最后一个节点', isCorrect: false }
+    ];
+    rightSideView.explanation = 'BFS解法：①初始化队列和结果数组；②若root不为空，入队；③循环当队列不为空：获取当前层节点数size；④循环size次：出队节点；若为当前层最后一个节点：加入结果；⑤左右孩子入队；⑥返回结果。时间复杂度O(n)，空间复杂度O(n)，直接获取每层最右侧的节点值，符合右视图的定义。';
+    rightSideView.hint = '关键是「层序遍历的最后一个节点」，每层最右侧的节点即为右视图可见的节点';
+    problems.push(rightSideView);
+
+    // 1656. 从前序与中序遍历序列构造二叉树（LeetCode 105）
+    const buildTreePreIn = new ProblemModel();
+    buildTreePreIn.id = 1656;
+    buildTreePreIn.title = '从前序与中序遍历序列构造二叉树';
+    buildTreePreIn.description = '给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。';
+    buildTreePreIn.difficulty = ProblemDifficulty.MEDIUM;
+    buildTreePreIn.category = ProblemCategory.BINARY_TREE;
+    buildTreePreIn.choices = [
+      { id: 'A', text: '递归，前序首元素为根，中序中找到根位置，划分左右子树的前序和中序序列', isCorrect: true },
+      { id: 'B', text: '迭代，使用栈模拟前序遍历过程', isCorrect: false },
+      { id: 'C', text: '先构建哈希表存储中序值的索引，再递归构建', isCorrect: false },
+      { id: 'D', text: '分治法，将序列分割为左右子树部分递归处理', isCorrect: false }
+    ];
+    buildTreePreIn.explanation = '递归解法：①若preorder为空：return null；②根值rootVal = preorder[0]；③在inorder中找到rootVal的索引index；④左子树节点数leftSize = index；⑤左前序preLeft = preorder.slice(1, 1+leftSize)；右前序preRight = preorder.slice(1+leftSize)；⑥左中序inLeft = inorder.slice(0, index)；右中序inRight = inorder.slice(index+1)；⑦构建根节点root；root.left = buildTree(preLeft, inLeft)；root.right = buildTree(preRight, inRight)；⑧返回root。优化：用哈希表存储中序值的索引，避免每次查找。时间复杂度O(n)，空间复杂度O(n)，利用前序和中序的特性递归构建二叉树。';
+    buildTreePreIn.hint = '核心是「前序找根，中序分左右」，前序遍历的第一个元素是根，中序中根的左右分别是左右子树';
+    problems.push(buildTreePreIn);
+
+    // 1657. 从中序与后序遍历序列构造二叉树（LeetCode 106）
+    const buildTreeInPost = new ProblemModel();
+    buildTreeInPost.id = 1657;
+    buildTreeInPost.title = '从中序与后序遍历序列构造二叉树';
+    buildTreeInPost.description = '给定两个整数数组 inorder 和 postorder ，其中 inorder 是二叉树的中序遍历， postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树 。';
+    buildTreeInPost.difficulty = ProblemDifficulty.MEDIUM;
+    buildTreeInPost.category = ProblemCategory.BINARY_TREE;
+    buildTreeInPost.choices = [
+      { id: 'A', text: '递归，后序尾元素为根，中序中找到根位置，划分左右子树的中序和后序序列', isCorrect: true },
+      { id: 'B', text: '迭代，使用栈模拟后序遍历过程', isCorrect: false },
+      { id: 'C', text: '先构建哈希表存储中序值的索引，再递归构建', isCorrect: false },
+      { id: 'D', text: '分治法，将序列分割为左右子树部分递归处理', isCorrect: false }
+    ];
+    buildTreeInPost.explanation = '递归解法：①若postorder为空：return null；②根值rootVal = postorder[postorder.length-1]；③在inorder中找到rootVal的索引index；④左子树节点数leftSize = index；⑤左后序postLeft = postorder.slice(0, leftSize)；右后序postRight = postorder.slice(leftSize, postorder.length-1)；⑥左中序inLeft = inorder.slice(0, index)；右中序inRight = inorder.slice(index+1)；⑦构建根节点root；root.left = buildTree(inLeft, postLeft)；root.right = buildTree(inRight, postRight)；⑧返回root。优化：用哈希表存储中序值的索引。时间复杂度O(n)，空间复杂度O(n)，利用后序和中序的特性递归构建二叉树。';
+    buildTreeInPost.hint = '关键是「后序找根，中序分左右」，后序遍历的最后一个元素是根，中序中根的左右分别是左右子树';
+    problems.push(buildTreeInPost);
+
+    // 1658. 把二叉搜索树转换为累加树（LeetCode 538）
+    const convertBST = new ProblemModel();
+    convertBST.id = 1658;
+    convertBST.title = '把二叉搜索树转换为累加树';
+    convertBST.description = '给出二叉 搜索 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。提醒一下，二叉搜索树满足下列约束条件：节点的左子树仅包含键 小于 节点键的节点。节点的右子树仅包含键 大于 节点键的节点。左右子树也必须是二叉搜索树。';
+    convertBST.difficulty = ProblemDifficulty.MEDIUM;
+    convertBST.category = ProblemCategory.BINARY_TREE;
+    convertBST.choices = [
+      { id: 'A', text: '反中序遍历（右-根-左），累加节点值并更新当前节点', isCorrect: true },
+      { id: 'B', text: '先计算所有节点的和，再中序遍历减去小于当前节点值的和', isCorrect: false },
+      { id: 'C', text: '递归计算每个节点的累加和，等于自身值加右子树的累加和', isCorrect: false },
+      { id: 'D', text: 'BFS，从大到小遍历节点并累加', isCorrect: false }
+    ];
+    convertBST.explanation = '反中序遍历解法：①初始化累加和sum=0；②定义递归函数traverse(node)：若node为null：return；③traverse(node.right)；④sum += node.val；node.val = sum；⑤traverse(node.left)；⑥调用traverse(root)，返回root。时间复杂度O(n)，空间复杂度O(h)，利用BST中序遍历有序的特性，反向遍历实现累加。';
+    convertBST.hint = '核心是「BST的反中序遍历」，按从大到小的顺序遍历节点，实时累加并更新节点值';
+    problems.push(convertBST);
+
+    // 1659. 二叉搜索树迭代器（LeetCode 173）
+    const BSTIterator = new ProblemModel();
+    BSTIterator.id = 1659;
+    BSTIterator.title = '二叉搜索树迭代器';
+    BSTIterator.description = '实现一个二叉搜索树迭代器类BSTIterator ，表示一个按中序遍历二叉搜索树（BST）的迭代器：BSTIterator(TreeNode root) 初始化 BSTIterator 类的一个对象。BST 的根节点会作为构造函数的参数传入。指针初始位置在 BST 中最左的元素处。boolean hasNext() 如果向指针右侧遍历存在数字，则返回 true ；否则返回 false 。int next() 将指针向右移动，然后返回指针处的数字。注意：指针初始位置在 BST 中最左的元素处。你可以假设 next() 调用总是有效的，也就是说，当调用 next() 时，BST 的中序遍历中至少存在一个下一个数字。';
+    BSTIterator.difficulty = ProblemDifficulty.MEDIUM;
+    BSTIterator.category = ProblemCategory.BINARY_TREE;
+    BSTIterator.choices = [
+      { id: 'A', text: '受控迭代，使用栈存储左节点，next()时弹出并处理右子树的左节点', isCorrect: true },
+      { id: 'B', text: '提前中序遍历存储所有节点值，迭代时依次返回', isCorrect: false },
+      { id: 'C', text: '递归中序遍历，使用生成器实现迭代', isCorrect: false },
+      { id: 'D', text: '记录当前节点，每次寻找中序后继', isCorrect: false }
+    ];
+    BSTIterator.explanation = '受控迭代解法：①构造函数：初始化栈；将root的所有左节点入栈；②next()：弹出栈顶节点node；将node.right的所有左节点入栈；返回node.val；③hasNext()：return 栈不为空。时间复杂度：构造函数O(h)，next()摊还O(1)，hasNext()O(1)；空间复杂度O(h)，实现按需遍历，节省空间。';
+    BSTIterator.hint = '关键是「栈的受控使用」，只在需要时加载右子树的左节点，实现高效的中序遍历迭代';
+    problems.push(BSTIterator);
+
+    // 1660. 二叉树的序列化与反序列化（LeetCode 297）
+    const Codec = new ProblemModel();
+    Codec.id = 1660;
+    Codec.title = '二叉树的序列化与反序列化';
+    Codec.description = '序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。';
+    Codec.difficulty = ProblemDifficulty.HARD;
+    Codec.category = ProblemCategory.BINARY_TREE;
+    Codec.choices = [
+      { id: 'A', text: '前序遍历序列化，包含空节点标记；反序列化时递归构建', isCorrect: true },
+      { id: 'B', text: '层序遍历序列化，包含空节点标记；反序列化时队列辅助', isCorrect: false },
+      { id: 'C', text: '中序遍历序列化，反序列化时结合根节点位置', isCorrect: false },
+      { id: 'D', text: '后序遍历序列化，反序列化时从后向前处理', isCorrect: false }
+    ];
+    Codec.explanation = '前序遍历解法：①serialize(root)：若root为null：return "null,"；否则：return root.val + "," + serialize(root.left) + serialize(root.right)；②deserialize(data)：将字符串split为列表；定义辅助函数build()：弹出首元素；若为"null"：return null；创建节点val=当前值；node.left = build()；node.right = build()；return node；调用build()。时间复杂度O(n)，空间复杂度O(n)，通过包含空节点标记，确保反序列化的唯一性。';
+    Codec.hint = '核心是「包含空节点信息」，序列化时记录null节点，使反序列化能准确还原树结构';
+    problems.push(Codec);
+
+    // 1662. 寻找峰值（LeetCode 162）
+    const findPeakElement = new ProblemModel();
+    findPeakElement.id = 1662;
+    findPeakElement.title = '寻找峰值';
+    findPeakElement.description = '峰值元素是指其值严格大于左右相邻值的元素。给你一个整数数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 任何一个峰值 所在位置即可。你可以假设 nums[-1] = nums[n] = -∞ 。你必须实现时间复杂度为 O(log n) 的算法来解决此问题。';
+    findPeakElement.difficulty = ProblemDifficulty.MEDIUM;
+    findPeakElement.category = ProblemCategory.ARRAY;
+    findPeakElement.choices = [
+      { id: 'A', text: '二分查找，若nums[mid] < nums[mid+1]则峰值在右侧，否则在左侧', isCorrect: true },
+      { id: 'B', text: '线性扫描，找到第一个满足nums[i] > nums[i+1]的i', isCorrect: false },
+      { id: 'C', text: '递归二分，缩小搜索范围', isCorrect: false },
+      { id: 'D', text: '寻找数组最大值的索引，一定是峰值', isCorrect: false }
+    ];
+    findPeakElement.explanation = '二分查找解法：①初始化left=0，right=nums.length-1；②循环当left < right：mid = Math.floor((left + right)/2)；③若nums[mid] < nums[mid+1]：left = mid + 1；④else：right = mid；⑤循环结束后return left。时间复杂度O(log n)，空间复杂度O(1)，利用数组两端为负无穷的特性，通过比较mid和mid+1的值确定峰值所在侧。';
+    findPeakElement.hint = '核心是「二分的判断条件」，若mid处的值小于右侧，则右侧必有峰值；否则左侧必有峰值';
+    problems.push(findPeakElement);
+
+    // 1663. 搜索旋转排序数组（LeetCode 33）
+    const searchRotated = new ProblemModel();
+    searchRotated.id = 1663;
+    searchRotated.title = '搜索旋转排序数组';
+    searchRotated.description = '整数数组 nums 按升序排列，数组中的值 互不相同 。在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。';
+    searchRotated.difficulty = ProblemDifficulty.MEDIUM;
+    searchRotated.category = ProblemCategory.ARRAY;
+    searchRotated.choices = [
+      { id: 'A', text: '二分查找，先判断哪部分是有序的，再在有序部分中查找目标', isCorrect: true },
+      { id: 'B', text: '先找到旋转点，再在相应的有序区间二分查找', isCorrect: false },
+      { id: 'C', text: '线性搜索，找到目标值', isCorrect: false },
+      { id: 'D', text: '恢复数组为有序后再二分查找', isCorrect: false }
+    ];
+    searchRotated.explanation = '二分查找解法：①初始化left=0，right=nums.length-1；②循环当left <= right：mid = Math.floor((left + right)/2)；③若nums[mid] == target：return mid；④若nums[left] <= nums[mid]（左半部分有序）：若nums[left] <= target < nums[mid]：right = mid - 1；else：left = mid + 1；⑤else（右半部分有序）：若nums[mid] < target <= nums[right]：left = mid + 1；else：right = mid - 1；⑥循环结束后return -1。时间复杂度O(log n)，空间复杂度O(1)，在旋转数组中高效查找目标。';
+    searchRotated.hint = '关键是「判断有序区间」，每次二分确定哪部分是有序的，再在有序部分中判断目标是否存在';
+    problems.push(searchRotated);
+
+    // 1664. 搜索二维矩阵（LeetCode 74）
+    const searchMatrix = new ProblemModel();
+    searchMatrix.id = 1664;
+    searchMatrix.title = '搜索二维矩阵';
+    searchMatrix.description = '编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：每行中的整数从左到右按升序排列。每行的第一个整数大于前一行的最后一个整数。';
+    searchMatrix.difficulty = ProblemDifficulty.MEDIUM;
+    searchMatrix.category = ProblemCategory.ARRAY;
+    searchMatrix.choices = [
+      { id: 'A', text: '二分查找，将二维矩阵视为一维有序数组，计算对应行列', isCorrect: true },
+      { id: 'B', text: '先二分查找行，再在该行二分查找列', isCorrect: false },
+      { id: 'C', text: '从右上角开始，小于目标则下移，大于则左移', isCorrect: false },
+      { id: 'D', text: '逐行二分查找', isCorrect: false }
+    ];
+    searchMatrix.explanation = '一维二分解法：①若矩阵为空：return false；②m = matrix.length，n = matrix[0].length；left=0，right = m*n - 1；③循环当left <= right：mid = Math.floor((left + right)/2)；row = Math.floor(mid / n)；col = mid % n；④若matrix[row][col] == target：return true；⑤else if (matrix[row][col] < target)：left = mid + 1；⑥else：right = mid - 1；⑦return false。时间复杂度O(log(mn))，空间复杂度O(1)，将二维矩阵映射为一维有序数组进行二分查找。';
+    searchMatrix.hint = '核心是「矩阵的有序性」，整个矩阵可视为按行拼接的一维有序数组，直接计算中间元素的行列位置';
+    problems.push(searchMatrix);
+
+    // 1665. 在排序数组中查找元素的第一个和最后一个位置（LeetCode 34）
+    const searchRange = new ProblemModel();
+    searchRange.id = 1665;
+    searchRange.title = '在排序数组中查找元素的第一个和最后一个位置';
+    searchRange.description = '给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。如果数组中不存在目标值 target，返回 [-1, -1]。你必须设计并实现时间复杂度为 O(log n) 的算法解决此问题。';
+    searchRange.difficulty = ProblemDifficulty.MEDIUM;
+    searchRange.category = ProblemCategory.ARRAY;
+    searchRange.choices = [
+      { id: 'A', text: '两次二分查找，分别寻找左边界和右边界', isCorrect: true },
+      { id: 'B', text: '一次二分找到目标，再向两边扩展找边界', isCorrect: false },
+      { id: 'C', text: '线性扫描找到第一个和最后一个出现的位置', isCorrect: false },
+      { id: 'D', text: '使用内置函数indexOf和lastIndexOf', isCorrect: false }
+    ];
+    searchRange.explanation = '两次二分解法：①定义找左边界函数findLeft()：left=0，right=nums.length-1；res=-1；循环当left <= right：mid=(left+right)/2；if nums[mid] == target：res=mid；right=mid-1；else if nums[mid] < target：left=mid+1；else：right=mid-1；return res；②类似定义找右边界函数findRight()，找到时left=mid+1；③leftIdx = findLeft()；if leftIdx == -1：return [-1,-1]；rightIdx = findRight()；return [leftIdx, rightIdx]。时间复杂度O(log n)，空间复杂度O(1)，准确找到目标值的范围。';
+    searchRange.hint = '关键是「二分查找的变体」，寻找左边界时找到目标后继续向左搜索，寻找右边界时继续向右搜索';
+    problems.push(searchRange);
+
+    // 1666. 多数元素（LeetCode 169）
+    const majorityElement = new ProblemModel();
+    majorityElement.id = 1666;
+    majorityElement.title = '多数元素';
+    majorityElement.description = '给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。你可以假设数组是非空的，并且给定的数组总是存在多数元素。';
+    majorityElement.difficulty = ProblemDifficulty.EASY;
+    majorityElement.category = ProblemCategory.ARRAY;
+    majorityElement.choices = [
+      { id: 'A', text: '摩尔投票法，遍历数组，相同则计数加1，不同则减1，计数为0则更换候选', isCorrect: true },
+      { id: 'B', text: '哈希表，统计每个元素的出现次数，返回次数最多的', isCorrect: false },
+      { id: 'C', text: '排序，数组中间的元素即为多数元素', isCorrect: false },
+      { id: 'D', text: '分治法，递归寻找左右子数组的多数元素，再比较两者的出现次数', isCorrect: false }
+    ];
+    majorityElement.explanation = '摩尔投票解法：①初始化候选candidate = nums[0]，计数count=1；②遍历i从1到nums.length-1：if nums[i] == candidate：count++；else：count--；if count == 0：candidate = nums[i]；count=1；③返回candidate。时间复杂度O(n)，空间复杂度O(1)，利用多数元素出现次数超过一半的特性，高效找到多数元素。';
+    majorityElement.hint = '核心是「抵消思想」，不同元素相互抵消，最后剩下的一定是多数元素';
+    problems.push(majorityElement);
+
+    // 1667. 缺失的第一个正数（LeetCode 41）
+    const firstMissingPositive = new ProblemModel();
+    firstMissingPositive.id = 1667;
+    firstMissingPositive.title = '缺失的第一个正数';
+    firstMissingPositive.description = '给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数。请你实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案。';
+    firstMissingPositive.difficulty = ProblemDifficulty.HARD;
+    firstMissingPositive.category = ProblemCategory.ARRAY;
+    firstMissingPositive.choices = [
+      { id: 'A', text: '原地哈希，将正数放到对应的索引位置，再遍历寻找第一个不匹配的索引', isCorrect: true },
+      { id: 'B', text: '使用哈希表存储所有正数，再从1开始检查', isCorrect: false },
+      { id: 'C', text: '排序数组，再寻找缺失的最小正数', isCorrect: false },
+      { id: 'D', text: '位图法，用一个整数的位表示是否出现', isCorrect: false }
+    ];
+    firstMissingPositive.explanation = '原地哈希解法：①n = nums.length；②遍历数组：若nums[i]是1~n的正数，且nums[nums[i]-1] != nums[i]：交换nums[i]和nums[nums[i]-1]；重复直到无法交换或nums[i]不在范围内；③遍历数组：若nums[i] != i+1：return i+1；④return n+1。时间复杂度O(n)，空间复杂度O(1)，利用数组本身作为哈希表，将正数放到正确位置。';
+    firstMissingPositive.hint = '关键是「位置映射」，最小的缺失正数一定在1~n+1之间，通过将数放到对应索引位置来查找';
+    problems.push(firstMissingPositive);
+
+    // 1668. 寻找重复数（LeetCode 287）
+    const findDuplicate = new ProblemModel();
+    findDuplicate.id = 1668;
+    findDuplicate.title = '寻找重复数';
+    findDuplicate.description = '给定一个包含 n + 1 个整数的数组 nums ，其数字都在 [1, n] 范围内（包括 1 和 n），可知至少存在一个重复的整数。假设 nums 只有 一个重复的整数 ，找出 这个重复的数 。你设计的解决方案必须 不修改 数组 nums 且只用常量级 O(1) 的额外空间。';
+    findDuplicate.difficulty = ProblemDifficulty.MEDIUM;
+    findDuplicate.category = ProblemCategory.ARRAY;
+    findDuplicate.choices = [
+      { id: 'A', text: '快慢指针，将数组视为链表，寻找环的入口（弗洛伊德判圈法）', isCorrect: true },
+      { id: 'B', text: '二分查找，统计小于等于mid的数的个数，判断重复数在左侧还是右侧', isCorrect: false },
+      { id: 'C', text: '哈希表，记录出现过的数', isCorrect: false },
+      { id: 'D', text: '排序数组，寻找相邻相等的数', isCorrect: false }
+    ];
+    findDuplicate.explanation = '快慢指针解法：①慢指针slow = nums[0]；快指针fast = nums[nums[0]]；②循环当slow != fast：slow = nums[slow]；fast = nums[nums[fast]]；③快指针重置为0；④循环当slow != fast：slow = nums[slow]；fast = nums[fast]；⑤return slow。时间复杂度O(n)，空间复杂度O(1)，不修改数组，符合题目约束。原理：数组值范围1~n，索引0~n，可构建链表，重复数为环的入口。';
+    findDuplicate.hint = '核心是「环的检测」，通过快慢指针找到环，再找到环的入口即为重复数';
+    problems.push(findDuplicate);
+
+    // 1669. 颜色分类（LeetCode 75）
+    const sortColors = new ProblemModel();
+    sortColors.id = 1669;
+    sortColors.title = '颜色分类';
+    sortColors.description = '给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。必须在不使用库的sort函数的情况下解决这个问题。';
+    sortColors.difficulty = ProblemDifficulty.MEDIUM;
+    sortColors.category = ProblemCategory.ARRAY;
+    sortColors.choices = [
+      { id: 'A', text: '三指针，left指向0的右边界，right指向2的左边界，current遍历数组交换元素', isCorrect: true },
+      { id: 'B', text: '计数排序，统计0、1、2的个数，再重新填充数组', isCorrect: false },
+      { id: 'C', text: '两次遍历，第一次将0交换到前面，第二次将1交换到0后面', isCorrect: false },
+      { id: 'D', text: '快速排序，选择1作为 pivot 进行分区', isCorrect: false }
+    ];
+    sortColors.explanation = '三指针解法：①left=0（0的右边界），current=0，right=nums.length-1（2的左边界）；②循环当current <= right：if nums[current] == 0：交换nums[current]和nums[left]；left++；current++；③else if nums[current] == 2：交换nums[current]和nums[right]；right--；④else：current++；⑤排序完成。时间复杂度O(n)，空间复杂度O(1)，一次遍历完成排序，原地操作。';
+    sortColors.hint = '关键是「分区思想」，通过三个指针划分0、1、2的区域，遇到0放左边，遇到2放右边';
+    problems.push(sortColors);
+
+    // 1670. 移除元素（LeetCode 27）
+    const removeElement = new ProblemModel();
+    removeElement.id = 1670;
+    removeElement.title = '移除元素';
+    removeElement.description = '给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。';
+    removeElement.difficulty = ProblemDifficulty.EASY;
+    removeElement.category = ProblemCategory.ARRAY;
+    removeElement.choices = [
+      { id: 'A', text: '双指针，慢指针记录有效元素位置，快指针遍历数组，不等则复制', isCorrect: true },
+      { id: 'B', text: '暴力法，遇到val则将后面元素前移', isCorrect: false },
+      { id: 'C', text: '将所有val交换到数组末尾，返回新长度', isCorrect: false },
+      { id: 'D', text: '使用filter方法创建新数组，再复制回原数组', isCorrect: false }
+    ];
+    removeElement.explanation = '双指针解法：①初始化慢指针i=0；②遍历快指针j从0到nums.length-1：if nums[j] != val：nums[i] = nums[j]；i++；③返回i。时间复杂度O(n)，空间复杂度O(1)，原地移除元素，保留非val元素的相对顺序。';
+    removeElement.hint = '核心是「覆盖无效元素」，慢指针跟踪有效元素的位置，快指针寻找有效元素进行覆盖';
+    problems.push(removeElement);
+
+    // 1671. 移除重复元素（LeetCode 26）
+    const removeDuplicates = new ProblemModel();
+    removeDuplicates.id = 1671;
+    removeDuplicates.title = '移除重复元素';
+    removeDuplicates.description = '给你一个 升序排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。由于在某些语言中不能改变数组的长度，所以必须将结果放在数组nums的第一部分。更规范地说，如果在删除重复项之后有 k 个元素，那么 nums 的前 k 个元素应该保存最终结果。不需要考虑数组中超出新长度后面的元素。';
+    removeDuplicates.difficulty = ProblemDifficulty.EASY;
+    removeDuplicates.category = ProblemCategory.ARRAY;
+    removeDuplicates.choices = [
+      { id: 'A', text: '双指针，慢指针记录不重复元素位置，快指针遍历，不同则复制', isCorrect: true },
+      { id: 'B', text: '使用Set存储不重复元素，再复制回原数组', isCorrect: false },
+      { id: 'C', text: '暴力法，遇到重复则将后面元素前移', isCorrect: false },
+      { id: 'D', text: '使用filter方法过滤重复元素', isCorrect: false }
+    ];
+    removeDuplicates.explanation = '双指针解法：①若数组长度<=1：return 数组长度；②慢指针i=0；③遍历快指针j从1到nums.length-1：if nums[j] != nums[i]：i++；nums[i] = nums[j]；④返回i+1。时间复杂度O(n)，空间复杂度O(1)，原地移除重复元素，利用数组升序的特性。';
+    removeDuplicates.hint = '关键是「利用升序特性」，重复元素必然相邻，通过双指针保留第一个出现的元素';
+    problems.push(removeDuplicates);
+
+    // 1672. 移除重复元素 II（LeetCode 80）
+    const removeDuplicatesII = new ProblemModel();
+    removeDuplicatesII.id = 1672;
+    removeDuplicatesII.title = '移除重复元素 II';
+    removeDuplicatesII.description = '给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。';
+    removeDuplicatesII.difficulty = ProblemDifficulty.MEDIUM;
+    removeDuplicatesII.category = ProblemCategory.ARRAY;
+    removeDuplicatesII.choices = [
+      { id: 'A', text: '双指针，慢指针i=2，快指针j=2，若nums[j] != nums[i-2]则保留', isCorrect: true },
+      { id: 'B', text: '计数法，记录每个元素出现次数，超过两次则跳过', isCorrect: false },
+      { id: 'C', text: '遍历数组，将符合条件的元素复制到前面', isCorrect: false },
+      { id: 'D', text: '使用哈希表记录出现次数，再重建数组', isCorrect: false }
+    ];
+    removeDuplicatesII.explanation = '双指针解法：①若数组长度<=2：return 数组长度；②慢指针i=2；③遍历快指针j从2到nums.length-1：if nums[j] != nums[i-2]：nums[i] = nums[j]；i++；④返回i。时间复杂度O(n)，空间复杂度O(1)，允许元素最多出现两次，通过比较当前元素与i-2位置的元素判断是否保留。';
+    removeDuplicatesII.hint = '核心是「允许两次重复」，通过i-2位置的元素判断当前元素是否是第三次出现';
+    problems.push(removeDuplicatesII);
+
+    // 1673. 移动零（LeetCode 283）
+    const moveZeroes = new ProblemModel();
+    moveZeroes.id = 1673;
+    moveZeroes.title = '移动零';
+    moveZeroes.description = '给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。请注意 ，必须在不复制数组的情况下原地对数组进行操作。';
+    moveZeroes.difficulty = ProblemDifficulty.EASY;
+    moveZeroes.category = ProblemCategory.ARRAY;
+    moveZeroes.choices = [
+      { id: 'A', text: '双指针，慢指针记录非零元素位置，快指针遍历，非零则交换，最后填充零', isCorrect: true },
+      { id: 'B', text: '遍历数组，遇到零则与后面第一个非零元素交换', isCorrect: false },
+      { id: 'C', text: '统计零的个数，将非零元素前移，最后补零', isCorrect: false },
+      { id: 'D', text: '使用filter过滤零，再填充到原数组，剩余位置补零', isCorrect: false }
+    ];
+    moveZeroes.explanation = '双指针解法：①慢指针i=0；②遍历快指针j从0到nums.length-1：if nums[j] != 0：nums[i] = nums[j]；i++；③遍历从i到nums.length-1：nums[k] = 0；④完成。时间复杂度O(n)，空间复杂度O(1)，先移动非零元素，再统一填充零，保持相对顺序。';
+    moveZeroes.hint = '关键是「先处理非零元素」，将所有非零元素移到前面，再在剩余位置补零';
+    problems.push(moveZeroes);
+
+    // 1674. 加一（LeetCode 66）
+    const plusOne = new ProblemModel();
+    plusOne.id = 1674;
+    plusOne.title = '加一';
+    plusOne.description = '给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。';
+    plusOne.difficulty = ProblemDifficulty.EASY;
+    plusOne.category = ProblemCategory.ARRAY;
+    plusOne.choices = [
+      { id: 'A', text: '从末尾开始加一，处理进位，若最高位有进位则在开头插入1', isCorrect: true },
+      { id: 'B', text: '转换为数字加一后再转换为数组', isCorrect: false },
+      { id: 'C', text: '使用BigInt处理大数字', isCorrect: false },
+      { id: 'D', text: '递归处理每一位的加一和进位', isCorrect: false }
+    ];
+    plusOne.explanation = '进位处理解法：①n = digits.length；②遍历i从n-1到0：digits[i] += 1；if digits[i] < 10：return digits；else：digits[i] = 0；③若所有位都进位（如999）：在数组开头插入1；④return digits。时间复杂度O(n)，空间复杂度O(1)（最坏O(n)），正确处理各种进位情况，包括最高位进位。';
+    plusOne.hint = '核心是「处理进位」，从最后一位开始加一，若等于10则进位为0，继续处理前一位';
+    problems.push(plusOne);
+
+    // 1675. 合并两个有序数组（LeetCode 88）
+    const mergeArrays = new ProblemModel();
+    mergeArrays.id = 1675;
+    mergeArrays.title = '合并两个有序数组';
+    mergeArrays.description = '给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。';
+    mergeArrays.difficulty = ProblemDifficulty.EASY;
+    mergeArrays.category = ProblemCategory.ARRAY;
+    mergeArrays.choices = [
+      { id: 'A', text: '双指针从后往前，比较两数组末尾元素，大的放到nums1的末尾', isCorrect: true },
+      { id: 'B', text: '双指针从前往后，需要额外空间存储nums1的元素', isCorrect: false },
+      { id: 'C', text: '将nums2复制到nums1的后面，再排序', isCorrect: false },
+      { id: 'D', text: '使用内置的concat和sort方法', isCorrect: false }
+    ];
+    mergeArrays.explanation = '后向双指针解法：①初始化i = m - 1，j = n - 1，k = m + n - 1；②循环当i >= 0且j >= 0：if nums1[i] > nums2[j]：nums1[k] = nums1[i]；i--；else：nums1[k] = nums2[j]；j--；k--；③若j >= 0：将nums2剩余元素复制到nums1前面；④完成。时间复杂度O(m+n)，空间复杂度O(1)，原地合并，无需额外空间。';
+    mergeArrays.hint = '关键是「从后往前合并」，利用nums1后面的空闲空间，避免覆盖未处理的元素';
+    problems.push(mergeArrays);
+
+    // 1676. 两数之和（LeetCode 1）
+    const twoSum = new ProblemModel();
+    twoSum.id = 1676;
+    twoSum.title = '两数之和';
+    twoSum.description = '给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。';
+    twoSum.difficulty = ProblemDifficulty.EASY;
+    twoSum.category = ProblemCategory.ARRAY;
+    twoSum.choices = [
+      { id: 'A', text: '哈希表，存储元素值到索引的映射，遍历同时查找target-当前值', isCorrect: true },
+      { id: 'B', text: '暴力双重循环，检查所有可能的两数组合', isCorrect: false },
+      { id: 'C', text: '排序后双指针，找到目标和后再找原索引', isCorrect: false },
+      { id: 'D', text: '先计算所有元素与target的差值，再查找是否存在', isCorrect: false }
+    ];
+    twoSum.explanation = '哈希表解法：①创建map存储值到索引的映射；②遍历i从0到nums.length-1：complement = target - nums[i]；if map.has(complement)：return [map.get(complement), i]；map.set(nums[i], i)；③返回空数组（题目保证有解）。时间复杂度O(n)，空间复杂度O(n)，一次遍历完成，高效查找两个数的索引。';
+    twoSum.hint = '核心是「空间换时间」，通过哈希表记录已遍历元素，快速查找互补数';
+    problems.push(twoSum);
+
+    // 1677. 三数之和（LeetCode 15）- 重复题目，此处为示例延续，实际应避免
+    const threeSumAgain = new ProblemModel();
+    threeSumAgain.id = 1677;
+    threeSumAgain.title = '三数之和（重复示例）';
+    threeSumAgain.description = '给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。';
+    threeSumAgain.difficulty = ProblemDifficulty.MEDIUM;
+    threeSumAgain.category = ProblemCategory.ARRAY;
+    threeSumAgain.choices = [
+      { id: 'A', text: '排序+双指针，固定第一个数，左右指针找另外两个数', isCorrect: true },
+      { id: 'B', text: '哈希表，固定前两个数，查找第三个数', isCorrect: false },
+      { id: 'C', text: '暴力三重循环', isCorrect: false },
+      { id: 'D', text: '先计算两数之和，再查找第三个数', isCorrect: false }
+    ];
+    threeSumAgain.explanation = '同1620题三数之和的解释';
+    threeSumAgain.hint = '同1620题三数之和的提示';
+    problems.push(threeSumAgain);
+
+
+    // 一、递归类（17题）
+    // 1. 斐波那契数列
+    const fibonacci = new ProblemModel();
+    fibonacci.id = 3001;
+    fibonacci.title = '斐波那契数列';
+    fibonacci.description = '斐波那契数列定义为：F(0)=0，F(1)=1，F(n)=F(n-1)+F(n-2)（n≥2）。给定n，用递归求F(n)的值。';
+    fibonacci.difficulty = ProblemDifficulty.EASY;
+    fibonacci.category = ProblemCategory.RECURSION;
+    fibonacci.choices = [
+      { id: 'A', text: '递归终止条件：n=0返回0，n=1返回1，否则返回F(n-1)+F(n-2)', isCorrect: true },
+      { id: 'B', text: '递归终止条件：n≤2返回1，否则返回F(n-1)+F(n-2)', isCorrect: false },
+      { id: 'C', text: '迭代计算，用变量存储前两项', isCorrect: false },
+      { id: 'D', text: '矩阵快速幂优化递归', isCorrect: false }
+    ];
+    fibonacci.explanation = '基础递归解法：直接按照定义实现，明确终止条件为n=0和n=1，递归计算n-1和n-2的和。但该方法时间复杂度为O(2ⁿ)，存在大量重复计算，实际应用中需优化。';
+    fibonacci.hint = '核心是「递归定义转化」，直接将数学定义翻译为递归函数';
+    problems.push(fibonacci);
+
+    // 2. 阶乘计算
+    const factorial = new ProblemModel();
+    factorial.id = 3002;
+    factorial.title = '阶乘计算';
+    factorial.description = '阶乘定义为n! = n × (n-1) × ... × 1，0! = 1。给定非负整数n，用递归求n!的值。';
+    factorial.difficulty = ProblemDifficulty.EASY;
+    factorial.category = ProblemCategory.RECURSION;
+    factorial.choices = [
+      { id: 'A', text: '终止条件：n=0返回1，否则返回n × factorial(n-1)', isCorrect: true },
+      { id: 'B', text: '终止条件：n=1返回1，否则返回n × factorial(n-1)', isCorrect: false },
+      { id: 'C', text: '循环累乘计算', isCorrect: false },
+      { id: 'D', text: '使用伽马函数近似计算', isCorrect: false }
+    ];
+    factorial.explanation = '递归解法：当n=0时返回1（0!的定义），对于n>0，递归计算n乘以(n-1)!。时间复杂度O(n)，空间复杂度O(n)（递归栈深度）。';
+    factorial.hint = '注意0!的特殊值为1，递归过程从n逐步减到0';
+    problems.push(factorial);
+
+    // 3. 汉诺塔问题
+    const hanota = new ProblemModel();
+    hanota.id = 3003;
+    hanota.title = '汉诺塔问题';
+    hanota.description = '有A、B、C三根柱子，A上有n个圆盘（上小下大）。每次只能移动一个圆盘，且大盘不能放在小盘上。用递归实现将所有圆盘从A移到C的步骤。';
+    hanota.difficulty = ProblemDifficulty.MEDIUM;
+    hanota.category = ProblemCategory.RECURSION;
+    hanota.choices = [
+      { id: 'A', text: 'n=1时直接移A→C；n>1时：先移n-1个从A→B，再移第n个A→C，最后移n-1个从B→C', isCorrect: true },
+      { id: 'B', text: 'n=1时移A→B；n>1时：先移n-1个A→C，再移第n个A→B，最后移n-1个C→B', isCorrect: false },
+      { id: 'C', text: '用循环模拟移动步骤', isCorrect: false },
+      { id: 'D', text: '随机选择柱子移动，检查合法性', isCorrect: false }
+    ];
+    hanota.explanation = '经典递归问题：将n个圆盘的移动分解为三个步骤，利用中间柱子作为过渡，通过递归处理n-1个圆盘的子问题。时间复杂度O(2ⁿ)，空间复杂度O(n)（递归栈）。';
+    hanota.hint = '核心是「问题分解」，把大问题拆解为规模更小的同类问题，利用中间柱子传递圆盘';
+    problems.push(hanota);
+
+    // 4. 反转链表（递归版）
+    const reverseListRecursive = new ProblemModel();
+    reverseListRecursive.id = 3004;
+    reverseListRecursive.title = '反转链表（递归版）';
+    reverseListRecursive.description = '给你单链表的头节点head，请用递归方法将链表反转，并返回反转后的链表头节点。';
+    reverseListRecursive.difficulty = ProblemDifficulty.MEDIUM;
+    reverseListRecursive.category = ProblemCategory.RECURSION;
+    reverseListRecursive.choices = [
+      { id: 'A', text: '终止条件：head或head.next为空返回head；递归反转head.next，将head.next.next指向head，head.next置空', isCorrect: true },
+      { id: 'B', text: '遍历链表存储节点，再反向重建链表', isCorrect: false },
+      { id: 'C', text: '用三个指针迭代反转', isCorrect: false },
+      { id: 'D', text: '递归时直接交换相邻节点的指针', isCorrect: false }
+    ];
+    reverseListRecursive.explanation = '递归解法：先递归反转当前节点的下一个节点，得到反转后的链表头；再将当前节点设为其下一个节点的下一个节点（反转指针），并断开当前节点与原下一个节点的连接。时间复杂度O(n)，空间复杂度O(n)（递归栈）。';
+    hanota.hint = '关注「后序处理」，先完成子链表的反转，再调整当前节点的指针';
+    problems.push(reverseListRecursive);
+
+
+    // 7. 二叉树的中序遍历（递归）
+    const inorderTraversal = new ProblemModel();
+    inorderTraversal.id = 3007;
+    inorderTraversal.title = '二叉树的中序遍历（递归）';
+    inorderTraversal.description = '给你二叉树的根节点root，返回它节点值的中序遍历（左→根→右）。要求用递归实现。';
+    inorderTraversal.difficulty = ProblemDifficulty.EASY;
+    inorderTraversal.category = ProblemCategory.RECURSION;
+    inorderTraversal.choices = [
+      { id: 'A', text: '递归：递归遍历左子树，访问根节点，递归遍历右子树', isCorrect: true },
+      { id: 'B', text: '递归：访问根节点，递归遍历左子树，递归遍历右子树', isCorrect: false },
+      { id: 'C', text: '递归：递归遍历左子树，递归遍历右子树，访问根节点', isCorrect: false },
+      { id: 'D', text: '用栈迭代实现', isCorrect: false }
+    ];
+    inorderTraversal.explanation = '中序遍历递归逻辑：先递归处理左子树，再记录当前根节点的值，最后递归处理右子树。时间复杂度O(n)，空间复杂度O(h)。';
+    inorderTraversal.hint = '遵循「左根右」的顺序，左子树处理完毕后再访问根节点';
+    problems.push(inorderTraversal);
+
+    // 8. 二叉树的后序遍历（递归）
+    const postorderTraversal = new ProblemModel();
+    postorderTraversal.id = 3008;
+    postorderTraversal.title = '二叉树的后序遍历（递归）';
+    postorderTraversal.description = '给你二叉树的根节点root，返回它节点值的后序遍历（左→右→根）。要求用递归实现。';
+    postorderTraversal.difficulty = ProblemDifficulty.EASY;
+    postorderTraversal.category = ProblemCategory.RECURSION;
+    postorderTraversal.choices = [
+      { id: 'A', text: '递归：递归遍历左子树，递归遍历右子树，访问根节点', isCorrect: true },
+      { id: 'B', text: '递归：访问根节点，递归遍历左子树，递归遍历右子树', isCorrect: false },
+      { id: 'C', text: '递归：递归遍历左子树，访问根节点，递归遍历右子树', isCorrect: false },
+      { id: 'D', text: '用栈迭代实现', isCorrect: false }
+    ];
+    postorderTraversal.explanation = '后序遍历递归逻辑：先递归处理左子树，再递归处理右子树，最后记录当前根节点的值。时间复杂度O(n)，空间复杂度O(h)。';
+    postorderTraversal.hint = '遵循「左右根」的顺序，左右子树均处理完毕后再访问根节点';
+    problems.push(postorderTraversal);
+
+    // 10. 子集（无重复元素）
+    const subsets = new ProblemModel();
+    subsets.id = 3010;
+    subsets.title = '子集（无重复元素）';
+    subsets.description = '给你一个整数数组nums，数组中的元素互不相同。返回该数组所有可能的子集（幂集）。解集不能包含重复的子集。';
+    subsets.difficulty = ProblemDifficulty.MEDIUM;
+    subsets.category = ProblemCategory.RECURSION;
+    subsets.choices = [
+      { id: 'A', text: '递归回溯：每个元素选或不选，递归构建子集，到达末尾时加入结果', isCorrect: true },
+      { id: 'B', text: '迭代：从空集开始，每次加入一个元素，与现有子集组合', isCorrect: false },
+      { id: 'C', text: '二进制位运算：用位表示元素是否选中', isCorrect: false },
+      { id: 'D', text: '动态规划，基于前n-1个元素的子集推导', isCorrect: false }
+    ];
+    subsets.explanation = '回溯递归解法：定义递归函数，参数为当前索引和临时子集；对于每个元素，有两种选择（加入或不加入子集）；当索引到达数组末尾时，将临时子集加入结果。时间复杂度O(2ⁿ)，空间复杂度O(n)（递归栈+临时子集）。';
+    subsets.hint = '利用「选择树」思想，每个元素的选择状态（选/不选）构成所有可能的子集';
+    problems.push(subsets);
+
+    // 12. 组合（从n选k）
+    const combine = new ProblemModel();
+    combine.id = 3012;
+    combine.title = '组合（从n选k）';
+    combine.description = '给定两个整数n和k，返回范围[1, n]中所有可能的k个数的组合。你可以按任何顺序返回答案。';
+    combine.difficulty = ProblemDifficulty.MEDIUM;
+    combine.category = ProblemCategory.RECURSION;
+    combine.choices = [
+      { id: 'A', text: '递归回溯：从start开始选，选够k个加入结果；每次选择后start递增（避免重复）', isCorrect: true },
+      { id: 'B', text: '递归时允许重复选择，最后去重', isCorrect: false },
+      { id: 'C', text: '用二进制位表示组合，筛选出k个1的情况', isCorrect: false },
+      { id: 'D', text: '动态规划，基于n-1选k和n-1选k-1的结果', isCorrect: false }
+    ];
+    combine.explanation = '回溯解法：定义递归函数，参数为当前组合、起始数字；从start到n遍历，选择数字加入组合；若组合长度为k，加入结果；否则递归选择下一个数字（start+1，确保数字递增，避免重复组合）。时间复杂度O(C(n,k)×k)，空间复杂度O(k)（递归栈+组合存储）。';
+    combine.hint = '通过「控制起始索引」避免重复组合，每次选择的数字必须大于上一个';
+    problems.push(combine);
+
+    // 13. 组合总和
+    const combinationSum = new ProblemModel();
+    combinationSum.id = 3013;
+    combinationSum.title = '组合总和';
+    combinationSum.description = '给你一个无重复元素的整数数组candidates和一个目标整数target，找出candidates中可以使数字和为目标数target的所有不同组合。candidates中的数字可以无限制重复被选取。';
+    combinationSum.difficulty = ProblemDifficulty.MEDIUM;
+    combinationSum.category = ProblemCategory.RECURSION;
+    combinationSum.choices = [
+      { id: 'A', text: '排序后递归回溯，每次选择当前或之后的元素（避免重复组合），目标递减至0时加入结果', isCorrect: true },
+      { id: 'B', text: '不排序，递归允许任意选择，最后去重', isCorrect: false },
+      { id: 'C', text: '动态规划，记录每个目标值的组合方式', isCorrect: false },
+      { id: 'D', text: 'BFS层序遍历，每层添加一个元素', isCorrect: false }
+    ];
+    combinationSum.explanation = '回溯解法：①排序数组（便于剪枝）；②递归函数参数为当前组合、起始索引、剩余目标；③遍历元素从start开始（避免重复组合），若元素>剩余目标则跳过（剪枝）；④选择元素加入组合，递归（目标-元素），回溯移除元素。时间复杂度O(S)（S为所有可行解的长度和），空间复杂度O(target)（递归栈深度）。';
+    combinationSum.hint = '「排序+控制起始索引」是去重关键，允许重复选同一元素但需按顺序';
+    problems.push(combinationSum);
+
+    // 14. 组合总和II
+    const combinationSum2 = new ProblemModel();
+    combinationSum2.id = 3014;
+    combinationSum2.title = '组合总和II';
+    combinationSum2.description = '给定一个候选人编号的集合candidates和一个目标数target，找出candidates中所有可以使数字和为target的组合。candidates中的每个数字在每个组合中只能使用一次。注意：解集不能包含重复的组合。';
+    combinationSum2.difficulty = ProblemDifficulty.MEDIUM;
+    combinationSum2.category = ProblemCategory.RECURSION;
+    combinationSum2.choices = [
+      { id: 'A', text: '排序后递归回溯，跳过重复元素（同层相同元素只选第一个），每个元素最多选一次', isCorrect: true },
+      { id: 'B', text: '不排序，用哈希表记录已选组合去重', isCorrect: false },
+      { id: 'C', text: '允许重复选择，最后过滤重复组合', isCorrect: false },
+      { id: 'D', text: '动态规划，基于前i个元素的组合推导', isCorrect: false }
+    ];
+    combinationSum2.explanation = '带去重的回溯解法：①排序数组；②递归时，若当前元素与前一个相同且前一个未被选择，则跳过（同层去重）；③每个元素只能选择一次（递归时start+1）；④剩余目标为0时加入结果。时间复杂度O(2ⁿ)，空间复杂度O(n)。';
+    combinationSum2.hint = '需同时处理「元素不重复使用」和「组合不重复」，排序后剪枝是关键';
+    problems.push(combinationSum2);
+
+    // 15. 全排列II（有重复元素）
+    const permuteUnique = new ProblemModel();
+    permuteUnique.id = 3015;
+    permuteUnique.title = '全排列II（有重复元素）';
+    permuteUnique.description = '给定一个可包含重复数字的序列nums，按任意顺序返回所有不重复的全排列。';
+    permuteUnique.difficulty = ProblemDifficulty.MEDIUM;
+    permuteUnique.category = ProblemCategory.RECURSION;
+    permuteUnique.choices = [
+      { id: 'A', text: '排序后递归回溯，用used数组标记使用状态，同层相同元素若前一个未使用则跳过', isCorrect: true },
+      { id: 'B', text: '不排序，递归生成所有排列后去重', isCorrect: false },
+      { id: 'C', text: '用哈希表存储已生成的排列，避免重复', isCorrect: false },
+      { id: 'D', text: '迭代生成下一个排列，直到所有排列生成', isCorrect: false }
+    ];
+    permuteUnique.explanation = '去重全排列解法：①排序数组（使重复元素相邻）；②递归时，used[i]为true表示已使用；③若nums[i] == nums[i-1]且used[i-1]为false（同层未使用），则跳过（避免重复）；④其他逻辑同无重复全排列。时间复杂度O(n×n!)，空间复杂度O(n)（used数组+递归栈）。';
+    permuteUnique.hint = '「同层去重」是核心，重复元素只在第一个未被使用时选择';
+    problems.push(permuteUnique);
+
+    // 16. 电话号码的字母组合
+    const letterCombinations = new ProblemModel();
+    letterCombinations.id = 3016;
+    letterCombinations.title = '电话号码的字母组合';
+    letterCombinations.description = '给定一个仅包含数字2-9的字符串，返回所有它能表示的字母组合。答案可以按任意顺序返回。数字到字母的映射与电话按键相同（2→"abc"，3→"def"，...，9→"wxyz"）。';
+    letterCombinations.difficulty = ProblemDifficulty.MEDIUM;
+    letterCombinations.category = ProblemCategory.RECURSION;
+    letterCombinations.choices = [
+      { id: 'A', text: '递归回溯：每个数字对应多个字母，递归选择每个位置的字母，拼接成组合', isCorrect: true },
+      { id: 'B', text: '迭代：从空字符串开始，每次拼接下一个数字的所有字母', isCorrect: false },
+      { id: 'C', text: '用队列存储中间结果，逐层拼接字母', isCorrect: false },
+      { id: 'D', text: '动态规划，基于前i个数字的组合推导', isCorrect: false }
+    ];
+    letterCombinations.explanation = '回溯解法：①建立数字到字母的映射表；②递归函数参数为当前组合和数字索引；③若索引等于数字长度，加入结果；④否则遍历当前数字对应的字母，拼接后递归下一个索引。时间复杂度O(3ⁿ×4ᵐ)（n为对应3个字母的数字数，m为对应4个字母的），空间复杂度O(n+m)。';
+    letterCombinations.hint = '将每个数字视为选择层，递归选择每层的字母构建组合';
+    problems.push(letterCombinations);
+
+    // 17. 括号生成
+    const generateParenthesis = new ProblemModel();
+    generateParenthesis.id = 3017;
+    generateParenthesis.title = '括号生成';
+    generateParenthesis.description = '数字n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合。';
+    generateParenthesis.difficulty = ProblemDifficulty.MEDIUM;
+    generateParenthesis.category = ProblemCategory.RECURSION;
+    generateParenthesis.choices = [
+      { id: 'A', text: '递归回溯：记录左括号和右括号数量，左<span style="text-decoration: overline;">=</span>n时可加左括号，右<左时可加右括号，长度为2n时加入结果', isCorrect: true },
+      { id: 'B', text: '生成所有可能组合，再检查有效性', isCorrect: false },
+      { id: 'C', text: '动态规划，基于n-1的结果插入新括号', isCorrect: false },
+      { id: 'D', text: '用卡特兰数公式直接计算', isCorrect: false }
+    ];
+    generateParenthesis.explanation = '回溯解法：通过控制左右括号的生成条件剪枝：①左括号数量小于n时，可添加左括号；②右括号数量小于左括号时，可添加右括号；③当字符串长度为2n时，得到一个有效组合。时间复杂度O(4ⁿ/√n)（卡特兰数增长），空间复杂度O(n)（递归栈）。';
+    generateParenthesis.hint = '利用「有效性约束」剪枝，避免生成无效组合（右括号不能多于左括号）';
+    problems.push(generateParenthesis);
+
+
+    // 二、堆类（17题）
+    // 18. 数组中的第K个最大元素
+    const findKthLargest = new ProblemModel();
+    findKthLargest.id = 3018;
+    findKthLargest.title = '数组中的第K个最大元素';
+    findKthLargest.description = '给定整数数组nums和整数k，请返回数组中第k个最大的元素。请注意，你需要找的是数组排序后的第k个最大的元素，而不是第k个不同的元素。';
+    findKthLargest.difficulty = ProblemDifficulty.MEDIUM;
+    findKthLargest.category = ProblemCategory.HEAP;
+    findKthLargest.choices = [
+      { id: 'A', text: '最小堆：维护大小为k的堆，遍历结束后堆顶即为第k大元素', isCorrect: true },
+      { id: 'B', text: '最大堆：弹出k-1个元素后，堆顶为结果', isCorrect: false },
+      { id: 'C', text: '快速排序后取第n-k个元素', isCorrect: false },
+      { id: 'D', text: '计数排序，适用于元素范围小的情况', isCorrect: false }
+    ];
+    findKthLargest.explanation = '最小堆解法：①构建大小为k的最小堆（存储当前最大的k个元素）；②遍历数组，若元素>堆顶则替换堆顶并调整；③遍历结束后，堆顶即为第k大元素。时间复杂度O(n log k)，空间复杂度O(k)，适合大数据量场景。';
+    findKthLargest.hint = '最小堆的堆顶是当前k个最大元素中的最小值，即整体第k大';
+    problems.push(findKthLargest);
+
+    // 19. 前K个高频元素
+    const topKFrequent = new ProblemModel();
+    topKFrequent.id = 3019;
+    topKFrequent.title = '前K个高频元素';
+    topKFrequent.description = '给你一个整数数组nums和一个整数k，请你返回其中出现频率前k高的元素。你可以按任意顺序返回答案。';
+    topKFrequent.difficulty = ProblemDifficulty.MEDIUM;
+    topKFrequent.category = ProblemCategory.HEAP;
+    topKFrequent.choices = [
+      { id: 'A', text: '哈希表统计频率，再用最小堆筛选前k个高频元素', isCorrect: true },
+      { id: 'B', text: '哈希表统计频率，排序后取前k个', isCorrect: false },
+      { id: 'C', text: '桶排序，按频率分组，从高到低取k个', isCorrect: false },
+      { id: 'D', text: '快速选择算法，基于频率数组', isCorrect: false }
+    ];
+    topKFrequent.explanation = '堆解法：①用哈希表记录元素频率；②构建大小为k的最小堆（存储频率和元素）；③遍历频率表，若堆大小<k则入堆，否则若当前频率>堆顶频率则替换；④最后从堆中提取元素。时间复杂度O(n log k)，空间复杂度O(n)。';
+    topKFrequent.hint = '核心是「用堆筛选top k」，避免对所有元素排序的O(n log n)复杂度';
+    problems.push(topKFrequent);
+
+    // 20. 数据流中的第K大元素
+    const KthLargest = new ProblemModel();
+    KthLargest.id = 3020;
+    KthLargest.title = '数据流中的第K大元素';
+    KthLargest.description = '设计一个找到数据流中第k大元素的类（class）。注意是排序后的第k大元素，不是第k个不同的元素。请实现KthLargest类：KthLargest(int k, int[] nums) 使用整数k和整数流nums初始化对象；int add(int val) 将val插入数据流nums后，返回当前数据流中第k大的元素。';
+    KthLargest.difficulty = ProblemDifficulty.EASY;
+    KthLargest.category = ProblemCategory.HEAP;
+    KthLargest.choices = [
+      { id: 'A', text: '维护一个大小为k的最小堆，堆顶即为第k大元素；add时若堆未满则入堆，否则大于堆顶则替换', isCorrect: true },
+      { id: 'B', text: '维护一个最大堆，每次add后弹出k-1个元素取堆顶', isCorrect: false },
+      { id: 'C', text: '每次add后对数组排序，取第k大', isCorrect: false },
+      { id: 'D', text: '用平衡二叉搜索树存储元素，直接访问第k大', isCorrect: false }
+    ];
+    KthLargest.explanation = '最小堆解法：①初始化时，将nums中元素加入最小堆，保持堆大小为k（多余元素移除）；②add方法：若元素>堆顶或堆未满，加入堆并调整至大小k；③堆顶即为当前第k大元素。时间复杂度：初始化O(n log k)，add O(log k)，空间复杂度O(k)。';
+    KthLargest.hint = '堆的大小固定为k，始终保留当前最大的k个元素，堆顶自然是第k大';
+    problems.push(KthLargest);
+
+    // 21. 数据流的中位数
+    const MedianFinder = new ProblemModel();
+    MedianFinder.id = 3021;
+    MedianFinder.title = '数据流的中位数';
+    MedianFinder.description = '中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。设计一个支持以下两种操作的数据结构：void addNum(int num) - 从数据流中添加一个整数到数据结构中；double findMedian() - 返回目前所有元素的中位数。';
+    MedianFinder.difficulty = ProblemDifficulty.HARD;
+    MedianFinder.category = ProblemCategory.HEAP;
+    MedianFinder.choices = [
+      { id: 'A', text: '大顶堆存较小一半元素，小顶堆存较大一半元素；大顶堆 size = 小顶堆 size 或 size+1，中位数为堆顶平均或大顶堆顶', isCorrect: true },
+      { id: 'B', text: '每次add后排序，取中间元素', isCorrect: false },
+      { id: 'C', text: '用一个大顶堆存储所有元素，取中间元素', isCorrect: false },
+      { id: 'D', text: '平衡二叉搜索树，记录元素数量，直接访问中间节点', isCorrect: false }
+    ];
+    MedianFinder.explanation = '双堆解法：①大顶堆（maxHeap）存储较小的一半元素，小顶堆（minHeap）存储较大的一半；②添加元素时，先加入maxHeap，再将maxHeap顶移至minHeap（或相反），确保平衡；③maxHeap size 等于 minHeap size 或多1；④findMedian时，若size相等取两堆顶平均，否则取maxHeap顶。时间复杂度：add O(log n)，findMedian O(1)，空间复杂度O(n)。';
+    MedianFinder.hint = '双堆分别维护两半元素，通过堆顶快速获取中位数，避免全量排序';
+    problems.push(MedianFinder);
+
+    // 22. 合并K个排序链表
+    const mergeKLists = new ProblemModel();
+    mergeKLists.id = 3022;
+    mergeKLists.title = '合并K个排序链表';
+    mergeKLists.description = '给你一个链表数组，每个链表都已经按升序排列。请你将所有链表合并到一个升序链表中，返回合并后的链表。';
+    mergeKLists.difficulty = ProblemDifficulty.HARD;
+    mergeKLists.category = ProblemCategory.HEAP;
+    mergeKLists.choices = [
+      { id: 'A', text: '小顶堆：存储各链表当前头节点，每次取堆顶（最小值），并将其next入堆', isCorrect: true },
+      { id: 'B', text: '逐一合并：先合并两个，再与第三个合并...', isCorrect: false },
+      { id: 'C', text: '分治法：两两合并，递归处理', isCorrect: false },
+      { id: 'D', text: '取出所有节点排序后重建链表', isCorrect: false }
+    ];
+    mergeKLists.explanation = '堆解法：①将k个链表的头节点加入小顶堆（按节点值排序）；②创建虚拟头节点，current指针指向它；③循环：取出堆顶节点（最小值），current.next指向该节点，current后移；④若该节点有next，将next加入堆；⑤直到堆为空，返回虚拟头节点的next。时间复杂度O(N log k)（N为总节点数），空间复杂度O(k)。';
+    mergeKLists.hint = '用堆高效获取当前k个节点中的最小值，避免每次线性扫描';
+    problems.push(mergeKLists);
+
+    // 23. 最接近原点的K个点
+    const kClosest = new ProblemModel();
+    kClosest.id = 3023;
+    kClosest.title = '最接近原点的K个点';
+    kClosest.description = '给定一个数组points，其中points[i] = [x_i, y_i]表示X-Y平面上的一个点，并且是一个整数k，请返回离原点(0,0)最近的k个点。这里，平面上两点之间的距离是欧几里德距离（√(x₁² + y₁²)）。你可以按任何顺序返回答案。';
+    kClosest.difficulty = ProblemDifficulty.MEDIUM;
+    kClosest.category = ProblemCategory.HEAP;
+    kClosest.choices = [
+      { id: 'A', text: '最大堆：维护大小为k的堆（存储距离最大的k个点），遍历结束后堆中即为结果', isCorrect: true },
+      { id: 'B', text: '最小堆：存储所有点，弹出前k个', isCorrect: false },
+      { id: 'C', text: '排序后取前k个', isCorrect: false },
+      { id: 'D', text: '快速选择算法，基于距离数组', isCorrect: false }
+    ];
+    kClosest.explanation = '最大堆解法：①计算每个点到原点的距离（可用平方避免开方）；②构建大小为k的最大堆（存储距离最大的k个候选点）；③遍历点，若堆大小<k则入堆，否则若当前距离<堆顶距离则替换；④最后堆中元素即为最近的k个点。时间复杂度O(n log k)，空间复杂度O(k)。';
+    kClosest.hint = '最大堆的堆顶是当前k个点中最远的，若新点更近则替换，最终保留最近的k个';
+    problems.push(kClosest);
+
+    // 24. 查找和最小的K对数字
+    const kSmallestPairs = new ProblemModel();
+    kSmallestPairs.id = 3024;
+    kSmallestPairs.title = '查找和最小的K对数字';
+    kSmallestPairs.description = '给定两个以升序排列的整数数组nums1和nums2，以及一个整数k。定义一对值(u,v)，其中第一个元素来自nums1，第二个元素来自nums2。请找到和最小的k对数字(u1,v1), (u2,v2) ..., (uk,vk)。';
+    kSmallestPairs.difficulty = ProblemDifficulty.MEDIUM;
+    kSmallestPairs.category = ProblemCategory.HEAP;
+    kSmallestPairs.choices = [
+      { id: 'A', text: '小顶堆：初始加入(0,0)，每次取堆顶(i,j)，并加入(i+1,j)和(i,j+1)（避免重复）', isCorrect: true },
+      { id: 'B', text: '生成所有可能的对，排序后取前k个', isCorrect: false },
+      { id: 'C', text: '最大堆：维护k个最小和的对', isCorrect: false },
+      { id: 'D', text: '双指针，类似归并排序', isCorrect: false }
+    ];
+    kSmallestPairs.explanation = '堆解法：①用小顶堆存储索引对(i,j)，按nums1[i]+nums2[j]排序；②初始加入(0,0)，并用visited数组避免重复；③循环k次：取出堆顶(i,j)加入结果；④若i+1 < len(nums1)且未访问，加入(i+1,j)并标记；⑤若j+1 < len(nums2)且未访问，加入(i,j+1)并标记；⑥返回结果。时间复杂度O(k log k)，空间复杂度O(k)。';
+    kSmallestPairs.hint = '利用数组升序特性，从最小和(0,0)开始，逐步扩展候选对';
+    problems.push(kSmallestPairs);
+
+    // 25. 第K个最小的素数分数
+    const kthSmallestPrimeFraction = new ProblemModel();
+    kthSmallestPrimeFraction.id = 3025;
+    kthSmallestPrimeFraction.title = '第K个最小的素数分数';
+    kthSmallestPrimeFraction.description = '给你一个按递增顺序排序的数组arr，其中每个元素都是一个素数。请你找出arr中第k个最小的分数a/b，其中a和b是数组中的元素，且a < b。';
+    kthSmallestPrimeFraction.difficulty = ProblemDifficulty.HARD;
+    kthSmallestPrimeFraction.category = ProblemCategory.HEAP;
+    kthSmallestPrimeFraction.choices = [
+      { id: 'A', text: '小顶堆：初始加入(0,j)（j从1到n-1），每次取堆顶(i,j)，并加入(i+1,j)（i+1<j），第k次取出的即为结果', isCorrect: true },
+      { id: 'B', text: '生成所有可能分数，排序后取第k个', isCorrect: false },
+      { id: 'C', text: '二分查找，统计小于mid的分数数量', isCorrect: false },
+      { id: 'D', text: '最大堆维护k个最小分数', isCorrect: false }
+    ];
+    kthSmallestPrimeFraction.explanation = '堆解法：①数组递增且元素为素数，故分数a/b随a增大而增大，随b增大而减小；②初始将(0,j)入堆（最小的分数是arr[0]/arr[j]）；③循环k次：取出堆顶(i,j)，若i+1 < j，将(i+1,j)入堆；④第k次取出的(i,j)对应的arr[i]/arr[j]即为答案。时间复杂度O(k log n)，空间复杂度O(n)。';
+    kthSmallestPrimeFraction.hint = '利用数组有序性，从最小的候选分数开始，逐步生成更大的分数';
+    problems.push(kthSmallestPrimeFraction);
+
+    // 26. 任务调度器
+    const leastInterval = new ProblemModel();
+    leastInterval.id = 3026;
+    leastInterval.title = '任务调度器';
+    leastInterval.description = '给你一个用字符数组tasks表示的CPU需要执行的任务列表。其中每个字母表示一种不同种类的任务。任务可以以任意顺序执行，并且每个任务都可以在1个单位时间内执行完。在任何一个单位时间，CPU可以完成一个任务，或者处于待命状态。然而，两个相同种类的任务之间必须有长度为n的冷却时间，因此至少有n个单位时间内CPU在执行不同的任务，或者在待命。返回完成所有任务所需要的最短时间。';
+    leastInterval.difficulty = ProblemDifficulty.MEDIUM;
+    leastInterval.category = ProblemCategory.HEAP;
+    leastInterval.choices = [
+      { id: 'A', text: '最大堆：存储任务剩余次数，每次取最多剩余次数的任务执行，冷却期内安排其他任务', isCorrect: true },
+      { id: 'B', text: '计算最大频率任务所需的最少时间，与总任务数比较', isCorrect: false },
+      { id: 'C', text: '排序后按频率高低安排任务', isCorrect: false },
+      { id: 'D', text: '贪心算法，优先执行冷却时间快结束的任务', isCorrect: false }
+    ];
+    leastInterval.explanation = '堆解法：①用哈希表统计任务频率，放入最大堆；②时间time=0，用队列记录冷却中的任务（剩余次数，下次可执行时间）；③循环：若堆非空，取出顶部任务（次数最多），执行（time++），次数-1；若次数>0，加入队列（time+n）；④若队列非空且队首任务冷却结束，移回堆；⑤直到堆和队列都为空，返回time。时间复杂度O(m log 26)（m为任务总数），空间复杂度O(26)。';
+    leastInterval.hint = '始终优先执行剩余次数最多的任务，减少整体待命时间';
+    problems.push(leastInterval);
+
+    // 27. 重构字符串
+    const reorganizeString = new ProblemModel();
+    reorganizeString.id = 3027;
+    reorganizeString.title = '重构字符串';
+    reorganizeString.description = '给定一个字符串s，检查是否能重新排布其中的字母，使得两相邻的字符不同。返回任意可行的结果。如果不可行，返回空字符串。';
+    reorganizeString.difficulty = ProblemDifficulty.MEDIUM;
+    reorganizeString.category = ProblemCategory.HEAP;
+    reorganizeString.choices = [
+      { id: 'A', text: '最大堆：每次取出现次数最多的字符（与前一个不同），减少次数后放回堆（次数>0）', isCorrect: true },
+      { id: 'B', text: '排序后间隔放置字符', isCorrect: false },
+      { id: 'C', text: '贪心算法，从出现次数最多的字符开始放置', isCorrect: false },
+      { id: 'D', text: '检查最大频率是否超过阈值，若超过返回空，否则构造', isCorrect: false }
+    ];
+    reorganizeString.explanation = '堆解法：①统计字符频率，若最大频率>ceil(n/2)，返回""；②最大堆存储(频率, 字符)；③prev记录上一个使用的字符及剩余频率；④循环：从堆取顶部字符（与prev不同），加入结果，频率-1；⑤若prev频率>0，放回堆；⑥更新prev为当前字符；⑦直到堆空，返回结果。时间复杂度O(n log 26)，空间复杂度O(26)。';
+    reorganizeString.hint = '关键是「避免连续相同字符」，用堆每次选择次高频字符';
+    problems.push(reorganizeString);
+
+    // 28. 相对名次
+    const findRelativeRanks = new ProblemModel();
+    findRelativeRanks.id = 3028;
+    findRelativeRanks.title = '相对名次';
+    findRelativeRanks.description = '给你一个长度为n的整数数组score，其中score[i]是第i位运动员在比赛中的得分。所有得分都 互不相同 。运动员将根据得分 从高到低 获得名次，其中名次第1的运动员得分最高，名次第2的运动员得分第2高，依此类推。名次有三个特殊名称：第1名是"Gold Medal"，第2名是"Silver Medal"，第3名是"Bronze Medal"。其余的名次用它们的排名编号表示（即第4名是"4"，第5名是"5"，以此类推）。返回一个长度为n的字符串数组answer，其中answer[i]是第i位运动员的名次。';
+    findRelativeRanks.difficulty = ProblemDifficulty.EASY;
+    findRelativeRanks.category = ProblemCategory.HEAP;
+    findRelativeRanks.choices = [
+      { id: 'A', text: '最大堆：存储(分数, 索引)，弹出时按顺序赋予名次', isCorrect: true },
+      { id: 'B', text: '排序后映射名次', isCorrect: false },
+      { id: 'C', text: '用哈希表记录分数与名次的对应关系', isCorrect: false },
+      { id: 'D', text: '逐个查找每个分数的排名', isCorrect: false }
+    ];
+    findRelativeRanks.explanation = '堆解法：①将(score[i], i)存入最大堆；②初始化名次计数器rank=1；③循环弹出堆顶元素：根据rank赋值名次（1→金牌，2→银牌，3→铜牌，其余为数字）；④将名次存入answer[索引]；⑤返回answer。时间复杂度O(n log n)，空间复杂度O(n)。';
+    findRelativeRanks.hint = '利用最大堆按分数降序获取运动员，依次分配名次';
+    problems.push(findRelativeRanks);
+
+    // 29. 最大堆的实现
+    const MaxHeap = new ProblemModel();
+    MaxHeap.id = 3029;
+    MaxHeap.title = '最大堆的实现';
+    MaxHeap.description = '实现一个最大堆类，支持以下操作：1. 插入元素；2. 删除并返回堆顶元素（最大值）；3. 获取堆顶元素；4. 判断堆是否为空；5. 获取堆的大小。';
+    MaxHeap.difficulty = ProblemDifficulty.MEDIUM;
+    MaxHeap.category = ProblemCategory.HEAP;
+    MaxHeap.choices = [
+      { id: 'A', text: '用数组存储，父节点i的左子节点为2i+1，右子节点为2i+2；插入时上滤，删除时下滤', isCorrect: true },
+      { id: 'B', text: '用链表存储，父节点指向子节点，插入时比较父节点', isCorrect: false },
+      { id: 'C', text: '插入时直接放在末尾，删除时线性查找最大值', isCorrect: false },
+      { id: 'D', text: '用二叉搜索树实现，根节点为最大值', isCorrect: false }
+    ];
+    MaxHeap.explanation = '数组实现最大堆：①底层用数组存储，索引0为堆顶；②插入：添加到数组末尾，与父节点比较，若更大则交换（上滤），直到根节点或父节点更大；③删除堆顶：用最后一个元素替换堆顶，移除最后一个元素，然后与子节点比较，若小于子节点则交换（下滤），直到叶节点或子节点更小；④其他操作基于数组长度和首元素实现。时间复杂度：插入和删除O(log n)，查询O(1)。';
+    MaxHeap.hint = '堆是完全二叉树，数组存储可通过索引计算父子关系，上滤和下滤是维护堆性质的核心';
+    problems.push(MaxHeap);
+
+    // 30. 最小堆的实现
+    const MinHeap = new ProblemModel();
+    MinHeap.id = 3030;
+    MinHeap.title = '最小堆的实现';
+    MinHeap.description = '实现一个最小堆类，支持以下操作：1. 插入元素；2. 删除并返回堆顶元素（最小值）；3. 获取堆顶元素；4. 判断堆是否为空；5. 获取堆的大小。';
+    MinHeap.difficulty = ProblemDifficulty.MEDIUM;
+    MinHeap.category = ProblemCategory.HEAP;
+    MinHeap.choices = [
+      { id: 'A', text: '用数组存储，父节点i的左子节点为2i+1，右子节点为2i+2；插入时上滤（与父节点比较，更小则交换），删除时下滤（与子节点比较，更大则交换）', isCorrect: true },
+      { id: 'B', text: '用链表存储，插入时放在头部，再调整', isCorrect: false },
+      { id: 'C', text: '插入时直接排序，删除时取第一个元素', isCorrect: false },
+      { id: 'D', text: '与最大堆实现相同，只是插入和删除时比较逻辑相反', isCorrect: false }
+    ];
+    MinHeap.explanation = '数组实现最小堆：①结构同最大堆，区别在于比较逻辑；②插入：添加到末尾，若小于父节点则交换（上滤）；③删除堆顶：用最后一个元素替换，若大于子节点则交换（下滤，与较小的子节点交换）；④其他操作与最大堆类似。时间复杂度：插入和删除O(log n)，查询O(1)。';
+    MinHeap.hint = '与最大堆的区别仅在于比较方向，始终保持父节点小于子节点';
+    problems.push(MinHeap);
+
+    // 31. 堆排序（升序，用最大堆）
+    const heapSortAsc = new ProblemModel();
+    heapSortAsc.id = 3031;
+    heapSortAsc.title = '堆排序（升序，用最大堆）';
+    heapSortAsc.description = '实现堆排序算法，对数组进行升序排序，要求使用最大堆实现。';
+    heapSortAsc.difficulty = ProblemDifficulty.MEDIUM;
+    heapSortAsc.category = ProblemCategory.HEAP;
+    heapSortAsc.choices = [
+      { id: 'A', text: '步骤：1. 构建最大堆；2. 交换堆顶（最大值）与末尾元素，堆大小减1；3. 对堆顶下滤；4. 重复至堆大小为1', isCorrect: true },
+      { id: 'B', text: '构建最小堆，依次取出堆顶元素', isCorrect: false },
+      { id: 'C', text: '每次插入元素后维护堆，再依次取出', isCorrect: false },
+      { id: 'D', text: '用二叉搜索树辅助排序', isCorrect: false }
+    ];
+    heapSortAsc.explanation = '最大堆升序排序：①构建最大堆（从最后一个非叶节点开始下滤）；②循环：将堆顶（最大值）与当前堆的最后一个元素交换；③堆大小减1；④对新堆顶执行下滤；⑤直到堆大小为1。时间复杂度O(n log n)，空间复杂度O(1)（原地排序）。';
+    heapSortAsc.hint = '最大堆的堆顶是最大值，通过交换到末尾并缩小堆范围，逐步构建有序数组';
+    problems.push(heapSortAsc);
+
+    // 32. 堆排序（降序，用最小堆）
+    const heapSortDesc = new ProblemModel();
+    heapSortDesc.id = 3032;
+    heapSortDesc.title = '堆排序（降序，用最小堆）';
+    heapSortDesc.description = '实现堆排序算法，对数组进行降序排序，要求使用最小堆实现。';
+    heapSortDesc.difficulty = ProblemDifficulty.MEDIUM;
+    heapSortDesc.category = ProblemCategory.HEAP;
+    heapSortDesc.choices = [
+      { id: 'A', text: '步骤：1. 构建最小堆；2. 交换堆顶（最小值）与末尾元素，堆大小减1；3. 对堆顶下滤；4. 重复至堆大小为1', isCorrect: true },
+      { id: 'B', text: '构建最大堆，依次取出堆顶元素', isCorrect: false },
+      { id: 'C', text: '每次插入元素后维护堆，再反向取出', isCorrect: false },
+      { id: 'D', text: '用冒泡排序思想优化', isCorrect: false }
+    ];
+    heapSortDesc.explanation = '最小堆降序排序：①构建最小堆；②循环：将堆顶（最小值）与当前堆的最后一个元素交换；③堆大小减1；④对新堆顶执行下滤；⑤直到堆大小为1，数组呈降序。时间复杂度O(n log n)，空间复杂度O(1)。';
+    heapSortDesc.hint = '最小堆的堆顶是最小值，交换到末尾后，末尾元素依次增大，形成降序';
+    problems.push(heapSortDesc);
+
+    // 33. 找出第K大的异或坐标值
+    const kthLargestValue = new ProblemModel();
+    kthLargestValue.id = 3033;
+    kthLargestValue.title = '找出第K大的异或坐标值';
+    kthLargestValue.description = '给你一个二维矩阵matrix和一个整数k，矩阵大小为m x n由非负整数组成。坐标(i,j)的「异或坐标值」定义为：matrix[0][0] XOR matrix[0][1] XOR ... XOR matrix[0][j] XOR matrix[1][0] XOR ... XOR matrix[i][j]（即从(0,0)到(i,j)的异或和）。请你找出matrix的所有异或坐标值中第k大的值。';
+    kthLargestValue.difficulty = ProblemDifficulty.MEDIUM;
+    kthLargestValue.category = ProblemCategory.HEAP;
+    kthLargestValue.choices = [
+      { id: 'A', text: '前缀异或计算所有坐标值，用最小堆筛选第k大值', isCorrect: true },
+      { id: 'B', text: '计算所有坐标值后排序，取第k大', isCorrect: false },
+      { id: 'C', text: '用最大堆存储所有值，弹出k-1个后取堆顶', isCorrect: false },
+      { id: 'D', text: '快速选择算法，在坐标值数组中查找', isCorrect: false }
+    ];
+    kthLargestValue.explanation = '堆解法：①用前缀异或公式计算所有坐标(i,j)的异或值（dp[i][j] = dp[i-1][j] XOR dp[i][j-1] XOR dp[i-1][j-1] XOR matrix[i][j]）；②用大小为k的最小堆存储这些值，超过k则替换堆顶；③最终堆顶即为第k大值。时间复杂度O(mn log k)，空间复杂度O(k + mn)（可优化前缀异或空间）。';
+    kthLargestValue.hint = '先高效计算所有异或坐标值，再用堆筛选top k';
+    problems.push(kthLargestValue);
+
+    // 34. 吃苹果的最大数目
+    const eatenApples = new ProblemModel();
+    eatenApples.id = 3034;
+    eatenApples.title = '吃苹果的最大数目';
+    eatenApples.description = '有一棵特殊的苹果树，一连n天，每天都可以长出若干个苹果。在第i天，树上会长出apples[i]个苹果，这些苹果会在days[i]天后（也就是说，第i + days[i]天）过期，过期的苹果不能吃。每天，你可以吃一个苹果，如果有多个苹果，你要选择最快要过期的那个。请你返回你可以吃掉的苹果的最大数目。';
+    eatenApples.difficulty = ProblemDifficulty.MEDIUM;
+    eatenApples.category = ProblemCategory.HEAP;
+    eatenApples.choices = [
+      { id: 'A', text: '小顶堆：存储(过期日, 数量)，每天先移除已过期的，再吃一个（若有），并添加当天新苹果', isCorrect: true },
+      { id: 'B', text: '贪心选择数量最多的苹果吃', isCorrect: false },
+      { id: 'C', text: '按过期日排序，依次食用', isCorrect: false },
+      { id: 'D', text: '动态规划，记录每天能吃的最大苹果数', isCorrect: false }
+    ];
+    eatenApples.explanation = '堆解法：①小顶堆按过期日排序；②day=0开始，循环：若day < n，将(apples[day], day+days[day])入堆；③移除堆顶过期的（过期日<=day）；④若堆非空，取出堆顶，数量-1，计数+1，若数量>0放回堆；⑤day++；⑥直到堆空且day >=n。时间复杂度O((n + max_day) log n)，空间复杂度O(n)。';
+    eatenApples.hint = '核心是「优先吃快过期的苹果」，用小顶堆维护过期日，避免浪费';
+    problems.push(eatenApples);
+
+
+    // 三、队列类（16题）
+    // 35. 用队列实现栈
+    const MyStackByQueue = new ProblemModel();
+    MyStackByQueue.id = 3035;
+    MyStackByQueue.title = '用队列实现栈';
+    MyStackByQueue.description = '请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop和empty）。实现MyStack类：void push(int x) 将元素x压入栈顶；int pop() 移除并返回栈顶元素；int top() 返回栈顶元素；boolean empty() 如果栈是空的，返回true；否则，返回false。';
+    MyStackByQueue.difficulty = ProblemDifficulty.EASY;
+    MyStackByQueue.category = ProblemCategory.QUEUE;
+    MyStackByQueue.choices = [
+      { id: 'A', text: '两个队列：push到非空队列；pop时将前n-1个元素移到另一个队列，返回最后一个元素', isCorrect: true },
+      { id: 'B', text: '两个队列：push到队列后，将前面所有元素移到另一个队列再移回', isCorrect: false },
+      { id: 'C', text: '一个队列：push后将前n-1个元素出队再入队，使新元素在队首', isCorrect: false },
+      { id: 'D', text: '用链表模拟队列实现栈', isCorrect: false }
+    ];
+    MyStackByQueue.explanation = '双队列解法：①q1和q2，始终保持一个为空；②push：加入非空队列（初始都空时加q1）；③pop：将非空队列的前size-1个元素移到另一个队列，返回最后一个元素；④top：类似pop，但不移除元素，返回后将元素放回另一个队列；⑤empty：两队列都为空。时间复杂度：push O(1)，pop和top O(n)，空间复杂度O(n)。';
+    MyStackByQueue.hint = '栈是LIFO，队列是FIFO，通过转移元素使队列尾部元素能被优先取出';
+    problems.push(MyStackByQueue);
+
+    // 36. 用栈实现队列
+    const MyQueueByStack = new ProblemModel();
+    MyQueueByStack.id = 3036;
+    MyQueueByStack.title = '用栈实现队列';
+    MyQueueByStack.description = '请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（push、pop、peek、empty）：void push(int x) 将元素x推到队列的末尾；int pop() 从队列的开头移除并返回元素；int peek() 返回队列开头的元素；boolean empty() 如果队列为空，返回true；否则，返回false。';
+    MyQueueByStack.difficulty = ProblemDifficulty.EASY;
+    MyQueueByStack.category = ProblemCategory.QUEUE;
+    MyQueueByStack.choices = [
+      { id: 'A', text: '两个栈：push栈（输入）和pop栈（输出）；pop/peek时若输出栈空，将输入栈元素全部倒入输出栈', isCorrect: true },
+      { id: 'B', text: '两个栈：每次push都将元素移到另一个栈再移回', isCorrect: false },
+      { id: 'C', text: '一个栈：push时反转栈，pop时直接取', isCorrect: false },
+      { id: 'D', text: '用链表模拟栈实现队列', isCorrect: false }
+    ];
+    MyQueueByStack.explanation = '双栈解法：①inStack负责输入，outStack负责输出；②push：直接入inStack；③pop：若outStack为空，将inStack所有元素弹出并压入outStack，再从outStack弹出；④peek：类似pop，但不弹出元素；⑤empty：两栈都为空。时间复杂度：push O(1)，pop和peek amortized O(1)，空间复杂度O(n)。';
+    MyQueueByStack.hint = '输入栈反转后即为输出栈，实现FIFO特性，避免每次操作都转移元素';
+    problems.push(MyQueueByStack);
+
+    // 37. 循环队列的实现
+    const MyCircularQueue = new ProblemModel();
+    MyCircularQueue.id = 3037;
+    MyCircularQueue.title = '循环队列的实现';
+    MyCircularQueue.description = '设计你的循环队列实现。循环队列是一种线性数据结构，其操作表现基于FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为"环形缓冲器"。循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。你的实现应该支持如下操作：MyCircularQueue(k) 构造器，设置队列长度为k；boolean enQueue(int value) 向循环队列插入一个元素。如果成功插入则返回真；boolean deQueue() 从循环队列中删除一个元素。如果成功删除则返回真；int Front() 获取队首元素。如果队列为空，返回-1；int Rear() 获取队尾元素。如果队列为空，返回-1；boolean isEmpty() 检查循环队列是否为空；boolean isFull() 检查循环队列是否为满。';
+    MyCircularQueue.difficulty = ProblemDifficulty.MEDIUM;
+    MyCircularQueue.category = ProblemCategory.QUEUE;
+    MyCircularQueue.choices = [
+      { id: 'A', text: '用数组实现，维护front（队首索引）、rear（队尾索引+1）、size；空：front == rear；满：(rear+1)%capacity == front', isCorrect: true },
+      { id: 'B', text: '用链表实现，记录头、尾节点和当前大小', isCorrect: false },
+      { id: 'C', text: '用数组实现，front和rear都指向实际元素，用计数器判断空满', isCorrect: false },
+      { id: 'D', text: '用栈模拟循环队列', isCorrect: false }
+    ];
+    MyCircularQueue.explanation = '数组循环队列：①capacity = k+1（预留一个空位区分空满）；②front=0，rear=0；③enQueue：若不满，rear=(rear+1)%capacity，赋值；④deQueue：若不空，front=(front+1)%capacity；⑤Front：返回arr[front]；⑥Rear：返回arr[(rear-1+capacity)%capacity]；⑦空：front==rear；满：(rear+1)%capacity==front。时间复杂度O(1)，空间复杂度O(k)。';
+    MyCircularQueue.hint = '关键是「空满判断」，通过预留一个空位，用front和rear的关系区分';
+    problems.push(MyCircularQueue);
+
+    // 38. 设计循环双端队列
+    const MyCircularDeque = new ProblemModel();
+    MyCircularDeque.id = 3038;
+    MyCircularDeque.title = '设计循环双端队列';
+    MyCircularDeque.description = '设计实现双端队列。你的实现需要支持以下操作：MyCircularDeque(k)：构造函数,双端队列的大小为k；boolean insertFront(int value)：将一个元素添加到双端队列头部。如果操作成功返回true；boolean insertLast(int value)：将一个元素添加到双端队列尾部。如果操作成功返回true；boolean deleteFront()：从双端队列头部删除一个元素。如果操作成功返回true；boolean deleteLast()：从双端队列尾部删除一个元素。如果操作成功返回true；int getFront()：从双端队列头部获得一个元素。如果双端队列为空，返回-1；int getRear()：获得双端队列的最后一个元素。如果双端队列为空，返回-1；boolean isEmpty()：检查双端队列是否为空；boolean isFull()：检查双端队列是否满了。';
+    MyCircularDeque.difficulty = ProblemDifficulty.MEDIUM;
+    MyCircularDeque.category = ProblemCategory.QUEUE;
+    MyCircularDeque.choices = [
+      { id: 'A', text: '数组实现，front和rear指向队首和队尾的下一个位置，支持头部插入（front左移）和尾部插入（rear右移）', isCorrect: true },
+      { id: 'B', text: '链表实现，头节点和尾节点支持双向操作', isCorrect: false },
+      { id: 'C', text: '两个栈实现，分别处理前后端插入删除', isCorrect: false },
+      { id: 'D', text: '循环队列基础上增加头部操作，每次头部插入需移动所有元素', isCorrect: false }
+    ];
+    MyCircularDeque.explanation = '数组双端队列：①capacity = k+1；②front=0，rear=0；③insertFront：front=(front-1+capacity)%capacity，赋值；④insertLast：同循环队列enQueue；⑤deleteFront：同循环队列deQueue；⑥deleteLast：rear=(rear-1+capacity)%capacity；⑦其他操作类似循环队列。支持两端O(1)插入删除。';
+    MyCircularDeque.hint = '在循环队列基础上，允许front指针左移（头部插入）和rear指针左移（尾部删除）';
+    problems.push(MyCircularDeque);
+
+    // 39. 最近的请求次数
+    const RecentCounter = new ProblemModel();
+    RecentCounter.id = 3039;
+    RecentCounter.title = '最近的请求次数';
+    RecentCounter.description = '写一个RecentCounter类来计算特定时间范围内最近的请求。请实现RecentCounter类：RecentCounter() 初始化计数器，请求数为0；int ping(int t) 在时间t添加一个新请求，其中t表示以毫秒为单位的时间，并返回过去3000毫秒内发生的所有请求数（包括新请求）。确切地说，返回在[t-3000, t]内发生的请求数。';
+    RecentCounter.difficulty = ProblemDifficulty.EASY;
+    RecentCounter.category = ProblemCategory.QUEUE;
+    RecentCounter.choices = [
+      { id: 'A', text: '队列：每次ping(t)时，将t入队，再弹出所有小于t-3000的元素，返回队列大小', isCorrect: true },
+      { id: 'B', text: '数组：存储所有请求时间，每次ping时二分查找t-3000的位置', isCorrect: false },
+      { id: 'C', text: '链表：维护有序请求，删除过期时间', isCorrect: false },
+      { id: 'D', text: '哈希表：记录每个时间的请求数，计算范围内总和', isCorrect: false }
+    ];
+    RecentCounter.explanation = '队列解法：①队列存储请求时间，按时间递增；②ping(t)：t入队；③循环弹出队首元素，直到队首 >= t-3000；④返回队列大小。时间复杂度：每个元素入队出队各一次，amortized O(1)，空间复杂度O(3000)（最多存储3000ms内的请求）。';
+    RecentCounter.hint = '请求时间递增，用队列自然维护顺序，过期请求从队首移除';
+    problems.push(RecentCounter);
+
+    // 40. 二叉树的层序遍历
+    const levelOrder = new ProblemModel();
+    levelOrder.id = 3040;
+    levelOrder.title = '二叉树的层序遍历';
+    levelOrder.description = '给你二叉树的根节点root，返回其节点值的层序遍历（即逐层地，从左到右访问所有节点）。';
+    levelOrder.difficulty = ProblemDifficulty.MEDIUM;
+    levelOrder.category = ProblemCategory.QUEUE;
+    levelOrder.choices = [
+      { id: 'A', text: '队列：每层开始时记录队列大小，循环取出该数量的节点，加入结果，同时入队其左右子节点', isCorrect: true },
+      { id: 'B', text: '递归：传递当前层数，将节点值加入对应层的列表', isCorrect: false },
+      { id: 'C', text: '栈：模拟队列进行层序遍历', isCorrect: false },
+      { id: 'D', text: '哈希表：记录每个节点的层数，再按层收集', isCorrect: false }
+    ];
+    levelOrder.explanation = '队列层序遍历：①若root为空，返回空；②队列初始化加入root；③结果列表res；④循环：levelSize=队列大小，当前层列表level；⑤循环levelSize次：出队节点，加入level；⑥若左子树非空入队，右子树非空入队；⑦level加入res；⑧返回res。时间复杂度O(n)，空间复杂度O(n)（最坏满二叉树，队列存n/2节点）。';
+    levelOrder.hint = '核心是「分层处理」，通过记录每层节点数量，确保同一层的节点被同时处理';
+    problems.push(levelOrder);
+
+    // 41. 二叉树的层序遍历II（自底向上）
+    const levelOrderBottom = new ProblemModel();
+    levelOrderBottom.id = 3041;
+    levelOrderBottom.title = '二叉树的层序遍历II（自底向上）';
+    levelOrderBottom.description = '给你二叉树的根节点root，返回其节点值 自底向上的层序遍历 。（即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）。';
+    levelOrderBottom.difficulty = ProblemDifficulty.MEDIUM;
+    levelOrderBottom.category = ProblemCategory.QUEUE;
+    levelOrderBottom.choices = [
+      { id: 'A', text: '队列层序遍历（自顶向下），最后反转结果列表', isCorrect: true },
+      { id: 'B', text: '栈存储每层节点，出栈后遍历', isCorrect: false },
+      { id: 'C', text: '递归时先处理子树，再添加当前层', isCorrect: false },
+      { id: 'D', text: '计算树的深度，从最深层开始收集节点', isCorrect: false }
+    ];
+    levelOrderBottom.explanation = '队列解法：①同自顶向下的层序遍历，得到每层节点列表；②将结果列表反转，得到自底向上的顺序。时间复杂度O(n)，空间复杂度O(n)。';
+    levelOrderBottom.hint = '最简单的方法是先获取自顶向下的层序结果，再反转列表';
+    problems.push(levelOrderBottom);
+
+    // 43. 课程表II（拓扑排序，BFS）
+    const findOrder = new ProblemModel();
+    findOrder.id = 3043;
+    findOrder.title = '课程表II（拓扑排序，BFS）';
+    findOrder.description = '现在你总共有numCourses门课需要学习，记为0到numCourses-1。给你一个数组prerequisites，其中prerequisites[i] = [ai, bi]，表示在选修课程ai之前必须先选修bi。请你返回一个可以学完所有课程的顺序。可能会有多个正确的顺序，你只要返回任意一个就可以了。如果不可能完成所有课程，返回一个空数组。';
+    findOrder.difficulty = ProblemDifficulty.MEDIUM;
+    findOrder.category = ProblemCategory.QUEUE;
+    findOrder.choices = [
+      { id: 'A', text: '队列BFS（Kahn算法）：入度为0的节点入队，出队时加入结果，减少邻接节点入度，重复至队空，若结果长度≠numCourses返回空', isCorrect: true },
+      { id: 'B', text: 'DFS检测环并记录后序遍历，反转后为拓扑序', isCorrect: false },
+      { id: 'C', text: '贪心选择，每次选没有先修课的课程', isCorrect: false },
+      { id: 'D', text: '动态规划，记录每个课程的先修顺序', isCorrect: false }
+    ];
+    findOrder.explanation = 'BFS拓扑排序：①构建邻接表和入度数组；②入度为0的节点入队；③result列表；④循环：出队u，加入result；⑤遍历u的邻接节点v：入度[v]--；若入度[v]==0，入队；⑥队空后，若result长度==numCourses返回，否则返回空。时间复杂度O(n+m)，空间复杂度O(n+m)。';
+    findOrder.hint = '拓扑排序的BFS实现核心是「处理入度为0的节点」，逐步消除依赖';
+    problems.push(findOrder);
+
+    // 44. 岛屿数量（BFS版）
+    const numIslandsBFS = new ProblemModel();
+    numIslandsBFS.id = 3044;
+    numIslandsBFS.title = '岛屿数量（BFS版）';
+    numIslandsBFS.description = '给你一个由\'1\'（陆地）和\'0\'（水）组成的的二维网格，请你计算网格中岛屿的数量。岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。此外，你可以假设该网格的四条边均被水包围。要求用BFS实现。';
+    numIslandsBFS.difficulty = ProblemDifficulty.MEDIUM;
+    numIslandsBFS.category = ProblemCategory.QUEUE;
+    numIslandsBFS.choices = [
+      { id: 'A', text: 'BFS：遍历网格，遇到\'1\'则计数+1，并用队列将所有相连的\'1\'改为\'0\'（淹没）', isCorrect: true },
+      { id: 'B', text: 'BFS：记录访问过的陆地，不修改原网格', isCorrect: false },
+      { id: 'C', text: '队列存储所有陆地，逐一处理', isCorrect: false },
+      { id: 'D', text: '分层BFS，记录岛屿层级', isCorrect: false }
+    ];
+    numIslandsBFS.explanation = 'BFS解法：①计数count=0；②遍历网格每个单元格(i,j)；③若grid[i][j]==\'1\'：count++；④队列加入(i,j)，grid[i][j]=\'0\'（标记为水）；⑤队列非空：出队(x,y)，检查上下左右四个方向；⑥若邻居为\'1\'，入队并标记为\'0\'；⑦返回count。时间复杂度O(mn)，空间复杂度O(min(m,n))（队列最大大小为网格中最小边）。';
+    numIslandsBFS.hint = '与DFS思路相同，只是用队列替代递归栈，通过淹没岛屿避免重复计数';
+    problems.push(numIslandsBFS);
+
+    // 45. 打开转盘锁
+    const openLock = new ProblemModel();
+    openLock.id = 3045;
+    openLock.title = '打开转盘锁';
+    openLock.description = '你有一个带有四个圆形拨轮的转盘锁。每个拨轮都有10个数字：\'0\'-\'9\'。每个拨轮可以自由旋转：例如把\'9\'变为\'0\'，\'0\'变为\'9\'。每次旋转都只能旋转一个拨轮的一位数字。锁的初始数字为\'0000\'，一个代表四个拨轮的数字的字符串。列表deadends包含了一组死亡数字，一旦拨轮的数字和列表里的任何一个元素相同，这个锁将会被永久锁定，无法再被旋转。字符串target代表可以解锁的数字，请给出解锁需要的最小旋转次数，如果无论如何不能解锁，返回-1。';
+    openLock.difficulty = ProblemDifficulty.MEDIUM;
+    openLock.category = ProblemCategory.QUEUE;
+    openLock.choices = [
+      { id: 'A', text: 'BFS：从"0000"开始，每次旋转一个拨轮生成新状态，避开deadends和已访问状态，直到到达target', isCorrect: true },
+      { id: 'B', text: 'DFS：尝试所有可能的旋转路径，记录最小次数', isCorrect: false },
+      { id: 'C', text: '双向BFS：从"0000"和target同时开始，相遇时返回步数和', isCorrect: false },
+      { id: 'D', text: '动态规划，记录每个状态的最小步数', isCorrect: false }
+    ];
+    openLock.explanation = 'BFS解法：①deadends转集合，若"0000"在其中返回-1；②队列初始化["0000"]，访问集合记为{"0000"}；③步数step=0；④循环：队列大小size，循环size次：出队current；⑤若current==target，返回step；⑥生成8种可能的下一状态（每个拨轮+1或-1）；⑦若状态不在deadends且未访问，加入队列和访问集；⑧step++；⑨队空返回-1。时间复杂度O(10^4)（最多10000种状态），空间复杂度O(10^4)。';
+    openLock.hint = 'BFS适合求最短路径（最小步数），每个状态的邻居是旋转一个拨轮得到的8种可能';
+    problems.push(openLock);
+
+    // 46. 完全平方数（BFS求最少步数）
+    const numSquares = new ProblemModel();
+    numSquares.id = 3046;
+    numSquares.title = '完全平方数（BFS求最少步数）';
+    numSquares.description = '给你一个整数n，返回和为n的完全平方数的最少数量。完全平方数是一个整数，其值等于另一个整数的平方；换句话说，其值等于n²，其中n是整数。例如，1、4、9和16都是完全平方数，而3和11不是。要求用BFS实现。';
+    numSquares.difficulty = ProblemDifficulty.MEDIUM;
+    numSquares.category = ProblemCategory.QUEUE;
+    numSquares.choices = [
+      { id: 'A', text: 'BFS：将n视为起点，每次减去一个完全平方数，到达0的最少步数即为答案', isCorrect: true },
+      { id: 'B', text: '动态规划，dp[i]表示和为i的最少数量', isCorrect: false },
+      { id: 'C', text: '数学公式，判断n是否为4^k*(8m+7)，若是则返回4，否则尝试1或2', isCorrect: false },
+      { id: 'D', text: '贪心算法，从最大的完全平方数开始减', isCorrect: false }
+    ];
+    numSquares.explanation = 'BFS解法：①生成所有<=n的完全平方数squares；②队列存储当前和与步数，初始(0,0)；③访问集合记录已处理的和；④循环：出队(current, step)；⑤若current==n，返回step；⑥遍历squares：next=current+s；⑦若next>n：跳过；⑧若next未访问：加入队列(step+1)和访问集；⑨返回-1（理论上不会触发）。时间复杂度O(n√n)，空间复杂度O(n)。';
+    numSquares.hint = '将问题转化为「从0到n的最短路径」，每次可走的步数是完全平方数';
+    problems.push(numSquares);
+
+    // 47. 单词接龙
+    const ladderLength = new ProblemModel();
+    ladderLength.id = 3047;
+    ladderLength.title = '单词接龙';
+    ladderLength.description = '字典wordList中从单词beginWord和endWord的转换序列是一个按下述规格形成的序列beginWord -> s1 -> s2 -> ... -> sk：每一对相邻的单词只差一个字母；对于1 <= i <= k时，每个si都在wordList中；注意，beginWord不需要在wordList中；sk == endWord。给你两个单词beginWord和endWord和一个字典wordList，返回从beginWord到endWord的最短转换序列中的单词数目。如果不存在这样的转换序列，返回0。';
+    ladderLength.difficulty = ProblemDifficulty.HARD;
+    ladderLength.category = ProblemCategory.QUEUE;
+    ladderLength.choices = [
+      { id: 'A', text: 'BFS：从beginWord开始，每次变换一个字母生成新单词，在wordList中且未访问则入队，直到endWord', isCorrect: true },
+      { id: 'B', text: '双向BFS：从beginWord和endWord同时开始，相遇时返回步数和', isCorrect: false },
+      { id: 'C', text: 'DFS：尝试所有可能的变换路径，记录最短长度', isCorrect: false },
+      { id: 'D', text: '构建单词图（边为相差一个字母），求最短路径', isCorrect: false }
+    ];
+    ladderLength.explanation = 'BFS解法：①wordList转集合，若endWord不在其中返回0；②队列初始化[beginWord]，访问集{beginWord}；③长度length=1；④循环：队列大小size；⑤循环size次：出队word；⑥若word==endWord，返回length；⑦生成所有可能的变换（每个位置替换为a-z）；⑧若变换在wordList且未访问：加入队列和访问集；⑨length++；⑩队空返回0。时间复杂度O(L×26×n)（L为单词长度，n为wordList大小），空间复杂度O(n)。';
+    ladderLength.hint = 'BFS求最短转换序列，关键是高效生成相邻单词（变换一个字母）';
+    problems.push(ladderLength);
+
+    // 48. 滑动窗口的平均值
+    const MovingAverage = new ProblemModel();
+    MovingAverage.id = 3048;
+    MovingAverage.title = '滑动窗口的平均值';
+    MovingAverage.description = '给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，计算滑动窗口里所有数字的平均值。实现MovingAverage类：MovingAverage(int size) 用窗口大小size初始化对象；double next(int val) 成员函数next每次调用的时候都会往滑动窗口增加一个整数，请计算并返回数据流中最后size个值的移动平均值，即滑动窗口里所有数字的平均值。';
+    MovingAverage.difficulty = ProblemDifficulty.EASY;
+    MovingAverage.category = ProblemCategory.QUEUE;
+    MovingAverage.choices = [
+      { id: 'A', text: '队列：维护窗口内的元素，超过size时出队队首；用sum记录总和，每次next返回sum/窗口大小', isCorrect: true },
+      { id: 'B', text: '数组：记录所有元素，每次计算最后size个的平均值', isCorrect: false },
+      { id: 'C', text: '双端队列：两端维护窗口边界', isCorrect: false },
+      { id: 'D', text: '循环数组：固定大小，用指针记录窗口位置', isCorrect: false }
+    ];
+    MovingAverage.explanation = '队列解法：①队列存储窗口内元素，sum记录总和；②next(val)：val入队，sum += val；③若队列大小>size：sum -= 队首元素，队首出队；④返回sum / 队列大小。时间复杂度O(1)，空间复杂度O(size)。';
+    MovingAverage.hint = '队列天然适合维护滑动窗口，确保只保留最新的size个元素，sum变量避免重复计算';
+    problems.push(MovingAverage);
+
+    // 49. 设计前中后队列
+    const FrontMiddleBackQueue = new ProblemModel();
+    FrontMiddleBackQueue.id = 3049;
+    FrontMiddleBackQueue.title = '设计前中后队列';
+    FrontMiddleBackQueue.description = '设计一个队列，支持在前，中，后三个位置的push和pop操作。请实现FrontMiddleBack类：FrontMiddleBack() 初始化队列；void pushFront(int val) 将val添加到队列的前面；void pushMiddle(int val) 将val添加到队列的中间；void pushBack(int val) 将val添加到队列的后面；int popFront() 将队列前面的元素移除并返回；如果队列是空的，返回-1；int popMiddle() 将队列中间的元素移除并返回；如果队列是空的，返回-1；int popBack() 将队列后面的元素移除并返回；如果队列是空的，返回-1。请注意，当有两个中间位置时，选择靠前面的位置进行操作。例如：[1, 2, 3, 4] 的中间位置是索引1和2，选择索引1。';
+    FrontMiddleBackQueue.difficulty = ProblemDifficulty.MEDIUM;
+    FrontMiddleBackQueue.category = ProblemCategory.QUEUE;
+    FrontMiddleBackQueue.choices = [
+      { id: 'A', text: '两个双端队列：left存储前半部分，right存储后半部分（right.size() = left.size() 或 left.size()+1）；中间操作基于两队列的边界', isCorrect: true },
+      { id: 'B', text: '链表：维护头、中、尾指针，插入删除时调整指针', isCorrect: false },
+      { id: 'C', text: '动态数组：每次操作后重新计算中间位置', isCorrect: false },
+      { id: 'D', text: '栈和队列组合，分别处理前后端', isCorrect: false }
+    ];
+    FrontMiddleBackQueue.explanation = '双端队列解法：①left和right两个deque，保持right.size()为left.size()或left.size()+1；②pushMiddle：若left.size() == right.size()，则push到left尾部再移到right头部；否则push到left尾部；③popMiddle：若left.size() < right.size()，从right头部移到left尾部再pop left尾部；否则pop left尾部；④前后操作直接调用deque的前后方法，操作后调整两队列平衡。时间复杂度O(1)，空间复杂度O(n)。';
+    FrontMiddleBackQueue.hint = '用两个队列拆分存储，使中间位置始终在两队列的交界处，简化操作';
+    problems.push(FrontMiddleBackQueue);
+
+    // 50. 用两个队列实现栈（优化版）
+    const MyStackOptimal = new ProblemModel();
+    MyStackOptimal.id = 3050;
+    MyStackOptimal.title = '用两个队列实现栈（优化版）';
+    MyStackOptimal.description = '请你仅使用两个队列实现一个后入先出（LIFO）的栈，并优化pop操作的时间复杂度。支持普通栈的全部四种操作（push、top、pop和empty）。';
+    MyStackOptimal.difficulty = ProblemDifficulty.EASY;
+    MyStackOptimal.category = ProblemCategory.QUEUE;
+    MyStackOptimal.choices = [
+      { id: 'A', text: '两个队列：push时加入空队列，再将另一个队列所有元素移过来（新元素在队首）；pop直接取队首', isCorrect: true },
+      { id: 'B', text: '与基础版相同，pop时转移n-1个元素', isCorrect: false },
+      { id: 'C', text: '主队列存储元素，辅助队列仅在pop时临时使用', isCorrect: false },
+      { id: 'D', text: '始终保持一个队列为空，push到非空队列', isCorrect: false }
+    ];
+    MyStackOptimal.explanation = '优化pop的双队列解法：①q1和q2，始终一个为空；②push(val)：将val加入空队列（如q2），再将q1所有元素移到q2，交换q1和q2（使q1非空，q2空）；③pop：直接弹出q1队首；④top：返回q1队首。时间复杂度：push O(n)，pop和top O(1)，空间复杂度O(n)。适合pop操作频繁的场景。';
+    MyStackOptimal.hint = '通过在push时转移元素，使栈顶元素始终在队列头部，优化pop的时间复杂度';
+    problems.push(MyStackOptimal);
 
     return problems;
 

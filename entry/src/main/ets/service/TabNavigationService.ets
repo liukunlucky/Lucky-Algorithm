@@ -76,6 +76,18 @@ export class TabNavigationService {
   }
 
   /**
+   * 切换到指定Tab
+   * @param tabIndex Tab索引
+   */
+  switchToTab(tabIndex: number): void {
+    console.info(`📱 TabNavigationService: 切换到Tab ${tabIndex}`);
+    this.currentTabIndex = tabIndex;
+    // 使用AppStorage通知Index页面切换Tab
+    AppStorage.setOrCreate('switchToTabIndex', tabIndex);
+    console.info('✅ 已发送切换信号到Index页面');
+  }
+
+  /**
    * 触发考试数据刷新
    */
   private triggerExamDataRefresh(): void {

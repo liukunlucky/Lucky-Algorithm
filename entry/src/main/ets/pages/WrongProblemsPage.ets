@@ -323,7 +323,7 @@ struct WrongProblemsPage {
           const wrongInfo: WrongProblemInfo = {
             problem: problem,
             wrongCount: progress.attemptCount - progress.successCount,
-            lastWrongDate: new Date(progress.lastAttempted),
+            lastWrongDate: progress.lastAttempted ? new Date(progress.lastAttempted) : new Date(),
             isRetried: progress.successCount > 0
           };
           wrongProblemsInfo.push(wrongInfo);
@@ -481,11 +481,13 @@ struct WrongProblemsPage {
   }
 
   private formatDate(date: Date): string {
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
+    // 确保使用本地时间显示
+    const localDate = new Date(date.getTime());
+    const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = localDate.getDate().toString().padStart(2, '0');
+    const hours = localDate.getHours().toString().padStart(2, '0');
+    const minutes = localDate.getMinutes().toString().padStart(2, '0');
+    const seconds = localDate.getSeconds().toString().padStart(2, '0');
     return `${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 }
