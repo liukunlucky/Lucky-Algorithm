@@ -1,8 +1,8 @@
-import relationalStore from '@ohos.data.relationalStore';
 import { ProblemModel, ProblemDifficulty, ProblemCategory } from '../model/ProblemModel';
 import { UserProgressModel, ProblemStatus } from '../model/UserProgressModel';
 import { ExamRecordModel, ExamMode } from '../model/ExamRecordModel';
 import Context from '@ohos.app.ability.common';
+import { relationalStore } from '@kit.ArkData';
 
 interface SampleProblem {
   title: string;

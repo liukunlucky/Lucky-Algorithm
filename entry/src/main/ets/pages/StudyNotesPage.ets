@@ -25,7 +25,7 @@ struct StudyNotesPage {
   
   private userNoteDao: UserNoteDao = new UserNoteDao();
 
-  aboutToAppear(): void {
+  onPageShow(): void {
     this.loadNotes();
   }
 
@@ -95,6 +95,7 @@ struct StudyNotesPage {
         text: this.searchText
       })
         .layoutWeight(1)
+        .placeholderColor('#D5DBDB')
         .height(40)
         .fontSize(14)
         .backgroundColor('#f8f9fa')
@@ -173,7 +174,7 @@ struct StudyNotesPage {
         ListItem() {
           this.buildNoteItem(noteWithProblem)
         }
-      }, (noteWithProblem: NoteWithProblem) => noteWithProblem.note.id.toString())
+      })
     }
     .width('100%')
     .layoutWeight(1)
@@ -345,7 +346,7 @@ struct StudyNotesPage {
     }
     
     console.info('🔍 笔记过滤完成，显示', this.filteredNotes.length, '条笔记');
-    console.info('🔍 过滤结果的第一条笔记内容:', this.filteredNotes[0]?.note.content);
+    console.info('🔍 过滤结果的第一条笔记内容:', JSON.stringify(this.filteredNotes[0]?.note));
   }
 
   // 编辑笔记
@@ -457,19 +458,24 @@ struct StudyNotesPage {
       console.info('🔄 开始保存笔记，原内容:', this.selectedNote.note.content);
       console.info('🔄 新内容:', this.editingContent.trim());
       
-      // 更新笔记内容
+      // 更新笔记内容和时间戳
       this.selectedNote.note.updateContent(this.editingContent.trim());
+      const updatedTimestamp = this.selectedNote.note.updatedAt; // 保存更新后的时间戳
+      
+      console.info('🔄 更新时间戳:', updatedTimestamp);
+      
+      // 保存到数据库
       await this.userNoteDao.saveNote(this.selectedNote.note);
       
       console.info('✅ 笔记保存到数据库成功');
 
-      // 创建新的笔记对象以确保引用变化
+      // 创建新的笔记对象以确保引用变化，使用相同的时间戳
       const updatedNote = new UserNoteModel();
       updatedNote.id = this.selectedNote.note.id;
       updatedNote.problemId = this.selectedNote.note.problemId;
       updatedNote.content = this.editingContent.trim();
       updatedNote.createdAt = this.selectedNote.note.createdAt;
-      updatedNote.updatedAt = new Date().toISOString();
+      updatedNote.updatedAt = updatedTimestamp; // 使用相同的时间戳
 
       // 更新本地数据 - 完全重建数组以确保状态变化
       const index = this.notesWithProblems.findIndex(item => item.note.id === this.selectedNote!.note.id);
@@ -484,11 +490,17 @@ struct StudyNotesPage {
         this.notesWithProblems = updatedNotes;
         
         console.info('✅ 本地数据更新完成，新内容:', updatedNotes[index].note.content);
+        console.info('✅ 本地数据更新时间:', updatedNotes[index].note.updatedAt);
       }
+
+      // 重新排序笔记（按更新时间降序）
+      this.notesWithProblems.sort((a, b) => {
+        return new Date(b.note.updatedAt).getTime() - new Date(a.note.updatedAt).getTime();
+      });
 
       // 强制重新过滤笔记以更新显示
       this.filterNotes();
-      
+
       // 重置编辑状态
       this.isEditingNote = false;
       this.selectedNote = null;
@@ -511,7 +523,7 @@ struct StudyNotesPage {
   private showDeleteConfirmDialog(noteId: number): void {
     AlertDialog.show({
       title: '删除笔记',
-      message: '确定要删除这条笔记吗？删除后无法恢复。',
+      message: '确定要删除这条笔记吗？删除后无法恢复',
       primaryButton: {
         value: '取消',
         action: () => {
@@ -571,8 +583,24 @@ struct StudyNotesPage {
   private formatDate(dateString: string): string {
     const date = new Date(dateString);
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
+    
+    // 获取当地时间的年月日，忽略时分秒
+    const dateYear = date.getFullYear();
+    const dateMonth = date.getMonth();
+    const dateDay = date.getDate();
+    
+    const nowYear = now.getFullYear();
+    const nowMonth = now.getMonth();
+    const nowDay = now.getDate();
+    
+    // 创建当地时间的日期对象用于比较（只比较年月日）
+    const dateOnly = new Date(dateYear, dateMonth, dateDay);
+    const nowOnly = new Date(nowYear, nowMonth, nowDay);
+    
+    const diffMs = nowOnly.getTime() - dateOnly.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    console.info(`📅 时间格式化调试: 原始时间=${dateString}, 解析后=${date.toLocaleString('zh-CN')}, 当前时间=${now.toLocaleString('zh-CN')}, 天数差=${diffDays}`);
 
     if (diffDays === 0) {
       // 今天

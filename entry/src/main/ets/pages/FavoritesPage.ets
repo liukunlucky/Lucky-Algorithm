@@ -346,13 +346,31 @@ struct FavoritesPage {
   }
 
   private formatDate(dateString: string): string {
+    console.log('formatDate input:', dateString, 'type:', typeof dateString);
+    
+    // 检查输入是否为空或无效
+    if (!dateString || dateString.trim() === '') {
+      console.warn('Empty date string provided');
+      return '未知时间';
+    }
+    
     const date = new Date(dateString);
+    console.log('Created date object:', date, 'getTime():', date.getTime());
+    
+    // 检查日期是否有效
+    if (isNaN(date.getTime())) {
+      console.warn('Invalid date string:', dateString);
+      return '未知时间';
+    }
+    
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
-    return `${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const result = `${month}-${day} ${hours}:${minutes}:${seconds}`;
+    console.log('formatDate result:', result);
+    return result;
   }
 
   // 跳转到题目详情页面

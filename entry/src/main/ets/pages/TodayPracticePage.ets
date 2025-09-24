@@ -319,6 +319,9 @@ export struct TodayPracticePage {
         .fontColor('#666666')
     }
     .alignItems(HorizontalAlign.Center)
+    .onClick(() => {
+      this.navigateToPage('pages/ContinuousStudyPage');
+    })
   }
 
   @Builder
@@ -334,6 +337,9 @@ export struct TodayPracticePage {
         .fontColor('#666666')
     }
     .alignItems(HorizontalAlign.Center)
+    .onClick(() => {
+      this.navigateToPage('pages/TotalSolvedPage');
+    })
   }
 
   @Builder
@@ -349,6 +355,9 @@ export struct TodayPracticePage {
         .fontColor('#666666')
     }
     .alignItems(HorizontalAlign.Center)
+    .onClick(() => {
+      this.navigateToPage('pages/TodayCompletedPage');
+    })
   }
 
   @Builder

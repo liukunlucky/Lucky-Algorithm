@@ -9,6 +9,9 @@
     "pages/WrongProblemsPage",
     "pages/ExamRecordsPage",
     "pages/StatisticsPage",
-    "pages/StudyNotesPage"
+    "pages/StudyNotesPage",
+    "pages/ContinuousStudyPage",
+    "pages/TotalSolvedPage",
+    "pages/TodayCompletedPage"
   ]
 }
