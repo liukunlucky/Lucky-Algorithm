@@ -327,7 +327,10 @@ struct AddEditStudyGoalPage {
         });
       }
 
-      router.back();
+      // 确保数据库操作完全完成后再返回
+      setTimeout(() => {
+        router.back();
+      }, 100);
     } catch (error) {
       console.error('保存学习目标失败:', error);
       promptAction.showToast({
@@ -370,7 +373,10 @@ struct AddEditStudyGoalPage {
         duration: 2000
       });
       
-      router.back();
+      // 确保数据库操作完全完成后再返回
+      setTimeout(() => {
+        router.back();
+      }, 100);
     } catch (error) {
       console.error('删除学习目标失败:', error);
       promptAction.showToast({

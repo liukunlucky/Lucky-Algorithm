@@ -16,6 +16,10 @@
     "pages/StudyDiaryPage",
     "pages/StudyGoalsPage",
     "pages/AddEditStudyDiaryPage",
-    "pages/AddEditStudyGoalPage"
+    "pages/AddEditStudyGoalPage",
+    "pages/KnowledgeRecitePage",
+    "pages/StudyAchievementPage",
+    "pages/InterviewBankPage",
+    "pages/InterviewGuideePage"
   ]
 }

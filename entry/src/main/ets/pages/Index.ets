@@ -86,7 +86,7 @@ struct Index {
       TabContent() {
         PracticeCenterPage()
       }
-      .tabBar(this.buildTabBarItem($r('app.media.icon_train_center'), '练习中心', 2))
+      .tabBar(this.buildTabBarItem($r('app.media.icon_train_center'), '题库中心', 2))
 
       // 模拟考核Tab
       TabContent() {

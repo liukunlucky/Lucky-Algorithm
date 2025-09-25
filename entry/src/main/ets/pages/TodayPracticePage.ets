@@ -918,33 +918,58 @@ export struct TodayPracticePage {
   @Builder
   buildFunctionGrid() {
     Column({ space: 16 }) {
+      // 笔试专区标题
+      Row() {
+        Text('笔试专区')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.Start)
+      .padding({ left: 4 })
       // 第一行：学习路线、题库、考核、统计
       Row({ space: 20 }) {
-        this.buildFunctionItem($r('app.media.icon_route'), '学习路线', () => this.switchToTab(1))
-        this.buildFunctionItem($r('app.media.icon_train_center'), '题库', () => this.switchToTab(2))
-        this.buildFunctionItem($r('app.media.icon_exam'), '考核', () => this.switchToTab(3))
-        this.buildFunctionItem($r('app.media.icon_tj'), '统计', () => this.navigateToPage('pages/StatisticsPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_note'), '笔记', () => this.navigateToPage('pages/StudyNotesPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_error'), '错题本', () => this.navigateToPage('pages/WrongProblemsPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_like'), '我的收藏', () => this.navigateToPage('pages/FavoritesPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_tj'), '统计', () => this.navigateToPage('pages/StatisticsPage'))
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
 
       // 第二行：学习笔记、错题本、我的收藏、学习日记
       Row({ space: 20 }) {
-        this.buildFunctionItem($r('app.media.icon_note'), '学习笔记', () => this.navigateToPage('pages/StudyNotesPage'))
-        this.buildFunctionItem($r('app.media.icon_error'), '错题本', () => this.navigateToPage('pages/WrongProblemsPage'))
-        this.buildFunctionItem($r('app.media.icon_like'), '我的收藏', () => this.navigateToPage('pages/FavoritesPage'))
-        this.buildFunctionItem($r('app.media.icon_rj'), '学习日记', () => this.navigateToPage('pages/StudyDiaryPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_target'), '学习目标', () => this.navigateToPage('pages/StudyGoalsPage'))// 添加占位空间，保持与上一行对齐
+        this.buildFunctionItem($r('app.media.icon_fun_dairy'), '学习日记', () => this.navigateToPage('pages/StudyDiaryPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_chengjiu'), '学习成就', () => this.navigateToPage('pages/StudyAchievementPage'))// 添加占位空间，保持与上一行对齐
+        this.buildFunctionItem($r('app.media.icon_fun_beisong'), '知识背诵', () => this.navigateToPage('pages/KnowledgeRecitePage'))
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
 
-      // 第三行：学习目标（只有一个，居中显示）
+      // 面试专区标题
       Row() {
-        this.buildFunctionItem($r('app.media.icon_traget'), '学习目标', () => this.navigateToPage('pages/StudyGoalsPage'))// 添加占位空间，保持与上一行对齐
-        Blank().width(220) // 与图标宽度相同
+        Text('面试专区')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.Start)
+      .padding({ left: 4, top: 16 })
+
+      // 面试专区图标
+      Row({ space: 20 }) {
+        this.buildFunctionItem($r('app.media.icon_fun_center'), '面试题库', () => this.navigateToPage('pages/InterviewBankPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_baodian'), '面试宝典', () => this.navigateToPage('pages/InterviewGuideePage'))
+        // 占位空间，保持对齐
+        Column().width(60)
+        Column().width(60)
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
+
     }
     .width('100%')
     .padding(16)
@@ -957,7 +982,7 @@ export struct TodayPracticePage {
     Column({ space: 8 }) {
       Stack() {
         Circle({ width: 60, height: 60 })
-          .fill('#FF6B35')
+          .fill('#FFFFFF')
           .shadow({
             radius: 8,
             color: '#00000010',
@@ -966,9 +991,8 @@ export struct TodayPracticePage {
           })
 
         Image(icon)
-          .width(32)
-          .height(32)
-          .fillColor('#FFFFFF')
+          .width(48)
+          .height(48)
       }
       .width(60)
       .height(60)

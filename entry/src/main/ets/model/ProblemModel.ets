@@ -33,6 +33,16 @@ export enum ProblemCategory {
   QUEUE = 'queue'
 }
 
+export enum MianshiProblemCategory {
+  JAVA_BASIC = 0,       // Java基础
+  COLLECTION = 1,       // 集合框架
+  MULTITHREAD = 2,      // 多线程
+  JVM = 3,              // JVM
+  EXCEPTION = 4,        // 异常处理
+  JAVA_ADVANCED = 5,    // Java进阶
+  JAVA_NEW_FEATURE = 6  // Java新特性
+}
+
 // 题目类型枚举
 export enum ProblemType {
   SINGLE_CHOICE = 'single_choice',  // 单选题

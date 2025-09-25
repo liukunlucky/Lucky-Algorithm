@@ -334,7 +334,10 @@ struct AddEditStudyDiaryPage {
         });
       }
 
-      router.back();
+      // 确保数据库操作完全完成后再返回
+      setTimeout(() => {
+        router.back();
+      }, 100);
     } catch (error) {
       console.error('保存日记失败:', error);
       promptAction.showToast({
@@ -374,7 +377,10 @@ struct AddEditStudyDiaryPage {
         message: '日记删除成功',
         duration: 2000
       });
-      router.back();
+      // 确保数据库操作完全完成后再返回
+      setTimeout(() => {
+        router.back();
+      }, 100);
     } catch (error) {
       console.error('删除日记失败:', error);
       promptAction.showToast({

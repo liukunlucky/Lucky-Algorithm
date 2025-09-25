@@ -1,0 +1,1402 @@
+[
+  {
+    "id": 1001,
+    "title": "Java的面向对象三大特性是什么？",
+    "answer": "封装、继承、多态。封装指隐藏对象内部实现细节，仅通过公共接口交互；继承指子类继承父类属性和方法，实现代码复用；多态指同一方法在不同对象上有不同实现，通过重写和重载实现。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1002,
+    "title": "String为什么是不可变的？",
+    "answer": "String类被final修饰，其内部存储字符的char数组也是final的。不可变的好处包括：线程安全、可作为HashMap的key、字符串常量池复用节省内存。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1003,
+    "title": "ArrayList和LinkedList的区别？",
+    "answer": "底层结构：ArrayList基于动态数组，LinkedList基于双向链表。性能：ArrayList随机访问快（O(1)），增删首尾元素慢（需移动元素）；LinkedList随机访问慢（O(n)），增删首尾元素快（O(1)）。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1004,
+    "title": "Java中创建线程的三种方式？",
+    "answer": "①继承Thread类，重写run()方法；②实现Runnable接口，重写run()方法，通过Thread包装；③实现Callable接口，重写call()方法，结合Future获取返回值。",
+    "category": 2,
+    "difficulty": 0
+  },
+  {
+    "id": 1005,
+    "title": "JVM的垃圾回收机制是什么？",
+    "answer": "垃圾回收（GC）是自动释放不再被引用的对象内存的机制。核心步骤：①判断对象是否可回收（可达性分析，以GC Roots为起点）；②回收算法（标记-清除、复制、标记-整理、分代收集）；③垃圾收集器（如SerialGC、ParallelGC、G1等）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1006,
+    "title": "Checked Exception和Unchecked Exception的区别？",
+    "answer": "Checked Exception（受检异常）：编译期检查，必须处理（try-catch或throws），如IOException；Unchecked Exception（非受检异常）：运行时异常，编译期不强制处理，如NullPointerException、IndexOutOfBoundsException。",
+    "category": 4,
+    "difficulty": 0
+  },
+  {
+    "id": 1007,
+    "title": "HashMap的底层实现原理？",
+    "answer": "JDK1.8前：数组+链表；JDK1.8后：数组+链表+红黑树。当链表长度超过8且数组容量≥64时，链表转为红黑树（提升查询效率）。通过key的hashCode计算数组索引，使用equals解决哈希冲突。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1008,
+    "title": "synchronized和volatile的区别？",
+    "answer": "synchronized：保证原子性、可见性、有序性，是重量级锁（可优化为偏向锁、轻量级锁）；volatile：仅保证可见性和有序性（禁止指令重排），不保证原子性，适用于单写多读场景。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1009,
+    "title": "什么是反射机制？有哪些应用场景？",
+    "answer": "反射是指程序在运行时可获取类的信息（属性、方法、构造器等）并操作对象的机制。应用场景：框架（Spring的IOC）、ORM框架（MyBatis）、动态代理、注解处理等。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1010,
+    "title": "JVM内存模型（JMM）是什么？",
+    "answer": "JMM定义了线程和主内存之间的抽象关系：线程操作工作内存，通过主内存交互。核心是解决多线程可见性、原子性、有序性问题，通过volatile、synchronized、final等关键字实现。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1011,
+    "title": "接口和抽象类的区别？",
+    "answer": "接口：只能有抽象方法（Java 8后可有默认方法），变量为public static final，支持多实现；抽象类：可包含抽象方法和具体方法，变量可非静态，支持单继承。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1012,
+    "title": "ConcurrentHashMap的实现原理？",
+    "answer": "JDK1.7：分段锁（Segment数组+HashEntry），每个Segment独立加锁；JDK1.8：取消分段锁，用CAS+synchronized实现，结构同HashMap（数组+链表+红黑树），支持更高并发。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1013,
+    "title": "什么是线程池？核心参数有哪些？",
+    "answer": "线程池是管理线程的容器，降低线程创建销毁成本。核心参数：核心线程数、最大线程数、队列容量、拒绝策略、空闲线程存活时间。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1014,
+    "title": "类加载的过程是什么？",
+    "answer": "类加载包括：加载（获取字节流）、验证（校验字节码）、准备（分配内存初始化静态变量）、解析（符号引用转直接引用）、初始化（执行clinit方法）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1015,
+    "title": "equals和hashCode的关系？",
+    "answer": "若两个对象equals()返回true，则hashCode()必须相等；若hashCode()不等，则equals()必为false；重写equals()时必须重写hashCode()，否则会导致HashMap等集合存储异常。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1016,
+    "title": "什么是死锁？如何避免？",
+    "answer": "死锁是多个线程互相持有对方所需资源而阻塞的状态。避免方式：固定锁顺序、使用tryLock设置超时、减少锁持有时间、使用Lock的定时尝试获取锁。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1017,
+    "title": "ArrayList的扩容机制？",
+    "answer": "初始容量10（JDK1.8），当元素数超过容量时，扩容为原容量的1.5倍（oldCapacity + (oldCapacity >> 1)），通过Arrays.copyOf()复制元素到新数组。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1018,
+    "title": "什么是强引用、软引用、弱引用、虚引用？",
+    "answer": "强引用：普通引用，GC不回收；软引用：内存不足时回收，用于缓存；弱引用：GC时立即回收，用于临时关联；虚引用：仅用于跟踪GC，必须配合引用队列。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1019,
+    "title": "Java中的异常处理机制？",
+    "answer": "通过try-catch-finally处理异常：try执行可能出错的代码，catch捕获并处理异常，finally执行必须完成的操作（如资源释放）。可通过throws声明方法可能抛出的异常。",
+    "category": 4,
+    "difficulty": 0
+  },
+  {
+    "id": 1020,
+    "title": "什么是动态代理？有哪些实现方式？",
+    "answer": "动态代理是运行时生成代理类的技术。实现方式：JDK动态代理（基于接口，通过Proxy和InvocationHandler）、CGLIB动态代理（基于继承，通过Enhancer和MethodInterceptor）。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1021,
+    "title": "HashMap和HashTable的区别？",
+    "answer": "线程安全：HashTable线程安全（方法加synchronized），HashMap非线程安全；性能：HashMap更高；null值：HashMap允许key和value为null，HashTable不允许；扩容：HashMap扩为2倍，HashTable扩为2倍+1。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1022,
+    "title": "ThreadLocal的原理和用途？",
+    "answer": "ThreadLocal为每个线程提供独立变量副本，实现线程隔离。原理：每个Thread有ThreadLocalMap，key为ThreadLocal实例，value为变量副本。用途：存储线程私有信息（如Session、数据库连接）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1023,
+    "title": "JVM的内存区域划分？",
+    "answer": "分为：程序计数器（线程私有，记录指令地址）、虚拟机栈（线程私有，存储栈帧）、本地方法栈（线程私有，支持native方法）、堆（线程共享，存储对象实例）、方法区（线程共享，存储类信息、常量等）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1024,
+    "title": "static关键字的作用？",
+    "answer": "static修饰的成员属于类而非实例：静态变量（类变量，所有实例共享）、静态方法（类方法，可直接通过类名调用，不能访问非静态成员）、静态代码块（类加载时执行，用于初始化）。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1025,
+    "title": "什么是泛型？有什么作用？",
+    "answer": "泛型是参数化类型的技术，在编译时检查类型安全。作用：避免类型转换、提高代码复用性、增强类型安全（编译期报错而非运行时）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1026,
+    "title": "Java 8的Stream API有什么特点？",
+    "answer": "Stream API用于处理集合数据，特点：流式操作、惰性执行（中间操作延迟执行）、可并行处理、支持函数式编程，提供map、filter、reduce等操作。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1027,
+    "title": "什么是双亲委派模型？",
+    "answer": "类加载时，先委托父类加载器加载，父类无法加载再由子类加载器尝试。作用：防止类重复加载、保证核心类安全（如java.lang.Object不会被自定义类替换）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1028,
+    "title": "Lock接口和synchronized的区别？",
+    "answer": "Lock需手动获取和释放锁（try-finally），synchronized自动释放；Lock可中断获取锁、超时获取锁、尝试获取锁，synchronized不行；Lock可实现公平锁，synchronized是非公平锁。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1029,
+    "title": "LinkedHashMap的实现原理？",
+    "answer": "继承HashMap，内部维护双向链表记录插入顺序或访问顺序。可通过构造函数指定accessOrder（true为访问顺序，用于LRU缓存），迭代顺序与插入/访问顺序一致。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1030,
+    "title": "Java中的注解有哪些类型？如何自定义注解？",
+    "answer": "注解类型：内置注解（@Override、@Deprecated等）、元注解（@Target、@Retention等）、自定义注解。自定义注解需用@interface声明，配合元注解指定适用范围和生命周期。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1031,
+    "title": "Java中的访问修饰符有哪些？各自的作用范围是什么？",
+    "answer": "Java有4种访问修饰符：public（所有类可见）、protected（同一包及子类可见）、default（同一包可见，无修饰符）、private（仅本类可见）。作用范围从大到小：public > protected > default > private。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1032,
+    "title": "构造方法有什么特点？可以被继承或重写吗？",
+    "answer": "构造方法特点：与类名相同、无返回值、用于初始化对象。构造方法不能被继承，也不能被重写，但子类可以通过super()调用父类构造方法。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1033,
+    "title": "this和super关键字的区别？",
+    "answer": "this指代当前对象，用于访问本类成员（属性、方法、构造器）；super指代父类对象，用于访问父类成员（属性、方法、构造器）。this()调用本类其他构造器，super()调用父类构造器，均需放在构造器第一行。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1034,
+    "title": "Java的包装类有哪些？自动装箱和拆箱是什么？",
+    "answer": "包装类对应8种基本类型：Byte、Short、Integer、Long、Float、Double、Boolean、Character。自动装箱是基本类型自动转为包装类（如int→Integer），拆箱是包装类自动转为基本类型（如Integer→int），由JDK1.5引入。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1035,
+    "title": "final关键字可以修饰什么？分别有什么效果？",
+    "answer": "final可修饰类、方法、变量：修饰类→类不可被继承；修饰方法→方法不可被重写；修饰变量→变量为常量，初始化后不可修改（引用类型则引用地址不可变）。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1036,
+    "title": "重载（Overload）和重写（Override）的区别？",
+    "answer": "重载：同一类中，方法名相同，参数列表（类型、个数、顺序）不同，与返回值无关；重写：子类中，方法名、参数列表、返回值与父类相同，访问修饰符不能严于父类，异常不能扩大。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1037,
+    "title": "Java中的常量池有哪些？各自作用是什么？",
+    "answer": "主要常量池：字符串常量池（存储字符串字面量，复用避免重复创建）、class常量池（存储类编译后的常量信息，如字面量、符号引用）、运行时常量池（class常量池加载到内存后的表现形式，支持动态生成）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1038,
+    "title": "基本类型和包装类的缓存机制？",
+    "answer": "部分包装类有缓存机制：Integer（-128~127）、Byte（全部）、Short（-128~127）、Long（-128~127）、Character（0~127）。缓存范围内的值使用相同对象，超出范围则新建对象，通过valueOf()方法实现。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1039,
+    "title": "Java中的单例模式有哪些实现方式？",
+    "answer": "常见实现：饿汉式（类加载时初始化，线程安全）、懒汉式（延迟初始化，需加锁保证线程安全）、双重检查锁（DCL，减少锁开销）、静态内部类（延迟加载且线程安全）、枚举（防止反射和序列化破坏）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1040,
+    "title": "什么是值传递和引用传递？Java属于哪种？",
+    "answer": "值传递：传递参数的副本，修改副本不影响原变量；引用传递：传递参数的引用地址，修改会影响原对象。Java只有值传递：基本类型传递值副本，引用类型传递引用地址的副本（地址本身不可变，对象内容可变）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1041,
+    "title": "HashSet的底层实现原理？",
+    "answer": "HashSet基于HashMap实现，元素存储在HashMap的key位置，value为固定的Object对象。其特性（无序、不重复）继承自HashMap，添加元素时通过hashCode和equals判断是否重复。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1042,
+    "title": "TreeSet和TreeMap的排序原理？",
+    "answer": "两者均基于红黑树实现，支持排序。排序方式：①元素实现Comparable接口，重写compareTo()；②创建集合时传入Comparator比较器。TreeSet底层依赖TreeMap，元素作为key存储。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1043,
+    "title": "Vector和ArrayList的区别？",
+    "answer": "线程安全：Vector线程安全（方法加synchronized），ArrayList非线程安全；性能：ArrayList更高；扩容：Vector默认扩为2倍，ArrayList扩为1.5倍；Vector有Enumeration迭代器，ArrayList没有。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1044,
+    "title": "ArrayDeque的特点及适用场景？",
+    "answer": "ArrayDeque是基于循环数组的双端队列，实现Deque接口。特点：无容量限制（自动扩容）、两端增删操作高效（O(1)）、不允许null元素。适用场景：实现栈（比Stack高效）、队列（比LinkedList高效）。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1045,
+    "title": "Collections工具类有哪些常用方法？",
+    "answer": "常用方法：sort()（排序）、binarySearch()（二分查找）、reverse()（反转）、shuffle()（打乱）、swap()（交换元素）、max()/min()（最大/小值）、synchronizedXXX()（包装为线程安全集合）。",
+    "category": 1,
+    "difficulty": 0
+  },
+  {
+    "id": 1046,
+    "title": "Iterator和ListIterator的区别？",
+    "answer": "Iterator：支持遍历Collection集合，只能向前遍历，可执行remove()；ListIterator：仅支持List，可双向遍历，可执行add()、set()、remove()，能获取索引位置。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1047,
+    "title": "ConcurrentSkipListMap的特点？",
+    "answer": "ConcurrentSkipListMap是线程安全的有序映射，基于跳表实现。特点：支持并发访问、key有序、查询/插入/删除效率高（平均O(log n)）、适用于高并发场景下的有序映射需求。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1048,
+    "title": "CopyOnWriteArrayList的实现原理？",
+    "answer": "CopyOnWriteArrayList是线程安全的List，原理是写时复制：修改操作（add/set等）会创建原数组的副本，修改副本后替换原数组，读操作无需加锁。适合读多写少场景，迭代器不支持修改操作。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1049,
+    "title": "什么是哈希冲突？解决哈希冲突的方法有哪些？",
+    "answer": "哈希冲突指不同key计算出相同哈希值。解决方法：开放定址法（线性探测、二次探测）、链地址法（链表存储冲突元素，HashMap采用）、再哈希法（使用多个哈希函数）、建立公共溢出区。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1050,
+    "title": "LinkedHashSet和HashSet的区别？",
+    "answer": "LinkedHashSet继承HashSet，底层基于LinkedHashMap实现，维护双向链表记录插入顺序，迭代时按插入顺序返回元素；HashSet无序。两者都不允许重复元素，时间复杂度相近。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1051,
+    "title": "线程的生命周期有哪些状态？",
+    "answer": "线程生命周期包括：新建（New）、就绪（Runnable）、运行（Running）、阻塞（Blocked/Waiting/Timed Waiting）、终止（Terminated）。阻塞状态细分：同步阻塞（Blocked）、等待阻塞（Waiting）、计时等待（Timed Waiting）。",
+    "category": 2,
+    "difficulty": 0
+  },
+  {
+    "id": 1052,
+    "title": "wait()、notify()、notifyAll()的使用场景和注意事项？",
+    "answer": "用于线程间通信，需在synchronized同步块/方法中调用（持有对象锁）。wait()：释放锁并进入等待状态；notify()：唤醒一个等待线程；notifyAll()：唤醒所有等待线程。注意：避免虚假唤醒，需在循环中判断条件。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1053,
+    "title": "线程池的拒绝策略有哪些？",
+    "answer": "JDK默认拒绝策略：①AbortPolicy（抛出RejectedExecutionException，默认）；②CallerRunsPolicy（由提交任务的线程执行）；③DiscardPolicy（直接丢弃任务）；④DiscardOldestPolicy（丢弃队列中最旧的任务，再尝试提交）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1054,
+    "title": "Java中的线程池有哪些核心实现类？",
+    "answer": "核心实现类：①ThreadPoolExecutor（基础实现，可自定义参数）；②Executors工具类创建的线程池：FixedThreadPool（固定线程数）、CachedThreadPool（缓存线程池）、SingleThreadExecutor（单线程）、ScheduledThreadPool（定时任务）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1055,
+    "title": "AtomicInteger的实现原理？",
+    "answer": "AtomicInteger基于CAS（Compare-And-Swap）操作实现原子性，底层使用Unsafe类的native方法。CAS包含三个操作数：内存地址、预期值、新值，当内存值等于预期值时更新为新值，否则重试（自旋），避免了锁的开销。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1056,
+    "title": "什么是线程安全？如何保证线程安全？",
+    "answer": "线程安全指多线程环境下，程序执行结果与单线程一致且符合预期。保证方式：①使用synchronized或Lock加锁；②使用线程安全的集合（如ConcurrentHashMap）；③使用原子类（如AtomicInteger）；④ThreadLocal隔离线程私有变量。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1057,
+    "title": "CountDownLatch的作用及使用场景？",
+    "answer": "CountDownLatch用于等待多个线程完成后再执行主线程。原理：初始化计数器，线程完成后调用countDown()减1，主线程调用await()阻塞至计数器为0。场景：并行任务协调（如主线程等待所有子线程初始化完成）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1058,
+    "title": "CyclicBarrier和CountDownLatch的区别？",
+    "answer": "CyclicBarrier：让多个线程到达屏障后再同时执行，计数器可重置重复使用，适用于线程间相互等待协作；CountDownLatch：计数器只能减不能重置，适用于主线程等待子线程完成，子线程无需等待主线程。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1059,
+    "title": "Semaphore的作用？",
+    "answer": "Semaphore（信号量）用于控制同时访问特定资源的线程数量。通过acquire()获取许可（许可不足则阻塞），release()释放许可。场景：限流（如控制并发访问数据库的连接数）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1060,
+    "title": "线程中断（interrupt）的原理？",
+    "answer": "线程中断并非强制终止线程，而是设置中断标志位。调用interrupt()设置标志位；isInterrupted()检查标志位；interrupted()检查并清除标志位。阻塞线程（如wait()、sleep()）被中断会抛出InterruptedException并清除标志位。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1061,
+    "title": "JVM的垃圾收集器有哪些？各有什么特点？",
+    "answer": "常见收集器：①SerialGC（单线程收集，STW时间长，适合客户端）；②ParallelGC（多线程收集，注重吞吐量，默认年轻代收集器）；③CMS（并发标记清除，低延迟，CPU消耗高，老年代）；④G1（区域化分代式，兼顾吞吐量和延迟，大堆场景）；⑤ZGC/Shenandoah（超低延迟，支持TB级堆）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1062,
+    "title": "什么是内存泄漏？常见原因有哪些？",
+    "answer": "内存泄漏指对象不再使用但未被GC回收，导致内存占用持续增加。常见原因：①静态集合持有对象引用；②监听器未移除；③资源未关闭（如IO流、数据库连接）；④内部类持有外部类引用（如非静态内部类导致外部类无法回收）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1063,
+    "title": "JVM的堆内存如何划分？",
+    "answer": "堆内存分为：①年轻代（Young Generation）：Eden区（新对象分配）、Survivor区（From/To，幸存对象），比例默认8:1:1；②老年代（Old Generation）：存放存活久的对象；③元空间（Metaspace，JDK1.8后）：替代永久代，存储类元数据，直接使用本地内存。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1064,
+    "title": "Minor GC、Major GC和Full GC的区别？",
+    "answer": "Minor GC：回收年轻代（Eden+Survivor），频率高，速度快；Major GC：回收老年代，频率低，速度慢；Full GC：回收整个堆（年轻代+老年代+元空间），STW时间长，应尽量避免。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1065,
+    "title": "类加载器的类型有哪些？",
+    "answer": "JVM类加载器：①启动类加载器（Bootstrap ClassLoader，加载JRE核心类，如rt.jar）；②扩展类加载器（Extension ClassLoader，加载jre/lib/ext目录）；③应用程序类加载器（Application ClassLoader，加载应用classpath类）；④自定义类加载器（继承ClassLoader，满足特殊需求）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1066,
+    "title": "什么是OOM？常见的OOM类型有哪些？",
+    "answer": "OOM（OutOfMemoryError）是内存不足错误。常见类型：①Java heap space（堆内存不足）；②PermGen space/Metaspace（元空间不足）；③StackOverflowError（栈溢出，递归过深等）；④Unable to create new native thread（线程创建过多）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1067,
+    "title": "JVM的常用调优参数有哪些？",
+    "answer": "常用参数：①堆内存：-Xms（初始堆）、-Xmx（最大堆）、-Xmn（年轻代大小）；②老年代与年轻代比例：-XX:NewRatio；③Survivor比例：-XX:SurvivorRatio；④GC日志：-XX:+PrintGCDetails、-Xloggc:gc.log；⑤收集器：-XX:+UseG1GC、-XX:+UseConcMarkSweepGC。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1068,
+    "title": "什么是TLAB（Thread Local Allocation Buffer）？",
+    "answer": "TLAB是线程在Eden区分配的私有缓冲区，用于加速对象分配。线程创建对象时优先在TLAB中分配，避免锁竞争，当TLAB不足时再使用公共区域。默认开启（-XX:+UseTLAB），大小可通过-XX:TLABSize调整。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1069,
+    "title": "对象的创建过程？",
+    "answer": "对象创建步骤：①类加载检查（判断类是否已加载）；②分配内存（指针碰撞或空闲列表）；③初始化零值（除对象头外的字段设为默认值）；④设置对象头（类元信息、哈希码、GC分代年龄等）；⑤执行init方法（构造函数初始化）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1070,
+    "title": "对象的内存布局？",
+    "answer": "对象内存布局：①对象头（Header）：存储Mark Word（哈希码、锁状态等）、类元指针（指向类元数据）、数组长度（数组对象特有）；②实例数据（Instance Data）：对象属性值；③对齐填充（Padding）：保证对象大小为8字节的整数倍，提高访问效率。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1071,
+    "title": "throw和throws的区别？",
+    "answer": "throw：用于方法内部，抛出具体异常对象（如throw new IOException()）；throws：用于方法声明处，声明方法可能抛出的异常类型（如void method() throws IOException）。throw执行后会终止当前方法，throws仅声明不处理。",
+    "category": 4,
+    "difficulty": 0
+  },
+  {
+    "id": 1072,
+    "title": "finally块一定会执行吗？",
+    "answer": "大部分情况会执行，但以下例外：①try块前代码抛出异常；②try或catch块中调用System.exit(0)；③线程死亡；④CPU被关闭。finally块用于释放资源，即使try/catch中有return，finally仍会执行（return值可能被覆盖）。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1073,
+    "title": "如何自定义异常？",
+    "answer": "自定义异常需继承Exception（受检）或RuntimeException（非受检）。步骤：①创建类继承对应父类；②提供无参和带消息的构造方法；③按需添加自定义属性或方法。使用时通过throw抛出，受检异常需处理或声明。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1074,
+    "title": "异常链是什么？有什么作用？",
+    "answer": "异常链指将捕获的异常包装到新异常中，形成链式传递。通过构造方法传入原始异常（如new MyException(\"msg\", cause)），使用getCause()获取原始异常。作用：保留异常根源信息，便于调试，避免异常信息丢失。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1075,
+    "title": "try-with-resources的作用？",
+    "answer": "try-with-resources是JDK7引入的语法，用于自动关闭实现AutoCloseable接口的资源（如IO流、数据库连接）。资源声明在try后的括号中，无需手动在finally关闭，会自动释放，即使发生异常。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1076,
+    "title": "反射的优缺点？",
+    "answer": "优点：灵活性高，可动态操作类和对象（如框架实现）；缺点：①性能较差（绕过编译期检查）；②破坏封装性（可访问私有成员）；③代码可读性降低；④安全风险（可能执行恶意代码）。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1077,
+    "title": "Java注解的生命周期有哪些？如何指定？",
+    "answer": "注解生命周期通过@Retention指定：①SOURCE（仅源码中存在，编译后丢弃）；②CLASS（编译期存在，类加载时丢弃，默认）；③RUNTIME（运行时存在，可通过反射获取）。需配合元注解@Retention(RetentionPolicy.XXX)使用。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1078,
+    "title": "动态代理和静态代理的区别？",
+    "answer": "静态代理：编译期生成代理类，代理类与被代理类实现同一接口，代码固定，灵活性低；动态代理：运行时动态生成代理类，无需手动编写代理类，灵活性高（如JDK动态代理、CGLIB），适用于通用代理场景。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1079,
+    "title": "Java中的SPI机制是什么？",
+    "answer": "SPI（Service Provider Interface）是服务发现机制：①定义服务接口；②服务提供者实现接口并在META-INF/services下创建接口全限定名文件，内容为实现类全限定名；③通过ServiceLoader加载实现类。应用：JDBC驱动加载、日志框架适配。",
+    "category": 5,
+    "difficulty": 2
+  },
+  {
+    "id": 1080,
+    "title": "Java的序列化和反序列化？",
+    "answer": "序列化指将对象转为字节流（实现Serializable接口）；反序列化指字节流恢复为对象。需注意：①transient关键字修饰的字段不被序列化；②序列化版本号serialVersionUID不一致会导致反序列化失败；③静态字段不参与序列化。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1081,
+    "title": "Java 8中的Lambda表达式有什么特点？",
+    "answer": "Lambda表达式用于简化函数式接口的实现，格式：(参数) -> 表达式/代码块。特点：①匿名（无名称）；②函数式（关注参数和返回值）；③简洁；④可传递。需配合函数式接口（仅一个抽象方法的接口）使用。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1082,
+    "title": "Java 8的函数式接口有哪些？",
+    "answer": "常用函数式接口：①Consumer<T>（消费型，void accept(T t)）；②Supplier<T>（供给型，T get()）；③Function<T,R>（函数型，R apply(T t)）；④Predicate<T>（断言型，boolean test(T t)）；⑤BinaryOperator<T>（二元操作，T apply(T t1, T t2)）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1083,
+    "title": "Java 8的Optional类有什么作用？",
+    "answer": "Optional用于解决NullPointerException，封装可能为null的对象。常用方法：of()（非null对象）、ofNullable()（可null对象）、isPresent()（是否有值）、orElse()（无值时默认值）、ifPresent()（有值时执行操作）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1084,
+    "title": "Java 8的日期时间API有哪些改进？",
+    "answer": "Java 8引入java.time包，改进：①线程安全（旧API如Date、Calendar非线程安全）；②不可变（修改返回新对象）；③清晰区分日期（LocalDate）、时间（LocalTime）、日期时间（LocalDateTime）；④支持时区（ZonedDateTime）；⑤简化日期计算（如plusDays()）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1085,
+    "title": "Java 9的模块化系统（Jigsaw）是什么？",
+    "answer": "Jigsaw将JDK分为模块，每个模块声明依赖和导出的包。作用：①减少内存占用（仅加载所需模块）；②增强安全性（控制包访问）；③简化大型应用维护。模块通过module-info.java声明，使用requires（依赖）、exports（导出）关键字。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1086,
+    "title": "Java 10的var关键字有什么作用？",
+    "answer": "var用于局部变量类型推断，编译器根据初始化值推断变量类型（如var list = new ArrayList<String>() → 推断为ArrayList<String>）。限制：①只能用于局部变量；②必须初始化；③不能用于方法参数、返回值、类字段。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1087,
+    "title": "Java 11的HttpClient有什么特点？",
+    "answer": "Java 11引入的HttpClient替代旧的HttpURLConnection，特点：①支持同步和异步请求；②支持HTTP/1.1和HTTP/2；③支持WebSocket；④API简洁（Builder模式）；⑤响应式编程风格（CompletableFuture）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1088,
+    "title": "Java 16的Records有什么作用？",
+    "answer": "Records是 immutable数据载体，用于简化数据类定义。编译器自动生成equals()、hashCode()、toString()和getter方法。声明：record Person(String name, int age) {}。适用于DTO、VO等仅存储数据的类。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1089,
+    "title": "Java 8的默认方法（Default Method）是什么？",
+    "answer": "默认方法是接口中带实现的方法，用default修饰，允许接口添加新方法而不破坏现有实现类。实现类可直接继承或重写默认方法。作用：兼容旧版本接口，支持接口演进（如Collection的stream()方法）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1090,
+    "title": "Java 17的密封类（Sealed Classes）有什么作用？",
+    "answer": "密封类限制哪些类可以继承它，通过sealed关键字声明，permits指定允许的子类。作用：控制类的继承关系，增强代码安全性和可维护性。子类必须声明为final、sealed或non-sealed。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1091,
+    "title": "接口中可以定义静态方法吗？有什么限制？",
+    "answer": "Java 8及以上允许接口定义静态方法，用static修饰，有具体实现。限制：①静态方法属于接口本身，需通过接口名调用；②实现类不能继承或重写接口的静态方法；③主要用于提供工具方法（如Collection的of()方法）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1092,
+    "title": "Java中的协变和逆变？",
+    "answer": "协变：子类型泛型可赋值给父类型泛型（如List<String> → List<? extends Object>）；逆变：父类型泛型可赋值给子类型泛型（如List<Object> → List<? super String>）。泛型数组是协变的，而泛型类默认不变，需通过通配符实现协变/逆变。",
+    "category": 0,
+    "difficulty": 2
+  },
+  {
+    "id": 1093,
+    "title": "WeakHashMap的特点？",
+    "answer": "WeakHashMap的key是弱引用，当key不再被强引用时，会被GC回收，对应的Entry自动移除。适用于缓存场景（如临时数据，内存不足时自动释放），与HashMap相比，无需手动移除过期数据。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1094,
+    "title": "线程池的corePoolSize和maximumPoolSize的区别？",
+    "answer": "corePoolSize：核心线程数，线程池保持的最小线程数，即使空闲也不销毁；maximumPoolSize：最大线程数，线程池允许创建的最大线程数。当任务数超过核心线程数+队列容量时，会创建新线程直至达到最大线程数。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1095,
+    "title": "G1收集器的工作流程？",
+    "answer": "G1工作流程：①初始标记（STW，标记GC Roots直接关联对象）；②并发标记（遍历对象引用链，无STW）；③最终标记（STW，处理并发标记遗漏的对象）；④筛选回收（STW，按区域价值和成本排序，优先回收收益高的区域）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1096,
+    "title": "try-catch-finally中return的执行顺序？",
+    "answer": "执行顺序：①try块中若有return，先计算返回值并暂存；②执行finally块；③返回暂存的return值（若finally中有return，会覆盖try的return值）。finally块的代码无论try/catch是否有return都会执行。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1097,
+    "title": "注解处理器（Annotation Processor）的作用？",
+    "answer": "注解处理器是编译期处理注解的工具，可在编译时扫描和处理注解，生成Java代码或资源文件。作用：①减少模板代码（如ButterKnife）；②编译期校验（如Lombok的@NonNull）；③代码生成（如Dagger依赖注入）。",
+    "category": 5,
+    "difficulty": 2
+  },
+  {
+    "id": 1098,
+    "title": "Java 8的CompletableFuture有什么作用？",
+    "answer": "CompletableFuture用于异步编程，支持非阻塞回调，可组合多个异步任务。相比Future，增加了链式调用（thenApply()、thenAccept()）、异常处理（exceptionally()）、任务组合（allOf()、anyOf()）等功能，简化异步代码编写。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1099,
+    "title": "什么是偏向锁、轻量级锁、重量级锁？",
+    "answer": "synchronized的锁升级过程：①偏向锁：同一线程多次获取锁时，只需CAS设置线程ID，无锁竞争时效率高；②轻量级锁：多线程交替获取锁，通过CAS自旋尝试获取锁，避免阻塞；③重量级锁：多线程竞争激烈，依赖操作系统互斥量，会导致线程阻塞。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1100,
+    "title": "Java中的元空间（Metaspace）和永久代（PermGen）的区别？",
+    "answer": "元空间是JDK1.8后替代永久代的内存区域：①存储位置：元空间使用本地内存，永久代在堆中；②大小限制：元空间默认无上限（受本地内存限制），永久代有固定大小；③垃圾回收：元空间回收更高效，减少OOM风险。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1101,
+    "title": "Java中的基本数据类型有哪些？各自占用多少字节？",
+    "answer": "Java有8种基本数据类型：byte(1字节)、short(2字节)、int(4字节)、long(8字节)、float(4字节)、double(8字节)、char(2字节)、boolean(1字节或不确定，取决于JVM)。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1102,
+    "title": "boolean类型为什么不能参与算术运算？",
+    "answer": "Java的boolean类型仅表示真或假，没有数值语义，设计上不支持算术运算。这与C/C++不同，避免了将非零值视为true的歧义，增强了类型安全性。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1103,
+    "title": "Java中的类型转换有哪些？需要注意什么？",
+    "answer": "类型转换分为：自动转换（小范围→大范围，如int→long）和强制转换（大范围→小范围，如double→int，需显式声明）。注意：强制转换可能导致精度丢失或溢出；引用类型转换需用instanceof判断，否则可能抛ClassCastException。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1104,
+    "title": "String、StringBuffer、StringBuilder的区别？",
+    "answer": "String不可变，每次修改创建新对象；StringBuffer可变，线程安全（方法加synchronized），效率低；StringBuilder可变，非线程安全，效率高。场景：少量操作用String，多线程用StringBuffer，单线程用StringBuilder。",
+    "category": 0,
+    "difficulty": 0
+  },
+  {
+    "id": 1105,
+    "title": "String的intern()方法作用？",
+    "answer": "intern()将字符串添加到字符串常量池：若常量池已有该字符串，返回池中的引用；否则将当前字符串加入常量池并返回引用。JDK1.7后，常量池移至堆中，intern()可能返回堆中对象引用。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1106,
+    "title": "Java中的匿名内部类有什么限制？",
+    "answer": "匿名内部类限制：①不能有构造方法；②不能定义静态成员；③只能实现一个接口或继承一个类；④访问外部类局部变量需用final修饰（JDK8后隐式final）。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1107,
+    "title": "静态内部类和非静态内部类的区别？",
+    "answer": "静态内部类：用static修饰，不依赖外部类实例，可直接访问外部类静态成员，不能直接访问非静态成员；非静态内部类：依赖外部类实例，可访问外部类所有成员，持有外部类引用。创建方式：静态→Outer.Inner()，非静态→outer.new Inner()。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1108,
+    "title": "Java中的异常体系结构？",
+    "answer": "异常体系以Throwable为根，分为：①Error（错误，如OutOfMemoryError，程序无法处理）；②Exception（异常，可处理），包括Checked Exception（受检，如IOException）和Unchecked Exception（非受检，如RuntimeException及其子类）。",
+    "category": 4,
+    "difficulty": 0
+  },
+  {
+    "id": 1109,
+    "title": "NullPointerException的常见原因及避免方式？",
+    "answer": "常见原因：调用null对象的方法/属性、数组为null时访问索引、自动拆箱null等。避免方式：①调用前判空；②使用Optional；③初始化对象；④使用StringUtils等工具类；⑤IDE静态检查。",
+    "category": 4,
+    "difficulty": 0
+  },
+  {
+    "id": 1110,
+    "title": "ArrayIndexOutOfBoundsException和IndexOutOfBoundsException的关系？",
+    "answer": "IndexOutOfBoundsException是父类，泛指索引越界；ArrayIndexOutOfBoundsException是子类，特指数组索引越界。类似的还有StringIndexOutOfBoundsException（字符串索引越界），均继承自IndexOutOfBoundsException。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1111,
+    "title": "HashMap的loadFactor（负载因子）作用？默认值是多少？",
+    "answer": "负载因子是哈希表实际元素数与容量的比值，用于决定何时扩容。默认0.75，平衡空间和时间效率：值过高减少扩容次数但增加哈希冲突；值过低减少冲突但浪费空间。当元素数≥容量×负载因子时触发扩容。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1112,
+    "title": "HashMap的初始容量为什么是16？",
+    "answer": "初始容量16是综合性能的选择：①2的幂次方，便于通过位运算（&）计算索引（hash & (n-1) 等价于模运算，效率更高）；②16大小适中，避免过小导致频繁扩容，或过大浪费空间。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1113,
+    "title": "LinkedList的get(int index)方法效率为什么低？",
+    "answer": "LinkedList基于双向链表，get(index)需从表头或表尾（根据索引位置选择近的一端）依次遍历至目标位置，时间复杂度O(n)。而ArrayList基于数组，可直接通过索引访问，时间复杂度O(1)。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1114,
+    "title": "HashSet如何保证元素不重复？",
+    "answer": "HashSet添加元素时，先通过hashCode()计算哈希值，定位到数组位置；再通过equals()比较该位置的元素（链表或红黑树中），若两者均相同则视为重复元素，不添加；否则添加新元素。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1115,
+    "title": "TreeMap的key可以为null吗？",
+    "answer": "TreeMap的key不能为null。因为TreeMap需要通过比较器（Comparator）或key实现的Comparable接口排序，null无法参与比较，会抛出NullPointerException。而HashMap允许key为null（仅一个）。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1116,
+    "title": "ConcurrentHashMap在JDK1.7和JDK1.8中的性能对比？",
+    "answer": "JDK1.7用分段锁（Segment），每个Segment独立加锁，并发度为Segment数量（默认16）；JDK1.8取消分段锁，用CAS+synchronized实现，粒度更细（对链表头/红黑树节点加锁），高并发下性能更优，支持更高并发量。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1117,
+    "title": "Array.asList()方法的返回值有什么特点？",
+    "answer": "Array.asList()返回固定大小的List（ArrayList的内部实现，非java.util.ArrayList），不支持add()、remove()等修改大小的操作（会抛UnsupportedOperationException）；返回的List由原数组支持，修改List会影响原数组，反之亦然。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1118,
+    "title": "Collections.emptyList()和new ArrayList()的区别？",
+    "answer": "Collections.emptyList()返回不可变空列表（无法添加元素），单例模式（所有调用返回同一实例），节省内存；new ArrayList()返回可变空列表（可添加元素），每次调用创建新实例。场景：返回空集合时用emptyList()更高效。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1119,
+    "title": "线程的join()方法作用？",
+    "answer": "join()让当前线程等待调用线程执行完毕后再继续。如t.join()表示当前线程阻塞，直至t线程执行完成。重载方法：join(long millis)等待指定毫秒，超时后继续执行。底层通过wait()实现。",
+    "category": 2,
+    "difficulty": 0
+  },
+  {
+    "id": 1120,
+    "title": "Thread.sleep()和Object.wait()的区别？",
+    "answer": "sleep()是Thread静态方法，暂停线程指定时间，不释放锁；wait()是Object方法，需在同步块中调用，释放锁并等待，需通过notify()唤醒。sleep()用于暂停执行，wait()用于线程间通信。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1121,
+    "title": "线程的优先级有什么作用？范围是多少？",
+    "answer": "线程优先级提示调度器哪个线程更重要，优先级高的线程获得更多执行机会。范围1-10，默认5（NORM_PRIORITY），最高10（MAX_PRIORITY），最低1（MIN_PRIORITY）。注意：优先级依赖操作系统，不保证绝对执行顺序。",
+    "category": 2,
+    "difficulty": 0
+  },
+  {
+    "id": 1122,
+    "title": "什么是守护线程（Daemon Thread）？",
+    "answer": "守护线程是为其他线程服务的线程（如GC线程），当所有非守护线程结束，守护线程自动终止。通过setDaemon(true)设置，需在start()前调用。守护线程不能持有资源（如文件锁），否则可能导致资源未释放。",
+    "category": 2,
+    "difficulty": 0
+  },
+  {
+    "id": 1123,
+    "title": "线程池的keepAliveTime作用？",
+    "answer": "keepAliveTime是当线程数超过corePoolSize时，多余空闲线程的存活时间。超过该时间仍空闲的线程会被终止，直到线程数等于corePoolSize。通过allowCoreThreadTimeOut(true)可让核心线程也受此参数影响。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1124,
+    "title": "Executors创建的线程池有哪些潜在问题？",
+    "answer": "潜在问题：①FixedThreadPool和SingleThreadExecutor的队列无界，可能导致OOM；②CachedThreadPool的最大线程数为Integer.MAX_VALUE，可能创建过多线程导致OOM；③不推荐在生产环境使用，应手动创建ThreadPoolExecutor指定参数。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1125,
+    "title": "AtomicStampedReference的作用？",
+    "answer": "AtomicStampedReference解决CAS的ABA问题（值从A→B→A，CAS误判为未修改）。通过维护一个版本号（stamp），CAS操作时同时检查值和版本号，只有两者都匹配才更新，确保操作的原子性和正确性。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1126,
+    "title": "什么是线程局部存储（Thread Local Storage）？",
+    "answer": "线程局部存储是让每个线程拥有变量独立副本的机制，Java通过ThreadLocal实现。每个线程的变量不被其他线程访问，避免同步开销。适用于存储线程私有状态（如用户会话、数据库连接），但需注意内存泄漏风险（及时remove()）。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1127,
+    "title": "Fork/Join框架的作用及原理？",
+    "answer": "Fork/Join用于并行处理大任务，基于分治法：①Fork：将大任务拆分为小任务并行执行；②Join：合并小任务结果。核心类：ForkJoinPool（线程池）、ForkJoinTask（任务）。特点：工作窃取（空闲线程窃取其他线程任务），提高效率。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1128,
+    "title": "什么是乐观锁和悲观锁？",
+    "answer": "悲观锁：认为并发冲突频繁，每次操作前加锁（如synchronized、ReentrantLock），阻塞其他线程，安全性高但效率低；乐观锁：认为冲突少，不加锁，操作时检查是否被修改（如CAS、版本号机制），无阻塞，效率高但需处理冲突重试。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1129,
+    "title": "ReentrantLock的可重入性是什么意思？",
+    "answer": "可重入性指同一线程可多次获取同一把锁，不会死锁。ReentrantLock通过计数器实现：线程首次获取锁，计数器=1；再次获取，计数器递增；释放时计数器递减，直至0释放锁。synchronized也具有可重入性。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1130,
+    "title": "JVM的即时编译器（JIT）作用？",
+    "answer": "JIT将热点代码（频繁执行的代码）从字节码编译为本地机器码，提高执行效率。工作流程：解释执行→识别热点代码→编译为机器码→缓存并复用。热点判定：基于方法调用次数或循环执行次数的计数器。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1131,
+    "title": "什么是逃逸分析？有什么作用？",
+    "answer": "逃逸分析是JIT的优化技术，分析对象是否逃逸出方法（如被外部引用）。若对象未逃逸，可优化：①栈上分配（避免堆分配，减少GC）；②标量替换（将对象拆分为基本类型）；③同步消除（移除无用同步锁）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1132,
+    "title": "GC Roots包含哪些对象？",
+    "answer": "GC Roots是可达性分析的起点，包括：①虚拟机栈中引用的对象；②方法区中类静态属性引用的对象；③方法区中常量引用的对象；④本地方法栈中JNI（Native方法）引用的对象；⑤活跃线程对象。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1133,
+    "title": "标记-清除算法的优缺点？",
+    "answer": "优点：实现简单，无需移动对象；缺点：①产生内存碎片（导致大对象无法分配）；②效率低（需遍历所有对象标记，再遍历清除）。是CMS收集器的基础算法。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1134,
+    "title": "复制算法的优缺点？",
+    "answer": "优点：①无内存碎片；②分配效率高（指针碰撞）；缺点：①内存利用率低（需预留一半空间）；②对象存活率高时复制成本大。适用于年轻代（对象存活率低），如SerialGC的年轻代。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1135,
+    "title": "类加载器的双亲委派模型有什么例外？",
+    "answer": "例外情况：①Tomcat的WebAppClassLoader（优先加载自身目录类，打破双亲委派）；②SPI机制（如JDBC，线程上下文类加载器加载服务实现）；③OSGi的类加载器（支持模块化热部署，灵活的委派规则）。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1136,
+    "title": "什么是类的主动使用和被动使用？",
+    "answer": "主动使用会触发类初始化：①创建实例；②调用静态方法；③访问静态变量；④反射；⑤初始化子类（父类先初始化）；⑥启动类（main方法所在类）。被动使用不触发初始化：如访问静态常量、子类引用父类静态变量等。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1137,
+    "title": "JVM的堆和栈有什么区别？",
+    "answer": "堆：①线程共享；②存储对象实例；③垃圾回收的主要区域；④大小动态变化。栈（虚拟机栈）：①线程私有；②存储栈帧（局部变量、操作数栈等）；③方法调用时创建，执行完销毁；④大小固定或动态扩展（可能栈溢出）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1138,
+    "title": "什么是直接内存（Direct Memory）？",
+    "answer": "直接内存是堆外内存，不受JVM堆大小限制（受本地内存限制），通过DirectByteBuffer访问。优点：减少堆内存与本地内存的数据拷贝，提高IO效率；缺点：可能导致OOM（不受-Xmx控制），回收依赖Cleaner机制。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1139,
+    "title": "ZGC收集器的特点？",
+    "answer": "ZGC是低延迟垃圾收集器，特点：①STW时间短（毫秒级）；②支持TB级堆；③并发执行大部分阶段；④基于Region的内存布局；⑤使用着色指针和读屏障技术；⑥适用于对延迟敏感的大型应用。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1140,
+    "title": "什么是类的卸载？哪些类会被卸载？",
+    "answer": "类的卸载指类的Class对象被GC回收，类信息从方法区移除。满足条件：①该类所有实例被回收；②加载该类的ClassLoader被回收；③该类的Class对象无引用。系统类加载器加载的类（如rt.jar中的类）不会被卸载。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1141,
+    "title": "Java中的泛型擦除是什么？有什么影响？",
+    "answer": "泛型擦除指编译时检查泛型类型，运行时泛型信息被擦除（替换为上限类型，如List<String>→List）。影响：①不能用instanceof判断泛型类型；②不能创建泛型数组；③静态方法不能引用类的泛型参数；④泛型异常无法捕获。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1142,
+    "title": "Java中的通配符有哪些？各自用途？",
+    "answer": "通配符：①? extends T（上界通配符）：表示T及其子类，只能读取（get）不能写入（除null）；②? super T（下界通配符）：表示T及其父类，只能写入（add）不能安全读取（返回Object）；③?（无界通配符）：表示任意类型，类似? extends Object。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1143,
+    "title": "Java中的枚举（Enum）有什么特点？",
+    "answer": "枚举是特殊类，继承Enum类，实例不可变且有限。特点：①枚举常量是静态 final 实例；②默认实现Serializable和Comparable；③可定义构造方法（私有）、属性、方法；④可用于switch语句；⑤防止反射创建实例。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1144,
+    "title": "Java中的大数类有哪些？如何使用？",
+    "answer": "大数类用于处理超出基本类型范围的数值：①BigInteger（整数）：支持任意精度整数运算，方法如add()、subtract()、multiply()、divide()；②BigDecimal（小数）：支持高精度小数运算，需指定精度和舍入模式避免精度丢失。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1145,
+    "title": "Java中的反射如何访问私有成员？",
+    "answer": "通过反射的setAccessible(true)方法绕过访问检查：①获取私有字段：clazz.getDeclaredField(\"fieldName\")，调用setAccessible(true)后用set()/get()操作；②获取私有方法：clazz.getDeclaredMethod(\"methodName\")，调用setAccessible(true)后用invoke()执行。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1146,
+    "title": "Java的动态代理为什么要求目标类实现接口？",
+    "answer": "JDK动态代理通过生成目标接口的实现类作为代理类，代理类继承Proxy类（Java单继承），因此只能代理接口。若目标类无接口，需用CGLIB动态代理（通过继承目标类生成代理类）。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1147,
+    "title": "Lombok的@Data注解做了什么？",
+    "answer": "@Data是Lombok的复合注解，自动生成：①所有字段的getter，非final字段的setter；②equals()、hashCode()；③toString()；④无参构造方法。简化POJO类代码，但可能降低代码可读性，需IDE支持。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1148,
+    "title": "Java的序列化版本号（serialVersionUID）作用？",
+    "answer": "serialVersionUID用于验证序列化和反序列化的类版本一致性。若类未显式定义，JVM会根据类结构自动生成；若类结构变化（如增减字段），自动生成的值会变化，导致反序列化失败。显式定义可保证版本兼容。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1149,
+    "title": "Java中的深拷贝和浅拷贝的区别？",
+    "answer": "浅拷贝：复制对象时，仅复制基本类型字段，引用类型字段复制引用地址（原对象和副本共享引用对象）；深拷贝：复制对象及所有引用类型字段指向的对象（完全独立）。实现：浅拷贝→Cloneable接口，深拷贝→序列化/反序列化或递归克隆。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1150,
+    "title": "Java 8的Stream和Collection的区别？",
+    "answer": "Stream是数据处理管道，不存储数据，支持惰性求值和并行处理；Collection是数据容器，存储数据，操作是即时的。Stream操作分为中间操作（返回Stream，如filter()）和终端操作（返回结果，如collect()），终端操作触发执行。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1151,
+    "title": "Java 8的Stream的flatMap()方法作用？",
+    "answer": "flatMap()将流中的每个元素转换为一个流，再将所有流合并为一个流（扁平化）。如List<List<String>>转换为List<String>：list.stream().flatMap(Collection::stream).collect(Collectors.toList())。与map()的区别：map()返回单个元素，flatMap()返回流。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1152,
+    "title": "Java 8的Collectors工具类有哪些常用方法？",
+    "answer": "常用方法：①toList()/toSet()（转为集合）；②toMap()（转为Map）；③groupingBy()（分组）；④partitioningBy()（按布尔值分区）；⑤joining()（字符串拼接）；⑥summingInt()/averagingInt()（求和/平均值）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1153,
+    "title": "Java 9的Try-With-Resources改进？",
+    "answer": "Java 9允许在try-with-resources中使用已声明的final变量或有效final变量，无需重新声明。例如：InputStream in = new FileInputStream(\"file.txt\"); try (in) { ... }，简化了代码。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1154,
+    "title": "Java 10的局部变量类型推断有什么限制？",
+    "answer": "限制：①不能用于类字段、方法参数、返回值；②必须初始化（如var x; 错误）；③不能用于数组初始化为空（如var[] arr = {}; 错误）；④lambda表达式不能直接赋值（如var func = () -> {}; 错误，需指定函数式接口）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1155,
+    "title": "Java 12的Switch表达式改进？",
+    "answer": "Java 12增强switch：①支持箭头语法（case x -> ...），无需break；②可作为表达式返回值；③支持多个case合并（case x, y -> ...）。例如：int result = switch (day) { case MONDAY -> 1; case TUESDAY -> 2; default -> 0; }。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1156,
+    "title": "Java 13的文本块（Text Blocks）作用？",
+    "answer": "文本块用三重引号（\"\"\"）表示多行字符串，保留换行和缩进，无需转义字符（如\\n），使JSON、SQL等多行文本更易读。例如：String json = \"\"\"{ \"name\": \"Java\" }\"\"\"; 。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1157,
+    "title": "Java 14的Records和Lombok的@Data的区别？",
+    "answer": "Records是JDK原生支持的不可变数据类，编译期生成方法，无需依赖第三方库；@Data是Lombok注解，通过编译期注解处理器生成代码，需依赖Lombok库和IDE插件。Records更简洁且无第三方依赖，@Data更灵活（支持可变字段）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1158,
+    "title": "Java 15的密封类（Sealed Classes）解决了什么问题？",
+    "answer": "密封类限制继承关系，防止不可控的子类扩展，解决了普通类继承过于灵活的问题。通过指定允许的子类，增强代码可维护性和安全性，明确API设计意图（如只允许特定类实现接口）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1159,
+    "title": "Java 16的Vector API有什么作用？",
+    "answer": "Vector API提供矢量计算支持，允许开发者编写平台无关的矢量算法，利用CPU的SIMD（单指令多数据）指令，提升数值计算性能（如科学计算、机器学习）。目前为孵化阶段，通过jdk.incubator.vector包使用。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1160,
+    "title": "Java 17的增强伪随机数生成器（PRNG）？",
+    "answer": "Java 17新增RandomGenerator接口及多种实现，统一PRNG API，支持流操作和跳跃（jump）功能。实现包括：L32X64MixRandom、Xoshiro256PlusPlus等，提供更好的性能和统计特性，替代旧的Random和ThreadLocalRandom。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1161,
+    "title": "Java中的单例模式为什么要防止序列化？",
+    "answer": "默认序列化会将单例对象写入流，反序列化时创建新实例，破坏单例。解决方式：在单例类中添加readResolve()方法，返回原有单例实例，覆盖反序列化创建的新对象。",
+    "category": 0,
+    "difficulty": 2
+  },
+  {
+    "id": 1162,
+    "title": "Java中的工厂模式有哪几种？",
+    "answer": "工厂模式分为：①简单工厂（一个工厂类根据参数创建不同产品）；②工厂方法（每个产品对应一个工厂接口实现类）；③抽象工厂（创建一系列相关产品，提供产品族的创建接口）。作用：解耦产品创建和使用，隐藏实现细节。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1163,
+    "title": "Java中的观察者模式是什么？",
+    "answer": "观察者模式定义对象间一对多依赖，当主题（被观察者）状态变化时，通知所有观察者自动更新。Java通过Observable类和Observer接口实现，或自定义接口。应用：GUI事件监听、消息订阅系统。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1164,
+    "title": "Java中的适配器模式作用？",
+    "answer": "适配器模式将一个类的接口转换为客户端期望的另一个接口，使不兼容的类可协同工作。分为类适配器（继承适配者）和对象适配器（持有适配者引用）。应用：Java的InputStreamReader（字节流→字符流）。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1165,
+    "title": "Java中的装饰器模式和代理模式的区别？",
+    "answer": "装饰器模式：动态添加对象功能，强调功能扩展，装饰器和被装饰者实现同一接口，通常透明使用；代理模式：控制对象访问，强调权限控制或附加操作（如日志、事务），代理类可能隐藏被代理对象。",
+    "category": 5,
+    "difficulty": 2
+  },
+  {
+    "id": 1166,
+    "title": "Java IO流的分类？",
+    "answer": "IO流分类：①按方向：输入流、输出流；②按数据单位：字节流（InputStream/OutputStream）、字符流（Reader/Writer）；③按功能：节点流（直接操作数据源）、处理流（包装节点流，增强功能，如BufferedStream）。",
+    "category": 5,
+    "difficulty": 0
+  },
+  {
+    "id": 1167,
+    "title": "BufferedReader的readLine()方法为什么比InputStream的read()高效？",
+    "answer": "BufferedReader使用缓冲区（默认8192字符），一次从底层流读取多个字符到缓冲区，后续readLine()从缓冲区获取，减少IO操作次数；InputStream的read()每次读取一个字节，频繁IO操作，效率低。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1168,
+    "title": "NIO和IO的区别？",
+    "answer": "IO是阻塞式、面向流、单向的；NIO是非阻塞式、面向缓冲区、双向的，基于通道（Channel）和缓冲区（Buffer），支持选择器（Selector）实现单线程处理多通道。NIO更适合高并发场景，IO适合简单场景。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1169,
+    "title": "Java中的Path和File的区别？",
+    "answer": "Path是NIO中的接口，代表文件系统路径，支持更多路径操作（如resolve()、relativize()），可跨平台；File是IO中的类，代表文件或目录，操作有限。Java 7后推荐用Path和Files工具类替代File。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1170,
+    "title": "Java中的序列化为什么不序列化静态字段？",
+    "answer": "静态字段属于类而非实例，序列化是针对对象实例的，因此不序列化静态字段。反序列化时，静态字段的值取自当前类的静态变量，而非序列化流中的值，保持类级别的一致性。",
+    "category": 5,
+    "difficulty": 1
+  },
+  {
+    "id": 1171,
+    "title": "CopyOnWriteArrayList适用于什么场景？",
+    "answer": "适用于读多写少的场景（如缓存、配置列表）。优点：读操作无锁，效率高；缺点：写操作复制数组，开销大，且读可能获取旧数据（最终一致性）。不适合频繁修改或数据量大的场景。",
+    "category": 1,
+    "difficulty": 1
+  },
+  {
+    "id": 1172,
+    "title": "LinkedHashMap如何实现LRU缓存？",
+    "answer": "LRU（最近最少使用）缓存通过LinkedHashMap的accessOrder=true实现：访问元素（get/put）时，元素移至链表尾部；当容量不足时，移除链表头部元素（最久未使用）。需重写removeEldestEntry()方法定义移除条件。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1173,
+    "title": "EnumSet的实现原理？",
+    "answer": "EnumSet是专门存储枚举的集合，基于位向量实现（高效紧凑）。根据枚举数量，使用RegularEnumSet（64个以下枚举，long存储）或JumboEnumSet（64个以上，long数组存储）。特点：有序（按枚举声明顺序）、高效、非线程安全。",
+    "category": 1,
+    "difficulty": 2
+  },
+  {
+    "id": 1174,
+    "title": "线程池中的工作队列为空且无任务时，核心线程会被销毁吗？",
+    "answer": "默认不会，核心线程会一直存活等待新任务。若设置allowCoreThreadTimeOut(true)，核心线程在空闲时间超过keepAliveTime后会被销毁，直到线程数为0，适合短期任务场景。",
+    "category": 2,
+    "difficulty": 1
+  },
+  {
+    "id": 1175,
+    "title": "什么是线程的虚假唤醒（Spurious Wakeup）？",
+    "answer": "虚假唤醒指线程在没有被notify()/notifyAll()唤醒的情况下从wait()中返回，是操作系统底层实现导致的。解决方式：将wait()放在循环中，重新检查唤醒条件，如while (condition) { wait(); }。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1176,
+    "title": "ReentrantReadWriteLock的特点？",
+    "answer": "ReentrantReadWriteLock（读写锁）允许多个读线程同时访问，写线程独占访问，提高读多写少场景的并发效率。特点：①读锁共享，写锁排他；②可重入；③支持公平/非公平模式；④读锁不能升级为写锁，写锁可降级为读锁。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1177,
+    "title": "Fork/Join框架的工作窃取算法？",
+    "answer": "工作窃取算法让空闲线程从繁忙线程的任务队列尾部窃取任务执行，减少线程竞争。每个线程有自己的双端队列，执行自己任务时从头部获取，窃取时从尾部获取。优点：提高CPU利用率，减少阻塞。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1178,
+    "title": "ThreadLocal可能导致内存泄漏的原因？",
+    "answer": "ThreadLocal的内存泄漏源于：ThreadLocalMap的key是弱引用（ThreadLocal实例），value是强引用（线程变量）。当ThreadLocal被回收，key为null，但value仍被线程引用，若线程长期存活（如线程池），value无法回收导致泄漏。解决：使用后调用remove()。",
+    "category": 2,
+    "difficulty": 2
+  },
+  {
+    "id": 1179,
+    "title": "JVM的逃逸分析如何判断对象是否逃逸？",
+    "answer": "逃逸分析通过数据流分析判断对象引用是否出界：①方法逃逸：对象被返回给调用者或被外部对象引用；②线程逃逸：对象被其他线程访问。若对象既不方法逃逸也不线程逃逸，则为非逃逸对象，可进行栈上分配等优化。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1180,
+    "title": "G1收集器的Region大小如何确定？",
+    "answer": "G1将堆划分为大小相同的Region，大小由堆总大小决定，范围1MB-32MB（2的幂次方）。计算方式：将堆大小除以2048，取接近的2的幂次方。例如：4GB堆 → 4GB/2048=2MB，Region大小为2MB。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1181,
+    "title": "JVM的类初始化顺序？",
+    "answer": "类初始化顺序：①父类静态变量和静态代码块（按声明顺序）；②子类静态变量和静态代码块（按声明顺序）；③父类实例变量和实例代码块（按声明顺序）；④父类构造方法；⑤子类实例变量和实例代码块（按声明顺序）；⑥子类构造方法。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1182,
+    "title": "什么是JVM的方法内联？",
+    "answer": "方法内联是JIT优化，将被调用方法的代码嵌入到调用方法中，减少方法调用开销（如栈帧创建）。条件：方法体小、被频繁调用。对性能提升显著，尤其是小型工具方法（如getter/setter）。",
+    "category": 3,
+    "difficulty": 1
+  },
+  {
+    "id": 1183,
+    "title": "JVM的内存屏障（Memory Barrier）作用？",
+    "answer": "内存屏障阻止指令重排序，保证内存可见性：①LoadLoad屏障（禁止load后load重排）；②StoreStore屏障（禁止store后store重排）；③LoadStore屏障（禁止load后store重排）；④StoreLoad屏障（禁止store后load重排，最强大）。volatile通过内存屏障实现可见性和有序性。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1184,
+    "title": "JVM的标量替换优化？",
+    "answer": "标量替换将对象拆分为基本类型（标量），直接在栈上分配这些标量，而非创建对象。前提：对象未逃逸且可分解。优点：减少堆分配，降低GC压力，提高访问速度。由逃逸分析触发。",
+    "category": 3,
+    "difficulty": 2
+  },
+  {
+    "id": 1185,
+    "title": "Java中的异常链如何构建？",
+    "answer": "通过异常的构造方法传递cause构建异常链：①创建新异常时传入原始异常，如throw new MyException(\"错误\", originalException); ②使用initCause()方法设置cause，如new MyException().initCause(originalException)。通过getCause()获取原始异常，追溯错误根源。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1186,
+    "title": "try-with-resources中多个资源的关闭顺序？",
+    "answer": "try-with-resources中声明的多个资源按逆序关闭（最后声明的先关闭）。例如：try (A a = new A(); B b = new B()) { ... }，关闭顺序为b先关闭，a后关闭，确保依赖资源正确释放（如先关流，再关连接）。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1187,
+    "title": "NoClassDefFoundError和ClassNotFoundException的区别？",
+    "answer": "NoClassDefFoundError是Error，指编译时存在类，运行时找不到（如类路径错误、类被删除）；ClassNotFoundException是Exception，指主动加载类时找不到（如Class.forName()参数错误）。前者是链接错误，后者是加载时异常。",
+    "category": 4,
+    "difficulty": 1
+  },
+  {
+    "id": 1188,
+    "title": "Java中的泛型方法如何定义？",
+    "answer": "泛型方法在方法返回值前声明类型参数，格式：<T> 返回值 方法名(参数) { ... }。例如：public static <T> List<T> createList(T... elements) { ... }。泛型方法可在普通类或泛型类中定义，类型参数独立于类的泛型参数。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1189,
+    "title": "Java中的桥接方法（Bridge Method）是什么？",
+    "answer": "桥接方法是编译器生成的合成方法，用于解决泛型擦除和继承带来的问题。例如：子类重写父类泛型方法时，编译器生成桥接方法调用实际重写的方法，确保多态正确。可通过Method.isBridge()判断。",
+    "category": 0,
+    "difficulty": 2
+  },
+  {
+    "id": 1190,
+    "title": "Java中的自动装箱可能导致的性能问题？",
+    "answer": "频繁自动装箱会创建大量包装类对象，增加GC压力。例如：循环中int→Integer的自动装箱，会创建多个Integer对象（超出缓存范围时）。优化：手动缓存常用对象，或使用基本类型数组。",
+    "category": 0,
+    "difficulty": 1
+  },
+  {
+    "id": 1191,
+    "title": "Java 8的CompletableFuture如何处理异常？",
+    "answer": "CompletableFuture处理异常的方法：①exceptionally()：捕获异常并返回默认值；②handle()：同时处理正常结果和异常；③whenComplete()：处理结果或异常，不改变返回值。例如：future.exceptionally(ex -> defaultValue)。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1192,
+    "title": "Java 8的日期时间API如何格式化日期？",
+    "answer": "使用DateTimeFormatter格式化：①预定义格式（如ISO_LOCAL_DATE）；②自定义格式（如DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm:ss\")）。示例：LocalDateTime.now().format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\"))。DateTimeFormatter是线程安全的，优于SimpleDateFormat。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1193,
+    "title": "Java 9的接口私有方法作用？",
+    "answer": "Java 9允许接口定义私有方法（static private和private），用于接口内部方法的代码复用，避免默认方法（default）中的代码重复，同时不暴露实现细节。私有方法只能在接口内部被其他方法调用。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1194,
+    "title": "Java 11的字符串增强方法？",
+    "answer": "Java 11新增字符串方法：①isBlank()（判断是否空白）；②lines()（按行分割为Stream）；③strip()/stripLeading()/stripTrailing()（去除空白，比trim()更智能）；④repeat(int)（重复字符串）。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1195,
+    "title": "Java 12的CompactNumberFormat作用？",
+    "answer": "CompactNumberFormat用于格式化紧凑数字（如1000→\"1K\"，1000000→\"1M\"），支持不同语言环境。通过NumberFormat.getCompactNumberInstance()获取实例，适用于显示大数字时节省空间（如统计数据）。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1196,
+    "title": "Java 13的ZGC增强？",
+    "answer": "Java 13的ZGC支持将未使用的堆内存归还给操作系统，减少内存占用；优化了并发类卸载，提高大堆场景下的性能；修复了多个稳定性问题，使ZGC更接近生产可用（Java 15正式转正）。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1197,
+    "title": "Java 14的NullPointerException增强？",
+    "answer": "Java 14的NPE异常信息更详细，明确指出哪个变量为null及具体位置，例如：\"Cannot invoke \"String.length()\" because \"str\" is null\"，而非模糊的\"NullPointerException\"，便于快速定位问题。",
+    "category": 6,
+    "difficulty": 1
+  },
+  {
+    "id": 1198,
+    "title": "Java 15的EdDSA签名算法支持？",
+    "answer": "Java 15新增对EdDSA（Edwards-Curve Digital Signature Algorithm）的支持，这是一种现代、高效、安全的椭圆曲线签名算法，比现有算法（如ECDSA）性能更好，适合密码学应用和安全通信场景。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1199,
+    "title": "Java 16的Unix域套接字支持？",
+    "answer": "Java 16支持Unix域套接字（Unix Domain Sockets），用于同一主机上的进程间通信（IPC），比TCP套接字更高效（无需网络协议栈）。通过java.net.UnixDomainSocketAddress等类实现，适用于本地进程通信场景。",
+    "category": 6,
+    "difficulty": 2
+  },
+  {
+    "id": 1200,
+    "title": "Java 17的密封类与Records结合使用的好处？",
+    "answer": "密封类与Records结合可创建简洁、安全的数据模型：密封类限制继承，Records提供不可变数据载体，两者结合确保数据类型的完整性和可控性，适合代数数据类型（如表达式树、状态模式），代码更简洁且意图明确。",
+    "category": 6,
+    "difficulty": 2
+  }
+]

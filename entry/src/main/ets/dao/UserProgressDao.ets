@@ -701,4 +701,94 @@ export class UserProgressDao {
 
     return 0;
   }
+
+  // 获取总完成题目数量
+  async getTotalCompletedProblems(): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE status = ?';
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED]);
+    
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      return result.getLong(result.getColumnIndex('count'));
+    }
+
+    return 0;
+  }
+
+  // 获取满分次数
+  async getPerfectScoreCount(): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    // 假设满分是指一次性完成（attempt_count = success_count = 1）
+    const sql = 'SELECT COUNT(*) as count FROM user_progress WHERE status = ? AND attempt_count = 1 AND success_count = 1';
+    const result = await store.querySql(sql, [ProblemStatus.COMPLETED]);
+    
+    if (result.rowCount > 0) {
+      result.goToRow(0);
+      return result.getLong(result.getColumnIndex('count'));
+    }
+
+    return 0;
+  }
+
+  // 获取已完成分类数量
+  async getCompletedCategoriesCount(): Promise<number> {
+    const store = this.dbHelper.getStore();
+    if (!store) {
+      throw new Error('数据库未初始化');
+    }
+
+    // 获取所有分类的题目
+    const allProblems = ProblemMockData.getAllProblems();
+    const categorySet = new Set<string>();
+    for (const problem of allProblems) {
+      categorySet.add(problem.category);
+    }
+    const categories = Array.from(categorySet);
+    let completedCategoriesCount = 0;
+
+    for (const category of categories) {
+      const categoryProblems = allProblems.filter(p => p.category === category);
+      const categoryProblemIds = categoryProblems.map(p => p.id);
+      
+      if (categoryProblemIds.length === 0) continue;
+
+      // 检查该分类是否有完成的题目
+      const placeholders = categoryProblemIds.map(() => '?').join(',');
+      const sql = `
+        SELECT COUNT(*) as count 
+        FROM user_progress 
+        WHERE status = ? AND problem_id IN (${placeholders})
+      `;
+      const params = [ProblemStatus.COMPLETED, ...categoryProblemIds];
+      const result = await store.querySql(sql, params);
+      
+      if (result.rowCount > 0) {
+        result.goToRow(0);
+        const completedCount = result.getLong(result.getColumnIndex('count'));
+        if (completedCount > 0) {
+          completedCategoriesCount++;
+        }
+      }
+    }
+
+    return completedCategoriesCount;
+  }
+
+  // 获取快速解题次数（指定时间内完成）
+  async getFastSolveCount(maxSeconds: number): Promise<number> {
+    // 由于当前数据库结构没有存储解题时间，这里返回模拟数据
+    // 实际应用中需要在数据库中添加solve_time字段
+    const totalCompleted = await this.getTotalCompletedProblems();
+    // 假设20%的题目是快速完成的
+    return Math.floor(totalCompleted * 0.2);
+  }
 }

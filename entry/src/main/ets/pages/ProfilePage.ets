@@ -166,7 +166,7 @@ export struct ProfilePage {
    */
   private generateUserNickname() {
     const randomNum = Math.floor(Math.random() * 9000) + 1000; // 生成 1000-9999 的随机数
-    this.userNickname = `算法学习者${randomNum}`;
+    this.userNickname = `LeaderCode学习者${randomNum}`;
   }
 
   onRefreshProfile() {
@@ -750,7 +750,7 @@ export struct ProfilePage {
 
       // 应用信息
       Column() {
-        Text('算法天天练')
+        Text('LeaderCode')
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
           .fontColor($r('app.color.primary_text_color'))
@@ -761,7 +761,7 @@ export struct ProfilePage {
           .fontColor($r('app.color.secondary_text_color'))
           .margin({ bottom: 8 })
 
-        Text('您的专业算法学习助手')
+        Text('成就你的笔试面试，引领编程生涯')
           .fontSize(14)
           .fontColor($r('app.color.primary_text_color'))
           .textAlign(TextAlign.Center)
@@ -774,7 +774,7 @@ export struct ProfilePage {
       Blank()
 
       // 版权信息
-      Text('© 2025 算法天天练团队')
+      Text('© 2025 LeaderCode团队')
         .fontSize(12)
         .fontColor($r('app.color.tertiary_text_color'))
         .margin({ bottom: 20 })

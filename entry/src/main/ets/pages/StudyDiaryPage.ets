@@ -184,13 +184,14 @@ struct StudyDiaryPage {
       .alignItems(HorizontalAlign.Center)
       .height('70%')
     } else {
-      List({ space: 12 }) {
+      Column() { List({ space: 12 }) {
         ForEach(this.diaries, (diary: StudyDiaryModel) => {
           this.buildDiaryCard(diary)
         }, (diary: StudyDiaryModel) => diary.id.toString())
       }
       .padding(16)
-      .width('100%').height('100%')
+      .width('100%').height('100%')}.layoutWeight(1)
+
     }
   }
 
