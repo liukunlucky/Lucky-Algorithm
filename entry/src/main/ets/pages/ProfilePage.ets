@@ -166,7 +166,7 @@ export struct ProfilePage {
    */
   private generateUserNickname() {
     const randomNum = Math.floor(Math.random() * 9000) + 1000; // 生成 1000-9999 的随机数
-    this.userNickname = `LeaderCode学习者${randomNum}`;
+    this.userNickname = `LeaderCoder${randomNum}`;
   }
 
   onRefreshProfile() {

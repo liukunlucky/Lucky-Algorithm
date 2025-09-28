@@ -20,6 +20,14 @@
     "pages/KnowledgeRecitePage",
     "pages/StudyAchievementPage",
     "pages/InterviewBankPage",
-    "pages/InterviewGuideePage"
+    "pages/InterviewGuideePage",
+    "pages/BigCompanyPage",
+    "pages/CompanyProblemDetailPage",
+    "pages/MyRecordPage",
+    "pages/MyOfferPage",
+    "pages/AddInterviewRecordPage",
+    "pages/AddOfferPage",
+    "pages/OfferComparisonPage",
+    "pages/InterviewArticleDetailPage"
   ]
 }

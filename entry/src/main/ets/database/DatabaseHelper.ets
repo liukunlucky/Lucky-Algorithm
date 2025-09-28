@@ -19,7 +19,7 @@ export class DatabaseHelper {
   private static instance: DatabaseHelper;
   private store: relationalStore.RdbStore | null = null;
   private readonly DATABASE_NAME = 'algorithm_practice.db';
-  private readonly DATABASE_VERSION = 1;
+  private readonly DATABASE_VERSION = 2;
 
   private constructor() {}
 
@@ -39,11 +39,45 @@ export class DatabaseHelper {
       };
 
       this.store = await relationalStore.getRdbStore(context, config);
+      await this.upgradeDatabase();
       await this.createTables();
       await this.initDefaultData();
     } catch (error) {
       console.error('Database initialization failed:', error);
       throw new Error('数据库初始化失败');
+    }
+  }
+
+  // 升级数据库
+  private async upgradeDatabase(): Promise<void> {
+    if (!this.store) {
+      throw new Error('数据库未初始化');
+    }
+
+    try {
+      // 检查是否需要添加hr_name列
+      const checkColumnSql = `PRAGMA table_info(offers)`;
+      const result = await this.store.querySql(checkColumnSql);
+      
+      let hasHrNameColumn = false;
+      for (let i = 0; i < result.rowCount; i++) {
+        result.goToRow(i);
+        const columnName = result.getString(result.getColumnIndex('name'));
+        if (columnName === 'hr_name') {
+          hasHrNameColumn = true;
+          break;
+        }
+      }
+
+      // 如果没有hr_name列，则添加
+      if (!hasHrNameColumn) {
+        const addColumnSql = `ALTER TABLE offers ADD COLUMN hr_name TEXT`;
+        await this.store.executeSql(addColumnSql);
+        console.info('Added hr_name column to offers table');
+      }
+    } catch (error) {
+      console.error('Database upgrade failed:', error);
+      // 不抛出错误，因为表可能还不存在
     }
   }
 
@@ -137,12 +171,68 @@ export class DatabaseHelper {
         updated_at TEXT NOT NULL
       )
     `;
+
+    // 创建面试记录表
+    const createInterviewRecordsTable = `
+      CREATE TABLE IF NOT EXISTS interview_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company TEXT NOT NULL,
+        position TEXT NOT NULL,
+        interview_date TEXT NOT NULL,
+        round INTEGER NOT NULL,
+        status INTEGER NOT NULL,
+        result INTEGER NOT NULL,
+        offer_status INTEGER NOT NULL,
+        interview_type TEXT NOT NULL,
+        interviewer TEXT,
+        duration INTEGER DEFAULT 0,
+        questions TEXT,
+        answers TEXT,
+        tech_stack TEXT,
+        difficulty INTEGER DEFAULT 1,
+        experience TEXT,
+        notes TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )
+    `;
+
+    // 创建Offer表
+    const createOffersTable = `
+      CREATE TABLE IF NOT EXISTS offers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company TEXT NOT NULL,
+        position TEXT NOT NULL,
+        base_salary REAL NOT NULL,
+        bonus REAL DEFAULT 0,
+        stock_options REAL DEFAULT 0,
+        other_benefits TEXT,
+        work_type INTEGER NOT NULL,
+        work_mode INTEGER NOT NULL,
+        work_location TEXT,
+        offer_date TEXT NOT NULL,
+        response_deadline TEXT,
+        start_date TEXT,
+        hr_contact TEXT,
+        hr_name TEXT,
+        hr_phone TEXT,
+        hr_email TEXT,
+        notes TEXT,
+        satisfaction_score INTEGER DEFAULT 0,
+        status INTEGER NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )
+    `;
+
     await this.store.executeSql(createProblemsTable);
     await this.store.executeSql(createUserProgressTable);
     await this.store.executeSql(createExamRecordsTable);
     await this.store.executeSql(createUserNotesTable);
     await this.store.executeSql(createStudyDiaryTable);
     await this.store.executeSql(createStudyGoalsTable);
+    await this.store.executeSql(createInterviewRecordsTable);
+    await this.store.executeSql(createOffersTable);
   }
 
   // 初始化默认数据

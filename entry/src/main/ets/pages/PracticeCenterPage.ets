@@ -1,8 +1,19 @@
-import { ProblemModel, ProblemDifficulty, ProblemCategory } from '../model/ProblemModel';
-import { UserProgressModel } from '../model/UserProgressModel';
-import { ProblemMockData } from '../mock/ProblemMockData';
-import { UserProgressDao } from '../dao/UserProgressDao';
 import router from '@ohos.router';
+import util from '@ohos.util';
+import { ProblemModel, ProblemType, ProblemCategory, ProblemDifficulty, ProblemSource } from '../model/ProblemModel';
+import { ProblemService } from '../service/ProblemService';
+
+import { AppButton } from '../components/AppButton';
+
+import { ProblemMockData } from '../mock/ProblemMockData';
+
+interface InterviewQuestion {
+  id: number;
+  title: string;
+  answer: string;
+  category: number;
+  difficulty: number;
+}
 
 interface CategoryConfig {
   category: ProblemCategory;
@@ -13,30 +24,38 @@ interface CategoryConfig {
 
 @Component
 export struct PracticeCenterPage {
-  @State searchText: string = '';
+  // 笔试题相关状态
   @State problems: ProblemModel[] = [];
-  @State isLoading: boolean = false;
+  @State filteredProblems: ProblemModel[] = [];
   @State selectedCategory: ProblemCategory | null = null;
+  @State searchText: string = '';
+  @State isLoading: boolean = false;
+
+  
+  // Tab控制
+  @State currentTabIndex: number = 0; // 0: 面试题, 1: 笔试题
+  private tabsController: TabsController = new TabsController();
+  
+  // 面试题相关状态
+  @State interviewQuestions: InterviewQuestion[] = [];
+  @State filteredInterviewQuestions: InterviewQuestion[] = [];
+  @State interviewSelectedCategory: string = '全部';
+  @State interviewSearchKeyword: string = '';
+  @State showDetailDialog: boolean = false;
+  @State selectedQuestion: InterviewQuestion | null = null;
+  @State showInterviewCategoryDialog: boolean = false;
+  
   @State selectedDifficulty: ProblemDifficulty | null = null;
   @State isExpanded: boolean = false; // 控制题目类型展开状态
+  @State interviewCount: number = 0; // 面试题数量
+  @State writtenTestCount: number = 0; // 笔试题数量
   @StorageLink('selectedCategory') @Watch('onExternalCategoryChange') externalSelectedCategory: ProblemCategory | null = null;
   @StorageLink('selectedCategoryTitle') externalSelectedCategoryTitle: string = '';
-  
-  // 使用mock数据，不再需要数据库实例
-  private userProgressDao: UserProgressDao = new UserProgressDao();
 
   aboutToAppear() {
+    this.loadInterviewQuestions();
     this.loadProblems();
-    
-    // 检查是否有外部传递的分类参数
-    if (this.externalSelectedCategory) {
-      this.selectedCategory = this.externalSelectedCategory;
-      this.loadProblems();
-      
-      // 清除参数，避免下次进入时还保持选中状态
-      AppStorage.set('selectedCategory', null);
-      AppStorage.set('selectedCategoryTitle', '');
-    }
+    this.loadProblemsCount();
   }
 
   /**
@@ -54,6 +73,171 @@ export struct PracticeCenterPage {
   }
 
   build() {
+    Stack() {
+      // 主要内容
+      Column() {
+        Tabs({ barPosition: BarPosition.Start, controller: this.tabsController }) {
+          // 面试题Tab
+          TabContent() {
+            this.buildInterviewContent()
+          }
+          .tabBar(this.buildInterviewTabBarItem('面试题', 0))
+
+          // 笔试题Tab
+          TabContent() {
+            this.buildAlgorithmContent()
+          }
+          .tabBar(this.buildTabBarItem('笔试题', this.writtenTestCount, 1))
+        }
+        .animationDuration(300)
+        .scrollable(false)
+        .backgroundColor('#F8F9FA')
+        .barMode(BarMode.Fixed)
+        .barHeight(56)
+        .onChange((index: number) => {
+          this.currentTabIndex = index;
+          // 切换Tab时重置筛选条件
+          if (index === 0) {
+            // 面试题Tab
+            this.interviewSelectedCategory = '全部';
+            this.interviewSearchKeyword = '';
+            this.filteredInterviewQuestions = this.interviewQuestions;
+          } else {
+            // 笔试题Tab
+            this.selectedCategory = null;
+            this.searchText = '';
+            this.loadProblems();
+          }
+        })
+      }
+      .width('100%')
+      .height('100%')
+      .backgroundColor('#F8F9FA')
+
+      // 面试题详情弹窗
+      if (this.showDetailDialog && this.selectedQuestion) {
+        this.buildInterviewDetailDialog()
+      }
+
+      // 面试题分类选择器
+      if (this.showInterviewCategoryDialog) {
+        Stack() {
+          // 背景遮罩
+          Column()
+            .width('100%')
+            .height('100%')
+            .backgroundColor('rgba(0, 0, 0, 0.5)')
+            .onClick(() => {
+              this.showInterviewCategoryDialog = false;
+            })
+
+          // 选择器内容
+          this.buildInterviewCategorySelector()
+        }
+        .width('100%')
+        .height('100%')
+        .alignContent(Alignment.Center)
+      }
+    }
+    .width('100%')
+    .height('100%')
+  }
+
+  @Builder
+  buildTabBarItem(title: string, count: number, index: number) {
+    Column({ space: 4 }) {
+      Row({ space: 4 }) {
+        Text(title)
+          .fontSize(14)
+          .fontColor(this.currentTabIndex === index ? '#F34F40' : '#666666')
+          .fontWeight(this.currentTabIndex === index ? FontWeight.Medium : FontWeight.Normal)
+
+        Text(`(${count})`)
+          .fontSize(12)
+          .fontColor(this.currentTabIndex === index ? '#F34F40' : '#999999')
+          .backgroundColor(this.currentTabIndex === index ? '#FFF2F0' : '#F5F5F5')
+          .padding({ left: 6, right: 6, top: 2, bottom: 2 })
+          .borderRadius(10)
+      }
+      .justifyContent(FlexAlign.Center)
+
+      // 底部指示线
+      if (this.currentTabIndex === index) {
+        Divider()
+          .width(30)
+          .height(2)
+          .color('#F34F40')
+          .margin({ top: 4 })
+      }
+    }
+    .width('100%')
+    .height(56)
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildInterviewTabBarItem(title: string, index: number) {
+    Column({ space: 4 }) {
+      Row({ space: 4 }) {
+        Text(title)
+          .fontSize(14)
+          .fontColor(this.currentTabIndex === index ? '#F34F40' : '#666666')
+          .fontWeight(this.currentTabIndex === index ? FontWeight.Medium : FontWeight.Normal)
+
+        Text(`(${this.interviewCount})`)
+          .fontSize(12)
+          .fontColor(this.currentTabIndex === index ? '#F34F40' : '#999999')
+          .backgroundColor(this.currentTabIndex === index ? '#FFF2F0' : '#F5F5F5')
+          .padding({ left: 6, right: 6, top: 2, bottom: 2 })
+          .borderRadius(10)
+      }
+      .justifyContent(FlexAlign.Center)
+
+      // 底部指示线
+      if (this.currentTabIndex === index) {
+        Divider()
+          .width(30)
+          .height(2)
+          .color('#F34F40')
+          .margin({ top: 4 })
+      }
+    }
+    .width('100%')
+    .height(56)
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+  }
+
+  @Builder
+  buildInterviewContent() {
+    Column({ space: 12 }) {
+      // 面试题搜索栏
+      this.buildInterviewSearchBar()
+
+      // 面试题筛选栏
+      this.buildInterviewFilterBar()
+
+      // 面试题列表
+      List({ space: 12 }) {
+        ForEach(this.filteredInterviewQuestions, (question: InterviewQuestion) => {
+          ListItem() {
+            this.buildInterviewQuestionItem(question)
+          }
+        }, (question: InterviewQuestion) => question.id.toString())
+      }
+      .width('100%')
+      .layoutWeight(1)
+      .backgroundColor('#F8F8F8')
+    }
+    .width('100%')
+    .height('100%')
+    .padding(16)
+    .backgroundColor('#F8F8F8')
+  }
+
+  @Builder
+  buildAlgorithmContent() {
     Column({ space: 8 }) {
       // 搜索栏
       this.buildSearchBar()
@@ -73,7 +257,6 @@ export struct PracticeCenterPage {
     .width('100%')
     .height('100%')
     .padding({ left: 16, right: 16, top: 8, bottom: 16 })
-    .backgroundColor('#f5f5f5')
   }
 
   @Builder
@@ -391,18 +574,35 @@ export struct PracticeCenterPage {
     return configs;
   }
 
+  private loadProblemsCount(): void {
+    try {
+      const allProblems = ProblemMockData.getAllProblems();
+      // 面试题数量从interviewQuestions数组获取，因为它们来自JSON文件
+      // 这里先设置为0，会在loadInterviewQuestions完成后更新
+      this.writtenTestCount = allProblems.filter(p => p.source === ProblemSource.WRITTEN_TEST).length;
+    } catch (error) {
+      console.error('Failed to load problems count:', error);
+      this.interviewCount = 0;
+      this.writtenTestCount = 0;
+    }
+  }
+
   private async loadProblems(): Promise<void> {
     this.isLoading = true;
     try {
       let allProblems = ProblemMockData.getAllProblems();
       
-      // 首先按分类筛选
+      // 首先按题目来源筛选（面试题或笔试题）
+      const currentSource = this.currentTabIndex === 0 ? ProblemSource.INTERVIEW : ProblemSource.WRITTEN_TEST;
+      allProblems = allProblems.filter(p => p.source === currentSource);
+      
+      // 然后按分类筛选
       if (this.selectedCategory !== null) {
         console.log('Filtering by category:', this.selectedCategory);
         allProblems = allProblems.filter(p => p.category === this.selectedCategory);
       }
       
-      // 然后按搜索文本筛选
+      // 最后按搜索文本筛选
       if (this.searchText.trim()) {
         const searchKeyword = this.searchText.trim().toLowerCase();
         this.problems = allProblems.filter(p => 
@@ -431,9 +631,115 @@ export struct PracticeCenterPage {
     }
   }
 
+  // 面试题相关方法
+  async loadInterviewQuestions() {
+    try {
+      const resourceManager = getContext(this).resourceManager;
+      const fileData = await resourceManager.getRawFileContent('mianshi.json');
+      const decoder = new util.TextDecoder('utf-8');
+      const jsonString = decoder.decodeWithStream(new Uint8Array(fileData.buffer));
+      const data = JSON.parse(jsonString) as InterviewQuestion[];
+      
+      this.interviewQuestions = data || [];
+      this.filteredInterviewQuestions = this.interviewQuestions;
+      // 更新面试题计数
+      this.interviewCount = this.interviewQuestions.length;
+      console.info(`Successfully loaded ${this.interviewCount} interview questions from file`);
+    } catch (error) {
+      console.error('Failed to load interview questions:', error);
+      // 使用mock数据作为备选
+      this.interviewQuestions = this.getMockInterviewQuestions();
+      this.filteredInterviewQuestions = this.interviewQuestions;
+      // 更新面试题计数
+      this.interviewCount = this.interviewQuestions.length;
+      console.info(`Using mock data with ${this.interviewCount} interview questions`);
+    }
+  }
 
+  getMockInterviewQuestions(): InterviewQuestion[] {
+    const mockQuestions: InterviewQuestion[] = [];
+    
+    const question1: InterviewQuestion = {
+      id: 1,
+      title: 'JavaScript中的闭包是什么？',
+      answer: '闭包是指有权访问另一个函数作用域中变量的函数。闭包在JavaScript中非常重要，它允许函数访问并操作函数外部的变量。',
+      category: 0,
+      difficulty: 1
+    };
+    mockQuestions.push(question1);
 
+    const question2: InterviewQuestion = {
+      id: 2,
+      title: 'Java中的多态是什么？',
+      answer: '多态是面向对象编程的重要特性，指同一个接口可以有多种不同的实现方式。在Java中，多态主要通过继承和接口实现。',
+      category: 0,
+      difficulty: 0
+    };
+    mockQuestions.push(question2);
 
+    return mockQuestions;
+  }
+
+  // 分类映射
+  getInterviewCategoryName(category: number): string {
+    switch (category) {
+      case 0: return 'Java基础';
+      case 1: return '集合框架';
+      case 2: return '并发编程';
+      case 3: return 'JVM原理';
+      case 4: return '异常处理';
+      case 5: return '注解反射';
+      case 6: return '新特性';
+      default: return '其他';
+    }
+  }
+
+  // 难度映射
+  getInterviewDifficultyName(difficulty: number): string {
+    switch (difficulty) {
+      case 0: return '简单';
+      case 1: return '中等';
+      case 2: return '困难';
+      default: return '未知';
+    }
+  }
+
+  filterInterviewQuestions(): void {
+    this.filteredInterviewQuestions = this.interviewQuestions.filter((question: InterviewQuestion): boolean => {
+      const categoryMatch = this.interviewSelectedCategory === '全部' || this.getInterviewCategoryName(question.category) === this.interviewSelectedCategory;
+      const keywordMatch = this.interviewSearchKeyword === '' || 
+        question.title.includes(this.interviewSearchKeyword) || 
+        question.answer.includes(this.interviewSearchKeyword);
+      
+      return categoryMatch && keywordMatch;
+    });
+  }
+
+  getInterviewDifficultyColor(difficulty: number): string {
+    switch (difficulty) {
+      case 0: // 简单
+        return '#4CAF50';
+      case 1: // 中等
+        return '#FF9800';
+      case 2: // 困难
+        return '#F44336';
+      default:
+        return '#666666';
+    }
+  }
+
+  getInterviewDifficultyBgColor(difficulty: number): string {
+    switch (difficulty) {
+      case 0: // 简单
+        return '#E8F5E8';
+      case 1: // 中等
+        return '#FFF3E0';
+      case 2: // 困难
+        return '#FFEBEE';
+      default:
+        return '#F0F0F0';
+    }
+  }
 
   private getCategoryName(category: ProblemCategory): string {
     const categoryConfig = this.getCategoryConfigs().find(config => config.category === category);
@@ -447,5 +753,264 @@ export struct PracticeCenterPage {
     }).catch((error: Error) => {
       console.error('Failed to navigate to problem detail:', error);
     });
+  }
+
+  @Builder
+  buildInterviewSearchBar() {
+    TextInput({ placeholder: '搜索题目名称或关键词...' })
+      .height(36)
+      .placeholderColor('#D5DBDB')
+      .width('100%')
+      .borderRadius(18)
+      .backgroundColor('#ffffff')
+      .onChange((value: string) => {
+        this.interviewSearchKeyword = value;
+        this.filterInterviewQuestions();
+      })
+  }
+
+  @Builder
+  buildInterviewFilterBar() {
+    Row({ space: 12 }) {
+      // 分类筛选
+      Button(this.interviewSelectedCategory)
+        .fontSize(14)
+        .backgroundColor(this.interviewSelectedCategory === '全部' ? '#4A90E2' : '#F0F0F0')
+        .fontColor(this.interviewSelectedCategory === '全部' ? Color.White : '#666666')
+        .borderRadius(16)
+        .height(32)
+        .onClick(() => {
+          this.showInterviewCategorySelector();
+        })
+    }
+    .width('100%')
+    .justifyContent(FlexAlign.Start)
+  }
+
+  @Builder
+  buildInterviewQuestionItem(question: InterviewQuestion) {
+    Column({ space: 8 }) {
+      // 题目标题
+      Row() {
+        Text(question.title)
+          .fontSize(16)
+          .fontWeight(FontWeight.Medium)
+          .maxLines(2)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .layoutWeight(1)
+
+        Row({ space: 4 }) {
+          Text(this.getInterviewCategoryName(question.category))
+            .fontSize(12)
+            .fontColor('#4A90E2')
+            .backgroundColor('#E3F2FD')
+            .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+            .borderRadius(12)
+
+          Text(this.getInterviewDifficultyName(question.difficulty))
+            .fontSize(12)
+            .fontColor(this.getInterviewDifficultyColor(question.difficulty))
+            .backgroundColor(this.getInterviewDifficultyBgColor(question.difficulty))
+            .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+            .borderRadius(12)
+        }
+      }
+      .width('100%')
+      .alignItems(VerticalAlign.Top)
+
+      // 答案预览
+      Text(question.answer)
+        .fontSize(14)
+        .fontColor('#666666')
+        .maxLines(3)
+        .textOverflow({ overflow: TextOverflow.Ellipsis })
+        .width('100%')
+    }
+    .width('100%')
+    .padding(16)
+    .backgroundColor(Color.White)
+    .borderRadius(8)
+    .shadow({ radius: 2, color: '#00000010', offsetX: 0, offsetY: 1 })
+    .onClick(() => {
+      // 显示题目详情弹窗
+      this.selectedQuestion = question;
+      this.showDetailDialog = true;
+    })
+  }
+
+  @Builder
+  buildInterviewDetailDialog() {
+    // 遮罩层
+    Column()
+      .width('100%')
+      .height('100%')
+      .backgroundColor('rgba(0, 0, 0, 0.5)')
+      .onClick(() => {
+        this.showDetailDialog = false;
+        this.selectedQuestion = null;
+      })
+
+    // 弹窗内容
+    Column({ space: 20 }) {
+      // 标题栏
+      Row() {
+        Text('题目详情')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .layoutWeight(1)
+
+        Image($r('app.media.close_icon'))
+          .width(24)
+          .height(24)
+          .onClick(() => {
+            this.showDetailDialog = false;
+            this.selectedQuestion = null;
+          })
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+      .alignItems(VerticalAlign.Center)
+
+      // 题目信息
+      if (this.selectedQuestion) {
+        Column({ space: 16 }) {
+          // 分类和难度标签
+          Row({ space: 8 }) {
+            Text(this.getInterviewCategoryName(this.selectedQuestion.category))
+              .fontSize(12)
+              .fontColor('#4A90E2')
+              .backgroundColor('#E3F2FD')
+              .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+              .borderRadius(12)
+
+            Text(this.getInterviewDifficultyName(this.selectedQuestion.difficulty))
+              .fontSize(12)
+              .fontColor(this.getInterviewDifficultyColor(this.selectedQuestion.difficulty))
+              .backgroundColor(this.getInterviewDifficultyBgColor(this.selectedQuestion.difficulty))
+              .padding({ left: 8, right: 8, top: 4, bottom: 4 })
+              .borderRadius(12)
+          }
+          .width('100%')
+          .justifyContent(FlexAlign.Start)
+
+          // 题目标题
+          Text(this.selectedQuestion.title)
+            .fontSize(16)
+            .fontWeight(FontWeight.Medium)
+            .width('100%')
+            .textAlign(TextAlign.Start)
+
+          // 答案
+          Column({ space: 8 }) {
+            Text('参考答案')
+              .fontSize(14)
+              .fontWeight(FontWeight.Medium)
+              .fontColor('#333333')
+              .width('100%')
+              .textAlign(TextAlign.Start)
+
+            Text(this.selectedQuestion.answer)
+              .fontSize(14)
+              .fontColor('#666666')
+              .lineHeight(22)
+              .width('100%')
+              .textAlign(TextAlign.Start)
+          }
+          .width('100%')
+          .alignItems(HorizontalAlign.Start)
+        }
+        .width('100%')
+        .alignItems(HorizontalAlign.Start)
+      }
+    }
+    .width('90%')
+    .height('80%')
+    .backgroundColor(Color.White)
+    .borderRadius(12)
+    .padding(20)
+    .shadow({ radius: 8, color: '#00000020', offsetX: 0, offsetY: 4 })
+    .position({ x: '5%', y: '10%' })
+  }
+
+  /**
+   * 显示面试题分类选择器
+   */
+  showInterviewCategorySelector() {
+    this.showInterviewCategoryDialog = true;
+  }
+
+  /**
+   * 获取所有面试题分类
+   */
+  getInterviewCategories(): string[] {
+    // 从实际的面试题数据中提取所有可用的分类
+    const categorySet = new Set<string>();
+    categorySet.add('全部'); // 始终包含"全部"选项
+    
+    // 遍历所有面试题，提取分类
+    this.interviewQuestions.forEach((question: InterviewQuestion) => {
+      const categoryName = this.getInterviewCategoryName(question.category);
+      categorySet.add(categoryName);
+    });
+    
+    // 转换为数组并排序，确保"全部"在第一位
+    const categories = Array.from(categorySet);
+    const sortedCategories = categories.filter(cat => cat !== '全部').sort();
+    return ['全部', ...sortedCategories];
+  }
+
+  @Builder
+  buildInterviewCategorySelector() {
+    Column({ space: 16 }) {
+      Text('选择面试题类型')
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .textAlign(TextAlign.Center)
+
+      List({ space: 8 }) {
+        ForEach(this.getInterviewCategories(), (category: string) => {
+          ListItem() {
+            Row() {
+              Text(category)
+                .fontSize(16)
+                .layoutWeight(1)
+              
+              if (this.interviewSelectedCategory === category) {
+                Image($r('sys.media.ohos_ic_public_ok'))
+                  .width(20)
+                  .height(20)
+                  .fillColor('#4A90E2')
+              }
+            }
+            .width('100%')
+            .height(48)
+            .padding({ left: 16, right: 16 })
+            .backgroundColor(this.interviewSelectedCategory === category ? '#E3F2FD' : Color.Transparent)
+            .borderRadius(8)
+            .onClick(() => {
+              this.interviewSelectedCategory = category;
+              this.showInterviewCategoryDialog = false;
+              this.filterInterviewQuestions();
+            })
+          }
+        }, (category: string) => category)
+      }
+      .width('100%')
+      .height(300)
+
+      Button('取消')
+        .width('100%')
+        .height(40)
+        .backgroundColor('#F0F0F0')
+        .fontColor('#666666')
+        .onClick(() => {
+          this.showInterviewCategoryDialog = false;
+        })
+    }
+    .width('80%')
+    .backgroundColor(Color.White)
+    .borderRadius(12)
+    .padding(20)
+    .shadow({ radius: 8, color: '#00000020', offsetX: 0, offsetY: 4 })
   }
 }

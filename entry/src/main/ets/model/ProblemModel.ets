@@ -49,6 +49,12 @@ export enum ProblemType {
   MULTIPLE_CHOICE = 'multiple_choice'  // 多选题
 }
 
+// 题目来源枚举
+export enum ProblemSource {
+  INTERVIEW = 'interview',  // 面试题
+  WRITTEN_TEST = 'written_test'  // 笔试题
+}
+
 // 选择题选项接口
 export interface ChoiceOption {
   id: string;  // 选项ID，如 'A', 'B', 'C', 'D'
@@ -85,6 +91,7 @@ export class ProblemModel {
   difficulty: ProblemDifficulty = ProblemDifficulty.EASY;
   category: ProblemCategory = ProblemCategory.ARRAY;
   type: ProblemType = ProblemType.SINGLE_CHOICE;  // 题目类型
+  source: ProblemSource = ProblemSource.WRITTEN_TEST;  // 题目来源
   choices: ChoiceOption[] = [];  // 选择题选项
   explanation: string = '';  // 答案解析
   constraints: string = '';

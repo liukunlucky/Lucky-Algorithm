@@ -1,4 +1,4 @@
-import { ProblemModel, ProblemDifficulty, ProblemCategory, ChoiceOption } from '../model/ProblemModel';
+import { ProblemModel, ProblemDifficulty, ProblemCategory, ChoiceOption, ProblemSource } from '../model/ProblemModel';
 
 /**
  * 题目Mock数据
@@ -108,6 +108,7 @@ export class ProblemMockData {
       '给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。\n\n你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。\n\n你可以按任意顺序返回答案。';
     twoSum.difficulty = ProblemDifficulty.EASY;
     twoSum.category = ProblemCategory.ARRAY;
+    twoSum.source = ProblemSource.INTERVIEW; // 设置为面试题
     twoSum.choices = [
       { id: 'A', text: '使用两层循环遍历数组，时间复杂度O(n²)', isCorrect: false },
       { id: 'B', text: '先排序再使用双指针，时间复杂度O(nlogn)', isCorrect: false },
@@ -192,6 +193,7 @@ public:
       '给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。\n\n注意：答案中不可以包含重复的三元组。';
     threeSum.difficulty = ProblemDifficulty.MEDIUM;
     threeSum.category = ProblemCategory.ARRAY;
+    threeSum.source = ProblemSource.INTERVIEW; // 设置为面试题
     threeSum.choices = [
       { id: 'A', text: '使用三层循环暴力求解，时间复杂度O(n³)', isCorrect: false },
       { id: 'B', text: '使用哈希表存储所有两数之和，时间复杂度O(n²)', isCorrect: false },
@@ -211,6 +213,7 @@ public:
       '给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。\n\n子数组是数组中的一个连续部分。';
     maxSubArray.difficulty = ProblemDifficulty.EASY;
     maxSubArray.category = ProblemCategory.ARRAY;
+    maxSubArray.source = ProblemSource.INTERVIEW; // 设置为面试题
     maxSubArray.choices = [
       { id: 'A', text: '使用动态规划（Kadane算法），时间复杂度O(n)', isCorrect: true },
       { id: 'B', text: '使用两层循环枚举所有子数组，时间复杂度O(n²)', isCorrect: false },
@@ -845,6 +848,7 @@ public:
       '给定一个只包括 \'(\'，\')\'，\'[\'，\']\'，\'{\'，\'}\' 的字符串 s ，判断字符串是否有效。\n\n有效字符串需满足：\n1. 左括号必须用相同类型的右括号闭合。\n2. 左括号必须以正确的顺序闭合。';
     validParentheses.difficulty = ProblemDifficulty.EASY;
     validParentheses.category = ProblemCategory.STRING;
+    validParentheses.source = ProblemSource.INTERVIEW; // 设置为面试题
     validParentheses.choices = [
       { id: 'A', text: '使用栈数据结构，遇到左括号入栈，遇到右括号出栈匹配', isCorrect: true },
       { id: 'B', text: '使用计数器分别统计各种括号的数量', isCorrect: false },
@@ -864,6 +868,7 @@ public:
       '给你一个字符串 s，找到 s 中最长的回文子串。\n\n回文字符串是正着读和倒着读都一样的字符串。';
     longestPalindrome.difficulty = ProblemDifficulty.MEDIUM;
     longestPalindrome.category = ProblemCategory.STRING;
+    longestPalindrome.source = ProblemSource.INTERVIEW; // 设置为面试题
     longestPalindrome.choices = [
       { id: 'A', text: '暴力法：枚举所有子串并检查是否为回文，时间复杂度O(n³)', isCorrect: false },
       { id: 'B', text: '中心扩展法：以每个字符为中心向两边扩展，时间复杂度O(n²)', isCorrect: true },
@@ -1266,6 +1271,7 @@ public:
     reverseList.description = '给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。';
     reverseList.difficulty = ProblemDifficulty.EASY;
     reverseList.category = ProblemCategory.LINKED_LIST;
+    reverseList.source = ProblemSource.INTERVIEW; // 设置为面试题
     reverseList.choices = [
       { id: 'A', text: '使用迭代方法，维护三个指针prev、curr、next', isCorrect: true },
       { id: 'B', text: '使用递归方法，先反转子链表再处理当前节点', isCorrect: false },
@@ -1285,6 +1291,7 @@ public:
       '给你一个链表的头节点 head ，判断链表中是否有环。\n\n如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。';
     hasCycle.difficulty = ProblemDifficulty.EASY;
     hasCycle.category = ProblemCategory.LINKED_LIST;
+    hasCycle.source = ProblemSource.INTERVIEW; // 设置为面试题
     hasCycle.choices = [
       { id: 'A', text: '使用哈希表存储访问过的节点', isCorrect: false },
       { id: 'B', text: '使用快慢指针（Floyd判圈算法）', isCorrect: true },
@@ -1688,6 +1695,7 @@ public:
     maxDepth.description = '给定一个二叉树，找出其最大深度。\n\n二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。';
     maxDepth.difficulty = ProblemDifficulty.EASY;
     maxDepth.category = ProblemCategory.BINARY_TREE;
+    maxDepth.source = ProblemSource.INTERVIEW; // 设置为面试题
     maxDepth.choices = [
       { id: 'A', text: '使用递归：深度 = 1 + max(左子树深度, 右子树深度)', isCorrect: true },
       { id: 'B', text: '使用层序遍历（BFS），统计层数', isCorrect: false },
@@ -1706,6 +1714,7 @@ public:
     isSymmetric.description = '给你一个二叉树的根节点 root ， 检查它是否轴对称。';
     isSymmetric.difficulty = ProblemDifficulty.EASY;
     isSymmetric.category = ProblemCategory.BINARY_TREE;
+    isSymmetric.source = ProblemSource.INTERVIEW; // 设置为面试题
     isSymmetric.choices = [
       { id: 'A', text: '使用递归比较左右子树是否镜像对称', isCorrect: true },
       { id: 'B', text: '使用层序遍历，检查每层是否回文', isCorrect: false },
@@ -5319,25 +5328,6 @@ public:
     sortedSquares.hint = '原数组的有序性决定了「平方后的最大值在两端」，逆向填充结果数组是关键';
     problems.push(sortedSquares);
 
-    // 1507. 长度最小的子数组（LeetCode 209）
-    const minSubArrayLen = new ProblemModel();
-    minSubArrayLen.id = 1507;
-    minSubArrayLen.title = '长度最小的子数组';
-    minSubArrayLen.description =
-      '给定一个含有 n 个正整数的数组和一个正整数 target 。找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。';
-    minSubArrayLen.difficulty = ProblemDifficulty.MEDIUM;
-    minSubArrayLen.category = ProblemCategory.SLIDING_WINDOW;
-    minSubArrayLen.choices = [
-      { id: 'A', text: '使用滑动窗口（双指针），维护窗口内元素和，动态调整窗口左边界', isCorrect: true },
-      { id: 'B', text: '使用前缀和数组，再通过二分查找定位每个前缀和对应的最小窗口', isCorrect: false },
-      { id: 'C', text: '暴力遍历所有可能的连续子数组，计算和并记录最小长度', isCorrect: false },
-      { id: 'D', text: '使用动态规划，dp[i]表示以第i个元素结尾的最小子数组长度', isCorrect: false }
-    ];
-    minSubArrayLen.explanation =
-      '滑动窗口解法：定义左指针（left=0）、窗口和（sum=0）、最小长度（minLen=无穷大）。右指针（right）遍历数组，将nums[right]加入sum。当sum ≥ target时，更新minLen为min(minLen, right-left+1)，并将nums[left]从sum中减去，左指针右移（缩小窗口），直到sum < target。遍历结束后，若minLen仍为无穷大则返回0，否则返回minLen。时间复杂度O(n)，空间复杂度O(1)，窗口仅遍历数组一次。';
-    minSubArrayLen.hint = '滑动窗口的核心是「窗口右扩找满足条件的区间，左缩优化区间长度」';
-    problems.push(minSubArrayLen);
-
     // 1508. 螺旋矩阵（LeetCode 54）
     const spiralOrder = new ProblemModel();
     spiralOrder.id = 1508;
@@ -5375,24 +5365,6 @@ public:
     reverseString.hint = '双指针的核心是「对称位置交换」，无需额外空间';
     problems.push(reverseString);
 
-    // 1510. 反转字符串中的单词（LeetCode 151）
-    const reverseWords = new ProblemModel();
-    reverseWords.id = 1510;
-    reverseWords.title = '反转字符串中的单词';
-    reverseWords.description =
-      '给你一个字符串 s ，请你反转字符串中 单词 的顺序。\n\n单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。\n\n注意：输入字符串 s 中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。';
-    reverseWords.difficulty = ProblemDifficulty.MEDIUM;
-    reverseWords.category = ProblemCategory.STRING;
-    reverseWords.choices = [
-      { id: 'A', text: '先去除字符串首尾和中间多余空格，再反转整个字符串，最后反转每个单词', isCorrect: true },
-      { id: 'B', text: '使用split()方法分割单词，过滤空字符串后反转数组，再用join()连接', isCorrect: false },
-      { id: 'C', text: '用双指针从字符串尾部向前遍历，逐个截取单词并拼接', isCorrect: false },
-      { id: 'D', text: '使用栈存储单词，遍历字符串时将单词入栈，最后弹出并连接', isCorrect: false }
-    ];
-    reverseWords.explanation =
-      '原地优化解法（以字符数组操作为例）：①去除多余空格：双指针遍历字符数组，将有效字符（非连续空格）移到数组前部，最后截取有效长度；②反转整个字符数组：用双指针交换首尾字符；③反转每个单词：遍历数组，遇到空格时反转当前单词（从上次空格位置到当前空格前）。时间复杂度O(n)，空间复杂度O(n)（字符数组存储），避免了split()方法的额外空间开销。';
-    reverseWords.hint = '「整体反转+局部反转」是核心思路，先处理空格再反转更高效';
-    problems.push(reverseWords);
 
     // 1511. 字符串中的第一个唯一字符（LeetCode 387）
     const firstUniqChar = new ProblemModel();
@@ -5450,27 +5422,6 @@ public:
     strStr.hint = 'KMP的核心是「利用前缀表减少回溯」，避免haystack指针的回退';
     problems.push(strStr);
 
-    // 1516. 删除链表的倒数第 N 个节点（LeetCode 19）
-    const removeNthFromEnd = new ProblemModel();
-    removeNthFromEnd.id = 1516;
-    removeNthFromEnd.title = '删除链表的倒数第 N 个节点';
-    removeNthFromEnd.description = '给你一个链表，删除链表的倒数第 n 个节点，并且返回链表的头节点。';
-    removeNthFromEnd.difficulty = ProblemDifficulty.MEDIUM;
-    removeNthFromEnd.category = ProblemCategory.LINKED_LIST;
-    removeNthFromEnd.choices = [
-      {
-        id: 'A',
-        text: '使用双指针，让快指针先移动n步，再快慢指针同步移动，快指针到尾时慢指针指向目标节点前驱',
-        isCorrect: true
-      },
-      { id: 'B', text: '先遍历链表获取长度L，再遍历到第L-n个节点（目标节点前驱）进行删除', isCorrect: false },
-      { id: 'C', text: '使用栈存储链表节点，弹出n个节点后，栈顶即为目标节点前驱', isCorrect: false },
-      { id: 'D', text: '反转链表，删除第n个节点后再反转回来', isCorrect: false }
-    ];
-    removeNthFromEnd.explanation =
-      '双指针一次遍历解法：①创建虚拟头节点（dummy），快指针（fast=dummy）、慢指针（slow=dummy）；②快指针先移动n步；③快慢指针同步移动，直到fast.next=null（快指针到尾）；此时slow.next即为倒数第n个节点，执行slow.next=slow.next.next（删除节点）；④返回dummy.next。时间复杂度O(L)（L为链表长度，一次遍历），空间复杂度O(1)，优于两次遍历法（O(2L)时间）和栈方法（O(L)空间）。';
-    removeNthFromEnd.hint = '双指针的关键是「让快慢指针间距为n」，一次遍历即可定位目标节点前驱';
-    problems.push(removeNthFromEnd);
 
     // 1535. 二分查找（LeetCode 704）
     const search = new ProblemModel();
@@ -5799,22 +5750,6 @@ public:
     myAtoi.hint = '关键是「处理所有边界条件」，包括空格、符号、非数字字符和整数溢出';
     problems.push(myAtoi);
 
-    // 1579. 最长连续序列（LeetCode 128）
-    const longestConsecutive = new ProblemModel();
-    longestConsecutive.id = 1579;
-    longestConsecutive.title = '最长连续序列';
-    longestConsecutive.description = '给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。请你设计并实现时间复杂度为 O(n) 的算法解决此问题。';
-    longestConsecutive.difficulty = ProblemDifficulty.MEDIUM;
-    longestConsecutive.category = ProblemCategory.HASH_TABLE;
-    longestConsecutive.choices = [
-      { id: 'A', text: '哈希表存储所有数字，只对序列起点（前一个数不存在）计算长度', isCorrect: true },
-      { id: 'B', text: '排序数组后遍历找最长连续序列', isCorrect: false },
-      { id: 'C', text: '并查集，将连续的数字合并为集合，找最大集合大小', isCorrect: false },
-      { id: 'D', text: '动态规划，dp[x]表示以x结尾的最长连续序列长度', isCorrect: false }
-    ];
-    longestConsecutive.explanation = '哈希表解法：①创建Set存储nums元素，便于O(1)查找；②初始化最长长度maxLen=0；③遍历Set中每个数字x：若x-1不在Set中（x是序列起点）：当前长度currentLen=1；当前数字currentNum=x+1；while(currentNum在Set中)：currentLen++；currentNum++；更新maxLen=Math.max(maxLen, currentLen)；④返回maxLen。时间复杂度O(n)（每个数字最多访问两次），空间复杂度O(n)，满足题目时间复杂度要求，比排序法的O(n log n)更高效。';
-    longestConsecutive.hint = '核心是「只对序列起点计算长度」，避免重复计算中间元素的序列长度';
-    problems.push(longestConsecutive);
 
     // 1580. 打家劫舍（LeetCode 198）
     const rob = new ProblemModel();
@@ -6021,40 +5956,6 @@ public:
     findLength.hint = '关键是「连续子数组的特性」，只有当前元素相等时才能延续之前的公共子数组';
     problems.push(findLength);
 
-    // 1597. 验证二叉搜索树（LeetCode 98）
-    const isValidBST = new ProblemModel();
-    isValidBST.id = 1597;
-    isValidBST.title = '验证二叉搜索树';
-    isValidBST.description = '给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。有效 二叉搜索树定义如下：节点的左子树只包含 小于 当前节点的数。节点的右子树只包含 大于 当前节点的数。所有左子树和右子树自身必须也是二叉搜索树。';
-    isValidBST.difficulty = ProblemDifficulty.MEDIUM;
-    isValidBST.category = ProblemCategory.BINARY_TREE;
-    isValidBST.choices = [
-      { id: 'A', text: '递归，传递上下界约束，确保左子树节点小于当前值，右子树大于当前值', isCorrect: true },
-      { id: 'B', text: '中序遍历，检查遍历结果是否严格递增', isCorrect: false },
-      { id: 'C', text: '仅比较节点与其左右孩子的值，不考虑祖先约束', isCorrect: false },
-      { id: 'D', text: 'BFS，层序遍历中检查每个节点的约束', isCorrect: false }
-    ];
-    isValidBST.explanation = '递归解法：①定义辅助函数helper(node, lower, upper)：若node为null：return true；val = node.val；若val <= lower或val >= upper：return false；②递归检查左子树：helper(node.left, lower, val)；③递归检查右子树：helper(node.right, val, upper)；④返回左右检查结果的与运算；⑤初始调用helper(root, -Infinity, Infinity)。时间复杂度O(n)，空间复杂度O(h)（递归栈），通过传递上下界确保所有节点满足BST约束，避免只比较直接子节点的错误。';
-    isValidBST.hint = '核心是「全局约束」，每个节点不仅要大于左孩子、小于右孩子，还要满足与所有祖先的约束关系';
-    problems.push(isValidBST);
-
-    // 1598. 路径总和 II（LeetCode 113）
-    const pathSumII = new ProblemModel();
-    pathSumII.id = 1598;
-    pathSumII.title = '路径总和 II';
-    pathSumII.description = '给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。叶子节点 是指没有子节点的节点。';
-    pathSumII.difficulty = ProblemDifficulty.MEDIUM;
-    pathSumII.category = ProblemCategory.BINARY_TREE;
-    pathSumII.choices = [
-      { id: 'A', text: '回溯法，记录当前路径和，到达叶子节点时检查是否等于目标和', isCorrect: true },
-      { id: 'B', text: 'BFS，记录每个节点的路径和及路径', isCorrect: false },
-      { id: 'C', text: '动态规划，记录到达每个节点的所有路径和', isCorrect: false },
-      { id: 'D', text: '先计算所有根到叶子的路径，再筛选出总和符合的', isCorrect: false }
-    ];
-    pathSumII.explanation = '回溯解法：①初始化结果数组和路径数组；②定义回溯函数backtrack(node, currentSum)：路径加入node.val；currentSum += node.val；③若node是叶子节点且currentSum == targetSum：将路径副本加入结果；④否则：若左子树存在：backtrack(node.left, currentSum)；若右子树存在：backtrack(node.right, currentSum)；⑤路径弹出最后元素（回溯）；⑥调用backtrack(root, 0)，返回结果。时间复杂度O(n)（每个节点访问一次），空间复杂度O(h)（递归栈+路径存储），在遍历过程中实时检查并收集符合条件的路径。';
-    pathSumII.hint = '关键是「回溯记录路径」，到达叶子节点时判断总和，不符合则回溯继续探索';
-    problems.push(pathSumII);
-
     // 1599. 最大数（LeetCode 179）
     const largestNumber = new ProblemModel();
     largestNumber.id = 1599;
@@ -6072,22 +5973,6 @@ public:
     largestNumber.hint = '核心是「比较拼接结果」，两个数字的最优排列方式由它们不同拼接顺序的结果决定';
     problems.push(largestNumber);
 
-    // 1600. 加油站（LeetCode 134）
-    const canCompleteCircuit = new ProblemModel();
-    canCompleteCircuit.id = 1600;
-    canCompleteCircuit.title = '加油站';
-    canCompleteCircuit.description = '在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。';
-    canCompleteCircuit.difficulty = ProblemDifficulty.MEDIUM;
-    canCompleteCircuit.category = ProblemCategory.GREEDY;
-    canCompleteCircuit.choices = [
-      { id: 'A', text: '贪心算法，累计总油量，若当前油箱为负则重置起点', isCorrect: true },
-      { id: 'B', text: '暴力枚举每个起点，模拟行驶过程', isCorrect: false },
-      { id: 'C', text: '动态规划，记录从每个加油站出发能到达的最远距离', isCorrect: false },
-      { id: 'D', text: '计算每个加油站的净油量，找净油量累积最大的起点', isCorrect: false }
-    ];
-    canCompleteCircuit.explanation = '贪心解法：①初始化总油量total=0，当前油量current=0，起点start=0；②遍历每个加油站i：total += gas[i] - cost[i]；current += gas[i] - cost[i]；③若current < 0（从start到i无法到达）：重置current=0，start=i+1；④遍历结束后，若total < 0：返回-1；else返回start。时间复杂度O(n)，空间复杂度O(1)，一次遍历完成，利用贪心策略找到唯一可能的起点。';
-    canCompleteCircuit.hint = '关键是「总油量足够时必有解」，且若从start到i无法到达，则中间任何点都不能作为起点';
-    problems.push(canCompleteCircuit);
 
 
     // 1602. 旋转图像（LeetCode 48）
@@ -6397,23 +6282,6 @@ public:
     threeSum.hint = '关键是「排序+去重」，固定一个数后用双指针寻找另外两个数，避免重复三元组';
     problems.push(threeSum);
 
-    // 1621. 四数之和（LeetCode 18）
-    const fourSum = new ProblemModel();
-    fourSum.id = 1621;
-    fourSum.title = '四数之和';
-    fourSum.description = '给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为它们是重复的）：0 <= a, b, c, d < n；a、b、c 和 d 互不相同；nums[a] + nums[b] + nums[c] + nums[d] == target。你可以按 任意顺序 返回答案 。';
-    fourSum.difficulty = ProblemDifficulty.MEDIUM;
-    fourSum.category = ProblemCategory.ARRAY;
-    fourSum.choices = [
-      { id: 'A', text: '排序+双重循环+双指针，固定前两个数，双指针找后两个数，跳过重复', isCorrect: true },
-      { id: 'B', text: '哈希表存储两数之和，再查找另外两数之和', isCorrect: false },
-      { id: 'C', text: '暴力四重循环，检查所有可能的四元组', isCorrect: false },
-      { id: 'D', text: '基于三数之和的解法，增加一层循环', isCorrect: false }
-    ];
-    fourSum.explanation = '排序+双指针解法：①排序nums数组；②初始化结果数组；③遍历i从0到nums.length-4：若i>0且nums[i]==nums[i-1]：continue（去重）；④遍历j从i+1到nums.length-3：若j>i+1且nums[j]==nums[j-1]：continue（去重）；⑤左指针left = j+1，右指针right = nums.length-1；⑥循环当left < right：sum = nums[i] + nums[j] + nums[left] + nums[right]；若sum == target：加入结果；跳过left和right的重复元素；left++，right--；若sum < target：left++；else：right--；⑦返回结果。时间复杂度O(n³)，空间复杂度O(log n)，在三数之和基础上增加一层循环，同样通过排序去重。';
-    fourSum.hint = '核心是「扩展三数之和的思路」，固定两个数后用双指针寻找另外两个数，注意多层去重';
-    problems.push(fourSum);
-
     // 1622. 移除链表元素（LeetCode 203）
     const removeElements = new ProblemModel();
     removeElements.id = 1622;
@@ -6516,22 +6384,6 @@ public:
     searchBST.hint = '核心是「BST的有序性」，通过与当前节点值比较确定搜索方向，减少搜索范围';
     problems.push(searchBST);
 
-    // 1628. 二叉搜索树中的插入操作（LeetCode 701）
-    const insertIntoBST = new ProblemModel();
-    insertIntoBST.id = 1628;
-    insertIntoBST.title = '二叉搜索树中的插入操作';
-    insertIntoBST.description = '给定二叉搜索树（BST）的根节点 root 和要插入树中的值 value ，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 保证 ，新值和原始二叉搜索树中的任意节点值都不同。注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 任意有效的结果 。';
-    insertIntoBST.difficulty = ProblemDifficulty.MEDIUM;
-    insertIntoBST.category = ProblemCategory.BINARY_TREE;
-    insertIntoBST.choices = [
-      { id: 'A', text: '递归，根据BST特性找到合适的叶子节点位置插入', isCorrect: true },
-      { id: 'B', text: '迭代，循环找到插入位置', isCorrect: false },
-      { id: 'C', text: '将节点插入后再调整树结构保持BST平衡', isCorrect: false },
-      { id: 'D', text: '转换为数组，插入后重建BST', isCorrect: false }
-    ];
-    insertIntoBST.explanation = '递归解法：①若root为null：return new TreeNode(val)；②若val < root.val：root.left = insertIntoBST(root.left, val)；③else：root.right = insertIntoBST(root.right, val)；④返回root。时间复杂度O(h)，空间复杂度O(h)，利用BST特性找到正确的插入位置（叶子节点），保持BST性质，实现简单。';
-    insertIntoBST.hint = '关键是「BST的插入规则」，新节点总是作为叶子节点插入，根据值大小确定左右位置';
-    problems.push(insertIntoBST);
 
     // 1629. 删除二叉搜索树中的节点（LeetCode 450）
     const deleteNode = new ProblemModel();
@@ -6650,23 +6502,6 @@ public:
     mergeTwoLists.explanation = '迭代解法：①创建虚拟头节点dummy，当前指针curr = dummy；②循环当l1和l2都不为空：若l1.val <= l2.val：curr.next = l1；l1 = l1.next；else：curr.next = l2；l2 = l2.next；curr = curr.next；③将剩余的非空链表连接到curr.next；④返回dummy.next。时间复杂度O(m+n)，空间复杂度O(1)，原地合并两个有序链表。';
     mergeTwoLists.hint = '关键是「有序合并」，通过比较节点值，按顺序连接，保持升序特性';
     problems.push(mergeTwoLists);
-
-    // 1636. 反转链表（LeetCode 206）
-    const reverseList = new ProblemModel();
-    reverseList.id = 1636;
-    reverseList.title = '反转链表';
-    reverseList.description = '给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。';
-    reverseList.difficulty = ProblemDifficulty.EASY;
-    reverseList.category = ProblemCategory.LINKED_LIST;
-    reverseList.choices = [
-      { id: 'A', text: '迭代，使用三个指针反转节点指向', isCorrect: true },
-      { id: 'B', text: '递归，反转子链表后调整指针', isCorrect: false },
-      { id: 'C', text: '转换为数组后反向重建链表', isCorrect: false },
-      { id: 'D', text: '使用栈存储节点后重新连接', isCorrect: false }
-    ];
-    reverseList.explanation = '迭代解法：①初始化前驱节点prev = null，当前节点curr = head；②循环当curr不为空：保存下一个节点next = curr.next；curr.next = prev；prev = curr；curr = next；③循环结束后prev为新头节点，返回prev。时间复杂度O(n)，空间复杂度O(1)，原地反转链表，高效且简单。';
-    reverseList.hint = '核心是「改变指针方向」，每个节点的next指向其前驱，逐步完成整个链表的反转';
-    problems.push(reverseList);
 
     // 1637. 二叉树的最大深度（LeetCode 104）
     const maxDepth = new ProblemModel();
@@ -6821,22 +6656,6 @@ public:
     isSymmetricTree.hint = '核心是「镜像对称条件」，左子树的结构和值需与右子树的镜像一致';
     problems.push(isSymmetricTree);
 
-    // 1647. 二叉树的镜像（LeetCode 剑指 Offer 27）
-    const mirrorTree = new ProblemModel();
-    mirrorTree.id = 1647;
-    mirrorTree.title = '二叉树的镜像';
-    mirrorTree.description = '请完成一个函数，输入一棵二叉树，该函数输出它的镜像。';
-    mirrorTree.difficulty = ProblemDifficulty.EASY;
-    mirrorTree.category = ProblemCategory.BINARY_TREE;
-    mirrorTree.choices = [
-      { id: 'A', text: '递归，交换左右子树，再分别递归处理左右子树', isCorrect: true },
-      { id: 'B', text: 'BFS，层序遍历中交换每个节点的左右孩子', isCorrect: false },
-      { id: 'C', text: 'DFS迭代，使用栈处理节点并交换左右孩子', isCorrect: false },
-      { id: 'D', text: '先序遍历收集节点值，再反向构建镜像树', isCorrect: false }
-    ];
-    mirrorTree.explanation = '递归解法：①若root为null：return null；②交换左右子树：const temp = root.left；root.left = root.right；root.right = temp；③递归处理左子树mirrorTree(root.left)；④递归处理右子树mirrorTree(root.right)；⑤返回root。时间复杂度O(n)，空间复杂度O(h)，与翻转二叉树解法相同，本质是同一问题。';
-    mirrorTree.hint = '关键是「交换左右子树」，对每个节点执行左右孩子的交换操作';
-    problems.push(mirrorTree);
 
     // 1648. 平衡二叉树（LeetCode 110）
     const isBalanced = new ProblemModel();
@@ -6889,22 +6708,6 @@ public:
     sumOfLeftLeaves.hint = '核心是「左叶子的定义」，既是左孩子又是叶子节点（无左右子树）';
     problems.push(sumOfLeftLeaves);
 
-    // 1651. 二叉树的坡度（LeetCode 563）
-    const findTilt = new ProblemModel();
-    findTilt.id = 1651;
-    findTilt.title = '二叉树的坡度';
-    findTilt.description = '给定一个二叉树，计算 整个树 的坡度 。一个树的 节点的坡度 定义为，该节点左子树的节点之和和右子树节点之和的 绝对差 。如果没有左子树，左子树的节点之和为 0 ；没有右子树同理。整个树的坡度就是所有节点的坡度之和。';
-    findTilt.difficulty = ProblemDifficulty.EASY;
-    findTilt.category = ProblemCategory.BINARY_TREE;
-    findTilt.choices = [
-      { id: 'A', text: '后序遍历，计算每个节点的子树和，同时累加坡度', isCorrect: true },
-      { id: 'B', text: '先计算每个节点的左右子树和，再求坡度和', isCorrect: false },
-      { id: 'C', text: 'BFS，层序遍历中计算每个节点的坡度', isCorrect: false },
-      { id: 'D', text: '递归计算坡度，再递归计算子树和', isCorrect: false }
-    ];
-    findTilt.explanation = '后序遍历解法：①初始化总坡度totalTilt=0；②定义辅助函数sum(node)：若node为null：return 0；③左和leftSum = sum(node.left)；④右和rightSum = sum(node.right)；⑤当前坡度Math.abs(leftSum - rightSum)加入totalTilt；⑥返回node.val + leftSum + rightSum；⑦调用sum(root)，返回totalTilt。时间复杂度O(n)，空间复杂度O(h)，一次遍历同时计算子树和与坡度和。';
-    findTilt.hint = '关键是「后序遍历的顺序」，先计算子树和，再计算当前节点的坡度并累加';
-    problems.push(findTilt);
 
     // 1652. 二叉搜索树的范围和（LeetCode 938）
     const rangeSumBST = new ProblemModel();
@@ -6923,22 +6726,6 @@ public:
     rangeSumBST.hint = '核心是「BST的有序性」，通过节点值与范围的比较，剪枝不需要遍历的子树';
     problems.push(rangeSumBST);
 
-    // 1653. 二叉树的层平均值（LeetCode 637）
-    const averageOfLevels = new ProblemModel();
-    averageOfLevels.id = 1653;
-    averageOfLevels.title = '二叉树的层平均值';
-    averageOfLevels.description = '给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10^-5 以内的答案可以被接受。';
-    averageOfLevels.difficulty = ProblemDifficulty.EASY;
-    averageOfLevels.category = ProblemCategory.BINARY_TREE;
-    averageOfLevels.choices = [
-      { id: 'A', text: 'BFS层序遍历，计算每层的节点和与数量，求平均值', isCorrect: true },
-      { id: 'B', text: 'DFS，记录每层的节点值，最后计算平均值', isCorrect: false },
-      { id: 'C', text: '递归，传递层数参数，收集每层节点值', isCorrect: false },
-      { id: 'D', text: '先计算每层节点数，再计算总和', isCorrect: false }
-    ];
-    averageOfLevels.explanation = 'BFS解法：①初始化队列和结果数组；②若root不为空，入队；③循环当队列不为空：获取当前层节点数size；层和sum=0；④循环size次：出队节点，sum += node.val；左右孩子入队；⑤平均值sum/size加入结果；⑥返回结果。时间复杂度O(n)，空间复杂度O(n)，逐层计算平均值，直观高效。';
-    averageOfLevels.hint = '关键是「分层处理」，通过层序遍历分别计算每层的总和与节点数';
-    problems.push(averageOfLevels);
 
     // 1654. 二叉树中第二小的节点（LeetCode 671）
     const findSecondMinimumValue = new ProblemModel();
@@ -7177,23 +6964,6 @@ public:
     findDuplicate.explanation = '快慢指针解法：①慢指针slow = nums[0]；快指针fast = nums[nums[0]]；②循环当slow != fast：slow = nums[slow]；fast = nums[nums[fast]]；③快指针重置为0；④循环当slow != fast：slow = nums[slow]；fast = nums[fast]；⑤return slow。时间复杂度O(n)，空间复杂度O(1)，不修改数组，符合题目约束。原理：数组值范围1~n，索引0~n，可构建链表，重复数为环的入口。';
     findDuplicate.hint = '核心是「环的检测」，通过快慢指针找到环，再找到环的入口即为重复数';
     problems.push(findDuplicate);
-
-    // 1669. 颜色分类（LeetCode 75）
-    const sortColors = new ProblemModel();
-    sortColors.id = 1669;
-    sortColors.title = '颜色分类';
-    sortColors.description = '给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。必须在不使用库的sort函数的情况下解决这个问题。';
-    sortColors.difficulty = ProblemDifficulty.MEDIUM;
-    sortColors.category = ProblemCategory.ARRAY;
-    sortColors.choices = [
-      { id: 'A', text: '三指针，left指向0的右边界，right指向2的左边界，current遍历数组交换元素', isCorrect: true },
-      { id: 'B', text: '计数排序，统计0、1、2的个数，再重新填充数组', isCorrect: false },
-      { id: 'C', text: '两次遍历，第一次将0交换到前面，第二次将1交换到0后面', isCorrect: false },
-      { id: 'D', text: '快速排序，选择1作为 pivot 进行分区', isCorrect: false }
-    ];
-    sortColors.explanation = '三指针解法：①left=0（0的右边界），current=0，right=nums.length-1（2的左边界）；②循环当current <= right：if nums[current] == 0：交换nums[current]和nums[left]；left++；current++；③else if nums[current] == 2：交换nums[current]和nums[right]；right--；④else：current++；⑤排序完成。时间复杂度O(n)，空间复杂度O(1)，一次遍历完成排序，原地操作。';
-    sortColors.hint = '关键是「分区思想」，通过三个指针划分0、1、2的区域，遇到0放左边，遇到2放右边';
-    problems.push(sortColors);
 
     // 1670. 移除元素（LeetCode 27）
     const removeElement = new ProblemModel();
@@ -7556,24 +7326,6 @@ public:
     problems.push(generateParenthesis);
 
 
-    // 二、堆类（17题）
-    // 18. 数组中的第K个最大元素
-    const findKthLargest = new ProblemModel();
-    findKthLargest.id = 3018;
-    findKthLargest.title = '数组中的第K个最大元素';
-    findKthLargest.description = '给定整数数组nums和整数k，请返回数组中第k个最大的元素。请注意，你需要找的是数组排序后的第k个最大的元素，而不是第k个不同的元素。';
-    findKthLargest.difficulty = ProblemDifficulty.MEDIUM;
-    findKthLargest.category = ProblemCategory.HEAP;
-    findKthLargest.choices = [
-      { id: 'A', text: '最小堆：维护大小为k的堆，遍历结束后堆顶即为第k大元素', isCorrect: true },
-      { id: 'B', text: '最大堆：弹出k-1个元素后，堆顶为结果', isCorrect: false },
-      { id: 'C', text: '快速排序后取第n-k个元素', isCorrect: false },
-      { id: 'D', text: '计数排序，适用于元素范围小的情况', isCorrect: false }
-    ];
-    findKthLargest.explanation = '最小堆解法：①构建大小为k的最小堆（存储当前最大的k个元素）；②遍历数组，若元素>堆顶则替换堆顶并调整；③遍历结束后，堆顶即为第k大元素。时间复杂度O(n log k)，空间复杂度O(k)，适合大数据量场景。';
-    findKthLargest.hint = '最小堆的堆顶是当前k个最大元素中的最小值，即整体第k大';
-    problems.push(findKthLargest);
-
     // 19. 前K个高频元素
     const topKFrequent = new ProblemModel();
     topKFrequent.id = 3019;
@@ -7933,22 +7685,6 @@ public:
     RecentCounter.hint = '请求时间递增，用队列自然维护顺序，过期请求从队首移除';
     problems.push(RecentCounter);
 
-    // 40. 二叉树的层序遍历
-    const levelOrder = new ProblemModel();
-    levelOrder.id = 3040;
-    levelOrder.title = '二叉树的层序遍历';
-    levelOrder.description = '给你二叉树的根节点root，返回其节点值的层序遍历（即逐层地，从左到右访问所有节点）。';
-    levelOrder.difficulty = ProblemDifficulty.MEDIUM;
-    levelOrder.category = ProblemCategory.QUEUE;
-    levelOrder.choices = [
-      { id: 'A', text: '队列：每层开始时记录队列大小，循环取出该数量的节点，加入结果，同时入队其左右子节点', isCorrect: true },
-      { id: 'B', text: '递归：传递当前层数，将节点值加入对应层的列表', isCorrect: false },
-      { id: 'C', text: '栈：模拟队列进行层序遍历', isCorrect: false },
-      { id: 'D', text: '哈希表：记录每个节点的层数，再按层收集', isCorrect: false }
-    ];
-    levelOrder.explanation = '队列层序遍历：①若root为空，返回空；②队列初始化加入root；③结果列表res；④循环：levelSize=队列大小，当前层列表level；⑤循环levelSize次：出队节点，加入level；⑥若左子树非空入队，右子树非空入队；⑦level加入res；⑧返回res。时间复杂度O(n)，空间复杂度O(n)（最坏满二叉树，队列存n/2节点）。';
-    levelOrder.hint = '核心是「分层处理」，通过记录每层节点数量，确保同一层的节点被同时处理';
-    problems.push(levelOrder);
 
     // 41. 二叉树的层序遍历II（自底向上）
     const levelOrderBottom = new ProblemModel();
@@ -8103,7 +7839,2780 @@ public:
     MyStackOptimal.hint = '通过在push时转移元素，使栈顶元素始终在队列头部，优化pop的时间复杂度';
     problems.push(MyStackOptimal);
 
-    return problems;
+    // 4002. 除自身以外数组的乘积
+    const productExceptSelf = new ProblemModel ();productExceptSelf.id = 4002;productExceptSelf.title = ' 除自身以外数组的乘积 ';productExceptSelf.description = ' 给你一个整数数组 nums，返回数组 answer，其中 answer [i] 等于 nums 中除 nums [i] 之外其余各元素的乘积。题目数据 保证 数组 nums 之中任意元素的全部前缀元素和后缀的乘积都在 32 位 整数范围内。请 不要使用除法，且在 O (n) 时间复杂度、O (1) 额外空间复杂度内完成此题（输出数组不计入额外空间）。';productExceptSelf.difficulty = ProblemDifficulty.MEDIUM;productExceptSelf.category = ProblemCategory.ARRAY;productExceptSelf.choices = [{ id: 'A', text: ' 左右乘积数组优化：用输出数组存前缀积，再从后向前计算后缀积并相乘 ', isCorrect: true },{ id: 'B', text: ' 计算总乘积，再除以每个元素（无法处理 0）', isCorrect: false },{ id: 'C', text: ' 双重循环，每个元素遍历计算其他元素乘积 ', isCorrect: false },{ id: 'D', text: ' 前缀积数组 + 后缀积数组，两者相乘（额外空间 O (n)）', isCorrect: false }];productExceptSelf.explanation = ' 空间优化解法：①初始化 answer 数组，answer [0]=1；②计算前缀积：遍历 i 从 1 到 n-1：answer [i] = answer [i-1] * nums [i-1]；③初始化后缀积变量 suffix=1；④从后向前遍历 i 从 n-1 到 0：answer [i] *= suffix；suffix *= nums [i]；⑤返回 answer。时间复杂度 O (n)，空间复杂度 O (1)（输出数组不计入）。';productExceptSelf.hint = ' 关键是「拆分乘积为前缀 + 后缀」，用输出数组复用空间，避免额外存储 ';problems.push (productExceptSelf);
+    // 4005. 插入区间
+    const insertInterval = new ProblemModel ();insertInterval.id = 4005;insertInterval.title = ' 插入区间 ';insertInterval.description = ' 给你一个 无重叠的 ，按照区间起始端点排序的区间列表。在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。';insertInterval.difficulty = ProblemDifficulty.MEDIUM;insertInterval.category = ProblemCategory.ARRAY;insertInterval.choices = [{id: 'A', text: ' 遍历 + 合并：先加所有在新区间前的区间，再合并重叠区间，最后加剩余区间 ', isCorrect: true},{ id: 'B', text: ' 添加新区间后重新排序合并（时间 O (n log n)）', isCorrect: false },{ id: 'C', text: ' 二分查找新区间位置，再合并 ', isCorrect: false },{ id: 'D', text: ' 暴力比较所有区间，逐个合并 ', isCorrect: false }];insertInterval.explanation = ' 遍历解法：①初始化 result；②遍历 intervals：若当前区间 end < newInterval [0]（在新区间前）：加入 result；③else if 当前区间 start > newInterval [1]（在新区间后）：加入 newInterval 和剩余区间，返回 result；④else（重叠）：更新 newInterval = [min (start), max (end)]；⑤遍历结束后加入 newInterval；⑥返回 result。时间复杂度 O (n)，空间复杂度 O (n)。';insertInterval.hint = ' 利用原区间有序特性，分「前、重叠、后」三部分处理，避免全量排序 ';problems.push (insertInterval);
+    // 4006. 搜索二维矩阵 II
+    const searchMatrixII = new ProblemModel ();searchMatrixII.id = 4006;searchMatrixII.title = ' 搜索二维矩阵 II';searchMatrixII.description = ' 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：每行的元素从左到右升序排列；每列的元素从上到下升序排列。';searchMatrixII.difficulty = ProblemDifficulty.MEDIUM;searchMatrixII.category = ProblemCategory.ARRAY;searchMatrixII.choices = [{id: 'A', text: ' 从右上角开始：小于目标则下移，大于则左移，等于则返回 true', isCorrect: true},{ id: 'B', text: ' 逐行二分查找（时间 O (m log n)）', isCorrect: false },{ id: 'C', text: ' 暴力遍历所有元素（时间 O (mn)）', isCorrect: false },{ id: 'D', text: ' 从左上角开始，大于目标则右移或下移（无法确定方向）', isCorrect: false }];searchMatrixII.explanation = ' 右上角起点解法：①若 matrix 为空，返回 false；②m=matrix.length，n=matrix [0].length；③row=0，col=n-1；④循环 row<m 且 col>=0：current=matrix [row][col]；⑤若 current==target：return true；⑥else if current < target：row++（下方元素更大）；⑦else：col--（左侧元素更小）；⑧循环结束返回 false。时间复杂度 O (m+n)，空间复杂度 O (1)。';searchMatrixII.hint = ' 利用矩阵「行升序、列升序」特性，从右上角构建「二分」路径，每次排除一行或一列 ';problems.push (searchMatrixII);
+    // 4008. 最小路径和
+    const minPathSum = new ProblemModel ();minPathSum.id = 4008;minPathSum.title = ' 最小路径和 ';minPathSum.description = ' 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。说明：每次只能向下或者向右移动一步。';minPathSum.difficulty = ProblemDifficulty.MEDIUM;minPathSum.category = ProblemCategory.ARRAY;minPathSum.choices = [{id: 'A', text: ' 动态规划：dp [i][j] = grid [i][j] + min (dp [i-1][j], dp [i][j-1])，边界单独处理 ', isCorrect: true },{ id: 'B', text: ' 深度优先搜索（时间 O (2^(m+n))，超时）', isCorrect: false },{ id: 'C', text: ' 广度优先搜索，记录每个位置的最小和 ', isCorrect: false },{ id: 'D', text: ' 贪心算法，每次选当前最小的方向（局部最优非全局）', isCorrect: false }];minPathSum.explanation = 'DP 解法（空间优化）：①直接在 grid 上修改（不额外开数组）；②第一行：grid [0][j] += grid [0][j-1]（只能从左来）；③第一列：grid [i][0] += grid [i-1][0]（只能从上来）；④遍历 i 从 1 到 m-1，j 从 1 到 n-1：grid [i][j] += min (grid [i-1][j], grid [i][j-1])；⑤返回 grid [m-1][n-1]。时间复杂度 O (mn)，空间复杂度 O (1)。';minPathSum.hint = ' 每个位置的最小路径和由上方或左方的最小路径和决定，利用原网格存储结果优化空间 ';problems.push (minPathSum);
+    // 4009. 不同路径 II
+    const uniquePathsWithObstacles = new ProblemModel ();uniquePathsWithObstacles.id = 4009;uniquePathsWithObstacles.title = ' 不同路径 II';uniquePathsWithObstacles.description = ' 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish”）。现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？网格中的障碍物和空位置分别用 1 和 0 来表示。';uniquePathsWithObstacles.difficulty = ProblemDifficulty.MEDIUM;uniquePathsWithObstacles.category = ProblemCategory.ARRAY;uniquePathsWithObstacles.choices = [{ id: 'A', text: ' 动态规划：dp [i][j] = 0（有障碍），否则 dp [i][j] = dp [i-1][j] + dp [i][j-1]', isCorrect: true },{ id: 'B', text: ' 递归 + 记忆化（障碍物处返回 0）', isCorrect: false },{ id: 'C', text: ' 组合数学（无法处理障碍物）', isCorrect: false },{ id: 'D', text: 'BFS 统计路径数（空间开销大）', isCorrect: false }];uniquePathsWithObstacles.explanation = 'DP 解法（空间优化）：①若起点或终点有障碍，返回 0；②初始化 dp 数组（长度 n）；③dp [0] = 1（第一行无障碍物时）；④遍历第一行：若 grid [0][j] 有障碍或 dp [j-1]==0：dp [j]=0；else：dp [j]=1；⑤遍历 i 从 1 到 m-1：更新 dp [0]（第一列有障碍则为 0，否则继承上方 dp [0]）；⑥遍历 j 从 1 到 n-1：若 grid [i][j] 有障碍：dp [j]=0；else：dp [j] = dp [j]（上方） + dp [j-1]（左方）；⑦返回 dp [n-1]。时间复杂度 O (mn)，空间复杂度 O (n)。';uniquePathsWithObstacles.hint = ' 障碍物处路径数为 0，需在初始化和状态转移中特殊处理，避免路径穿过障碍 ';problems.push (uniquePathsWithObstacles);
+    // 4010. 区间列表的交集
+    const intervalIntersection = new ProblemModel ();intervalIntersection.id = 4010;intervalIntersection.title = ' 区间列表的交集 ';intervalIntersection.description = ' 给定两个由一些 闭区间 组成的列表，firstList 和 secondList ，其中 firstList [i] = [starti, endi] 而 secondList [j] = [startj, endj] 。每个区间列表都是成对不相交的，并且已经排序。返回这两个区间列表的交集。';intervalIntersection.difficulty = ProblemDifficulty.MEDIUM;intervalIntersection.category = ProblemCategory.ARRAY;intervalIntersection.choices = [{ id: 'A', text: ' 双指针：遍历两个列表，计算当前区间的交集，移动区间 end 较小的指针 ', isCorrect: true },{ id: 'B', text: ' 暴力比较所有区间对（时间 O (mn)）', isCorrect: false },{ id: 'C', text: ' 将两个列表合并后找交集（冗余步骤）', isCorrect: false },{ id: 'D', text: ' 二分查找，对每个区间找另一列表中的重叠区间 ', isCorrect: false }];intervalIntersection.explanation = ' 双指针解法：①i=0，j=0，result=[]；②m=firstList.length，n=secondList.length；③循环 i<m 且 j<n：a=firstList [i]，b=secondList [j]；④start=max (a [0], b [0])，end=min (a [1], b [1])；⑤若 start<=end（有交集）：result.push ([start, end])；⑥若 a [1] < b [1]：i++（a 已无后续重叠）；else：j++；⑦返回 result。时间复杂度 O (m+n)，空间复杂度 O (1)（输出数组不计入）。';intervalIntersection.hint = ' 利用区间有序特性，双指针同步推进，每次仅需比较当前两个区间，避免冗余计算 ';problems.push (intervalIntersection);
+    // 4011. 最小 K 个数
+    const getLeastNumbers = new ProblemModel ();getLeastNumbers.id = 4011;getLeastNumbers.title = ' 最小 K 个数 ';getLeastNumbers.description = ' 设计一个算法，找出数组中最小的 k 个数。以任意顺序返回这 k 个数均可。';getLeastNumbers.difficulty = ProblemDifficulty.EASY;getLeastNumbers.category = ProblemCategory.ARRAY;getLeastNumbers.choices = [{id: 'A', text: ' 最大堆：维护大小为 k 的堆，遍历数组时大于堆顶则跳过，否则替换，最终堆内为最小 k 数 ', isCorrect: true},{ id: 'B', text: ' 排序后取前 k 个（时间 O (n log n)）', isCorrect: false },{ id: 'C', text: ' 快速选择算法（平均 O (n)，最坏 O (n²)）', isCorrect: false },{ id: 'D', text: ' 计数排序（仅适用于元素范围小的情况）', isCorrect: false }];getLeastNumbers.explanation = ' 最大堆解法：①若 k==0，返回空；②初始化大小为 k 的最大堆（JS 需用最小堆存负数模拟）；③遍历 nums：若堆大小 < k：入堆；④else：若当前数 < 堆顶（负数堆则 > 堆顶）：弹出堆顶，入堆；⑤遍历结束后，将堆元素转为正数（若用负数模拟），返回。时间复杂度 O (n log k)，空间复杂度 O (k)。';getLeastNumbers.hint = ' 最大堆始终保留当前最小的 k 个数，堆顶是这 k 个数中的最大值，新元素仅需与堆顶比较 ';problems.push (getLeastNumbers);
+    // 4012. 被围绕的区域
+    // 4013. 岛屿的最大面积
+    const maxAreaOfIsland = new ProblemModel ();maxAreaOfIsland.id = 4013;maxAreaOfIsland.title = ' 岛屿的最大面积 ';maxAreaOfIsland.description = ' 给你一个大小为 m x n 的二进制矩阵 grid 。岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在 水平或者竖直的四个方向上 相邻。你可以假设 grid 的四个边缘都被 0（代表水）包围着。岛屿的面积是岛上值为 1 的单元格的数目。计算并返回 grid 中最大的岛屿面积。如果没有岛屿，则返回 0 。';maxAreaOfIsland.difficulty = ProblemDifficulty.MEDIUM;maxAreaOfIsland.category = ProblemCategory.ARRAY;maxAreaOfIsland.choices = [{ id: 'A', text: 'DFS：遍历网格，遇到 1 则递归计算连通面积，标记为 0 避免重复，更新最大面积 ', isCorrect: true },{ id: 'B', text: 'BFS：用队列处理每个岛屿的连通单元格，统计面积 ', isCorrect: false },{ id: 'C', text: ' 并查集：将相邻 1 合并，统计最大集合大小 ', isCorrect: false },{ id: 'D', text: ' 暴力遍历，每个 1 单独计算面积（重复计数）', isCorrect: false }];maxAreaOfIsland.explanation = 'DFS 解法：①maxArea=0；②定义 DFS 函数：若超出边界或为 0，返回 0；标记 grid [i][j]=0；返回 1 + DFS (i-1,j) + DFS (i+1,j) + DFS (i,j-1) + DFS (i,j+1)；③遍历每个单元格 (i,j)：若 grid [i][j]==1：area=DFS (i,j)；maxArea=max (maxArea, area)；④返回 maxArea。时间复杂度 O (mn)，空间复杂度 O (mn)（递归栈）。';maxAreaOfIsland.hint = ' 通过「淹没岛屿」（标记为 0）避免重复遍历，递归计算每个岛屿的连通单元格数 ';problems.push (maxAreaOfIsland);
+    // 4014. 矩阵中的最长递增路径
+    const longestIncreasingPath = new ProblemModel ();longestIncreasingPath.id = 4014;longestIncreasingPath.title = ' 矩阵中的最长递增路径 ';longestIncreasingPath.description = ' 给定一个 m x n 整数矩阵 matrix ，找出其中 最长递增路径 的长度。对于每个单元格，你可以往上，下，左，右四个方向移动。 你 不能 在对角线方向上移动或移动到边界外（即不允许环绕）。';longestIncreasingPath.difficulty = ProblemDifficulty.HARD;longestIncreasingPath.category = ProblemCategory.ARRAY;longestIncreasingPath.choices = [{id: 'A', text: 'DFS + 记忆化：dp [i][j] 记录以 (i,j) 为起点的最长路径，递归探索四个方向，取最大长度 + 1', isCorrect: true },{ id: 'B', text: ' 暴力 DFS（无记忆化，时间 O ((mn)²)）', isCorrect: false },{ id: 'C', text: 'BFS，按值从小到大处理，更新相邻单元格的最长路径 ', isCorrect: false },{ id: 'D', text: ' 动态规划，按行或列顺序更新（无法处理任意方向）', isCorrect: false }];longestIncreasingPath.explanation = ' 记忆化 DFS 解法：①m=matrix.length，n=matrix [0].length；②dp 二维数组初始化 0，存储每个单元格的最长路径；③定义 DFS (i,j)：若 dp [i][j]!=0，返回 dp [i][j]；初始化 len=1；④遍历四个方向：若邻居在边界内且值 > matrix [i][j]：len=max (len, 1+DFS (neighbor))；⑤dp [i][j]=len；return len；⑥遍历每个单元格：maxLen=max (maxLen, DFS (i,j))；⑦返回 maxLen。时间复杂度 O (mn)，空间复杂度 O (mn)。';longestIncreasingPath.hint = ' 利用记忆化缓存已计算的路径长度，避免重复递归，每个单元格仅计算一次 ';problems.push (longestIncreasingPath);
+    // 4015. 最小体力消耗路径
+    const minimumEffortPath = new ProblemModel ();minimumEffortPath.id = 4015;minimumEffortPath.title = ' 最小体力消耗路径 ';minimumEffortPath.description = ' 你准备参加一场远足活动。给你一个二维 rows x cols 的地图 heights ，其中 heights [row][col] 表示格子 (row, col) 的高度。一开始你在最左上角的格子 (0, 0) ，且你希望去最右下角的格子 (rows-1, cols-1) （注意下标从 0 开始）。你每次可以往 上，下，左，右 四个方向之一移动，你想要找到耗费体力最小的一条路径。一条路径耗费的体力是路径上相邻格子之间高度差的 最大值 决定的。请你返回从左上角走到右下角的最小体力消耗值。';minimumEffortPath.difficulty = ProblemDifficulty.MEDIUM;minimumEffortPath.category = ProblemCategory.ARRAY;minimumEffortPath.choices = [{ id: 'A', text: ' 二分查找 + DFS/BFS：二分体力值，判断是否存在路径所有相邻差 <= 该值 ', isCorrect: true },{ id: 'B', text: 'Dijkstra 算法：将体力消耗视为边权，找起点到终点的最小最大边权路径 ', isCorrect: false },{ id: 'C', text: ' 暴力 DFS（时间 O (4^(mn))）', isCorrect: false },{ id: 'D', text: ' 动态规划，dp [i][j] 表示到 (i,j) 的最小体力消耗（无法处理全局最优）', isCorrect: false }];minimumEffortPath.explanation = ' 二分 + DFS 解法：①left=0，right=1e6（最大可能高度差）；②定义 isPossible (limit)：DFS/BFS 判断是否存在路径，相邻差 <=limit；③循环 left<right：mid=(left+right)/2；④若 isPossible (mid)：right=mid；else：left=mid+1；⑤返回 left。时间复杂度 O (mn log H)（H 为最大高度差），空间复杂度 O (mn)（visited 数组）。';minimumEffortPath.hint = ' 二分查找最小可行体力值，用 DFS/BFS 验证可行性，将优化问题转化为判定问题 ';problems.push (minimumEffortPath);
+    // 二、字符串类（15 题）// 4016. 最长回文子序列
+    const longestPalindromeSubseq = new ProblemModel ();longestPalindromeSubseq.id = 4016;longestPalindromeSubseq.title = ' 最长回文子序列 ';longestPalindromeSubseq.description = ' 给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。';longestPalindromeSubseq.difficulty = ProblemDifficulty.MEDIUM;longestPalindromeSubseq.category = ProblemCategory.STRING;longestPalindromeSubseq.choices = [{id: 'A', text: ' 动态规划：dp [i][j] 表示 s [i..j] 的最长回文子序列长度，s [i]==s [j] 则 dp [i][j]=dp [i+1][j-1]+2，否则取 max (dp [i+1][j], dp [i][j-1])', isCorrect: true },{ id: 'B', text: ' 递归 + 记忆化，逻辑同 DP', isCorrect: false },{ id: 'C', text: ' 暴力枚举所有子序列，判断是否回文（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: ' 将问题转为最长公共子序列（s 与反转 s 的 LCS）', isCorrect: false }];longestPalindromeSubseq.explanation = 'DP 解法（空间优化）：①n=s.length；②dp 数组（长度 n），存储当前 i 对应的 j 范围值；③遍历 i 从 n-1 到 0：temp 数组存储当前 i 的结果；temp [i]=1；④遍历 j 从 i+1 到 n-1：if s [i]==s [j]：temp [j] = dp [j-1] + 2；else：temp [j] = max (dp [j], temp [j-1])；⑤dp=temp；⑥返回 dp [n-1]。时间复杂度 O (n²)，空间复杂度 O (n)。';longestPalindromeSubseq.hint = ' 子序列不要求连续，DP 状态需覆盖所有子串范围，通过对角线方向填充表格 ';problems.push (longestPalindromeSubseq);
+    // 4017. 字符串解码
+    const decodeString = new ProblemModel ();decodeString.id = 4017;decodeString.title = ' 字符串解码 ';decodeString.description = ' 给定一个经过编码的字符串，返回它解码后的字符串。编码规则为: k [encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2 [4] 的输入。';decodeString.difficulty = ProblemDifficulty.MEDIUM;decodeString.category = ProblemCategory.STRING;decodeString.choices = [{ id: 'A', text: ' 栈：两个栈分别存数字和字符串，遇到] 时弹出数字和字符串，拼接后压回字符串栈 ', isCorrect: true },{ id: 'B', text: ' 递归：遇到 [递归处理内部字符串，返回解码结果与数字相乘 ', isCorrect: false },{ id: 'C', text: ' 暴力解析，逐字符处理（无法处理嵌套）', isCorrect: false },{ id: 'D', text: ' 正则表达式替换，逐步替换最内层的编码（需多次替换）', isCorrect: false }];decodeString.explanation = ' 栈解法：①numStack（存重复次数），strStack（存待拼接字符串）；②currentNum=0，currentStr=""；③遍历每个字符 c：④若 c 是数字：currentNum = currentNum*10 + (c-0)；⑤若 c 是字母：currentStr += c；⑥若 c 是 [：numStack.push (currentNum)；strStack.push (currentStr)；重置 currentNum=0，currentStr=""；⑦若 c 是]：num=numStack.pop ()；prevStr=strStack.pop ()；currentStr = prevStr + currentStr.repeat (num)；⑧遍历结束返回 currentStr。时间复杂度 O (n)（解码后长度），空间复杂度 O (n)。';decodeString.hint = ' 栈适合处理嵌套结构，数字栈记录外层重复次数，字符串栈记录外层待拼接内容 ';problems.push (decodeString);
+    // 4019. 字符串的排列
+    const checkInclusion = new ProblemModel ();checkInclusion.id = 4019;checkInclusion.title = ' 字符串的排列 ';checkInclusion.description = ' 给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false 。换句话说，s1 的排列之一是 s2 的 子串 。';checkInclusion.difficulty = ProblemDifficulty.MEDIUM;checkInclusion.category = ProblemCategory.STRING;checkInclusion.choices = [{id: 'A', text: ' 滑动窗口（固定长度）：统计 s1 的字符频率，窗口长度为 s1.length，滑动比较频率是否一致 ', isCorrect: true},{ id: 'B', text: ' 生成 s1 的所有排列，检查是否为 s2 子串（时间 O (n!)）', isCorrect: false },{ id: 'C', text: ' 排序 s1 和 s2 的所有子串，比较是否相等（时间 O (n² log n)）', isCorrect: false },{ id: 'D', text: ' 哈希表记录 s1 字符，遍历 s2 子串检查（时间 O (nm)）', isCorrect: false }];checkInclusion.explanation = ' 固定窗口解法：①n=s1.length，m=s2.length；若 n>m 返回 false；②初始化 freq 数组（26 字母），count=0；③遍历 s1：freq [c.charCodeAt (0)-97]++；④遍历 s2 前 n 个字符：freq [c.charCodeAt (0)-97]--；若 freq [c.charCodeAt (0)-97]==0：count++；⑤若 count==26 返回 true；⑥遍历 s2 从 n 到 m-1：左移除字符 leftC：freq [leftC-97]++；若 freq [leftC-97]==1：count--；右加入字符 rightC：freq [rightC-97]--；若 freq [rightC-97]==0：count++；⑦若 count==26 返回 true；⑧返回 false。时间复杂度 O (m)，空间复杂度 O (1)。';checkInclusion.hint = ' 排列的本质是「字符种类和频率相同」，固定窗口长度为 s1 长度，通过频率数组和计数器快速比对 ';problems.push (checkInclusion);
+    // 4020. 最长有效括号
+    // 4023. 最短公共超序列
+    const shortestCommonSupersequence = new ProblemModel ();shortestCommonSupersequence.id = 4023;shortestCommonSupersequence.title = ' 最短公共超序列 ';shortestCommonSupersequence.description = ' 给你两个字符串 str1 和 str2，返回同时以 str1 和 str2 作为子序列的最短字符串。如果答案不止一个，则可以返回其中任意一个。一个字符串 s 包含另一个字符串 t 作为子序列，指可以从 s 中删除一些字符，而不改变其余字符的相对顺序，得到 t 。';shortestCommonSupersequence.difficulty = ProblemDifficulty.HARD;shortestCommonSupersequence.category = ProblemCategory.STRING;shortestCommonSupersequence.choices = [{id: 'A', text: ' 先求最长公共子序列（LCS），再合并 str1 和 str2，LCS 部分仅保留一次 ', isCorrect: true},{ id: 'B', text: ' 动态规划直接构建最短超序列（空间开销大）', isCorrect: false },{ id: 'C', text: ' 暴力枚举所有超序列，找最短（时间 O (2^(m+n))）', isCorrect: false },{ id: 'D', text: ' 贪心选择当前较小的字符（局部最优非全局）', isCorrect: false }];shortestCommonSupersequence.explanation = 'LCS 合并解法：①求 str1 和 str2 的 LCS；②双指针 i=0（str1），j=0（str2），k=0（LCS）；③result=""；④循环 k<LCS.length：⑤while i<str1.length && str1 [i]!=LCS [k]：result+=str1 [i++]；⑥while j<str2.length && str2 [j]!=LCS [k]：result+=str2 [j++]；⑦result+=LCS [k]；i++；j++；k++；⑧添加剩余的 str1 和 str2；⑨返回 result。时间复杂度 O (mn)（求 LCS），空间复杂度 O (mn)。';shortestCommonSupersequence.hint = ' 最短超序列长度 = len (str1)+len (str2)-len (LCS)，核心是找到 LCS，避免重复存储公共部分 ';problems.push (shortestCommonSupersequence);
+    // 4024. 验证回文串 II
+    const validPalindrome = new ProblemModel ();validPalindrome.id = 4024;validPalindrome.title = ' 验证回文串 II';validPalindrome.description = ' 给你一个字符串 s，最多可以从中删除一个字符，请你判断是否能成为回文字符串。';validPalindrome.difficulty = ProblemDifficulty.EASY;validPalindrome.category = ProblemCategory.STRING;validPalindrome.choices = [{id: 'A', text: ' 双指针：左右指针对比，不相等时尝试删除左或右字符，递归 / 迭代判断剩余子串 ', isCorrect: true},{ id: 'B', text: ' 暴力删除每个字符，判断是否为回文（时间 O (n²)）', isCorrect: false },{ id: 'C', text: ' 反转字符串，比较差异位置是否仅一处（逻辑错误）', isCorrect: false },{ id: 'D', text: ' 动态规划判断是否存在回文子串（未利用删除一次的条件）', isCorrect: false }];validPalindrome.explanation = ' 双指针解法：①定义辅助函数 isPal (l, r)：while l<r：if s [l]!=s [r] return false；l++；r--；return true；②l=0，r=s.length-1；③while l<r：④if s [l]==s [r]：l++；r--；⑤else：return isPal (l+1, r) || isPal (l, r-1)；⑥return true。时间复杂度 O (n)，空间复杂度 O (1)。';validPalindrome.hint = ' 仅当首次遇到不相等字符时，才有两种删除选择（左或右），后续子串需严格回文 ';problems.push (validPalindrome);
 
+    // 接字符串类（续）
+    // 4026. 最长重复子串
+    const longestDupSubstring = new ProblemModel();
+    longestDupSubstring.id = 4026;
+    longestDupSubstring.title = '最长重复子串';
+    longestDupSubstring.description = '给你一个字符串 s ，返回 s 中最长的 重复子串 。如果 s 中没有重复子串，返回空字符串 "" 。';
+    longestDupSubstring.difficulty = ProblemDifficulty.HARD;
+    longestDupSubstring.category = ProblemCategory.STRING;
+    longestDupSubstring.choices = [
+      { id: 'A', text: '二分查找+滚动哈希：二分子串长度，用哈希判断是否存在重复子串，滚动哈希优化比较效率', isCorrect: true },
+      { id: 'B', text: '后缀数组：构建后缀数组后找相邻后缀的最长公共前缀（实现复杂）', isCorrect: false },
+      { id: 'C', text: '暴力枚举所有子串，哈希表记录是否重复（时间O(n³)）', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i][j]表示以i和j结尾的最长重复子串长度（空间O(n²)）', isCorrect: false }
+    ];
+    longestDupSubstring.explanation = '二分+滚动哈希解法：①low=0，high=n-1，result=""；②定义check(L)：用哈希表存子串哈希值，遍历i从0到n-L：计算s[i..i+L-1]的哈希；若已存在则返回该子串；否则存入哈希表；返回""；③while low<=high：mid=(low+high)>>1；sub=check(mid)；④if sub：result=sub；low=mid+1；else：high=mid-1；⑤返回result。时间复杂度O(n log n)，空间复杂度O(n)。';
+    longestDupSubstring.hint = '二分查找降低问题复杂度，滚动哈希避免子串比较的O(L)时间，核心是哈希冲突处理（可双哈希优化）';
+    problems.push(longestDupSubstring);
+
+    // 4027. 字符串压缩
+    const compressString = new ProblemModel();
+    compressString.id = 4027;
+    compressString.title = '字符串压缩';
+    compressString.description = '字符串压缩。利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能。比如，字符串 aabcccccaaa 会变为 a2b1c5a3。若压缩后的字符串没有变短，则返回原先的字符串。你可以假设字符串中只包含大小写英文字母（a至z）。';
+    compressString.difficulty = ProblemDifficulty.EASY;
+    compressString.category = ProblemCategory.STRING;
+    compressString.choices = [
+      { id: 'A', text: '单指针遍历：记录当前字符和计数，不同字符时拼接结果，最后比较长度', isCorrect: true },
+      { id: 'B', text: '双指针：左指针固定当前字符，右指针计数重复次数', isCorrect: false },
+      { id: 'C', text: '正则表达式替换：匹配连续字符并替换为字符+次数（边界处理复杂）', isCorrect: false },
+      { id: 'D', text: '栈：相同字符入栈计数，不同字符时弹出拼接（空间开销大）', isCorrect: false }
+    ];
+    compressString.explanation = '单指针解法：①若s长度<=1，返回s；②result=[s[0]]；count=1；③遍历i从1到s.length-1：④if s[i]==s[i-1]：count++；⑤else：result.push(count.toString(), s[i])；count=1；⑥遍历结束后push(count.toString())；⑦compressed=result.join("")；⑧return compressed.length < s.length ? compressed : s。时间复杂度O(n)，空间复杂度O(n)。';
+    compressString.hint = '压缩的关键是「连续字符计数」，最后必须比较压缩前后长度，避免返回更长的字符串';
+    problems.push(compressString);
+
+    // 4028. 翻转字符串里的单词
+    const reverseWords = new ProblemModel();
+    reverseWords.id = 4028;
+    reverseWords.title = '翻转字符串里的单词';
+    reverseWords.description = '给你一个字符串 s ，逐个翻转字符串中的所有 单词 。单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。请你返回一个翻转 s 中单词顺序并用单个空格相连的字符串。说明：输入字符串 s 可以在前面、后面或者单词间包含多余的空格。翻转后单词间应当仅用一个空格分隔。翻转后的字符串中不应包含额外的空格。';
+    reverseWords.difficulty = ProblemDifficulty.MEDIUM;
+    reverseWords.category = ProblemCategory.STRING;
+    reverseWords.choices = [
+      { id: 'A', text: '双指针+反转：先去除多余空格，整体反转字符串，再逐个反转单词', isCorrect: true },
+      { id: 'B', text: '分割+反转+拼接：split分割单词，reverse数组，join空格（处理空格需额外步骤）', isCorrect: false },
+      { id: 'C', text: '栈：遍历字符串压入单词，弹出时拼接（需处理空格）', isCorrect: false },
+      { id: 'D', text: '暴力遍历，从后向前收集单词（时间O(n)，空间O(n)）', isCorrect: false }
+    ];
+    reverseWords.explanation = '双指针解法：①去除多余空格：用快慢指针，跳过连续空格，仅保留单词间一个空格；②整体反转字符串；③遍历字符串，用指针标记单词边界，逐个反转单词；④返回处理后的字符串。时间复杂度O(n)，空间复杂度O(n)（存储结果）。';
+    reverseWords.hint = '三次反转策略：先规范空格，再整体反转，最后局部反转单词，避免使用额外空间存储单词列表';
+    problems.push(reverseWords);
+
+    // 4029. 实现Trie(前缀树)
+    const TrieImplementation = new ProblemModel();
+    TrieImplementation.id = 4029;
+    TrieImplementation.title = '实现Trie(前缀树)';
+    TrieImplementation.description = 'Trie（发音类似 "try"）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。请实现 Trie 类：Trie() 初始化前缀树对象。void insert(String word) 向前缀树中插入字符串 word 。boolean search(String word) 如果字符串 word 在前缀树中，返回 true（即，在检索之前已经插入）；否则，返回 false 。boolean startsWith(String prefix) 如果之前已经插入的字符串 word 的前缀之一为 prefix ，返回 true ；否则，返回 false 。';
+    TrieImplementation.difficulty = ProblemDifficulty.MEDIUM;
+    TrieImplementation.category = ProblemCategory.STRING;
+    TrieImplementation.choices = [
+      { id: 'A', text: '字典树节点：每个节点含26个子节点数组和isEnd标记，插入时逐个字符创建节点，search检查路径存在且isEnd为true', isCorrect: true },
+      { id: 'B', text: '哈希表存储所有前缀：插入时存储所有前缀，search直接查询（空间O(n²)）', isCorrect: false },
+      { id: 'C', text: '二叉搜索树：按字符排序存储（检索效率低）', isCorrect: false },
+      { id: 'D', text: '数组存储所有单词，search时遍历检查（时间O(nm)）', isCorrect: false }
+    ];
+    TrieImplementation.explanation = 'Trie实现：①节点结构：children数组（26个元素），isEnd布尔值；②insert：current=根节点；遍历word每个字符c：index=c.charCodeAt(0)-97；若children[index]不存在则创建新节点；current=children[index]；遍历结束后current.isEnd=true；③search：类似insert，若中途节点不存在返回false；最后返回current.isEnd；④startsWith：同search，但最后无需检查isEnd，存在路径即返回true。时间复杂度O(L)（L为字符串长度），空间复杂度O(L*N)（N为插入单词数）。';
+    TrieImplementation.hint = '前缀树的核心是「共享前缀」，通过字符映射到数组索引实现高效插入和检索，适合前缀匹配场景';
+    problems.push(TrieImplementation);
+
+    // 4030. 单词拆分II
+    const wordBreakII = new ProblemModel();
+    wordBreakII.id = 4030;
+    wordBreakII.title = '单词拆分II';
+    wordBreakII.description = '给定一个字符串 s 和一个字符串字典 wordDict ，在字符串 s 中增加空格来构建一个句子，使得句子中所有的单词都在词典中。以任意顺序 返回所有这些可能的句子。注意：词典中的同一个单词可能在分段中被重复使用多次。';
+    wordBreakII.difficulty = ProblemDifficulty.HARD;
+    wordBreakII.category = ProblemCategory.STRING;
+    wordBreakII.choices = [
+      { id: 'A', text: '动态规划+回溯：先用DP判断是否可拆分并记录拆分点，再回溯生成所有可能句子', isCorrect: true },
+      { id: 'B', text: '纯回溯：递归尝试所有拆分可能（无剪枝易超时）', isCorrect: false },
+      { id: 'C', text: 'BFS：层序遍历记录拆分路径（空间开销大）', isCorrect: false },
+      { id: 'D', text: '前缀树优化回溯：用Trie快速判断前缀是否在词典中', isCorrect: false }
+    ];
+    wordBreakII.explanation = 'DP+回溯解法：①用哈希集存储wordDict；②DP数组dp[i]记录s[0..i-1]的所有拆分方式；③dp[0]=[""]；④遍历i从1到s.length：⑤初始化dp[i]=[]；⑥遍历j从0到i-1：⑦if dp[j]非空且s[j..i-1]在词典中：⑧for each str in dp[j]：newStr = str + (str?" ":"") + s[j..i-1]；dp[i].push(newStr)；⑨返回dp[s.length]。时间复杂度O(n² + 2^n)（最坏情况），空间复杂度O(2^n)。';
+    wordBreakII.hint = 'DP用于记录中间拆分结果避免重复计算，回溯过程通过拼接已有拆分结果生成完整句子，需注意空字符串处理';
+    problems.push(wordBreakII);
+
+
+    // 三、二叉树类（15题）
+    // 4031. 二叉树的层序遍历
+    const levelOrder = new ProblemModel();
+    levelOrder.id = 4031;
+    levelOrder.title = '二叉树的层序遍历';
+    levelOrder.description = '给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。';
+    levelOrder.difficulty = ProblemDifficulty.MEDIUM;
+    levelOrder.category = ProblemCategory.BINARY_TREE;
+    levelOrder.choices = [
+      { id: 'A', text: '队列BFS：用队列存储每一层节点，遍历当前层时记录节点值并将子节点入队', isCorrect: true },
+      { id: 'B', text: '递归DFS：记录当前深度，按深度存储节点值', isCorrect: false },
+      { id: 'C', text: '栈模拟BFS（需标记层结束，复杂）', isCorrect: false },
+      { id: 'D', text: '前序遍历后按层分组（逻辑错误）', isCorrect: false }
+    ];
+    levelOrder.explanation = '队列BFS解法：①若root为空，返回[]；②result=[], queue=[root]；③while queue非空：④levelSize=queue.length；currentLevel=[]；⑤for i从0到levelSize-1：node=queue.shift()；currentLevel.push(node.val)；⑥if node.left：queue.push(node.left)；if node.right：queue.push(node.right)；⑦result.push(currentLevel)；⑧返回result。时间复杂度O(n)，空间复杂度O(n)（队列最多存n/2节点）。';
+    levelOrder.hint = '层序遍历的关键是「分层处理」，通过记录每层节点数量控制遍历范围，确保同一层节点值连续存储';
+    problems.push(levelOrder);
+
+
+    // 4033. 从前序与中序遍历序列构造二叉树
+    const buildTreeFromPreIn = new ProblemModel();
+    buildTreeFromPreIn.id = 4033;
+    buildTreeFromPreIn.title = '从前序与中序遍历序列构造二叉树';
+    buildTreeFromPreIn.description = '给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。';
+    buildTreeFromPreIn.difficulty = ProblemDifficulty.MEDIUM;
+    buildTreeFromPreIn.category = ProblemCategory.BINARY_TREE;
+    buildTreeFromPreIn.choices = [
+      { id: 'A', text: '递归：前序首元素为根，中序中根的位置分割左右子树，递归构建左右子树', isCorrect: true },
+      { id: 'B', text: '迭代：用栈模拟前序遍历，通过中序确定左子树边界', isCorrect: false },
+      { id: 'C', text: '哈希表存储中序索引，优化查找根位置（辅助递归）', isCorrect: false },
+      { id: 'D', text: '先构造后序遍历，再从后序与中序构建（多步转换）', isCorrect: false }
+    ];
+    buildTreeFromPreIn.explanation = '递归+哈希解法：①若preorder为空，返回null；②rootVal=preorder[0]；root=new TreeNode(rootVal)；③在inorder中找rootVal的索引index（用哈希表预处理inorder的value->index）；④leftSize=index；⑤root.left=buildTree(preorder.slice(1,1+leftSize), inorder.slice(0,index))；⑥root.right=buildTree(preorder.slice(1+leftSize), inorder.slice(index+1))；⑦返回root。时间复杂度O(n)，空间复杂度O(n)（哈希表+递归栈）。';
+    buildTreeFromPreIn.hint = '前序遍历「根左右」，中序遍历「左根右」，核心是通过中序确定左右子树大小，实现递归分割';
+    problems.push(buildTreeFromPreIn);
+
+    // 4034. 二叉树中的最大路径和
+    const maxPathSum = new ProblemModel();
+    maxPathSum.id = 4034;
+    maxPathSum.title = '二叉树中的最大路径和';
+    maxPathSum.description = '路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。路径和 是路径中各节点值的总和。给你一个二叉树的根节点 root ，返回其 最大路径和 。';
+    maxPathSum.difficulty = ProblemDifficulty.HARD;
+    maxPathSum.category = ProblemCategory.BINARY_TREE;
+    maxPathSum.choices = [
+      { id: 'A', text: '后序遍历：递归计算每个节点的最大贡献（单边路径和），更新全局最大路径和（左+右+当前值）', isCorrect: true },
+      { id: 'B', text: '前序遍历：计算所有可能路径和（时间O(n²)）', isCorrect: false },
+      { id: 'C', text: '层次遍历：记录每个节点的路径和（无法处理跨父节点路径）', isCorrect: false },
+      { id: 'D', text: '动态规划：存储每个节点的左右路径和（本质同后序遍历）', isCorrect: false }
+    ];
+    maxPathSum.explanation = '后序遍历解法：①初始化maxSum为负无穷；②定义maxGain(node)：③if node为空，return 0；④leftGain = max(maxGain(node.left), 0)（舍弃负贡献）；⑤rightGain = max(maxGain(node.right), 0)；⑥currentSum = node.val + leftGain + rightGain；⑦maxSum = max(maxSum, currentSum)；⑧return node.val + max(leftGain, rightGain)（返回单边最大贡献）；⑨调用maxGain(root)；返回maxSum。时间复杂度O(n)，空间复杂度O(n)（递归栈）。';
+    maxPathSum.hint = '路径和可能不经过根节点，需在递归中同时计算「当前节点为顶点的路径和」并更新全局最大值，返回值仅保留单边最大贡献';
+    problems.push(maxPathSum);
+
+
+    // 4036. 二叉树的序列化与反序列化
+    const serializeDeserializeTree = new ProblemModel();
+    serializeDeserializeTree.id = 4036;
+    serializeDeserializeTree.title = '二叉树的序列化与反序列化';
+    serializeDeserializeTree.description = '序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。';
+    serializeDeserializeTree.difficulty = ProblemDifficulty.HARD;
+    serializeDeserializeTree.category = ProblemCategory.BINARY_TREE;
+    serializeDeserializeTree.choices = [
+      { id: 'A', text: '前序遍历：序列化时记录节点值（空节点用特殊符号），反序列化时递归解析字符串', isCorrect: true },
+      { id: 'B', text: '层序遍历：序列化按层记录节点（含空节点），反序列化用队列重建树', isCorrect: false },
+      { id: 'C', text: '后序遍历：逻辑同前序，反序列化时从后向前解析', isCorrect: false },
+      { id: 'D', text: '中序遍历：无法唯一确定树结构（同序列可能对应多棵树）', isCorrect: false }
+    ];
+    serializeDeserializeTree.explanation = '前序解法：①序列化：function serialize(root)：if root为空，return "null,"；str=root.val + "," + serialize(root.left) + serialize(root.right)；return str；②反序列化：将字符串split为数组，指针i=0；function deserialize()：if arr[i]=="null"：i++；return null；node=new TreeNode(arr[i++])；node.left=deserialize()；node.right=deserialize()；return node；调用deserialize()。时间复杂度O(n)，空间复杂度O(n)（递归栈/数组）。';
+    serializeDeserializeTree.hint = '序列化必须包含空节点信息才能唯一重建树，前序遍历的递归结构便于反序列化时递归还原';
+    problems.push(serializeDeserializeTree);
+
+    // 4037. 验证二叉搜索树
+    const isValidBST = new ProblemModel();
+    isValidBST.id = 4037;
+    isValidBST.title = '验证二叉搜索树';
+    isValidBST.description = '给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。有效 二叉搜索树定义如下：节点的左子树只包含 小于 当前节点的数。节点的右子树只包含 大于 当前节点的数。所有左子树和右子树自身必须也是二叉搜索树。';
+    isValidBST.difficulty = ProblemDifficulty.MEDIUM;
+    isValidBST.category = ProblemCategory.BINARY_TREE;
+    isValidBST.choices = [
+      { id: 'A', text: '递归+范围限制：传递当前节点允许的最小值和最大值，左子树最大值为当前值，右子树最小值为当前值', isCorrect: true },
+      { id: 'B', text: '中序遍历：BST的中序遍历为严格递增序列，检查序列是否递增', isCorrect: false },
+      { id: 'C', text: '仅比较当前节点与左右子节点（错误，未考虑祖先节点限制）', isCorrect: false },
+      { id: 'D', text: '迭代中序遍历，记录前一个节点值，判断是否递增', isCorrect: false }
+    ];
+    isValidBST.explanation = '递归范围解法：①定义helper(node, minVal, maxVal)：②if node为空，return true；③val=node.val；④if val<=minVal || val>=maxVal：return false；⑤return helper(node.left, minVal, val) && helper(node.right, val, maxVal)；⑥调用helper(root, -Infinity, Infinity)。时间复杂度O(n)，空间复杂度O(h)（递归栈）。';
+    isValidBST.hint = 'BST的每个节点需满足「大于所有左祖先，小于所有右祖先」，递归时传递动态范围是关键，避免仅比较直接子节点';
+    problems.push(isValidBST);
+
+
+
+    // 4040. 寻找二叉树的最近公共祖先
+    const lowestCommonAncestorBinaryTree = new ProblemModel();
+    lowestCommonAncestorBinaryTree.id = 4040;
+    lowestCommonAncestorBinaryTree.title = '寻找二叉树的最近公共祖先';
+    lowestCommonAncestorBinaryTree.description = '给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”';
+    lowestCommonAncestorBinaryTree.difficulty = ProblemDifficulty.MEDIUM;
+    lowestCommonAncestorBinaryTree.category = ProblemCategory.BINARY_TREE;
+    lowestCommonAncestorBinaryTree.choices = [
+      { id: 'A', text: '递归：若当前节点是p或q，返回当前节点；否则递归左右子树，若左右均返回非空，则当前节点是LCA；否则返回非空的一方', isCorrect: true },
+      { id: 'B', text: '记录父节点：遍历树记录每个节点的父节点，再向上追溯p和q的路径找交点', isCorrect: false },
+      { id: 'C', text: '前序遍历标记路径，再找最后一个共同节点（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '层次遍历，对每层节点判断是否为LCA（时间O(n²)）', isCorrect: false }
+    ];
+    lowestCommonAncestorBinaryTree.explanation = '递归解法：①function lca(node, p, q)：②if node为空或node==p或node==q：return node；③left=lca(node.left, p, q)；④right=lca(node.right, p, q)；⑤if left && right：return node；⑥return left ? left : right；⑦调用lca(root, p, q)。时间复杂度O(n)，空间复杂度O(h)。';
+    lowestCommonAncestorBinaryTree.hint = '递归的核心是「向上传递找到的目标节点」，当左右子树分别找到p和q时，当前节点即为最近公共祖先';
+    problems.push(lowestCommonAncestorBinaryTree);
+
+    // 4041. 二叉树的坡度
+    const findTilt = new ProblemModel();
+    findTilt.id = 4041;
+    findTilt.title = '二叉树的坡度';
+    findTilt.description = '给定一个二叉树，计算 整个树 的坡度 。一个树的 节点的坡度 定义为，该节点左子树的节点之和和右子树节点之和的 绝对差 。如果没有左子树，左子树的节点之和为 0 ；没有右子树同理。整个树的坡度就是所有节点的坡度之和。';
+    findTilt.difficulty = ProblemDifficulty.EASY;
+    findTilt.category = ProblemCategory.BINARY_TREE;
+    findTilt.choices = [
+      { id: 'A', text: '后序遍历：递归计算每个节点的子树和，同时累加当前节点的坡度', isCorrect: true },
+      { id: 'B', text: '前序遍历：先计算当前节点坡度，再递归左右子树（需重复计算子树和）', isCorrect: false },
+      { id: 'C', text: '层次遍历：对每个节点调用子树和函数（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: '中序遍历：无法同时获取左右子树和', isCorrect: false }
+    ];
+    findTilt.explanation = '后序解法：①totalTilt=0；②定义sum(node)：③if node为空，return 0；④leftSum=sum(node.left)；⑤rightSum=sum(node.right)；⑥tilt=Math.abs(leftSum - rightSum)；totalTilt += tilt；⑦return node.val + leftSum + rightSum；⑧调用sum(root)；返回totalTilt。时间复杂度O(n)，空间复杂度O(h)。';
+    findTilt.hint = '子树和的计算与坡度累加可在一次后序遍历中完成，避免重复计算，提高效率';
+    problems.push(findTilt);
+
+    // 4042. 路径总和II
+    const pathSumII = new ProblemModel();
+    pathSumII.id = 4042;
+    pathSumII.title = '路径总和II';
+    pathSumII.description = '给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。叶子节点 是指没有子节点的节点。';
+    pathSumII.difficulty = ProblemDifficulty.MEDIUM;
+    pathSumII.category = ProblemCategory.BINARY_TREE;
+    pathSumII.choices = [
+      { id: 'A', text: '回溯法：递归遍历路径，记录当前路径和节点值，到达叶子节点时判断是否等于目标和', isCorrect: true },
+      { id: 'B', text: 'BFS：队列存储节点、当前和、路径（空间开销大）', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个节点的路径和（无法保存完整路径）', isCorrect: false },
+      { id: 'D', text: '先计算所有路径和，再筛选目标路径（重复计算）', isCorrect: false }
+    ];
+    pathSumII.explanation = '回溯解法：①result=[], path=[]；②定义backtrack(node, currentSum)：③if node为空，return；④path.push(node.val)；currentSum += node.val；⑤if 是叶子节点且currentSum==targetSum：result.push([...path])；⑥else：backtrack(node.left, currentSum)；backtrack(node.right, currentSum)；⑦path.pop()；⑧调用backtrack(root, 0)；返回result。时间复杂度O(n)，空间复杂度O(h + k*m)（k为路径数，m为路径长度）。';
+    pathSumII.hint = '回溯法通过「入栈-递归-出栈」维护当前路径，到达叶子节点时检查和是否符合，适合收集所有满足条件的路径';
+    problems.push(pathSumII);
+
+    // 4043. 二叉搜索树中的插入操作
+    const insertIntoBST = new ProblemModel();
+    insertIntoBST.id = 4043;
+    insertIntoBST.title = '二叉搜索树中的插入操作';
+    insertIntoBST.description = '给定二叉搜索树（BST）的根节点 root 和要插入树中的值 value ，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 保证 ，新值和原始二叉搜索树中的任意节点值都不同。注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 任意有效的结果 。';
+    insertIntoBST.difficulty = ProblemDifficulty.MEDIUM;
+    insertIntoBST.category = ProblemCategory.BINARY_TREE;
+    insertIntoBST.choices = [
+      { id: 'A', text: '递归：若当前节点为空，返回新节点；若value小于当前值，递归插入左子树；否则插入右子树', isCorrect: true },
+      { id: 'B', text: '迭代：找到适合插入的叶子节点位置，创建新节点并链接', isCorrect: false },
+      { id: 'C', text: '重构BST：将新值加入节点列表，重新构建BST（效率低）', isCorrect: false },
+      { id: 'D', text: '平衡插入：确保插入后树平衡（超出题目要求）', isCorrect: false }
+    ];
+    insertIntoBST.explanation = '递归解法：①if root为空，return new TreeNode(value)；②if value < root.val：root.left = insertIntoBST(root.left, value)；③else：root.right = insertIntoBST(root.right, value)；④return root。时间复杂度O(h)，空间复杂度O(h)（递归栈）。迭代解法：①if root为空，return new TreeNode(value)；②current=root；③while true：④if value < current.val：if current.left为空：current.left=new TreeNode(value)；break；else current=current.left；⑤else：if current.right为空：current.right=new TreeNode(value)；break；else current=current.right；⑥return root。时间复杂度O(h)，空间复杂度O(1)。';
+    insertIntoBST.hint = '利用BST的「左小右大」特性，无需平衡，只需找到正确的叶子位置插入即可，递归实现简洁直观';
+    problems.push(insertIntoBST);
+
+    // 4044. 二叉树的层平均值
+    const averageOfLevels = new ProblemModel();
+    averageOfLevels.id = 4044;
+    averageOfLevels.title = '二叉树的层平均值';
+    averageOfLevels.description = '给定一个非空二叉树的根节点 root , 以数组的形式返回每一层节点的平均值。与实际答案相差 10^-5 以内的答案可以被接受。';
+    averageOfLevels.difficulty = ProblemDifficulty.EASY;
+    averageOfLevels.category = ProblemCategory.BINARY_TREE;
+    averageOfLevels.choices = [
+      { id: 'A', text: '层序遍历（BFS）：计算每层节点和与数量，求平均值', isCorrect: true },
+      { id: 'B', text: '递归DFS：记录每层的节点值，最后计算平均值', isCorrect: false },
+      { id: 'C', text: '先序遍历后按层分组计算（逻辑复杂）', isCorrect: false },
+      { id: 'D', text: '利用二叉树的完全性（不适用于非完全二叉树）', isCorrect: false }
+    ];
+    averageOfLevels.explanation = 'BFS解法：①if root为空，return []；②result=[], queue=[root]；③while queue非空：④levelSize=queue.length；sum=0；⑤for i从0到levelSize-1：node=queue.shift()；sum += node.val；⑥if node.left：queue.push(node.left)；if node.right：queue.push(node.right)；⑦result.push(sum / levelSize)；⑧返回result。时间复杂度O(n)，空间复杂度O(n)。';
+    averageOfLevels.hint = '层序遍历天然支持分层处理，只需在遍历每层时累加节点值并计数，即可轻松计算平均值';
+    problems.push(averageOfLevels);
+
+    // 4045. 二叉树的镜像
+    const mirrorTree = new ProblemModel();
+    mirrorTree.id = 4045;
+    mirrorTree.title = '二叉树的镜像';
+    mirrorTree.description = '请完成一个函数，输入一个二叉树，该函数输出它的镜像。';
+    mirrorTree.difficulty = ProblemDifficulty.EASY;
+    mirrorTree.category = ProblemCategory.BINARY_TREE;
+    mirrorTree.choices = [
+      { id: 'A', text: '递归：交换当前节点的左右子树，再递归处理左右子树', isCorrect: true },
+      { id: 'B', text: '迭代（栈/队列）：遍历节点，交换其左右子树', isCorrect: false },
+      { id: 'C', text: '层序遍历，交换每层节点的左右顺序（本质同迭代）', isCorrect: false },
+      { id: 'D', text: '构造新树：按镜像结构复制节点（空间O(n)）', isCorrect: false }
+    ];
+    mirrorTree.explanation = '递归解法：①if root为空，return null；②交换root的left和right；③mirrorTree(root.left)；④mirrorTree(root.right)；⑤return root。时间复杂度O(n)，空间复杂度O(h)。迭代解法：①if root为空，return null；②stack=[root]；③while stack非空：node=stack.pop()；④交换node的left和right；⑤if node.left：stack.push(node.left)；⑥if node.right：stack.push(node.right)；⑦return root。时间复杂度O(n)，空间复杂度O(n)。';
+    mirrorTree.hint = '镜像操作即「交换每个节点的左右子树」，递归或迭代均可实现，核心是遍历所有节点并执行交换';
+    problems.push(mirrorTree);
+
+    // 4047. 打家劫舍 II
+    const robII = new ProblemModel ();robII.id = 4047;robII.title = ' 打家劫舍 II';robII.description = ' 你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是相邻的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额。';robII.difficulty = ProblemDifficulty.MEDIUM;robII.category = ProblemCategory.DYNAMIC_PROGRAMMING;robII.choices = [{id: 'A', text: ' 拆分问题：分别计算偷 [0..n-2] 和 [1..n-1] 的最大金额，取两者最大值 ', isCorrect: true },{ id: 'B', text: ' 直接在 I 的基础上修改 DP 状态，加入环形判断（逻辑复杂）', isCorrect: false },{ id: 'C', text: ' 贪心选择排除金额最小的房屋（无法保证全局最优）', isCorrect: false },{ id: 'D', text: ' 递归遍历所有可能（时间 O (2^n)，超时）', isCorrect: false }];robII.explanation = ' 拆分 DP 解法：①定义辅助函数 robRange (nums, start, end)：实现打家劫舍 I 的逻辑，返回该区间的最大金额；②n=nums.length；if n==0 return 0；if n==1 return nums [0]；③return Math.max (robRange (nums, 0, n-2), robRange (nums, 1, n-1))。时间复杂度 O (n)，空间复杂度 O (1)。';robII.hint = ' 环形问题的关键是「拆分无环子问题」，由于首尾相邻，只需排除首或尾其一，转化为线性打家劫舍问题 ';problems.push (robII);
+    // 4048. 最长公共子序列
+    const longestCommonSubsequence = new ProblemModel ();longestCommonSubsequence.id = 4048;longestCommonSubsequence.title = ' 最长公共子序列 ';longestCommonSubsequence.description = ' 给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列。';longestCommonSubsequence.difficulty = ProblemDifficulty.MEDIUM;longestCommonSubsequence.category = ProblemCategory.DYNAMIC_PROGRAMMING;longestCommonSubsequence.choices = [{id: 'A', text: 'DP：dp [i][j] 表示 text1 前 i 个与 text2 前 j 个的 LCS 长度，text1 [i-1]==text2 [j-1] 则 dp [i][j]=dp [i-1][j-1]+1，否则取 max (dp [i-1][j], dp [i][j-1])', isCorrect: true },{ id: 'B', text: ' 递归 + 记忆化，逻辑同 DP（空间开销大）', isCorrect: false },{ id: 'C', text: ' 暴力枚举 text1 的所有子序列，检查是否在 text2 中（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: ' 哈希表存储 text2 的字符位置，再遍历 text1 匹配（无法处理顺序）', isCorrect: false }];longestCommonSubsequence.explanation = ' 空间优化 DP：①m=text1.length，n=text2.length；②dp 数组（长度 n+1）初始化 0；③for i 从 1 到 m：prev=0；④for j 从 1 到 n：temp=dp [j]；⑤if text1 [i-1]==text2 [j-1]：dp [j] = prev + 1；⑥else：dp [j] = Math.max (dp [j], dp [j-1])；⑦prev=temp；⑧return dp [n]。时间复杂度 O (mn)，空间复杂度 O (n)。';longestCommonSubsequence.hint = ' 子序列不要求连续，DP 状态需覆盖两个字符串的所有前缀组合，通过空间优化减少存储开销 ';problems.push (longestCommonSubsequence);
+    // 4052. 最长递增子序列的个数
+    const findNumberOfLIS = new ProblemModel ();findNumberOfLIS.id = 4052;findNumberOfLIS.title = ' 最长递增子序列的个数 ';findNumberOfLIS.description = ' 给定一个未排序的整数数组，找到最长递增子序列的个数。';findNumberOfLIS.difficulty = ProblemDifficulty.MEDIUM;findNumberOfLIS.category = ProblemCategory.DYNAMIC_PROGRAMMING;findNumberOfLIS.choices = [{id: 'A', text: 'DP：len [i] 表示以 i 结尾的 LIS 长度，cnt [i] 表示个数，遍历 j<i 更新 len 和 cnt，最后统计最长长度的总个数 ', isCorrect: true },{ id: 'B', text: ' 贪心 + 二分，记录每个长度的个数（实现复杂）', isCorrect: false },{ id: 'C', text: ' 暴力枚举所有子序列，统计最长的个数（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: ' 递归 + 记忆化，记录每个位置的 LIS 长度和个数（时间效率低）', isCorrect: false }];findNumberOfLIS.explanation = 'DP 解法：①n=nums.length；if n<=1 return n；②len 数组（长度 n）初始化 1，cnt 数组（长度 n）初始化 1；③maxLen=1；④for i from 1 to n-1：⑤for j from 0 to i-1：⑥if nums [j] < nums [i]：⑦if len [j]+1 > len [i]：len [i]=len [j]+1；cnt [i]=cnt [j]；⑧else if len [j]+1 == len [i]：cnt [i] += cnt [j]；⑨maxLen=Math.max (maxLen, len [i])；⑩result=0；for i from 0 to n-1：if len [i]==maxLen：result += cnt [i]；return result。时间复杂度 O (n²)，空间复杂度 O (n)。';findNumberOfLIS.hint = ' 在常规 LIS 的 DP 基础上，增加计数数组记录每个长度的子序列个数，最后汇总最长长度的总计数 ';problems.push (findNumberOfLIS);
+    // 4053. 分割回文串 II
+    const minCut = new ProblemModel ();minCut.id = 4053;minCut.title = ' 分割回文串 II';minCut.description = ' 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。返回符合要求的 最少分割次数 。';minCut.difficulty = ProblemDifficulty.HARD;minCut.category = ProblemCategory.DYNAMIC_PROGRAMMING;minCut.choices = [{id: 'A', text: ' 双 DP：①isPal [i][j] 标记 s [i..j] 是否回文；②dp [i] 表示 s [0..i] 的最少分割数，dp [i] = min (dp [j-1]+1)（j<=i 且 s [j..i] 回文）', isCorrect: true },{ id: 'B', text: ' 递归 + 记忆化，枚举所有分割点（时间 O (2^n)）', isCorrect: false },{ id: 'C', text: ' 贪心选择最短回文子串（无法保证全局最优）', isCorrect: false },{ id: 'D', text: 'BFS，按分割次数分层（空间开销大）', isCorrect: false }];minCut.explanation = ' 双 DP 解法：①n=s.length；②isPal 二维数组初始化 false；③for i from n-1 down to 0：④for j from i to n-1：⑤if s [i]==s [j] && (j-i<=1 || isPal [i+1][j-1])：isPal [i][j]=true；⑥dp 数组初始化 Infinity；dp [0]=0；⑦for i from 1 to n-1：⑧if isPal [0][i]：dp [i]=0；continue；⑨for j from 1 to i：⑩if isPal [j][i] && dp [j-1]+1 < dp [i]：dp [i] = dp [j-1]+1；⑪return dp [n-1]。时间复杂度 O (n²)，空间复杂度 O (n²)。';minCut.hint = ' 先预处理回文子串减少重复判断，再用 DP 枚举所有可能的分割点，逐步更新最少分割次数 ';problems.push (minCut);
+    // 4055. 最长回文子串
+    const longestPalindromeSubstring = new ProblemModel ();longestPalindromeSubstring.id = 4055;longestPalindromeSubstring.title = ' 最长回文子串 ';longestPalindromeSubstring.description = ' 给你一个字符串 s，找到 s 中最长的回文子串。';longestPalindromeSubstring.difficulty = ProblemDifficulty.MEDIUM;longestPalindromeSubstring.category = ProblemCategory.DYNAMIC_PROGRAMMING;longestPalindromeSubstring.choices = [{id: 'A', text: ' 中心扩展法：以每个字符 / 每对相邻字符为中心，扩展找最长回文，记录起始和长度 ', isCorrect: true},{ id: 'B', text: 'DP：dp [i][j] 标记 s [i..j] 是否回文，从短到长枚举子串长度 ', isCorrect: false },{ id: 'C', text: 'Manacher 算法，线性时间复杂度（实现复杂）', isCorrect: false },{ id: 'D', text: ' 暴力枚举所有子串，判断是否回文（时间 O (n³)）', isCorrect: false }];longestPalindromeSubstring.explanation = ' 中心扩展解法：①maxLen=1，start=0；②定义 expand (l, r)：while l>=0 且 r<s.length 且 s [l]==s [r]：l--；r++；return {len: r-l-1, start: l+1}；③for i from 0 to s.length-1：④{len1, start1}=expand (i,i)；{len2, start2}=expand (i,i+1)；⑤currentLen=Math.max (len1, len2)；⑥if currentLen>maxLen：maxLen=currentLen；start= len1>len2 ? start1 : start2；⑦return s.slice (start, start+maxLen)。时间复杂度 O (n²)，空间复杂度 O (1)。';longestPalindromeSubstring.hint = ' 回文具有对称性，中心扩展法通过遍历所有可能的中心，高效找到最长回文，空间复杂度最优 ';problems.push (longestPalindromeSubstring);
+    // 4056. 编辑距离
+    const minDistanceEdit = new ProblemModel ();minDistanceEdit.id = 4056;minDistanceEdit.title = ' 编辑距离 ';minDistanceEdit.description = ' 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 。你可以对一个单词进行如下三种操作：1. 插入一个字符；2. 删除一个字符；3. 替换一个字符。';minDistanceEdit.difficulty = ProblemDifficulty.HARD;minDistanceEdit.category = ProblemCategory.DYNAMIC_PROGRAMMING;minDistanceEdit.choices = [{id: 'A', text: 'DP：dp [i][j] 表示 word1 前 i 个转 word2 前 j 个的最少操作，相同则继承 dp [i-1][j-1]，否则取 min (插入 / 删除 / 替换)+1', isCorrect: true },{ id: 'B', text: ' 递归 + 记忆化，逻辑同 DP（时间效率低）', isCorrect: false },{ id: 'C', text: ' 贪心选择优先匹配相同字符（无法保证全局最优）', isCorrect: false },{ id: 'D', text: ' 字符串哈希，比较子串相似度（逻辑错误）', isCorrect: false }];minDistanceEdit.explanation = ' 空间优化 DP：①m=word1.length，n=word2.length；②dp 数组（长度 n+1）初始化 0..n；③for i from 1 to m：④prev=dp [0]；dp [0]=i；⑤for j from 1 to n：⑥temp=dp [j]；⑦if word1 [i-1]==word2 [j-1]：dp [j]=prev；⑧else：dp [j] = 1 + Math.min (dp [j], dp [j-1], prev)；⑨prev=temp；⑩return dp [n]。时间复杂度 O (mn)，空间复杂度 O (n)。';minDistanceEdit.hint = ' 编辑距离是经典 DP 问题，核心是「子问题分解」，每种操作对应不同的状态转移，空间优化后可降低存储开销 ';problems.push (minDistanceEdit);
+    // 4059. 最长连续递增序列
+    const findLengthOfLCIS = new ProblemModel ();findLengthOfLCIS.id = 4059;findLengthOfLCIS.title = ' 最长连续递增序列 ';findLengthOfLCIS.description = ' 给定一个未经排序的整数数组，找到最长且 连续递增的子序列，并返回该序列的长度。连续递增的子序列 可以由两个下标 l 和 r（l <r）确定，如果对于每个 l <= i < r，都有 nums [i] < nums [i + 1]，那么子序列 [nums [l], nums [l + 1], ..., nums [r]] 就是连续递增子序列。';findLengthOfLCIS.difficulty = ProblemDifficulty.EASY;findLengthOfLCIS.category = ProblemCategory.DYNAMIC_PROGRAMMING;findLengthOfLCIS.choices = [{ id: 'A', text: 'DP / 贪心：currentLen 记录当前连续长度，maxLen 记录最大值，递增则 currentLen++，否则重置为 1', isCorrect: true },{ id: 'B', text: ' 暴力枚举所有连续子序列，判断是否递增（时间 O (n²)）', isCorrect: false },{ id: 'C', text: ' 排序后找最长连续序列（破坏原顺序，错误）', isCorrect: false },{ id: 'D', text: ' 哈希表存储元素位置，计算连续长度（不适合连续递增场景）', isCorrect: false }];findLengthOfLCIS.explanation = ' 贪心解法：①n=nums.length；if n==0 return 0；②maxLen=1，currentLen=1；③for i from 1 to n-1：④if nums [i]>nums [i-1]：currentLen++；maxLen=Math.max (maxLen, currentLen)；⑤else：currentLen=1；⑥return maxLen。时间复杂度 O (n)，空间复杂度 O (1)。';findLengthOfLCIS.hint = ' 连续递增子序列的特点是「相邻元素严格递增」，只需一次遍历，用变量记录当前长度和最大值即可 ';problems.push (findLengthOfLCIS);
+    // 4060. 分割等和子集
+    const canPartitionSubset = new ProblemModel ();canPartitionSubset.id = 4060;canPartitionSubset.title = ' 分割等和子集 ';canPartitionSubset.description = ' 给你一个 只包含正整数 的 非空 数组 nums 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。';canPartitionSubset.difficulty = ProblemDifficulty.MEDIUM;canPartitionSubset.category = ProblemCategory.DYNAMIC_PROGRAMMING;canPartitionSubset.choices = [{id: 'A', text: '0-1 背包：判断是否存在子集和等于总和的一半，dp [i] 表示能否凑成 i', isCorrect: true },{ id: 'B', text: ' 递归 + 剪枝，尝试所有子集划分（时间 O (2^n)）', isCorrect: false },{ id: 'C', text: ' 贪心选择，从大到小累加直到目标（无法保证全局最优）', isCorrect: false },{ id: 'D', text: ' 位运算，用二进制表示可能的子集和（空间开销大）', isCorrect: false }];canPartitionSubset.explanation = '0-1 背包解法：①sum = 数组总和；if sum 为奇数 return false；target=sum/2；②maxNum=Math.max (...nums)；if maxNum>target return false；③dp 数组（长度 target+1）初始化 false；dp [0]=true；④for num in nums：⑤for i from target down to num：⑥dp [i] = dp [i] || dp [i-num]；⑦return dp [target]。时间复杂度 O (n×target)，空间复杂度 O (target)。';canPartitionSubset.hint = ' 将分割问题转化为「子集和」问题，利用 0-1 背包的思路判断是否存在符合条件的子集，注意提前剪枝（如最大元素超过目标）';problems.push (canPartitionSubset);
+    // 五、图论类（15 题）// 4061. 课程表
+    const canFinishCourses = new ProblemModel ();canFinishCourses.id = 4061;canFinishCourses.title = ' 课程表 ';canFinishCourses.description = ' 你这个学期必须选修 numCourses 门课程，记为 0 到 numCourses - 1。在选修某些课程之前需要一些先修课程，例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示：[0,1]。给定课程总数以及它们的先决条件，请你判断是否可能完成所有课程的学习？';canFinishCourses.difficulty = ProblemDifficulty.MEDIUM;canFinishCourses.category = ProblemCategory.GRAPH;canFinishCourses.choices = [{ id: 'A', text: ' 拓扑排序（Kahn 算法）：计算入度，逐步删除入度为 0 的节点，最后判断删除数是否等于课程数 ', isCorrect: true },{ id: 'B', text: 'DFS 检测环：用访问状态（未访问 / 访问中 / 已访问）判断是否存在环 ', isCorrect: false },{ id: 'C', text: 'BFS 遍历所有节点，检查是否有可达路径（无法检测环）', isCorrect: false },{ id: 'D', text: ' 动态规划，记录每门课程的先修条件是否满足（逻辑错误）', isCorrect: false }];canFinishCourses.explanation = 'Kahn 算法：①构建邻接表 adj 和入度数组 inDegree；②队列存储入度为 0 的节点；count=0；③while 队列非空：u = 出队；count++；④for v in adj [u]：inDegree [v]--；if inDegree [v]==0：入队；⑤return count==numCourses。时间复杂度 O (n+m)（n 课程数，m 先修关系数），空间复杂度 O (n+m)。';canFinishCourses.hint = ' 核心是「判断有向图是否无环」，拓扑排序通过删除入度为 0 的节点，若最终所有节点都被删除则无环，可完成所有课程 ';problems.push (canFinishCourses);
+    // 4062. 课程表 II
+    const findOrderCourses = new ProblemModel ();findOrderCourses.id = 4062;findOrderCourses.title = ' 课程表 II';findOrderCourses.description = ' 现在你总共有 numCourses 门课需要学习，记为 0 到 numCourses - 1。给你一个数组 prerequisites ，其中 prerequisites [i] = [ai, bi] ，表示在选修课程 ai 之前必须先选修 bi 。请你返回一个可以学完所有课程的顺序。可能会有多个正确的顺序，你只要返回任意一个就可以了。如果不可能完成所有课程，返回一个空数组。';findOrderCourses.difficulty = ProblemDifficulty.MEDIUM;findOrderCourses.category = ProblemCategory.GRAPH;findOrderCourses.choices = [{ id: 'A', text: ' 拓扑排序（Kahn 算法）：删除入度为 0 的节点时记录顺序，最后判断长度是否等于课程数 ', isCorrect: true },{ id: 'B', text: 'DFS 后序遍历：检测环的同时记录节点，反转后为拓扑序 ', isCorrect: false },{ id: 'C', text: ' 贪心选择，每次选先修课程最少的（无法保证无环）', isCorrect: false },{ id: 'D', text: ' 并查集，合并先修课程关系（无法处理依赖顺序）', isCorrect: false }];findOrderCourses.explanation = 'Kahn 算法：①构建邻接表 adj 和入度数组 inDegree；②队列存储入度为 0 的节点；result=[]；③while 队列非空：u = 出队；result.push (u)；④for v in adj [u]：inDegree [v]--；if inDegree [v]==0：入队；⑤return result.length==numCourses ? result : []。时间复杂度 O (n+m)，空间复杂度 O (n+m)。';findOrderCourses.hint = ' 在课程表 I 的基础上，增加节点记录步骤，拓扑排序的结果即为合法的课程学习顺序 ';problems.push (findOrderCourses);
+    // 4063. 网络延迟时间
+    const networkDelayTime = new ProblemModel ();networkDelayTime.id = 4063;networkDelayTime.title = ' 网络延迟时间 ';networkDelayTime.description = ' 有 n 个网络节点，标记为 1 到 n。给你一个列表 times，表示信号经过 有向 边的传递时间。 times [i] = (u_i, v_i, w_i)，其中 u_i 是源节点，v_i 是目标节点，w_i 是一个信号从源节点传递到目标节点的时间。现在，从某个节点 k 发出一个信号。需要多久才能使所有节点都收到信号？如果不能使所有节点收到信号，返回 -1 。';networkDelayTime.difficulty = ProblemDifficulty.MEDIUM;networkDelayTime.category = ProblemCategory.GRAPH;networkDelayTime.choices = [{ id: 'A', text: 'Dijkstra 算法：求单源最短路径，所有节点最短路径的最大值即为答案 ', isCorrect: true },{ id: 'B', text: 'Floyd-Warshall 算法，计算所有节点对的最短路径（时间 O (n³)，效率低）', isCorrect: false },{ id: 'C', text: 'BFS，适用于边权为 1 的情况（无法处理加权边）', isCorrect: false },{ id: 'D', text: 'Bellman-Ford 算法，可处理负权边（此处无负权，效率低于 Dijkstra）', isCorrect: false }];networkDelayTime.explanation = 'Dijkstra 解法：①构建邻接表 adj；②dist 数组初始化 Infinity；dist [k]=0；③优先队列（最小堆）存入 (k, 0)；④while 队列非空：(u, t)= 出队；if t>dist [u]：跳过；⑤for (v, w) in adj [u]：if dist [v]>t+w：dist [v]=t+w；入队 (v, dist [v])；⑥maxDist=Math.max (...dist)；return maxDist===Infinity ? -1 : maxDist。时间复杂度 O (m log n)，空间复杂度 O (n+m)。';networkDelayTime.hint = ' 核心是「单源最短路径」，从 k 到所有节点的最短时间决定了整体延迟，取最大值即为所有节点收到信号的时间 ';problems.push (networkDelayTime);
+    // 4064. 冗余连接
+    const findRedundantConnection = new ProblemModel ();findRedundantConnection.id = 4064;findRedundantConnection.title = ' 冗余连接 ';findRedundantConnection.description = ' 树可以看成是一个连通且 无环 的 无向 图。给定往一棵 n 个节点 (节点值 1～n) 的树中添加一条边后的图。添加的这条边使得图中包含一个环，请找出这条多余的边。';findRedundantConnection.difficulty = ProblemDifficulty.MEDIUM;findRedundantConnection.category = ProblemCategory.GRAPH;findRedundantConnection.choices = [{ id: 'A', text: ' 并查集（Union-Find）：遍历边，若两点已连通则为冗余边，否则合并 ', isCorrect: true },{ id: 'B', text: 'DFS：遍历每条边，删除后判断是否无环（时间 O (mn)）', isCorrect: false },{ id: 'C', text: 'BFS：逻辑同 DFS，效率低 ', isCorrect: false },{ id: 'D', text: ' 拓扑排序，找无法删除的边（不适用于无向图）', isCorrect: false }];findRedundantConnection.explanation = ' 并查集解法：①初始化 parent 数组（1..n）；②定义 find (x)：路径压缩；③定义 union (x,y)：按秩合并；④for each edge (u,v) in edges：⑤if find (u)==find (v)：return edge；⑥else：union (u,v)；⑦return []。时间复杂度 O (m α(n))（α 为阿克曼函数反函数，接近常数），空间复杂度 O (n)。';findRedundantConnection.hint = ' 无向图的冗余边导致环的形成，并用查集可高效判断两点是否已连通，首次发现连通的边即为冗余边 ';problems.push (findRedundantConnection);
+    // 4065. 岛屿数量
+    const pacificAtlantic = new ProblemModel ();pacificAtlantic.id = 4066;pacificAtlantic.title = ' 太平洋大西洋水流问题 ';pacificAtlantic.description = ' 有一个 m x n 的矩形岛屿，与 太平洋 和 大西洋 相邻。 “太平洋” 处于大陆的左边界和上边界，而 “大西洋” 处于大陆的右边界和下边界。水流只能按照上、下、左、右四个方向流动，且只能从高到低或者在同等高度上流动。请找出那些水流既可以流动到 “太平洋”，又能流动到 “大西洋” 的陆地单元的坐标。';pacificAtlantic.difficulty = ProblemDifficulty.MEDIUM;pacificAtlantic.category = ProblemCategory.GRAPH;pacificAtlantic.choices = [{ id: 'A', text: ' 反向 DFS/BFS：分别从太平洋和大西洋边界出发，标记可到达的陆地，最后取交集 ', isCorrect: true },{ id: 'B', text: ' 正向 DFS/BFS：对每个陆地判断是否能到两个大洋（时间 O ((mn)²)）', isCorrect: false },{ id: 'C', text: ' 动态规划，记录每个陆地到两个大洋的可达性（边界处理复杂）', isCorrect: false },{ id: 'D', text: ' 贪心选择，优先判断边界陆地（无法覆盖内部陆地）', isCorrect: false }];pacificAtlantic.explanation = ' 反向 DFS 解法：①m=heights.length；if m==0 return []；n=heights [0].length；②定义两个布尔矩阵 pacific 和 atlantic；③定义 dfs (i,j,visited)：if visited [i][j]：return；visited [i][j]=true；④遍历四个方向：ni,nj；if ni、nj 在范围内且 heights [ni][nj]>=heights [i][j]：dfs (ni,nj,visited)；⑤初始化：上边界和左边界 DFS 标记 pacific；下边界和右边界 DFS 标记 atlantic；⑥遍历所有陆地，若 pacific [i][j] 且 atlantic [i][j]：加入结果。时间复杂度 O (mn)，空间复杂度 O (mn)。';pacificAtlantic.hint = ' 反向思维降低复杂度：从大洋边界（可直接到达大洋）出发，寻找可逆流到达的陆地，最后取两个大洋可达陆地的交集 ';problems.push (pacificAtlantic);
+    // 4067. 腐烂的橘子
+    const orangesRotting = new ProblemModel ();orangesRotting.id = 4067;orangesRotting.title = ' 腐烂的橘子 ';orangesRotting.description = ' 在给定的 m x n 网格中，每个单元格可以有以下三个值之一：值 0 代表空单元格；值 1 代表新鲜橘子；值 2 代表腐烂的橘子。每分钟，腐烂的橘子 周围 4 个方向上相邻 的新鲜橘子都会腐烂。返回直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 -1 。';orangesRotting.difficulty = ProblemDifficulty.MEDIUM;orangesRotting.category = ProblemCategory.GRAPH;orangesRotting.choices = [{id: 'A', text: 'BFS（多源）：初始将所有腐烂橘子入队，按层遍历，记录时间，最后检查是否有剩余新鲜橘子 ', isCorrect: true},{ id: 'B', text: 'DFS：递归处理腐烂过程（无法记录时间，错误）', isCorrect: false },{ id: 'C', text: ' 暴力模拟，每分钟遍历网格更新腐烂状态（时间 O ((mn)²)）', isCorrect: false },{ id: 'D', text: ' 动态规划，记录每个橘子腐烂的时间（边界处理复杂）', isCorrect: false }];orangesRotting.explanation = ' 多源 BFS 解法：①m=grid.length；n=grid [0].length；queue=[]；fresh=0；time=0；②for i from 0 to m-1：for j from 0 to n-1：if grid [i][j]==2：queue.push ([i,j])；else if grid [i][j]==1：fresh++；③directions=[[-1,0],[1,0],[0,-1],[0,1]]；④while queue.length>0 && fresh>0：levelSize=queue.length；time++；⑤for k from 0 to levelSize-1：[i,j]=queue.shift ()；⑥for [di,dj] in directions：ni=i+di；nj=j+dj；⑦if ni、nj 在范围内且 grid [ni][nj]==1：grid [ni][nj]=2；fresh--；queue.push ([ni,nj])；⑧return fresh==0 ? time : -1。时间复杂度 O (mn)，空间复杂度 O (mn)。';orangesRotting.hint = ' 多源 BFS 适合「多起点扩散」问题，按层遍历的层数即为时间，最后通过新鲜橘子数量判断是否完全腐烂 ';problems.push (orangesRotting);
+    // 4068. 单词接龙
+    const ladderLengthWord = new ProblemModel ();ladderLengthWord.id = 4068;ladderLengthWord.title = ' 单词接龙 ';ladderLengthWord.description = ' 字典 wordList 中从单词 beginWord 和 endWord 的转换序列是一个按下述规格形成的序列 beginWord -> s1 -> s2 -> ... -> sk：每一对相邻的单词只差一个字母；对于 1 <= i <= k 时，每个 si 都在 wordList 中；注意，beginWord 不需要在 wordList 中；sk == endWord。给你两个单词 beginWord 和 endWord 和一个字典 wordList，返回从 beginWord 到 endWord 的最短转换序列中的单词数目。如果不存在这样的转换序列，返回 0。';ladderLengthWord.difficulty = ProblemDifficulty.HARD;ladderLengthWord.category = ProblemCategory.GRAPH;ladderLengthWord.choices = [{id: 'A', text: 'BFS（双向优化）：从 beginWord 和 endWord 同时出发，相遇时返回步数和 ', isCorrect: true},{ id: 'B', text: ' 单向 BFS：从 beginWord 出发，逐层遍历（时间 O (L×26×n)，n 为 wordList 大小）', isCorrect: false },{ id: 'C', text: 'DFS：尝试所有转换路径，记录最短长度（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: ' 构建单词图，求最短路径（空间开销大）', isCorrect: false }];ladderLengthWord.explanation = ' 双向 BFS 解法：①wordSet = 新集合 (wordList)；if !wordSet.has (endWord) return 0；②beginSet={beginWord}，endSet={endWord}；visited=new Set ()；length=1；③while beginSet.size>0 && endSet.size>0：④if beginSet.size>endSet.size：交换 beginSet 和 endSet；⑤nextSet=new Set ()；length++；⑥for word in beginSet：⑦for i from 0 to word.length-1：⑧for c from \'a\' to \'z\'：⑨if c==word [i] continue；⑩newWord=word.slice (0,i)+c+word.slice (i+1)；⑪if endSet.has (newWord) return length；⑫if wordSet.has (newWord) && !visited.has (newWord)：visited.add (newWord)；nextSet.add (newWord)；⑬beginSet=nextSet；⑭return 0。时间复杂度 O (L×26×n)，空间复杂度 O (n)。';ladderLengthWord.hint = ' 双向 BFS 通过从两端同时扩散，减少遍历的节点数，大幅提升效率，核心是「每次选择较小的集合遍历」';problems.push (ladderLengthWord);
+    // 4069. 最小基因变化
+    const minMutation = new ProblemModel ();minMutation.id = 4069;minMutation.title = ' 最小基因变化 ';minMutation.description = ' 基因序列可以表示为一条由 8 个字符组成的字符串，其中每个字符都是 \'A\'、\'C\'、\'G\' 和 \'T\' 之一。假设我们需要调查从基因序列 start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。此外，还有一个基因库 bank 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。请找出从 start 到 end 所需的最少变化次数。如果无法完成此基因变化，返回 -1。注意：起始基因序列 start 默认是有效的，但是它并不一定会出现在基因库中。';minMutation.difficulty = ProblemDifficulty.MEDIUM;minMutation.category = ProblemCategory.GRAPH;minMutation.choices = [{id: 'A', text: 'BFS：将基因视为节点，一次变化的基因视为相邻节点，求 start 到 end 的最短路径 ', isCorrect: true},{ id: 'B', text: 'DFS：递归尝试所有变化路径，记录最小次数（时间 O (4^8)）', isCorrect: false },{ id: 'C', text: ' 动态规划，记录每个基因的最小变化次数（基因数量少，无需 DP）', isCorrect: false },{ id: 'D', text: ' 贪心选择，每次选择与 end 差异最小的基因（无法保证全局最优）', isCorrect: false }];minMutation.explanation = 'BFS 解法：①bankSet = 新集合 (bank)；if !bankSet.has (end) return -1；②queue=[[start, 0]]；visited=new Set ([start])；③chars=[\'A\',\'C\',\'G\',\'T\']；④while queue.length>0：[gene, step]=queue.shift ()；⑤if gene==end return step；⑥for i from 0 to 7：⑦for c in chars：⑧if c==gene [i] continue；⑨newGene=gene.slice (0,i)+c+gene.slice (i+1)；⑩if bankSet.has (newGene) && !visited.has (newGene)：visited.add (newGene)；queue.push ([newGene, step+1])；⑪return -1。时间复杂度 O (8×4×n)（n 为 bank 大小），空间复杂度 O (n)。';minMutation.hint = ' 与单词接龙类似，属于「最短路径」问题，BFS 按步骤遍历所有可能的基因变化，首次到达 end 的步数即为最小值 ';problems.push (minMutation);
+    // 4070. 克隆图
+    const cloneGraph = new ProblemModel ();cloneGraph.id = 4070;cloneGraph.title = ' 克隆图 ';cloneGraph.description = ' 给你无向连通图中一个节点的引用，请你返回该图的 深拷贝（克隆）。图中的每个节点都包含它的值 val（int） 和其邻居的列表（list [Node]）。';cloneGraph.difficulty = ProblemDifficulty.MEDIUM;cloneGraph.category = ProblemCategory.GRAPH;cloneGraph.choices = [{ id: 'A', text: 'DFS/BFS：用哈希表记录原节点到克隆节点的映射，避免重复克隆，递归 / 迭代克隆邻居 ', isCorrect: true },{ id: 'B', text: ' 暴力克隆，不处理重复节点（导致循环引用）', isCorrect: false },{ id: 'C', text: ' 拓扑排序后克隆（无向图无需拓扑排序）', isCorrect: false },{ id: 'D', text: ' 序列化图后反序列化（实现复杂）', isCorrect: false }];cloneGraph.explanation = 'DFS 解法：①if node 为空 return null；②map=new Map ()；③function dfs (n)：④if map.has (n) return map.get (n)；⑤clone=new Node (n.val)；map.set (n, clone)；⑥for neighbor in n.neighbors：clone.neighbors.push (dfs (neighbor))；⑦return clone；⑧return dfs (node)。时间复杂度 O (n)（n 为节点数），空间复杂度 O (n)（哈希表 + 递归栈）。';cloneGraph.hint = ' 深拷贝的关键是「避免重复克隆节点」，用哈希表建立原节点与克隆节点的映射，确保每个节点只克隆一次 ';problems.push (cloneGraph);
+    // 4071. 寻找最短路径的条数
+    const findShortestPathNum = new ProblemModel ();findShortestPathNum.id = 4071;findShortestPathNum.title = ' 寻找最短路径的条数 ';findShortestPathNum.description = ' 给定一个有向无环图（DAG），图中有 n 个节点，编号从 0 到 n-1。请找出从节点 0 到节点 n-1 的最短路径的条数。';findShortestPathNum.difficulty = ProblemDifficulty.MEDIUM;findShortestPathNum.category = ProblemCategory.GRAPH;findShortestPathNum.choices = [{id: 'A', text: ' 拓扑排序 + DP：拓扑序遍历节点，dist [i] 记录 0 到 i 的最短距离，cnt [i] 记录条数，更新 dist 和 cnt', isCorrect: true },{ id: 'B', text: 'BFS：按层记录距离，统计到达终点的路径数（无法处理加权边）', isCorrect: false },{ id: 'C', text: 'DFS + 记忆化，统计所有路径的长度和条数（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: 'Floyd-Warshall 算法，计算最短距离后统计路径（效率低）', isCorrect: false }];findShortestPathNum.explanation = ' 拓扑 + DP 解法：①构建邻接表 adj（每个节点存储 (邻居，边权)）；②计算入度数组 inDegree；③拓扑排序得到 order；④dist 数组初始化 Infinity；dist [0]=0；cnt 数组初始化 0；cnt [0]=1；⑤for u in order：⑥if dist [u]==Infinity continue；⑦for (v, w) in adj [u]：⑧if dist [v] > dist [u]+w：dist [v] = dist [u]+w；cnt [v] = cnt [u]；⑨else if dist [v] == dist [u]+w：cnt [v] += cnt [u]；⑩return cnt [n-1]。时间复杂度 O (n+m)，空间复杂度 O (n+m)。';findShortestPathNum.hint = 'DAG 的特性适合拓扑排序，按拓扑序更新最短距离和路径数，确保处理节点 u 时其前驱节点已处理完毕 ';problems.push (findShortestPathNum);
+    // 4072. 冗余连接 II
+    const findRedundantDirectedConnection = new ProblemModel ();findRedundantDirectedConnection.id = 4072;findRedundantDirectedConnection.title = ' 冗余连接 II';findRedundantDirectedConnection.description = ' 在本问题中，有根树指满足以下条件的 有向 图。该树只有一个根节点，所有其他节点都是该根节点的后继。该树除了根节点之外的每一个节点都有且只有一个父节点，而根节点没有父节点。输入一个有向图，该图由一个有着 n 个节点（节点值不重复，从 1 到 n）的树及一条附加的有向边构成。附加的边包含在 1 到 n 中的两个不同顶点间，这条附加的边不属于树中已存在的边。请找出这条附加的边，使删除它之后，剩余的图是一个有着 n 个节点的有根树。';findRedundantDirectedConnection.difficulty = ProblemDifficulty.HARD;findRedundantDirectedConnection.category = ProblemCategory.GRAPH;findRedundantDirectedConnection.choices = [{id: 'A', text: ' 并查集 + 异常边检测：先找有两个父节点的节点（冲突边），再找导致环的边，优先删除冲突边 ', isCorrect: true},{ id: 'B', text: 'DFS 检测环和冲突（实现复杂）', isCorrect: false },{ id: 'C', text: ' 暴力删除每条边，判断是否为有根树（时间 O (mn)）', isCorrect: false },{ id: 'D', text: ' 拓扑排序，找无法删除的边（不适用于有根树判断）', isCorrect: false }];findRedundantDirectedConnection.explanation = ' 并查集解法：①n=edges.length；parent 数组（1..n）记录父节点；conflict=[-1,-1]；cycle=[-1,-1]；②for i from 0 to n-1：[u,v]=edges [i]；③if parent [v]!=-1：conflict=[parent [v],v, edges [i]]；④else：parent [v]=u；⑤用并查集找导致环的边 cycle；⑥if conflict [0]==-1：return cycle；⑦else：检查 conflict 中的某条边是否在环中，不在则删除该边，否则删除另一条。时间复杂度 O (n α(n))，空间复杂度 O (n)。';findRedundantDirectedConnection.hint = ' 有向图的冗余边可能导致「节点有两个父节点」或「环」，需先检测冲突边和环边，按规则优先删除冲突边 ';problems.push (findRedundantDirectedConnection);
+    // 4073. 所有可能的路径
+    const allPathsSourceTarget = new ProblemModel ();allPathsSourceTarget.id = 4073;allPathsSourceTarget.title = ' 所有可能的路径 ';allPathsSourceTarget.description = ' 给你一个有向无环图（DAG），图中有 n 个节点，编号从 0 到 n-1，请你找出所有从节点 0 到节点 n-1 的路径。';allPathsSourceTarget.difficulty = ProblemDifficulty.MEDIUM;allPathsSourceTarget.category = ProblemCategory.GRAPH;allPathsSourceTarget.choices = [{id: 'A', text: 'DFS 回溯：从 0 出发，递归遍历邻居，到达 n-1 时记录路径，回溯继续探索 ', isCorrect: true},{ id: 'B', text: 'BFS：记录每个节点的路径，到达终点时收集（空间开销大）', isCorrect: false },{ id: 'C', text: ' 动态规划，记录每个节点的所有路径（空间开销大）', isCorrect: false },{ id: 'D', text: ' 拓扑排序后反向构建路径（逻辑复杂）', isCorrect: false }];allPathsSourceTarget.explanation = 'DFS 回溯解法：①result=[]；path=[0]；n=graph.length；②function dfs (node)：③if node==n-1：result.push ([...path])；return；④for neighbor in graph [node]：path.push (neighbor)；dfs (neighbor)；path.pop ()；⑤dfs (0)；return result。时间复杂度 O (2^n)（最坏情况每个节点有两个邻居），空间复杂度 O (n)（递归栈 + 路径）。';allPathsSourceTarget.hint = 'DAG 无环，适合 DFS 回溯，通过「入栈 - 递归 - 出栈」维护当前路径，到达终点即收集完整路径 ';problems.push (allPathsSourceTarget);
+    // 4074. 课程表 III
+    const scheduleCourse = new ProblemModel ();scheduleCourse.id = 4074;scheduleCourse.title = ' 课程表 III';scheduleCourse.description = ' 这里有 n 门不同的在线课程，按从 1 到 n 编号。给你一个数组 courses ，其中 courses [i] = [duration_i, lastDay_i] 表示第 i 门课将会持续上 duration_i 天课，并且必须在不晚于 lastDay_i 的时候完成。你的学期从第 1 天开始。如果你同一天开始上多门课程，那么它们会重叠。返回你最多可以修读的课程数目。';scheduleCourse.difficulty = ProblemDifficulty.HARD;scheduleCourse.category = ProblemCategory.GRAPH;scheduleCourse.choices = [{ id: 'A', text: ' 贪心 + 最大堆：按 lastDay 排序，选课时累加时间，超时则替换堆中最长 duration 的课程 ', isCorrect: true },{ id: 'B', text: ' 动态规划，dp [i] 表示修 i 门课的最少时间（空间 O (n)）', isCorrect: false },{ id: 'C', text: 'DFS 枚举所有课程组合（时间 O (2^n)）', isCorrect: false },{ id: 'D', text: ' 拓扑排序，按 lastDay 顺序选课（无法处理超时替换）', isCorrect: false }];scheduleCourse.explanation = ' 贪心 + 堆解法：①courses 按 lastDay 升序排序；②maxHeap（存储 duration，用最大堆）；totalTime=0；③for [dur, last] in courses：④if totalTime + dur <= last：totalTime += dur；heap.push (dur)；⑤else if heap.size>0 && heap.peek ()>dur：totalTime += dur - heap.pop ()；heap.push (dur)；⑥return heap.size。时间复杂度 O (n log n)，空间复杂度 O (n)。';scheduleCourse.hint = ' 核心是「优先选结束早的课程，超时则替换耗时最长的课程」，用最大堆维护已选课程的耗时，确保总时间最小 ';problems.push (scheduleCourse);
+    // 4075. 最大网络秩
+    const maximalNetworkRank = new ProblemModel ();maximalNetworkRank.id = 4075;maximalNetworkRank.title = ' 最大网络秩 ';maximalNetworkRank.description = 'n 座城市和一些连接它们的道路 roads 共同组成一个基础设施网络。每个 roads [i] = [ai, bi] 表示在城市 ai 和 bi 之间有一条双向道路。两座不同城市构成的城市对的 网络秩 定义为：与这两座城市 直接 相连的道路总数。如果存在一条道路直接连接这两座城市，则这条道路只计算 一次 。给你这座城市的数量 n 和道路数组 roads，返回整个基础设施网络中最大的网络秩。';maximalNetworkRank.difficulty = ProblemDifficulty.MEDIUM;maximalNetworkRank.category = ProblemCategory.GRAPH;maximalNetworkRank.choices = [{ id: 'A', text: ' 统计度数 + 邻接矩阵：计算每个城市的度数，枚举所有城市对，秩 = 度数和 - 是否直接相连（1 或 0）', isCorrect: true },{ id: 'B', text: ' 暴力枚举所有城市对，遍历道路统计秩（时间 O (n²m)）', isCorrect: false },{ id: 'C', text: 'BFS 计算每个城市的连接数（重复计算，效率低）', isCorrect: false },{ id: 'D', text: ' 并查集，统计每个连通分量的道路数（无法计算城市对秩）', isCorrect: false }];maximalNetworkRank.explanation = ' 度数 + 邻接矩阵解法：①degree 数组（长度 n）初始化 0；adj 矩阵（n×n）初始化 false；②for [a,b] in roads：degree [a]++；degree [b]++；adj [a][b]=true；adj [b][a]=true；③maxRank=0；④for i from 0 to n-1：for j from i+1 to n-1：⑤current=degree [i]+degree [j] - (adj [i][j] ? 1 : 0)；maxRank=Math.max (maxRank, current)；⑥return maxRank。时间复杂度 O (n²)，空间复杂度 O (n²)。';maximalNetworkRank.hint = ' 网络秩的关键是「避免重复计算直接相连的道路」，通过度数数组快速获取连接数，邻接矩阵判断是否直接相连 ';problems.push (maximalNetworkRank);
+
+    // 续4077. 三数之和
+    threeSum.choices = [
+      { id: 'A', text: '排序+双指针：排序数组，固定第一个数，双指针找另外两个数，跳过重复元素', isCorrect: true },
+      { id: 'B', text: '哈希表去重，固定两个数找第三个数（时间O(n²)，去重复杂）', isCorrect: false },
+      { id: 'C', text: '暴力三重循环，枚举所有三元组（时间O(n³)，超时）', isCorrect: false },
+      { id: 'D', text: '二分查找，固定两个数找第三个数（时间O(n² log n)，去重困难）', isCorrect: false }
+    ];
+    threeSum.explanation = '排序+双指针解法：①nums排序；result=[]；n=nums.length；②for i from 0 to n-3：③if nums[i]>0：break（三数和不可能为0）；④if i>0且nums[i]==nums[i-1]：continue（去重）；⑤left=i+1；right=n-1；⑥while left<right：sum=nums[i]+nums[left]+nums[right]；⑦if sum==0：result.push([nums[i],nums[left],nums[right]])；⑧while left<right且nums[left]==nums[left+1]：left++（去重）；⑨while left<right且nums[right]==nums[right-1]：right--（去重）；⑩left++；right--；⑪else if sum<0：left++；⑫else：right--；⑬return result。时间复杂度O(n²)，空间复杂度O(log n)（排序开销）。';
+    threeSum.hint = '排序是去重的基础，双指针将三重循环降为二重，关键是「固定一个数，用双指针找另外两个数」并跳过重复元素';
+    problems.push(threeSum);
+
+    // 4078. 四数之和
+    const fourSum = new ProblemModel();
+    fourSum.id = 4078;
+    fourSum.title = '四数之和';
+    fourSum.description = '给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。请你找出并返回所有满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] （若两个四元组元素一一对应，则认为是重复的四元组）：0 <= a, b, c, d < n；a、b、c、d 互不相同；nums[a] + nums[b] + nums[c] + nums[d] == target。';
+    fourSum.difficulty = ProblemDifficulty.MEDIUM;
+    fourSum.category = ProblemCategory.HASH_TABLE;
+    fourSum.choices = [
+      { id: 'A', text: '排序+双层循环+双指针：固定前两个数，双指针找后两个数，多层去重', isCorrect: true },
+      { id: 'B', text: '哈希表存储两数和，再找互补对（去重复杂）', isCorrect: false },
+      { id: 'C', text: '暴力四重循环（时间O(n⁴)，超时）', isCorrect: false },
+      { id: 'D', text: '递归回溯（时间复杂度高，去重困难）', isCorrect: false }
+    ];
+    fourSum.explanation = '排序+双指针解法：①nums排序；result=[]；n=nums.length；②for i from 0 to n-4：③if i>0且nums[i]==nums[i-1]：continue；④for j from i+1 to n-3：⑤if j>i+1且nums[j]==nums[j-1]：continue；⑥left=j+1；right=n-1；⑦while left<right：sum=nums[i]+nums[j]+nums[left]+nums[right]；⑧if sum==target：result.push([nums[i],nums[j],nums[left],nums[right]])；⑨while left<right且nums[left]==nums[left+1]：left++；⑩while left<right且nums[right]==nums[right-1]：right--；⑪left++；right--；⑫else if sum<target：left++；⑬else：right--；⑭return result。时间复杂度O(n³)，空间复杂度O(log n)。';
+    fourSum.hint = '在三数之和基础上增加一层循环，注意「多层去重」和边界条件（如数组长度不足4）';
+    problems.push(fourSum);
+
+    // 4079. 存在重复元素
+    const containsDuplicate = new ProblemModel();
+    containsDuplicate.id = 4079;
+    containsDuplicate.title = '存在重复元素';
+    containsDuplicate.description = '给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素都不相同，返回 false 。';
+    containsDuplicate.difficulty = ProblemDifficulty.EASY;
+    containsDuplicate.category = ProblemCategory.HASH_TABLE;
+    containsDuplicate.choices = [
+      { id: 'A', text: '哈希表/集合：遍历数组，存在则返回true，否则加入集合，最后返回false', isCorrect: true },
+      { id: 'B', text: '排序：排序后检查相邻元素是否相等（时间O(n log n)）', isCorrect: false },
+      { id: 'C', text: '暴力双重循环，检查每个元素是否重复（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: '位运算，标记出现的数字（不适合大范围整数）', isCorrect: false }
+    ];
+    containsDuplicate.explanation = '哈希表解法：①set=new Set()；②for num in nums：③if set.has(num)：return true；④set.add(num)；⑤return false。时间复杂度O(n)，空间复杂度O(n)。';
+    containsDuplicate.hint = '利用哈希表的O(1)查找特性，一次遍历即可判断是否有重复元素';
+    problems.push(containsDuplicate);
+
+    // 4080. 有效的字母异位词
+    const isAnagram = new ProblemModel();
+    isAnagram.id = 4080;
+    isAnagram.title = '有效的字母异位词';
+    isAnagram.description = '给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。';
+    isAnagram.difficulty = ProblemDifficulty.EASY;
+    isAnagram.category = ProblemCategory.HASH_TABLE;
+    isAnagram.choices = [
+      { id: 'A', text: '哈希表计数：统计s和t中每个字符的出现次数，比较是否完全相同', isCorrect: true },
+      { id: 'B', text: '排序：将两字符串排序后比较是否相等（时间O(n log n)）', isCorrect: false },
+      { id: 'C', text: '暴力枚举，逐个删除字符（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: 'ASCII码累加，比较总和（无法区分不同字符组合，错误）', isCorrect: false }
+    ];
+    isAnagram.explanation = '哈希表解法：①if s.length != t.length：return false；②count数组（长度26）初始化0；③for i from 0 to s.length-1：count[s.charCodeAt(i)-97]++；count[t.charCodeAt(i)-97]--；④for num in count：if num!=0：return false；⑤return true。时间复杂度O(n)，空间复杂度O(1)（固定大小数组）。';
+    isAnagram.hint = '核心是「字符出现次数完全一致」，用固定大小的数组（针对小写字母）比哈希表更高效';
+    problems.push(isAnagram);
+
+    // 4081. 字母异位词分组
+    const groupAnagrams = new ProblemModel();
+    groupAnagrams.id = 4081;
+    groupAnagrams.title = '字母异位词分组';
+    groupAnagrams.description = '给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。字母异位词 是由重新排列源单词的字母得到的一个新单词，所有源单词中的字母通常恰好只用一次。';
+    groupAnagrams.difficulty = ProblemDifficulty.MEDIUM;
+    groupAnagrams.category = ProblemCategory.HASH_TABLE;
+    groupAnagrams.choices = [
+      { id: 'A', text: '哈希表+排序：将每个字符串排序作为键，字母异位词排序后相同，归为同一组', isCorrect: true },
+      { id: 'B', text: '哈希表+计数：用字符计数数组作为键（如"a2b1c0..."），分组异位词', isCorrect: false },
+      { id: 'C', text: '暴力比较，两两判断是否为异位词（时间O(n²k)，k为字符串长度）', isCorrect: false },
+      { id: 'D', text: '按字符串长度分组后再比较（无法区分同长度非异位词）', isCorrect: false }
+    ];
+    groupAnagrams.explanation = '排序键解法：①map=new Map()；②for str in strs：③sortedStr=str.split(\'\').sort().join(\'\')；④if map.has(sortedStr)：map.get(sortedStr).push(str)；⑤else：map.set(sortedStr, [str])；⑥return Array.from(map.values())。时间复杂度O(nk log k)（n为字符串数，k为最长字符串长度），空间复杂度O(nk)。';
+    groupAnagrams.hint = '字母异位词的核心特征是「排序后字符串相同」，用排序结果作为哈希表的键，高效分组';
+    problems.push(groupAnagrams);
+
+    // 4082. 最长连续序列
+    const longestConsecutive = new ProblemModel();
+    longestConsecutive.id = 4082;
+    longestConsecutive.title = '最长连续序列';
+    longestConsecutive.description = '给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。请你设计并实现时间复杂度为 O(n) 的算法解决此问题。';
+    longestConsecutive.difficulty = ProblemDifficulty.HARD;
+    longestConsecutive.category = ProblemCategory.HASH_TABLE;
+    longestConsecutive.choices = [
+      { id: 'A', text: '哈希表去重+遍历起点：用集合存储元素，对每个可能的起点（无前驱的元素），计算连续长度', isCorrect: true },
+      { id: 'B', text: '排序后遍历，统计连续序列（时间O(n log n)，不满足要求）', isCorrect: false },
+      { id: 'C', text: '暴力枚举每个元素的连续序列（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: '并查集，合并相邻元素后统计最大集合（实现复杂）', isCorrect: false }
+    ];
+    longestConsecutive.explanation = '哈希表解法：①numSet=new Set(nums)；maxLen=0；②for num in numSet：③if !numSet.has(num-1)：// 找到序列起点④currentNum=num；currentLen=1；⑤while numSet.has(currentNum+1)：currentNum++；currentLen++；⑥maxLen=Math.max(maxLen, currentLen)；⑦return maxLen。时间复杂度O(n)（每个元素最多访问两次），空间复杂度O(n)。';
+    longestConsecutive.hint = '关键是「只对序列起点计算连续长度」，避免重复计算，用集合实现O(1)的存在性判断';
+    problems.push(longestConsecutive);
+
+    // 4083. 同构字符串
+    const isIsomorphic = new ProblemModel();
+    isIsomorphic.id = 4083;
+    isIsomorphic.title = '同构字符串';
+    isIsomorphic.description = '给定两个字符串 s 和 t，判断它们是否是同构的。如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，相同字符只能映射到同一个字符上，字符可以映射到自己本身。';
+    isIsomorphic.difficulty = ProblemDifficulty.EASY;
+    isIsomorphic.category = ProblemCategory.HASH_TABLE;
+    isIsomorphic.choices = [
+      { id: 'A', text: '双哈希表：记录s到t和t到s的映射，确保双向唯一映射', isCorrect: true },
+      { id: 'B', text: '单哈希表，只记录s到t的映射（无法检测t到s的冲突）', isCorrect: false },
+      { id: 'C', text: '替换为字符首次出现位置，比较转换后的序列（逻辑等价双哈希）', isCorrect: false },
+      { id: 'D', text: '比较字符出现次数（无法区分映射关系，错误）', isCorrect: false }
+    ];
+    isIsomorphic.explanation = '双哈希解法：①if s.length != t.length：return false；②mapS=new Map()；mapT=new Map()；③for i from 0 to s.length-1：④c1=s[i]；c2=t[i]；⑤if (mapS.has(c1) && mapS.get(c1)!=c2) || (mapT.has(c2) && mapT.get(c2)!=c1)：return false；⑥mapS.set(c1, c2)；mapT.set(c2, c1)；⑦return true。时间复杂度O(n)，空间复杂度O(n)。';
+    isIsomorphic.hint = '同构要求「双向唯一映射」，需同时验证s→t和t→s的映射关系，避免多对一或一对多';
+    problems.push(isIsomorphic);
+
+    // 4084. 两个数组的交集
+    const intersection = new ProblemModel();
+    intersection.id = 4084;
+    intersection.title = '两个数组的交集';
+    intersection.description = '给定两个数组 nums1 和 nums2 ，返回它们的交集。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。';
+    intersection.difficulty = ProblemDifficulty.EASY;
+    intersection.category = ProblemCategory.HASH_TABLE;
+    intersection.choices = [
+      { id: 'A', text: '哈希表/集合：将nums1转为集合，遍历nums2检查是否存在，收集结果去重', isCorrect: true },
+      { id: 'B', text: '排序+双指针：排序后双指针遍历，收集相同元素并去重', isCorrect: false },
+      { id: 'C', text: '暴力双重循环，检查元素是否存在（时间O(nm)）', isCorrect: false },
+      { id: 'D', text: '二分查找，对nums2中的元素在nums1中查找（时间O(n log n)）', isCorrect: false }
+    ];
+    intersection.explanation = '集合解法：①set1=new Set(nums1)；resultSet=new Set()；②for num in nums2：③if set1.has(num)：resultSet.add(num)；④return Array.from(resultSet)。时间复杂度O(n+m)，空间复杂度O(n)。';
+    intersection.hint = '利用集合的去重和O(1)查找特性，高效获取两个数组的交集元素';
+    problems.push(intersection);
+
+    // 4085. 两个数组的交集II
+    const intersectII = new ProblemModel();
+    intersectII.id = 4085;
+    intersectII.title = '两个数组的交集II';
+    intersectII.description = '给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则取较小值）。可以不考虑输出结果的顺序。';
+    intersectII.difficulty = ProblemDifficulty.EASY;
+    intersectII.category = ProblemCategory.HASH_TABLE;
+    intersectII.choices = [
+      { id: 'A', text: '哈希表计数：统计nums1中元素频率，遍历nums2匹配并减少计数，收集结果', isCorrect: true },
+      { id: 'B', text: '排序+双指针：排序后双指针遍历，相同则收集，指针同移，否则移动较小值指针', isCorrect: false },
+      { id: 'C', text: '暴力查找并删除，每次找到后从nums1中移除元素（时间O(nm)）', isCorrect: false },
+      { id: 'D', text: '集合求交后扩展次数（无法处理次数差异，错误）', isCorrect: false }
+    ];
+    intersectII.explanation = '哈希表解法：①if nums1.length > nums2.length：交换nums1和nums2（优化空间）；②countMap=new Map()；③for num in nums1：countMap.set(num, (countMap.get(num)||0)+1)；④result=[]；⑤for num in nums2：⑥if countMap.has(num) && countMap.get(num)>0：⑦result.push(num)；countMap.set(num, countMap.get(num)-1)；⑧return result。时间复杂度O(n+m)，空间复杂度O(min(n,m))。';
+    intersectII.hint = '与交集I的区别是「保留出现次数的最小值」，用哈希表记录次数，匹配时递减计数';
+    problems.push(intersectII);
+
+    // 4086. 快乐数
+    const isHappy = new ProblemModel();
+    isHappy.id = 4086;
+    isHappy.title = '快乐数';
+    isHappy.description = '编写一个算法来判断一个数 n 是不是快乐数。「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为 1，那么这个数就是快乐数。';
+    isHappy.difficulty = ProblemDifficulty.EASY;
+    isHappy.category = ProblemCategory.HASH_TABLE;
+    isHappy.choices = [
+      { id: 'A', text: '哈希表检测循环：记录出现过的数，若重复则非快乐数，直到1或循环', isCorrect: true },
+      { id: 'B', text: '快慢指针：快指针每次走两步，慢指针走一步，相遇则循环，等于1则快乐', isCorrect: false },
+      { id: 'C', text: '数学规律：非快乐数最终会进入4→16→...→4的循环，检查是否出现4', isCorrect: false },
+      { id: 'D', text: '递归计算，无循环检测（可能无限递归，错误）', isCorrect: false }
+    ];
+    isHappy.explanation = '哈希表解法：①function getNext(n)：sum=0；while n>0：digit=n%10；sum+=digit*digit；n=Math.floor(n/10)；return sum；②seen=new Set()；③while n!=1 && !seen.has(n)：④seen.add(n)；n=getNext(n)；⑤return n==1。时间复杂度O(log n)（每次计算位数减少），空间复杂度O(log n)。';
+    isHappy.hint = '核心是「检测是否进入循环」，哈希表可记录所有出现过的数，避免无限计算';
+    problems.push(isHappy);
+
+
+    // 4089. 跳跃游戏II
+    const jump = new ProblemModel();
+    jump.id = 4089;
+    jump.title = '跳跃游戏II';
+    jump.description = '给你一个非负整数数组 nums ，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。你的目标是使用最少的跳跃次数到达数组的最后一个位置。假设你总是可以到达数组的最后一个位置。';
+    jump.difficulty = ProblemDifficulty.HARD;
+    jump.category = ProblemCategory.GREEDY;
+    jump.choices = [
+      { id: 'A', text: '贪心分层跳跃：记录当前层终点、下一层终点，到达当前终点时步数+1并更新当前终点', isCorrect: true },
+      { id: 'B', text: '动态规划，dp[i]表示到i的最少步数（时间O(n²)）', isCorrect: false },
+      { id: 'C', text: 'BFS，层序遍历记录步数（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '每次跳最大步（无法保证最少步数，错误）', isCorrect: false }
+    ];
+    jump.explanation = '分层贪心解法：①n=nums.length；if n<=1 return 0；②steps=0；currentEnd=0；farthest=0；③for i from 0 to n-2：④farthest=Math.max(farthest, i + nums[i])；⑤if i==currentEnd：// 到达当前层终点⑥steps++；currentEnd=farthest；⑦if currentEnd >=n-1：break；⑧return steps。时间复杂度O(n)，空间复杂度O(1)。';
+    jump.hint = '关键是「按跳跃范围分层」，每次到达当前层的终点时，步数加1并更新下一层的终点，确保最少步数';
+    problems.push(jump);
+
+    // 4090. 买卖股票的最佳时机
+    const maxProfitStock = new ProblemModel();
+    maxProfitStock.id = 4090;
+    maxProfitStock.title = '买卖股票的最佳时机';
+    maxProfitStock.description = '给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。';
+    maxProfitStock.difficulty = ProblemDifficulty.EASY;
+    maxProfitStock.category = ProblemCategory.GREEDY;
+    maxProfitStock.choices = [
+      { id: 'A', text: '贪心跟踪最低价格：遍历数组，记录最低买入价，计算当前卖出利润，更新最大值', isCorrect: true },
+      { id: 'B', text: '暴力双重循环，计算所有可能的利润（时间O(n²)）', isCorrect: false },
+      { id: 'C', text: '动态规划，记录每天的最大利润（空间O(n)，不如贪心）', isCorrect: false },
+      { id: 'D', text: '寻找最大差值，不考虑先后顺序（可能买在卖之后，错误）', isCorrect: false }
+    ];
+    maxProfitStock.explanation = '贪心解法：①if prices.length<2 return 0；②minPrice=prices[0]；maxProfit=0；③for i from 1 to prices.length-1：④if prices[i]<minPrice：minPrice=prices[i]；⑤else：maxProfit=Math.max(maxProfit, prices[i]-minPrice)；⑥return maxProfit。时间复杂度O(n)，空间复杂度O(1)。';
+    maxProfitStock.hint = '核心是「低买高卖」，遍历中始终保留最低买入价，当前价格减去最低价即为可能的最大利润';
+    problems.push(maxProfitStock);
+
+    // 4091. 买卖股票的最佳时机II
+    const maxProfitStockII = new ProblemModel();
+    maxProfitStockII.id = 4091;
+    maxProfitStockII.title = '买卖股票的最佳时机II';
+    maxProfitStockII.description = '给你一个整数数组 prices ，其中 prices[i] 表示某支股票第 i 天的价格。在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。返回 你能获得的 最大 利润 。';
+    maxProfitStockII.difficulty = ProblemDifficulty.EASY;
+    maxProfitStockII.category = ProblemCategory.GREEDY;
+    maxProfitStockII.choices = [
+      { id: 'A', text: '贪心累加正收益：只要当天价格高于前一天，就累加差值（等价于所有上涨段收益和）', isCorrect: true },
+      { id: 'B', text: '动态规划，记录持有/不持有股票的最大利润（空间O(n)）', isCorrect: false },
+      { id: 'C', text: '暴力枚举所有交易组合（时间O(2^n)）', isCorrect: false },
+      { id: 'D', text: '寻找所有波峰波谷，低买高卖（逻辑等价贪心，实现稍复杂）', isCorrect: false }
+    ];
+    maxProfitStockII.explanation = '贪心解法：①profit=0；②for i from 1 to prices.length-1：③if prices[i]>prices[i-1]：profit += prices[i]-prices[i-1]；④return profit。时间复杂度O(n)，空间复杂度O(1)。';
+    maxProfitStockII.hint = '多次交易的最大利润等于「所有上涨区间的收益总和」，贪心策略是只赚每天的正差价';
+    problems.push(maxProfitStockII);
+
+    // 4092. 用最少数量的箭引爆气球
+    const findMinArrowShots = new ProblemModel();
+    findMinArrowShots.id = 4092;
+    findMinArrowShots.title = '用最少数量的箭引爆气球';
+    findMinArrowShots.description = '有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组 points ，其中points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend 之间的气球。你不知道气球的确切 y 坐标。一支弓箭可以沿着 x 轴从不同点 完全垂直 地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，则该气球会被引爆。可以射出的弓箭的数量没有限制。 弓箭一旦被射出之后，可以无限地前进。我们想找到使得所有气球全部被引爆，所需的弓箭的 最小数量 。';
+    findMinArrowShots.difficulty = ProblemDifficulty.MEDIUM;
+    findMinArrowShots.category = ProblemCategory.GREEDY;
+    findMinArrowShots.choices = [
+      { id: 'A', text: '排序+贪心：按气球右边界排序，箭射在当前右边界，跳过所有被引爆的气球', isCorrect: true },
+      { id: 'B', text: '按左边界排序，类似区间合并（可能需要更多箭）', isCorrect: false },
+      { id: 'C', text: '暴力枚举，每次选最早结束的气球射箭（逻辑等价A，实现不同）', isCorrect: false },
+      { id: 'D', text: '动态规划，记录射前i个气球的最少箭数（时间O(n²)）', isCorrect: false }
+    ];
+    findMinArrowShots.explanation = '右边界排序解法：①if points.length==0 return 0；②points.sort((a,b)=>a[1]-b[1])；③arrows=1；end=points[0][1]；④for i from 1 to points.length-1：⑤if points[i][0]>end：// 当前气球不被之前的箭引爆⑥arrows++；end=points[i][1]；⑦return arrows。时间复杂度O(n log n)，空间复杂度O(log n)。';
+    findMinArrowShots.hint = '贪心策略：「每次射在当前气球的右边界」，这样能最大限度覆盖后续气球，减少箭的数量';
+    problems.push(findMinArrowShots);
+
+    // 4093. 无重叠区间
+    const eraseOverlapIntervals = new ProblemModel();
+    eraseOverlapIntervals.id = 4093;
+    eraseOverlapIntervals.title = '无重叠区间';
+    eraseOverlapIntervals.description = '给定一个区间的集合 intervals ，其中 intervals[i] = [starti, endi] 。返回 需要移除区间的最小数量，使剩余区间互不重叠 。';
+    eraseOverlapIntervals.difficulty = ProblemDifficulty.MEDIUM;
+    eraseOverlapIntervals.category = ProblemCategory.GREEDY;
+    eraseOverlapIntervals.choices = [
+      { id: 'A', text: '排序+贪心：按右边界排序，保留最早结束的区间，统计需移除的重叠区间', isCorrect: true },
+      { id: 'B', text: '按左边界排序，类似处理（可能保留更多区间）', isCorrect: false },
+      { id: 'C', text: '动态规划，dp[i]表示前i个区间的最大保留数（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: '暴力枚举所有可能的保留组合（时间O(2^n)）', isCorrect: false }
+    ];
+    eraseOverlapIntervals.explanation = '右边界排序解法：①if intervals.length==0 return 0；②intervals.sort((a,b)=>a[1]-b[1])；③count=0；end=intervals[0][1]；④for i from 1 to intervals.length-1：⑤if intervals[i][0]<end：// 重叠，需移除⑥count++；⑦else：// 不重叠，更新end⑧end=intervals[i][1]；⑨return count。时间复杂度O(n log n)，空间复杂度O(log n)。';
+    eraseOverlapIntervals.hint = '等价于「保留最多的不重叠区间」，贪心选择最早结束的区间，为后续留出更多空间';
+    problems.push(eraseOverlapIntervals);
+
+    // 4094. 划分字母区间
+    const partitionLabels = new ProblemModel();
+    partitionLabels.id = 4094;
+    partitionLabels.title = '划分字母区间';
+    partitionLabels.description = '字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。返回一个表示每个字符串片段的长度的列表。';
+    partitionLabels.difficulty = ProblemDifficulty.MEDIUM;
+    partitionLabels.category = ProblemCategory.GREEDY;
+    partitionLabels.choices = [
+      { id: 'A', text: '贪心+最后位置：记录每个字母最后出现的位置，扩展当前区间到最大所需位置', isCorrect: true },
+      { id: 'B', text: '暴力划分，每次找最小的符合条件的区间（时间O(n²)）', isCorrect: false },
+      { id: 'C', text: '动态规划，记录每个位置的最大划分（逻辑复杂）', isCorrect: false },
+      { id: 'D', text: '哈希表统计每个字母的所有位置，再合并区间（实现复杂）', isCorrect: false }
+    ];
+    partitionLabels.explanation = '最后位置解法：①last=new Array(26).fill(0)；②for i from 0 to S.length-1：last[S.charCodeAt(i)-97] = i；③result=[]；start=0；end=0；④for i from 0 to S.length-1：⑤end=Math.max(end, last[S.charCodeAt(i)-97])；⑥if i==end：// 到达当前区间终点⑦result.push(end - start + 1)；start=end+1；⑧return result。时间复杂度O(n)，空间复杂度O(1)。';
+    partitionLabels.hint = '核心是「当前区间必须包含所有已出现字母的最后位置」，当遍历到该位置时，即可划分区间';
+    problems.push(partitionLabels);
+
+    // 4095. 合并区间
+    const mergeIntervals = new ProblemModel();
+    mergeIntervals.id = 4095;
+    mergeIntervals.title = '合并区间';
+    mergeIntervals.description = '以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。';
+    mergeIntervals.difficulty = ProblemDifficulty.MEDIUM;
+    mergeIntervals.category = ProblemCategory.GREEDY;
+    mergeIntervals.choices = [
+      { id: 'A', text: '排序+贪心：按区间起点排序，遍历合并重叠区间（当前区间终点取最大值）', isCorrect: true },
+      { id: 'B', text: '按区间终点排序，类似合并（实现稍复杂）', isCorrect: false },
+      { id: 'C', text: '暴力合并，两两检查是否重叠（时间O(n²)）', isCorrect: false },
+      { id: 'D', text: '哈希表存储区间，再合并（无法处理交叉重叠）', isCorrect: false }
+    ];
+    mergeIntervals.explanation = '排序合并解法：①if intervals.length==0 return []；②intervals.sort((a,b)=>a[0]-b[0])；③merged=[intervals[0]]；④for i from 1 to intervals.length-1：⑤last=merged[merged.length-1]；current=intervals[i]；⑥if current[0]<=last[1]：// 重叠，合并⑦last[1]=Math.max(last[1], current[1])；⑧else：// 不重叠，加入新区间⑨merged.push(current)；⑩return merged。时间复杂度O(n log n)，空间复杂度O(log n)。';
+    mergeIntervals.hint = '排序后区间重叠具有连续性，只需遍历一次，通过比较当前区间起点与上一区间终点判断是否合并';
+    problems.push(mergeIntervals);
+
+    // 4096. 加油站
+    const canCompleteCircuit = new ProblemModel();
+    canCompleteCircuit.id = 4096;
+    canCompleteCircuit.title = '加油站';
+    canCompleteCircuit.description = '在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。';
+    canCompleteCircuit.difficulty = ProblemDifficulty.MEDIUM;
+    canCompleteCircuit.category = ProblemCategory.GREEDY;
+    canCompleteCircuit.choices = [
+      { id: 'A', text: '贪心累计剩余：计算每个站的剩余油量，累计总剩余，若为负则无解；否则找第一个能累计到终点的起点', isCorrect: true },
+      { id: 'B', text: '暴力枚举每个起点，模拟行驶（时间O(n²)）', isCorrect: false },
+      { id: 'C', text: '动态规划，记录每个站的最大剩余油量（逻辑复杂）', isCorrect: false },
+      { id: 'D', text: '找剩余油量最大的站作为起点（无法保证能绕圈）', isCorrect: false }
+    ];
+    canCompleteCircuit.explanation = '贪心解法：①totalGas=0；totalCost=0；currentTank=0；start=0；②for i from 0 to gas.length-1：③totalGas += gas[i]；totalCost += cost[i]；currentTank += gas[i] - cost[i]；④if currentTank <0：// 从start到i无法到达，重置起点⑤start=i+1；currentTank=0；⑥return totalGas >= totalCost ? start : -1。时间复杂度O(n)，空间复杂度O(1)。';
+    canCompleteCircuit.hint = '关键是「总油量>=总消耗则一定有解」，且解为第一个能连续累计到终点的起点，之前的起点都无法到达该起点';
+    problems.push(canCompleteCircuit);
+
+
+    // 八、链表类（10题）
+    // 4097. 反转链表
+    const reverseList = new ProblemModel();
+    reverseList.id = 4097;
+    reverseList.title = '反转链表';
+    reverseList.description = '给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。';
+    reverseList.difficulty = ProblemDifficulty.EASY;
+    reverseList.category = ProblemCategory.LINKED_LIST;
+    reverseList.choices = [
+      { id: 'A', text: '迭代法：用prev、current、next三个指针，逐个反转节点指向', isCorrect: true },
+      { id: 'B', text: '递归法：递归反转后续节点，再调整当前节点指向（空间O(n)）', isCorrect: false },
+      { id: 'C', text: '栈：压入所有节点再弹出构建反转链表（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '复制值到数组，反转后写回（破坏原链表结构，错误）', isCorrect: false }
+    ];
+    reverseList.explanation = '迭代解法：①prev=null；current=head；②while current!=null：③next=current.next；// 保存下一个节点④current.next=prev；// 反转指针⑤prev=current；// 移动prev⑥current=next；// 移动current⑦return prev。时间复杂度O(n)，空间复杂度O(1)。';
+    reverseList.hint = '迭代法通过三个指针原地反转，只需一次遍历，空间复杂度最优';
+    problems.push(reverseList);
+
+    // 4099. 链表的中间结点
+    const middleNode = new ProblemModel();
+    middleNode.id = 4099;
+    middleNode.title = '链表的中间结点';
+    middleNode.description = '给定一个头结点为 head 的非空单链表，返回链表的中间结点。如果有两个中间结点，则返回第二个中间结点。';
+    middleNode.difficulty = ProblemDifficulty.EASY;
+    middleNode.category = ProblemCategory.LINKED_LIST;
+    middleNode.choices = [
+      { id: 'A', text: '快慢指针：快指针每次走两步，慢指针走一步，快指针到尾时慢指针在中间', isCorrect: true },
+      { id: 'B', text: '计算长度后遍历到中间（两次遍历，时间O(n)）', isCorrect: false },
+      { id: 'C', text: '转为数组，取中间索引（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '递归记录深度，返回中间层节点（空间O(n)）', isCorrect: false }
+    ];
+    middleNode.explanation = '快慢指针解法：①slow=head；fast=head；②while fast!=null && fast.next!=null：③slow=slow.next；④fast=fast.next.next；⑤return slow。时间复杂度O(n)，空间复杂度O(1)。';
+    middleNode.hint = '快慢指针一次遍历即可找到中间节点，快指针速度是慢指针的两倍，天然满足中间位置条件';
+    problems.push(middleNode);
+
+    // 4103. 删除链表的倒数第 N 个结点
+    const removeNthFromEnd = new ProblemModel();
+    removeNthFromEnd.id = 4103;
+    removeNthFromEnd.title = '删除链表的倒数第 N 个结点';
+    removeNthFromEnd.description = '给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。';
+    removeNthFromEnd.difficulty = ProblemDifficulty.MEDIUM;
+    removeNthFromEnd.category = ProblemCategory.LINKED_LIST;
+    removeNthFromEnd.choices = [
+      { id: 'A', text: '双指针：快指针先走n步，然后快慢指针同速前进，快指针到尾时慢指针在待删节点前', isCorrect: true },
+      { id: 'B', text: '计算长度后遍历到倒数第n+1个节点（两次遍历）', isCorrect: false },
+      { id: 'C', text: '栈：压入所有节点，弹出n个后栈顶为待删节点的前驱（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '递归回溯，计数删除（空间O(n)）', isCorrect: false }
+    ];
+    removeNthFromEnd.explanation = '双指针解法：①dummy=new ListNode(0, head)；②fast=dummy；slow=dummy；③// 快指针先走n步④for i from 0 to n-1：fast=fast.next；⑤// 快慢指针同速前进⑥while fast.next!=null：fast=fast.next；slow=slow.next；⑦// 删除节点⑧slow.next=slow.next.next；⑨return dummy.next。时间复杂度O(n)，空间复杂度O(1)。';
+    removeNthFromEnd.hint = '哑节点处理头节点删除的特殊情况，双指针一次遍历定位到待删节点的前驱，高效删除';
+    problems.push(removeNthFromEnd);
+
+    // 4104. 两两交换链表中的节点
+    const swapPairs = new ProblemModel();
+    swapPairs.id = 4104;
+    swapPairs.title = '两两交换链表中的节点';
+    swapPairs.description = '给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。';
+    swapPairs.difficulty = ProblemDifficulty.MEDIUM;
+    swapPairs.category = ProblemCategory.LINKED_LIST;
+    swapPairs.choices = [
+      { id: 'A', text: '迭代法：用prev、first、second指针，每次交换一对节点，更新指针', isCorrect: true },
+      { id: 'B', text: '递归法：交换前两个节点，递归处理剩余链表（空间O(n)）', isCorrect: false },
+      { id: 'C', text: '转为数组，交换元素后重建链表（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '修改节点值（不符合题意）', isCorrect: false }
+    ];
+    swapPairs.explanation = '迭代解法：①dummy=new ListNode(0, head)；prev=dummy；②while prev.next!=null && prev.next.next!=null：③first=prev.next；④second=prev.next.next；⑤// 交换⑥first.next=second.next；⑦second.next=first；⑧prev.next=second；⑨// 移动prev到下一对前⑩prev=first；⑪return dummy.next。时间复杂度O(n)，空间复杂度O(1)。';
+    swapPairs.hint = '关键是「保存前驱节点」，每次交换一对节点后，前驱指针更新为交换后的第二个节点（原第一个节点）';
+    problems.push(swapPairs);
+
+    // 4105. K 个一组翻转链表
+    const reverseKGroup = new ProblemModel();
+    reverseKGroup.id = 4105;
+    reverseKGroup.title = 'K 个一组翻转链表';
+    reverseKGroup.description = '给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。';
+    reverseKGroup.difficulty = ProblemDifficulty.HARD;
+    reverseKGroup.category = ProblemCategory.LINKED_LIST;
+    reverseKGroup.choices = [
+      { id: 'A', text: '迭代+反转子链表：分组检查长度，足够则反转，连接前后部分，循环处理', isCorrect: true },
+      { id: 'B', text: '递归：反转前k个，递归处理剩余（空间O(n/k)）', isCorrect: false },
+      { id: 'C', text: '转为数组，分组反转后重建（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '暴力翻转，逐个移动节点（实现复杂）', isCorrect: false }
+    ];
+    reverseKGroup.explanation = '迭代解法：①dummy=new ListNode(0, head)；prev=dummy；②while true：③// 检查剩余节点是否够k个④end=prev；⑤for i from 0 to k-1：end=end.next；if end==null：break；⑥// 记录下一组起点⑦nextGroup=end.next；⑧// 反转当前k个节点⑨start=prev.next；end.next=null；// 断开⑩prev.next=reverseList(start)；// 反转后start变尾，end变头⑪// 连接下一组⑫start.next=nextGroup；⑬// 移动prev到下一组前⑭prev=start；⑮return dummy.next。时间复杂度O(n)，空间复杂度O(1)。';
+    reverseKGroup.hint = '在两两交换基础上扩展，先检查每组长度，反转后正确连接前后部分，prev始终指向每组的前驱';
+    problems.push(reverseKGroup);
+
+    // 4106. 随机链表的复制
+    const copyRandomList = new ProblemModel();
+    copyRandomList.id = 4106;
+    copyRandomList.title = '随机链表的复制';
+    copyRandomList.description = '给你一个长度为 n 的链表，每个节点包含一个额外增加的随机指针 random ，该指针可以指向链表中的任何节点或空节点。构造这个链表的 深拷贝 。 深拷贝应该正好由 n 个 全新 节点组成，其中每个新节点的值都设为其对应的原节点的值。新节点的 next 指针和 random 指针也都应指向复制链表中的新节点，并使原链表和复制链表中的这些指针能够表示相同的链表状态。复制链表中的指针都不应指向原链表中的节点 。例如，如果原链表中有 X 和 Y 两个节点，其中 X.random --> Y ，那么在复制链表中对应的两个节点 x 和 y ，同样有 x.random --> y 。返回复制链表的头节点。';
+    copyRandomList.difficulty = ProblemDifficulty.MEDIUM;
+    copyRandomList.category = ProblemCategory.LINKED_LIST;
+    copyRandomList.choices = [
+      { id: 'A', text: '哈希表+两次遍历：第一次复制节点并存储映射，第二次设置next和random指针', isCorrect: true },
+      { id: 'B', text: '原地插入+拆分：复制节点插入原节点后，设置random，再拆分链表（空间O(1)）', isCorrect: false },
+      { id: 'C', text: '递归+哈希表，记录已复制节点（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '只复制next指针，再复制random（无法处理random指向未复制节点）', isCorrect: false }
+    ];
+    copyRandomList.explanation = '哈希表解法：①if head==null return null；②map=new Map()；③// 第一次遍历：复制节点并存储映射④current=head；⑤while current!=null：⑥map.set(current, new ListNode(current.val))；⑦current=current.next；⑧// 第二次遍历：设置next和random⑨current=head；⑩while current!=null：⑪map.get(current).next = map.get(current.next) || null；⑫map.get(current).random = map.get(current.random) || null；⑬current=current.next；⑭return map.get(head)。时间复杂度O(n)，空间复杂度O(n)。';
+    copyRandomList.hint = '核心是「建立原节点到复制节点的映射」，确保random指针能正确指向复制链表中的对应节点';
+    problems.push(copyRandomList);
+
+    // 九、树类（10题）
+    // 4107. 二叉树的前序遍历
+    const preorderTraversal = new ProblemModel();
+    preorderTraversal.id = 4107;
+    preorderTraversal.title = '二叉树的前序遍历';
+    preorderTraversal.description = '给你二叉树的根节点 root ，返回它节点值的 前序 遍历。前序遍历是指按照根-左-右的顺序遍历二叉树。';
+    preorderTraversal.difficulty = ProblemDifficulty.EASY;
+    preorderTraversal.category = ProblemCategory.BINARY_TREE;
+    preorderTraversal.choices = [
+      { id: 'A', text: '迭代法：用栈存储节点，先压右子树再压左子树，弹出时访问节点', isCorrect: true },
+      { id: 'B', text: '递归法：递归访问根节点，再递归左子树，最后递归右子树（空间O(n)）', isCorrect: false },
+      { id: 'C', text: ' Morris遍历：线索化二叉树，实现常数空间遍历（逻辑复杂）', isCorrect: false },
+      { id: 'D', text: '层序遍历改编（不符合前序遍历顺序，错误）', isCorrect: false }
+    ];
+    preorderTraversal.explanation = '迭代解法：①if root==null return []；②result=[]；stack=[root]；③while stack.length>0：④node=stack.pop()；⑤result.push(node.val)；⑥// 先压右子树，后压左子树（栈先进后出）⑦if node.right!=null：stack.push(node.right)；⑧if node.left!=null：stack.push(node.left)；⑨return result。时间复杂度O(n)，空间复杂度O(n)。';
+    preorderTraversal.hint = '前序遍历顺序为「根-左-右」，栈的特性是先进后出，因此需先推入右子树再推入左子树';
+    problems.push(preorderTraversal);
+
+
+    // 十、动态规划类（10题）
+    // 4117. 斐波那契数
+    const fib = new ProblemModel();
+    fib.id = 4117;
+    fib.title = '斐波那契数';
+    fib.description = '斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：F(0) = 0，F(1) = 1；F(n) = F(n - 1) + F(n - 2)，其中 n > 1。给你 n ，请计算 F(n)。';
+    fib.difficulty = ProblemDifficulty.EASY;
+    fib.category = ProblemCategory.DYNAMIC_PROGRAMMING;
+    fib.choices = [
+      { id: 'A', text: '动态规划（迭代）：用变量存储前两项，迭代计算到第n项（空间O(1)）', isCorrect: true },
+      { id: 'B', text: '递归（时间O(2^n)，存在大量重复计算，低效）', isCorrect: false },
+      { id: 'C', text: '递归+记忆化：缓存已计算结果（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '矩阵快速幂（时间O(log n)，实现复杂）', isCorrect: false }
+    ];
+    fib.explanation = '迭代DP解法：①if n<=1 return n；②a=0；b=1；③for i from 2 to n：④c=a+b；a=b；b=c；⑤return b。时间复杂度O(n)，空间复杂度O(1)。';
+    fib.hint = '斐波那契数的递推关系明确，迭代法通过滚动变量存储中间结果，优化空间复杂度至常数级';
+    problems.push(fib);
+
+
+    // 4133. 外观数列
+    const countAndSay = new ProblemModel();
+    countAndSay.id = 4133;
+    countAndSay.title = '外观数列';
+    countAndSay.description = '给定一个正整数 n ，输出外观数列的第 n 项。外观数列是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。你可以将其视作是由递归公式定义的数字字符串序列：countAndSay(1) = "1"；countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。前五项如下：1.     1；2.     11；3.     21；4.     1211；5.     111221；解释：第一项是数字 1；描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 "11"；描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 "21"；描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 "1211"；描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 "111221"。';
+    countAndSay.difficulty = ProblemDifficulty.EASY;
+    countAndSay.category = ProblemCategory.STRING;
+    countAndSay.choices = [
+      { id: 'A', text: '迭代生成：从n=1开始，逐个生成到第n项，每次遍历前一项统计连续数字', isCorrect: true },
+      { id: 'B', text: '递归生成：递归获取前一项，再处理生成当前项（空间O(n)）', isCorrect: false },
+      { id: 'C', text: '正则表达式：用正则匹配连续相同数字（实现简洁，效率略低）', isCorrect: false },
+      { id: 'D', text: '暴力拼接（逻辑混乱，易出错）', isCorrect: false }
+    ];
+    countAndSay.explanation = '迭代解法：①if (n === 1) return "1"；②let prev = "1"；③for (let i=2; i <=n; i++) {④let curr = ""；let count = 1；⑤for (let j=1; j < prev.length; j++) {⑥if (prev[j] === prev[j-1]) {⑦count++；⑧} else {⑨curr += count + prev[j-1]；⑩count = 1；⑪}⑫}⑬// 处理最后一组数字⑭curr += count + prev[prev.length-1]；⑮prev = curr；⑯}⑰return prev。时间复杂度O(n*m)（m为第n项长度），空间复杂度O(m)。';
+    countAndSay.hint = '核心是「描述前一项」：遍历前一项字符串，统计连续相同数字的个数和数字本身，拼接成新的字符串';
+    problems.push(countAndSay);
+
+    // 4134. 最长公共前缀
+    const longestCommonPrefix = new ProblemModel();
+    longestCommonPrefix.id = 4134;
+    longestCommonPrefix.title = '最长公共前缀';
+    longestCommonPrefix.description = '编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 ""。';
+    longestCommonPrefix.difficulty = ProblemDifficulty.EASY;
+    longestCommonPrefix.category = ProblemCategory.STRING;
+    longestCommonPrefix.choices = [
+      { id: 'A', text: '横向扫描：依次比较两个字符串的公共前缀，更新结果', isCorrect: true },
+      { id: 'B', text: '纵向扫描：按列比较所有字符串的相同位置字符，直到不匹配', isCorrect: false },
+      { id: 'C', text: '排序后比较：排序后只需比较第一个和最后一个字符串的公共前缀', isCorrect: false },
+      { id: 'D', text: '分治法：将数组分成两部分，分别求前缀再合并（实现复杂）', isCorrect: false }
+    ];
+    longestCommonPrefix.explanation = '横向扫描解法：①if (strs.length === 0) return ""；②let prefix = strs[0]；③for (let i=1; i < strs.length; i++) {④let j=0；⑤while (j < prefix.length && j < strs[i].length && prefix[j] === strs[i][j]) {⑥j++；⑦}⑧prefix = prefix.substring(0, j)；⑨if (prefix === "") break；// 提前退出⑩}⑪return prefix。时间复杂度O(S)（S为所有字符总数），空间复杂度O(1)。';
+    longestCommonPrefix.hint = '以第一个字符串为初始前缀，逐步与其他字符串比较并缩短前缀，直到找到所有字符串的公共部分';
+    problems.push(longestCommonPrefix);
+
+
+    // 4143. 搜索插入位置
+    const searchInsert = new ProblemModel();
+    searchInsert.id = 4143;
+    searchInsert.title = '搜索插入位置';
+    searchInsert.description = '给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。请必须使用时间复杂度为 O(log n) 的算法。';
+    searchInsert.difficulty = ProblemDifficulty.EASY;
+    searchInsert.category = ProblemCategory.ARRAY;
+    searchInsert.choices = [
+      { id: 'A', text: '二分查找：查找目标值，未找到则返回左指针位置', isCorrect: true },
+      { id: 'B', text: '线性查找（时间O(n)，不符合要求）', isCorrect: false },
+      { id: 'C', text: '内置方法（如indexOf，时间O(n)）', isCorrect: false },
+      { id: 'D', text: '排序后查找（数组已排序，无需再次排序）', isCorrect: false }
+    ];
+    searchInsert.explanation = '二分查找解法：①let left = 0；right = nums.length - 1；②while (left <= right) {③const mid = Math.floor((left + right) / 2)；④if (nums[mid] === target) {⑤return mid；⑥} else if (nums[mid] < target) {⑦left = mid + 1；⑧} else {⑨right = mid - 1；⑩}⑪}⑫// 未找到，返回插入位置left⑬return left。时间复杂度O(log n)，空间复杂度O(1)。';
+    searchInsert.hint = '二分查找不仅能找到目标值的位置，当循环结束时，left指针恰好是目标值应插入的位置';
+    problems.push(searchInsert);
+
+    // 4146. 杨辉三角
+    const generate = new ProblemModel();
+    generate.id = 4146;
+    generate.title = '杨辉三角';
+    generate.description = '给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。';
+    generate.difficulty = ProblemDifficulty.EASY;
+    generate.category = ProblemCategory.ARRAY;
+    generate.choices = [
+      { id: 'A', text: '迭代生成：第i行的第j个数等于i-1行的j-1和j个数之和（边界为1）', isCorrect: true },
+      { id: 'B', text: '递归生成：递归获取前i-1行，再计算第i行（空间O(n)）', isCorrect: false },
+      { id: 'C', text: '数学公式：利用组合数C(n,k)计算（可能有精度问题）', isCorrect: false },
+      { id: 'D', text: '暴力填充（逻辑混乱）', isCorrect: false }
+    ];
+    generate.explanation = '迭代解法：①if (numRows === 0) return []；②const result = [[1]]；③for (let i=1; i < numRows; i++) {④const row = [1]；// 第一个元素⑤const prevRow = result[i-1]；⑥for (let j=1; j < i; j++) {⑦row.push(prevRow[j-1] + prevRow[j])；⑧}⑨row.push(1)；// 最后一个元素⑩result.push(row)；⑪}⑫return result。时间复杂度O(n²)，空间复杂度O(n²)（存储结果）。';
+    generate.hint = '杨辉三角的每行首尾都是1，中间元素由上一行相邻两个元素相加得到，通过迭代逐行生成';
+    problems.push(generate);
+
+
+    // 4150. 链表中倒数第k个节点
+    const getKthFromEnd = new ProblemModel();
+    getKthFromEnd.id = 4150;
+    getKthFromEnd.title = '链表中倒数第k个节点';
+    getKthFromEnd.description = '输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有 6 个节点，从头节点开始，它们的值依次是 1、2、3、4、5、6。这个链表的倒数第 3 个节点是值为 4 的节点。';
+    getKthFromEnd.difficulty = ProblemDifficulty.EASY;
+    getKthFromEnd.category = ProblemCategory.LINKED_LIST;
+    getKthFromEnd.choices = [
+      { id: 'A', text: '快慢指针：快指针先走k步，然后两指针一起走，快指针到尾时慢指针即为目标', isCorrect: true },
+      { id: 'B', text: '计算长度后查找：先求长度n，再找第n-k+1个节点（两次遍历）', isCorrect: false },
+      { id: 'C', text: '栈辅助：将所有节点入栈，弹出k个（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '递归回溯计数（空间O(n)）', isCorrect: false }
+    ];
+    getKthFromEnd.explanation = '快慢指针解法：①let fast = head；②let slow = head；③// 快指针先走k步④for (let i=0; i < k; i++) {⑤if (fast === null) return null；// k大于链表长度⑥fast = fast.next；⑦}⑧// 两指针一起走⑨while (fast !== null) {⑩fast = fast.next；⑪slow = slow.next；⑫}⑬return slow；。时间复杂度O(n)，空间复杂度O(1)。';
+    getKthFromEnd.hint = '快慢指针保持k步距离，当快指针到达末尾时，慢指针正好指向倒数第k个节点，注意处理k大于链表长度的情况';
+    problems.push(getKthFromEnd);
+
+    // 4156. 分隔链表
+    const partition = new ProblemModel();
+    partition.id = 4156;
+    partition.title = '分隔链表';
+    partition.description = '给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。你应当 保留 两个分区中每个节点的初始相对位置。';
+    partition.difficulty = ProblemDifficulty.MEDIUM;
+    partition.category = ProblemCategory.LINKED_LIST;
+    partition.choices = [
+      { id: 'A', text: '双链表法：创建两个哑节点，分别收集小于x和大于等于x的节点，最后连接', isCorrect: true },
+      { id: 'B', text: '插入法：遍历链表，将大于等于x的节点移到后面（时间O(n)）', isCorrect: false },
+      { id: 'C', text: '数组存储后重建（空间O(n)）', isCorrect: false },
+      { id: 'D', text: '递归法（实现复杂）', isCorrect: false }
+    ];
+    partition.explanation = '双链表解法：①const dummy1 = new ListNode(0)；// 小于x的链表②const dummy2 = new ListNode(0)；// 大于等于x的链表③let p1 = dummy1；let p2 = dummy2；④let current = head；⑤while (current !== null) {⑥if (current.val < x) {⑦p1.next = current；⑧p1 = p1.next；⑨} else {⑩p2.next = current；⑪p2 = p2.next；⑫}⑬current = current.next；⑭}⑮// 连接两个链表，注意末尾置空⑯p2.next = null；⑰p1.next = dummy2.next；⑱return dummy1.next；。时间复杂度O(n)，空间复杂度O(1)。';
+    partition.hint = '通过两个链表分别收集符合条件的节点，最后拼接，能保持原有相对顺序且高效';
+    problems.push(partition);
+
+    // 4158. 被围绕的区域
+    const solve = new ProblemModel();
+    solve.id = 4158;
+    solve.title = '被围绕的区域';
+    solve.description = '给你一个 m x n 的矩阵 board ，由若干字符 \'X\' 和 \'O\' ，找到所有被 \'X\' 围绕的区域，并将这些区域里所有的 \'O\' 用 \'X\' 填充。';
+    solve.difficulty = ProblemDifficulty.MEDIUM;
+    solve.category = ProblemCategory.GRAPH;
+    solve.choices = [
+      { id: 'A', text: 'DFS/BFS：从边界的\'O\'开始，标记所有可达的\'O\'为临时字符，最后将未标记的\'O\'改为\'X\'，恢复临时字符', isCorrect: true },
+      { id: 'B', text: '并查集：将边界\'O\'与一个虚拟节点相连，内部\'O\'与相邻\'O\'相连，最后未与虚拟节点相连的\'O\'改为\'X\'', isCorrect: false },
+      { id: 'C', text: '暴力检查每个\'O\'是否被包围（时间O((mn)^2)）', isCorrect: false },
+      { id: 'D', text: '动态规划（难以定义状态）', isCorrect: false }
+    ];
+    solve.explanation = 'DFS解法：①if (board.length === 0) return；②const m = board.length；const n = board[0].length；③// DFS标记与边界相连的O为A④function dfs(i, j) {⑤if (i < 0 || i >= m || j < 0 || j >= n || board[i][j] !== \'O\') return；⑥board[i][j] = \'A\'；// 临时标记⑦dfs(i+1, j)；dfs(i-1, j)；dfs(i, j+1)；dfs(i, j-1)；⑧}⑨// 处理边界O⑩for (let i=0; i < m; i++) {⑪dfs(i, 0)；dfs(i, n-1)；⑫}⑬for (let j=0; j < n; j++) {⑭dfs(0, j)；dfs(m-1, j)；⑮}⑯// 替换：A恢复为O，O改为X⑰for (let i=0; i < m; i++) {⑱for (let j=0; j < n; j++) {⑲if (board[i][j] === \'O\') {⑳board[i][j] = \'X\'；㉑} else if (board[i][j] === \'A\') {㉒board[i][j] = \'O\'；㉓}㉔}㉕}。时间复杂度O(mn)，空间复杂度O(mn)（递归栈）。';
+    solve.hint = '被围绕的区域无法到达边界，因此先标记所有能到达边界的O，剩余的O就是被围绕的，可安全替换';
+    problems.push(solve);
+
+    // 十五、排序与查找类（10题）
+    // 4167. 排序数组
+    const sortArray = new ProblemModel();
+    sortArray.id = 4167;
+    sortArray.title = '排序数组';
+    sortArray.description = '给你一个整数数组 nums，请你将该数组升序排列。';
+    sortArray.difficulty = ProblemDifficulty.MEDIUM;
+    sortArray.category = ProblemCategory.SORT;
+    sortArray.choices = [
+      { id: 'A', text: '快速排序：选择基准，分区，递归排序左右（平均O(n log n)，最坏O(n²)）', isCorrect: true },
+      { id: 'B', text: '归并排序：分治思想，合并两个有序子数组（稳定，O(n log n)）', isCorrect: false },
+      { id: 'C', text: '堆排序：利用堆的特性，构建大顶堆后逐个提取最大值（O(n log n)）', isCorrect: false },
+      { id: 'D', text: '内置排序函数（如Array.sort，通常基于快排或TimSort）', isCorrect: false }
+    ];
+    sortArray.explanation = '快速排序解法：①function quickSort(nums, left, right) {②if (left >= right) return；③// 选择基准（这里用中间元素）④const pivotIndex = Math.floor((left + right) / 2)；⑤const pivot = nums[pivotIndex]；⑥// 交换基准到末尾⑦[nums[pivotIndex], nums[right]] = [nums[right], nums[pivotIndex]]；⑧let i = left；⑨for (let j=left; j < right; j++) {⑩if (nums[j] < pivot) {⑪[nums[i], nums[j]] = [nums[j], nums[i]]；⑫i++；⑬}⑭}⑮// 将基准放到正确位置⑯[nums[i], nums[right]] = [nums[right], nums[i]]；⑰// 递归排序左右⑱quickSort(nums, left, i-1)；⑲quickSort(nums, i+1, right)；⑳}㉑if (nums.length === 0) return []；㉒quickSort(nums, 0, nums.length-1)；㉓return nums；。平均时间复杂度O(n log n)，空间复杂度O(log n)（递归栈）。';
+    sortArray.hint = '快速排序的核心是分区操作：选择一个基准，将小于基准的元素放左边，大于的放右边，递归处理子数组';
+    problems.push(sortArray);
+
+    // 排序算法类题目
+    const sortColors = new ProblemModel();
+    sortColors.id = 1001;
+    sortColors.title = '颜色分类';
+    sortColors.description = '给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。此题中，我们使用整数 0、1 和 2 分别表示红色、白色和蓝色。';
+    sortColors.difficulty = ProblemDifficulty.MEDIUM;
+    sortColors.category = ProblemCategory.SORT;
+    sortColors.choices = [
+      { id: 'A', text: '单指针两次遍历：先移动所有0到前端，再移动所有1到0之后', isCorrect: false },
+      { id: 'B', text: '双指针一次遍历：分别追踪0的右边界和2的左边界，遇到0交换到左区，遇到2交换到右区', isCorrect: true },
+      { id: 'C', text: '快速排序：选择1作为 pivot 进行分区', isCorrect: false },
+      { id: 'D', text: '计数排序：统计0、1、2的个数后重新构造数组', isCorrect: false }
+    ];
+    sortColors.explanation = '双指针解法：①初始化p0=0（0的右边界），p2=n-1（2的左边界），当前指针i=0；②遍历数组：若nums[i]=0，交换nums[i]与nums[p0]，p0++和i++；若nums[i]=2，交换nums[i]与nums[p2]，p2--；若nums[i]=1，i++；③直至i>p2。时间O(n)，空间O(1)。';
+    sortColors.hint = '利用0、1、2的有限性，通过双指针划分三个区域，实现一次遍历完成排序';
+    problems.push(sortColors);
+
+    // 前缀和类题目
+    const subarraySum = new ProblemModel();
+    subarraySum.id = 2001;
+    subarraySum.title = '和为K的子数组';
+    subarraySum.description = '给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续子数组的个数。';
+    subarraySum.difficulty = ProblemDifficulty.MEDIUM;
+    subarraySum.category = ProblemCategory.PREFIX_SUM;
+    subarraySum.choices = [
+      { id: 'A', text: '前缀和+哈希表：用哈希表存储前缀和出现次数，通过前缀和差值计算目标和', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算和并判断', isCorrect: false },
+      { id: 'C', text: '滑动窗口：双指针移动计算子数组和（仅适用于非负数）', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]表示以i结尾的子数组和', isCorrect: false }
+    ];
+    subarraySum.explanation = '前缀和解法：①计算前缀和数组prefixSum，其中prefixSum[i] = sum(nums[0..i-1])；②子数组nums[j..i-1]和为k 等价于 prefixSum[i] - prefixSum[j] = k；③用哈希表map存储prefixSum出现次数，遍历中累计map[prefixSum[i]-k]的次数。时间O(n)，空间O(n)。';
+    subarraySum.hint = '前缀和的差值对应子数组和，哈希表可快速查询需要的前缀和出现次数';
+    problems.push(subarraySum);
+
+    const rangeSumQuery = new ProblemModel();
+    rangeSumQuery.id = 2002;
+    rangeSumQuery.title = '区域和检索 - 数组不可变';
+    rangeSumQuery.description = '给定一个整数数组 nums，处理以下类型的多个查询:计算索引 left 和 right （包含 left 和 right）之间的 nums 元素的和，其中 left <= right。实现 NumArray 类：NumArray(int[] nums) 使用数组 nums 初始化对象；int sumRange(int left, int right) 返回数组 nums 中索引 left 和 right 之间的元素的总和。';
+    rangeSumQuery.difficulty = ProblemDifficulty.EASY;
+    rangeSumQuery.category = ProblemCategory.PREFIX_SUM;
+    rangeSumQuery.choices = [
+      { id: 'A', text: '前缀和预处理：初始化时计算前缀和数组，查询时用差值计算', isCorrect: true },
+      { id: 'B', text: '每次查询遍历计算：直接从left到right累加', isCorrect: false },
+      { id: 'C', text: '线段树：构建线段树支持区间查询', isCorrect: false },
+      { id: 'D', text: '树状数组：适用于动态更新的区间和查询', isCorrect: false }
+    ];
+    rangeSumQuery.explanation = '前缀和解法：①初始化前缀和数组prefix，prefix[0]=0，prefix[i] = prefix[i-1] + nums[i-1]；②sumRange(left, right) = prefix[right+1] - prefix[left]。初始化时间O(n)，每次查询O(1)，空间O(n)。';
+    rangeSumQuery.hint = '前缀和数组可以将多次区间和查询的时间从O(n)优化到O(1)';
+    problems.push(rangeSumQuery);
+
+    const minSubArrayLen = new ProblemModel();
+    minSubArrayLen.id = 3002;
+    minSubArrayLen.title = '长度最小的子数组';
+    minSubArrayLen.description = '给定一个含有 n 个正整数的数组和一个正整数 target 。找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。';
+    minSubArrayLen.difficulty = ProblemDifficulty.MEDIUM;
+    minSubArrayLen.category = ProblemCategory.SLIDING_WINDOW;
+    minSubArrayLen.choices = [
+      { id: 'A', text: '滑动窗口：双指针维护窗口，右指针扩展，左指针收缩优化长度', isCorrect: true },
+      { id: 'B', text: '前缀和+二分查找：计算前缀和后，对每个起点二分查找最小终点', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子数组计算和并判断', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]表示以i结尾的最小子数组长度', isCorrect: false }
+    ];
+    minSubArrayLen.explanation = '滑动窗口解法：①初始化left=0，当前和sum=0，最小长度infinity；②遍历右指针right：sum += nums[right]；③当sum >= target时，更新最小长度为min(当前长度, right-left+1)，并减去nums[left]同时left++，直到sum < target；④最终返回最小长度（若仍为infinity则返回0）。时间O(n)，空间O(1)。';
+    minSubArrayLen.hint = '利用数组元素为正整数的特性，窗口和随右移递增，左移递减，可高效收缩窗口';
+    problems.push(minSubArrayLen);
+
+    // 排序算法类（续）
+    const findKthLargest = new ProblemModel();
+    findKthLargest.id = 1003;
+    findKthLargest.title = '数组中的第K个最大元素';
+    findKthLargest.description = '给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。';
+    findKthLargest.difficulty = ProblemDifficulty.MEDIUM;
+    findKthLargest.category = ProblemCategory.SORT;
+    findKthLargest.choices = [
+      { id: 'A', text: '快速选择算法：基于快速排序的分区思想，平均时间O(n)', isCorrect: true },
+      { id: 'B', text: '堆排序：维护大小为k的小顶堆，最终堆顶即为结果', isCorrect: false },
+      { id: 'C', text: '全排序后取第k个元素：时间O(n log n)', isCorrect: false },
+      { id: 'D', text: '冒泡排序优化：只排序前k轮，取第k个元素', isCorrect: false }
+    ];
+    findKthLargest.explanation = '快速选择解法：①随机选择基准元素，将数组分区为小于、等于、大于基准的三部分；②若大于基准的部分长度≥k，则目标在该区域；若大于+等于部分长度<k，则目标在小于区域且k更新；否则返回基准。平均时间O(n)，最坏O(n²)（可通过随机基准优化）。';
+    findKthLargest.hint = '利用快速排序的分区特性，无需完全排序即可定位第k大元素';
+    problems.push(findKthLargest);
+
+    const maximumGap = new ProblemModel();
+    maximumGap.id = 1004;
+    maximumGap.title = '最大间距';
+    maximumGap.description = '给定一个无序的数组，找出数组在排序之后，相邻元素之间最大的差值。如果数组元素个数小于 2，则返回 0。要求时间复杂度为O(n)。';
+    maximumGap.difficulty = ProblemDifficulty.HARD;
+    maximumGap.category = ProblemCategory.SORT;
+    maximumGap.choices = [
+      { id: 'A', text: '基数排序：按位排序后计算相邻差值', isCorrect: false },
+      { id: 'B', text: '桶排序：根据最大值和最小值划分桶，最大间距必在桶间', isCorrect: true },
+      { id: 'C', text: '快速排序后遍历计算：时间O(n log n)，不满足要求', isCorrect: false },
+      { id: 'D', text: '堆排序后遍历计算：时间O(n log n)，不满足要求', isCorrect: false }
+    ];
+    maximumGap.explanation = '桶排序解法：①计算数组max、min，若元素相同返回0；②创建n-1个桶，每个桶大小为d=(max-min)/(n-1)；③将元素放入对应桶，记录每个桶的最大最小值；④最大间距为相邻桶（前桶max与后桶min的差）的最大值。时间O(n)，空间O(n)。';
+    maximumGap.hint = '桶内元素最大间距不会超过桶大小，最大间距一定出现在不同桶之间';
+    problems.push(maximumGap);
+
+    // 前缀和类（续）
+    const subarraySumEqualsKII = new ProblemModel();
+    subarraySumEqualsKII.id = 2003;
+    subarraySumEqualsKII.title = '连续的子数组和';
+    subarraySumEqualsKII.description = '给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组中是否存在连续的子数组，其大小至少为 2，且总和为 k 的倍数（即总和为 n*k ，其中 n 也是一个整数）。';
+    subarraySumEqualsKII.difficulty = ProblemDifficulty.MEDIUM;
+    subarraySumEqualsKII.category = ProblemCategory.PREFIX_SUM;
+    subarraySumEqualsKII.choices = [
+      { id: 'A', text: '前缀和+哈希表存余数：若两个前缀和余数相同且间距≥2则存在', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有长度≥2的子数组计算和', isCorrect: false },
+      { id: 'C', text: '滑动窗口：双指针移动计算子数组和（不适用于负数）', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]存储以i结尾的子数组和', isCorrect: false }
+    ];
+    subarraySumEqualsKII.explanation = '前缀和余数解法：①计算前缀和mod k（处理k=0的特殊情况）；②哈希表存首次出现的余数索引，初始存入{0: -1}；③若当前余数已存在且当前索引-首次索引≥2，返回true；否则存入新余数。时间O(n)，空间O(min(n,k))。';
+    subarraySumEqualsKII.hint = '若两个前缀和的差是k的倍数，则它们的余数相同，通过哈希表记录首次出现位置判断间距';
+    problems.push(subarraySumEqualsKII);
+
+    // 滑动窗口类（续）
+    const slidingWindowMaximum = new ProblemModel();
+    slidingWindowMaximum.id = 3003;
+    slidingWindowMaximum.title = '滑动窗口最大值';
+    slidingWindowMaximum.description = '给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。返回 滑动窗口中的最大值 。';
+    slidingWindowMaximum.difficulty = ProblemDifficulty.HARD;
+    slidingWindowMaximum.category = ProblemCategory.SLIDING_WINDOW;
+    slidingWindowMaximum.choices = [
+      { id: 'A', text: '单调队列：维护一个存储索引的双端队列，队首始终为窗口最大值', isCorrect: true },
+      { id: 'B', text: '暴力法：每个窗口遍历找最大值', isCorrect: false },
+      { id: 'C', text: '优先队列（堆）：每次取堆顶最大值，需处理过期元素', isCorrect: false },
+      { id: 'D', text: '分块预处理：将数组分块，预处理块内前后缀最大值', isCorrect: false }
+    ];
+    slidingWindowMaximum.explanation = '单调队列解法：①队列存储nums索引，保持对应值递减；②入队前移除所有小于当前值的元素；③移除窗口外的索引；④当窗口形成（i≥k-1），队首即为当前窗口最大值。时间O(n)，空间O(k)。';
+    slidingWindowMaximum.hint = '单调队列能在O(1)时间获取最大值，同时高效维护窗口内元素顺序';
+    problems.push(slidingWindowMaximum);
+    // 一、排序算法类（10题）
+    // 1005
+    const sortList = new ProblemModel();
+    sortList.id = 1005;
+    sortList.title = '排序链表';
+    sortList.description = '给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。要求时间复杂度为 O(n log n) ，空间复杂度为 O(log n) 。';
+    sortList.difficulty = ProblemDifficulty.MEDIUM;
+    sortList.category = ProblemCategory.SORT;
+    sortList.choices = [
+      { id: 'A', text: '归并排序：递归拆分链表为两半，排序后合并', isCorrect: true },
+      { id: 'B', text: '快速排序：选择基准分割链表，递归排序', isCorrect: false },
+      { id: 'C', text: '转换为数组排序后重建链表：空间O(n)，不满足要求', isCorrect: false },
+      { id: 'D', text: '冒泡排序：时间O(n²)，不满足要求', isCorrect: false }
+    ];
+    sortList.explanation = '归并排序解法：①找到链表中点（快慢指针），拆分左右子链表；②递归排序左右子链表；③合并两个有序子链表（双指针）。时间O(n log n)，空间O(log n)（递归栈）。';
+    sortList.hint = '链表的归并排序无需额外空间存储元素，通过指针操作实现合并';
+    problems.push(sortList);
+
+    // 1007
+    const reversePairs = new ProblemModel();
+    reversePairs.id = 1007;
+    reversePairs.title = '数组中的逆序对';
+    reversePairs.description = '在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。';
+    reversePairs.difficulty = ProblemDifficulty.HARD;
+    reversePairs.category = ProblemCategory.SORT;
+    reversePairs.choices = [
+      { id: 'A', text: '归并排序：合并时统计逆序对数量', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有数对判断', isCorrect: false },
+      { id: 'C', text: '快速排序：分区时统计逆序对', isCorrect: false },
+      { id: 'D', text: '树状数组：通过离散化和前缀和统计', isCorrect: false }
+    ];
+    reversePairs.explanation = '归并排序解法：①递归拆分数组为左右两半；②分别计算左右逆序对，再计算跨左右的逆序对；③合并时，若左[i]>右[j]，则左[i..mid]均与右[j]构成逆序对。时间O(n log n)，空间O(n)。';
+    reversePairs.hint = '归并排序的合并过程可高效统计逆序对，避免暴力法的O(n²)时间';
+    problems.push(reversePairs);
+
+    // 1009
+    const sortByBits = new ProblemModel();
+    sortByBits.id = 1009;
+    sortByBits.title = '根据数字二进制下1的数目排序';
+    sortByBits.description = '给你一个整数数组 arr ，请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。';
+    sortByBits.difficulty = ProblemDifficulty.EASY;
+    sortByBits.category = ProblemCategory.SORT;
+    sortByBits.choices = [
+      { id: 'A', text: '自定义排序：先按1的个数排序，再按数值排序', isCorrect: true },
+      { id: 'B', text: '计数排序：按1的个数分组后组内排序', isCorrect: false },
+      { id: 'C', text: '基数排序：按二进制位依次排序', isCorrect: false },
+      { id: 'D', text: '冒泡排序：自定义比较规则', isCorrect: false }
+    ];
+    sortByBits.explanation = '自定义排序解法：①定义比较函数：比较两数二进制1的个数，个数相同则比较数值；②用该函数对数组排序。时间O(n log n)，空间O(1)。';
+    sortByBits.hint = '利用语言内置排序函数，自定义比较器实现双重排序逻辑';
+    problems.push(sortByBits);
+
+    // 1011
+    const relativeSortArray = new ProblemModel();
+    relativeSortArray.id = 1011;
+    relativeSortArray.title = '相对排序';
+    relativeSortArray.description = '给你两个数组，arr1 和 arr2，arr2 中的元素各不相同，arr2 中的每个元素都出现在 arr1 中。对 arr1 中的元素进行排序，使 arr1 中项的相对顺序和 arr2 中的相对顺序相同。未在 arr2 中出现过的元素需要按照升序放在 arr1 的末尾。';
+    relativeSortArray.difficulty = ProblemDifficulty.EASY;
+    relativeSortArray.category = ProblemCategory.SORT;
+    relativeSortArray.choices = [
+      { id: 'A', text: '自定义排序：按元素在arr2中的索引排序，无索引则按值排序', isCorrect: true },
+      { id: 'B', text: '计数排序：统计arr1元素频率，按arr2顺序和剩余元素升序输出', isCorrect: false },
+      { id: 'C', text: '插入排序：参照arr2顺序插入', isCorrect: false },
+      { id: 'D', text: '快速排序：修改基准选择逻辑', isCorrect: false }
+    ];
+    relativeSortArray.explanation = '自定义排序解法：①创建arr2元素到索引的映射；②自定义比较函数：若两元素都在映射中，比较索引；若仅一个在，在映射中的靠前；都不在则比较值。时间O(n log n)，空间O(m)（m为arr2长度）。';
+    relativeSortArray.hint = '通过映射将相对顺序转化为可比较的索引值，简化排序逻辑';
+    problems.push(relativeSortArray);
+
+    // 1012
+    const arrayPairSum = new ProblemModel();
+    arrayPairSum.id = 1012;
+    arrayPairSum.title = '数组拆分';
+    arrayPairSum.description = '给定长度为 2n 的整数数组 nums ，你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), ..., (an, bn) ，使得从 1 到 n 的 min(ai, bi) 总和最大。返回该最大总和。';
+    arrayPairSum.difficulty = ProblemDifficulty.EASY;
+    arrayPairSum.category = ProblemCategory.SORT;
+    arrayPairSum.choices = [
+      { id: 'A', text: '排序后取偶数索引元素和：排序后相邻两数为一对，取前一个', isCorrect: true },
+      { id: 'B', text: '贪心算法：每次取最小的两个数配对', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示前i对数的最大和', isCorrect: false },
+      { id: 'D', text: '暴力枚举：所有可能配对方式计算总和', isCorrect: false }
+    ];
+    arrayPairSum.explanation = '排序解法：①将数组升序排序；②每两个相邻元素为一对，取每对的第一个元素（较小值）求和。时间O(n log n)（排序），空间O(1)。原理：排序后相邻配对可避免大值被当作最小值，最大化总和。';
+    arrayPairSum.hint = '排序后相邻元素配对，能保证较小值尽可能大，从而最大化总和';
+    problems.push(arrayPairSum);
+
+    // 1013
+    const maxFrequency = new ProblemModel();
+    maxFrequency.id = 1013;
+    maxFrequency.title = '最大频率元素的频数';
+    maxFrequency.description = '元素的 频数 是该元素在一个数组中出现的次数。给你一个整数数组 nums 和一个整数 k 。在一步操作中，你可以选择 nums 的一个元素，并将其递增 1 。返回数组中最高频元素的最大可能频数。';
+    maxFrequency.difficulty = ProblemDifficulty.MEDIUM;
+    maxFrequency.category = ProblemCategory.SORT;
+    maxFrequency.choices = [
+      { id: 'A', text: '排序+滑动窗口：排序后用窗口计算可提升到当前元素的最大频数', isCorrect: true },
+      { id: 'B', text: '哈希表计数：统计频率后尝试提升低频元素', isCorrect: false },
+      { id: 'C', text: '暴力法：对每个元素计算可达到的最大频率', isCorrect: false },
+      { id: 'D', text: '堆排序：用堆维护最大元素及可提升次数', isCorrect: false }
+    ];
+    maxFrequency.explanation = '排序+滑动窗口解法：①排序数组；②滑动窗口[left, right]，计算将窗口内元素都提升到nums[right]的成本；③若成本≤k，扩大窗口；否则左移left。最大窗口长度即为结果。时间O(n log n)，空间O(1)。';
+    maxFrequency.hint = '排序后，只有连续元素可通过递增操作变为相同值，用窗口计算最小成本';
+    problems.push(maxFrequency);
+
+    // 1014
+    const findTarget = new ProblemModel();
+    findTarget.id = 1014;
+    findTarget.title = '两数之和 IV - 输入有序数组';
+    findTarget.description = '给定一个已按照 升序排列 的整数数组 numbers ，请你从数组中找出两个数满足相加之和等于目标数 target 。函数应该以长度为 2 的整数数组的形式返回这两个数的下标值。numbers 的下标 从 1 开始计数 ，所以答案数组应当满足 1 <= answer[0] < answer[1] <= numbers.length 。';
+    findTarget.difficulty = ProblemDifficulty.EASY;
+    findTarget.category = ProblemCategory.SORT;
+    findTarget.choices = [
+      { id: 'A', text: '双指针：左右指针向中间移动，和大于目标则左移右指针，反之右移左指针', isCorrect: true },
+      { id: 'B', text: '哈希表：存储元素值和索引，查找target-当前元素', isCorrect: false },
+      { id: 'C', text: '二分查找：对每个元素，二分查找target-当前元素', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有数对', isCorrect: false }
+    ];
+    findTarget.explanation = '双指针解法：①初始化left=0，right=numbers.length-1；②计算sum=numbers[left]+numbers[right]；③sum=target返回[left+1, right+1]；sum>target则right--；sum<target则left++。时间O(n)，空间O(1)。';
+    findTarget.hint = '利用数组有序性，双指针可一次遍历找到目标，无需额外空间';
+    problems.push(findTarget);
+
+
+    // 二、前缀和类（10题）
+    // 2005
+    const NumMatrix = new ProblemModel();
+    NumMatrix.id = 2005;
+    NumMatrix.title = '二维区域和检索 - 矩阵不可变';
+    NumMatrix.description = '给定一个二维矩阵 matrix，以下类型的多个请求：计算其子矩形范围内元素的总和，该子矩阵的 左上角 为 (row1, col1) ，右下角 为 (row2, col2) 。实现 NumMatrix 类：NumMatrix(int[][] matrix) 给定整数矩阵 matrix 进行初始化；int sumRegion(int row1, int col1, int row2, int col2) 返回子矩阵总和。';
+    NumMatrix.difficulty = ProblemDifficulty.MEDIUM;
+    NumMatrix.category = ProblemCategory.PREFIX_SUM;
+    NumMatrix.choices = [
+      { id: 'A', text: '二维前缀和：预处理前缀和矩阵，用容斥原理计算区域和', isCorrect: true },
+      { id: 'B', text: '逐行计算：对每行计算一维前缀和，查询时累加行和', isCorrect: false },
+      { id: 'C', text: '暴力计算：每次查询遍历子矩阵累加', isCorrect: false },
+      { id: 'D', text: '线段树：构建二维线段树支持区域查询', isCorrect: false }
+    ];
+    NumMatrix.explanation = '二维前缀和解法：①prefix[i][j]表示(0,0)到(i-1,j-1)的区域和；②prefix[i][j] = matrix[i-1][j-1] + prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]；③sumRegion = prefix[row2+1][col2+1] - prefix[row1][col2+1] - prefix[row2+1][col1] + prefix[row1][col1]。时间O(1)查询，空间O(mn)。';
+    NumMatrix.hint = '二维前缀和通过容斥原理，将区域和转化为四个前缀和的加减运算';
+    problems.push(NumMatrix);
+
+    // 2006
+    const productExceptSelfOptimized = new ProblemModel();
+    productExceptSelfOptimized.id = 2006;
+    productExceptSelfOptimized.title = '除自身以外数组的乘积（空间优化）';
+    productExceptSelfOptimized.description = '给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。要求在 O(n) 时间复杂度和 O(1) 额外空间（除结果数组）内完成。';
+    productExceptSelfOptimized.difficulty = ProblemDifficulty.MEDIUM;
+    productExceptSelfOptimized.category = ProblemCategory.PREFIX_SUM;
+    productExceptSelfOptimized.choices = [
+      { id: 'A', text: '单数组优化：用结果数组先存前缀积，再反向计算后缀积', isCorrect: true },
+      { id: 'B', text: '前缀积+后缀积：两个数组分别存储，空间O(n)', isCorrect: false },
+      { id: 'C', text: '总乘积/当前元素：无法处理0的情况', isCorrect: false },
+      { id: 'D', text: '暴力法：时间O(n²)，不满足要求', isCorrect: false }
+    ];
+    productExceptSelfOptimized.explanation = '空间优化解法：①初始化answer数组，answer[i]存储nums[0..i-1]的乘积；②用变量suffix记录右侧乘积，从后往前遍历，answer[i] *= suffix，同时更新suffix *= nums[i]。时间O(n)，空间O(1)（除结果）。';
+    productExceptSelfOptimized.hint = '复用结果数组存储前缀积，用变量替代后缀积数组，实现空间优化';
+    problems.push(productExceptSelfOptimized);
+
+    // 2007
+    const subarraysDivByK = new ProblemModel();
+    subarraysDivByK.id = 2007;
+    subarraysDivByK.title = '和可被 K 整除的子数组';
+    subarraysDivByK.description = '给定一个整数数组 A，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。';
+    subarraysDivByK.difficulty = ProblemDifficulty.MEDIUM;
+    subarraysDivByK.category = ProblemCategory.PREFIX_SUM;
+    subarraysDivByK.choices = [
+      { id: 'A', text: '前缀和+哈希表：统计前缀和余数出现次数，相同余数的前缀和差值可被K整除', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算和', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的符合条件的子数组数', isCorrect: false },
+      { id: 'D', text: '滑动窗口：仅适用于非负数，且K固定场景', isCorrect: false }
+    ];
+    subarraysDivByK.explanation = '前缀和余数解法：①计算前缀和mod K（处理负余数：(sum % K + K) % K）；②哈希表count记录余数出现次数，初始count[0]=1；③遍历中累计count[当前余数]，并更新count[当前余数]++。时间O(n)，空间O(K)。';
+    subarraysDivByK.hint = '若两个前缀和的余数相同，则它们的差是K的倍数，注意处理负余数';
+    problems.push(subarraysDivByK);
+
+    // 2008
+    const numberOfSubarrays = new ProblemModel();
+    numberOfSubarrays.id = 2008;
+    numberOfSubarrays.title = '统计「优美子数组」';
+    numberOfSubarrays.description = '给你一个整数数组 nums 和一个整数 k。如果某个子数组中恰好有 k 个奇数数字，我们就认为这个子数组是「优美子数组」。请返回这个数组中 「优美子数组」 的数目。';
+    numberOfSubarrays.difficulty = ProblemDifficulty.MEDIUM;
+    numberOfSubarrays.category = ProblemCategory.PREFIX_SUM;
+    numberOfSubarrays.choices = [
+      { id: 'A', text: '前缀奇数计数+哈希表：统计前缀奇数个数，寻找差值为k的次数', isCorrect: true },
+      { id: 'B', text: '滑动窗口：维护包含k个奇数的窗口，计算左右可能的扩展数', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子数组统计奇数个数', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i][j]表示前i个元素中含j个奇数的子数组数', isCorrect: false }
+    ];
+    numberOfSubarrays.explanation = '前缀奇数计数解法：①将数组转为0（偶数）和1（奇数）；②计算前缀和sum[i]（前i个元素的奇数个数）；③子数组[j..i]有k个奇数等价于sum[i]-sum[j] = k；④哈希表记录sum出现次数，累计count[sum[i]-k]。时间O(n)，空间O(n)。';
+    numberOfSubarrays.hint = '将问题转化为「和为k的子数组数目」，用前缀和哈希表思想解决';
+    problems.push(numberOfSubarrays);
+
+    // 2009
+    const maxTurbulenceSize = new ProblemModel();
+    maxTurbulenceSize.id = 2009;
+    maxTurbulenceSize.title = '最长湍流子数组';
+    maxTurbulenceSize.description = '当 A 的子数组 A[i..j] 满足下列条件时，我们称其为湍流子数组：若 i <= k < j，当 k 为奇数时，A[k] > A[k+1]，且当 k 为偶数时，A[k] < A[k+1]；或 若 i <= k < j，当 k 为偶数时，A[k] > A[k+1]，且当 k 为奇数时，A[k] < A[k+1]。返回 A 的最大湍流子数组的长度。';
+    maxTurbulenceSize.difficulty = ProblemDifficulty.MEDIUM;
+    maxTurbulenceSize.category = ProblemCategory.PREFIX_SUM;
+    maxTurbulenceSize.choices = [
+      { id: 'A', text: '前缀状态标记：标记相邻元素的大小关系，统计连续交替的最大长度', isCorrect: true },
+      { id: 'B', text: '滑动窗口：维护符合湍流条件的窗口', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的最长湍流子数组长度', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有子数组判断', isCorrect: false }
+    ];
+    maxTurbulenceSize.explanation = '前缀状态解法：①定义比较数组cmp，cmp[i]=1（A[i]>A[i+1]）、-1（A[i]<A[i+1]）、0（相等）；②遍历cmp，统计连续交替（1和-1交替）的最大长度，加1即为子数组长度。时间O(n)，空间O(n)（可优化为O(1)）。';
+    maxTurbulenceSize.hint = '将数组转为状态序列，问题简化为寻找最长的交替状态序列';
+    problems.push(maxTurbulenceSize);
+
+    // 2011
+    const xorQueries = new ProblemModel();
+    xorQueries.id = 2011;
+    xorQueries.title = '子数组异或查询';
+    xorQueries.description = '有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] = [L[i], R[i]]。对于每个查询 i，请你计算从 arr[L[i]] 到 arr[R[i]] 的 XOR 值（即 arr[L[i]] XOR arr[L[i]+1] XOR ... XOR arr[R[i]]）作为返回值。';
+    xorQueries.difficulty = ProblemDifficulty.MEDIUM;
+    xorQueries.category = ProblemCategory.PREFIX_SUM;
+    xorQueries.choices = [
+      { id: 'A', text: '前缀异或：预处理前缀异或数组，查询时用前缀异或[R+1] XOR 前缀异或[L]', isCorrect: true },
+      { id: 'B', text: '暴力法：每个查询遍历计算异或', isCorrect: false },
+      { id: 'C', text: '线段树：构建线段树支持区间异或查询', isCorrect: false },
+      { id: 'D', text: '动态规划：预处理所有可能区间的异或值', isCorrect: false }
+    ];
+    xorQueries.explanation = '前缀异或解法：①prefix[0] = 0，prefix[i] = prefix[i-1] XOR arr[i-1]；②区间[L, R]的异或 = prefix[R+1] XOR prefix[L]（因x XOR x = 0，中间部分抵消）。时间O(n + m)（n为arr长度，m为查询数），空间O(n)。';
+    xorQueries.hint = '异或运算的性质：x XOR x = 0，x XOR 0 = x，可像前缀和一样简化区间计算';
+    problems.push(xorQueries);
+
+    // 2012
+    const maxFrequencyII = new ProblemModel();
+    maxFrequencyII.id = 2012;
+    maxFrequencyII.title = '最高频元素的频数（前缀和辅助）';
+    maxFrequencyII.description = '元素的 频数 是该元素在一个数组中出现的次数。给你一个整数数组 nums 和一个整数 k 。在一步操作中，你可以选择 nums 的一个元素，并将其递增 1 。返回数组中最高频元素的最大可能频数。';
+    maxFrequencyII.difficulty = ProblemDifficulty.MEDIUM;
+    maxFrequencyII.category = ProblemCategory.PREFIX_SUM;
+    maxFrequencyII.choices = [
+      { id: 'A', text: '排序+前缀和+滑动窗口：用前缀和快速计算窗口内提升成本', isCorrect: true },
+      { id: 'B', text: '哈希表计数：直接统计频率', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举每个元素计算可提升次数', isCorrect: false },
+      { id: 'D', text: '堆：维护最大元素及可分配的k值', isCorrect: false }
+    ];
+    maxFrequencyII.explanation = '前缀和+滑动窗口解法：①排序数组并计算前缀和；②窗口[left, right]中，成本 = nums[right]*(right-left+1) - (prefix[right+1]-prefix[left])；③成本≤k时扩大窗口，否则左移left。最大窗口长度为结果。时间O(n log n)，空间O(n)。';
+    maxFrequencyII.hint = '前缀和可快速计算窗口内元素总和，结合排序后窗口，高效计算提升成本';
+    problems.push(maxFrequencyII);
+
+    // 2013
+    const largestAltitude = new ProblemModel();
+    largestAltitude.id = 2013;
+    largestAltitude.title = '找到最高海拔';
+    largestAltitude.description = '有一个自行车手打算进行一场公路骑行，这条路线总共由 n + 1 个不同海拔的点组成。自行车手从海拔为 0 的点 0 开始骑行。给你一个长度为 n 的整数数组 gain ，其中 gain[i] 是点 i 到点 i + 1 的净海拔变化（i 从 0 开始）。请你返回最高点的海拔。';
+    largestAltitude.difficulty = ProblemDifficulty.EASY;
+    largestAltitude.category = ProblemCategory.PREFIX_SUM;
+    largestAltitude.choices = [
+      { id: 'A', text: '前缀和：计算每个点的海拔，跟踪最大值', isCorrect: true },
+      { id: 'B', text: '遍历累加：边累加边记录最大值', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示第i点的海拔', isCorrect: false },
+      { id: 'D', text: '暴力法：计算所有点海拔后找最大', isCorrect: false }
+    ];
+    largestAltitude.explanation = '前缀和解法：①初始化currentAltitude=0，maxAltitude=0；②遍历gain，currentAltitude += gain[i]；③更新maxAltitude为currentAltitude和自身的最大值。时间O(n)，空间O(1)。';
+    largestAltitude.hint = '每个点的海拔是前序净变化的累加和，边计算边跟踪最大值即可';
+    problems.push(largestAltitude);
+
+    // 2014
+    const findNUniqueIntegersSumUpToZero = new ProblemModel();
+    findNUniqueIntegersSumUpToZero.id = 2014;
+    findNUniqueIntegersSumUpToZero.title = '和为零的N个唯一整数';
+    findNUniqueIntegersSumUpToZero.description = '给你一个整数 n，请你返回 任意 一个由 n 个 各不相同 的整数组成的数组，并且这 n 个数相加和为 0 。';
+    findNUniqueIntegersSumUpToZero.difficulty = ProblemDifficulty.EASY;
+    findNUniqueIntegersSumUpToZero.category = ProblemCategory.PREFIX_SUM;
+    findNUniqueIntegersSumUpToZero.choices = [
+      { id: 'A', text: '对称构造：1到n-1和-(1到n-1)，n为奇数时加0', isCorrect: true },
+      { id: 'B', text: '前缀和调整：生成序列后调整最后一个数使总和为0', isCorrect: false },
+      { id: 'C', text: '随机生成：随机生成n-1个数，最后一个数为相反数', isCorrect: false },
+      { id: 'D', text: '暴力枚举：尝试所有可能的唯一整数组合', isCorrect: false }
+    ];
+    findNUniqueIntegersSumUpToZero.explanation = '对称构造解法：①若n为偶数，返回[1,2,...,n/2, -1,-2,...,-n/2]；②若n为奇数，返回[0,1,2,...,(n-1)/2, -1,-2,...,-(n-1)/2]。总和必然为0，且元素唯一。时间O(n)，空间O(n)。';
+    findNUniqueIntegersSumUpToZero.hint = '利用正数和负数的对称性构造，确保总和为零且元素唯一';
+    problems.push(findNUniqueIntegersSumUpToZero);
+
+
+    // 三、滑动窗口类（10题）
+    // 3005
+    const findAnagrams = new ProblemModel();
+    findAnagrams.id = 3005;
+    findAnagrams.title = '找到字符串中所有字母异位词';
+    findAnagrams.description = '给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。';
+    findAnagrams.difficulty = ProblemDifficulty.MEDIUM;
+    findAnagrams.category = ProblemCategory.SLIDING_WINDOW;
+    findAnagrams.choices = [
+      { id: 'A', text: '滑动窗口+字符计数：维护p长度的窗口，比较字符频率与p是否一致', isCorrect: true },
+      { id: 'B', text: '排序比较：对每个p长度子串排序后与排序的p比较', isCorrect: false },
+      { id: 'C', text: '哈希表单次匹配：仅匹配一次后移动窗口', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有可能子串判断', isCorrect: false }
+    ];
+    findAnagrams.explanation = '滑动窗口解法：①统计p的字符频率；②在s上维护长度为p.length的窗口，统计窗口频率；③频率匹配时记录起始索引；④窗口滑动时更新频率（移除左字符，添加右字符）。时间O(n)（n为s长度），空间O(1)。';
+    findAnagrams.hint = '与"字符串的排列"类似，但需要收集所有符合条件的起始索引';
+    problems.push(findAnagrams);
+
+    // 3007
+    const movingAverage = new ProblemModel();
+    movingAverage.id = 3007;
+    movingAverage.title = '滑动窗口平均值';
+    movingAverage.description = '给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，计算滑动窗口里所有数字的平均值。实现 MovingAverage 类：MovingAverage(int size) 用窗口大小 size 初始化对象；double next(int val) 成员函数 next 每次调用的时候都会往滑动窗口增加一个整数，请计算并返回数据流中最后 size 个值的移动平均值。';
+    movingAverage.difficulty = ProblemDifficulty.EASY;
+    movingAverage.category = ProblemCategory.SLIDING_WINDOW;
+    movingAverage.choices = [
+      { id: 'A', text: '队列+总和维护：用队列存储窗口元素，超过大小则移除头部，实时计算总和', isCorrect: true },
+      { id: 'B', text: '数组存储：每次调用时计算最后size个元素的和', isCorrect: false },
+      { id: 'C', text: '前缀和：维护前缀和数组，每次计算最近size个元素的和', isCorrect: false },
+      { id: 'D', text: '暴力法：每次重新计算窗口和', isCorrect: false }
+    ];
+    movingAverage.explanation = '队列解法：①初始化队列和当前总和sum；②next(val)时，sum += val，队列加入val；③若队列大小>size，sum -= 队列头部并移除；④返回sum/队列大小。时间O(1)每次调用，空间O(size)。';
+    movingAverage.hint = '用队列维护窗口元素，通过总和的增量更新避免重复计算，提高效率';
+    problems.push(movingAverage);
+
+    // 3009
+    const longestOnes = new ProblemModel();
+    longestOnes.id = 3009;
+    longestOnes.title = '最大连续1的个数 III';
+    longestOnes.description = '给定一个二进制数组 nums 和一个整数 k，如果可以翻转最多 k 个 0 ，则返回 数组中连续 1 的最大个数 。';
+    longestOnes.difficulty = ProblemDifficulty.MEDIUM;
+    longestOnes.category = ProblemCategory.SLIDING_WINDOW;
+    longestOnes.choices = [
+      { id: 'A', text: '滑动窗口：维护最多含k个0的窗口，窗口长度即为连续1的最大可能数', isCorrect: true },
+      { id: 'B', text: '前缀和：计算前缀0的个数，用二分查找最大窗口', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i][j]表示前i个元素翻转j个0的最大连续1', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举每个位置计算可翻转k个0的最大长度', isCorrect: false }
+    ];
+    longestOnes.explanation = '滑动窗口解法：①left=0，zeroCount=0，maxLen=0；②右指针遍历：若nums[right]=0则zeroCount++；③当zeroCount>k时，若nums[left]=0则zeroCount--，left++；④更新maxLen为right-left+1。时间O(n)，空间O(1)。';
+    longestOnes.hint = '窗口内允许最多k个0，通过调整左右指针维护窗口合法性，窗口长度即为结果';
+    problems.push(longestOnes);
+
+    // 3010
+    const totalFruit = new ProblemModel();
+    totalFruit.id = 3010;
+    totalFruit.title = '水果成篮';
+    totalFruit.description = '你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 fruits 表示，其中 fruits[i] 是第 i 棵树上的水果种类。你想要尽可能多地收集水果。然而，农场的主人设定了一些严格的规矩：你只有 两个 篮子，并且每个篮子只能装 单一类型 的水果。每个篮子能够装的水果总量没有限制。你可以选择任意一棵树开始采摘，你必须从 每棵 树（包括开始采摘的树）上 恰好摘一个水果 。采摘的水果应当符合篮子中的水果类型。一旦你走到某棵树前，但这棵树的水果不能放进你的篮子，那么你必须停止采摘。给你一个整数数组 fruits ，返回你可以收集的水果的 最大 数目。';
+    totalFruit.difficulty = ProblemDifficulty.MEDIUM;
+    totalFruit.category = ProblemCategory.SLIDING_WINDOW;
+    totalFruit.choices = [
+      { id: 'A', text: '滑动窗口+哈希表：维护包含最多两种水果的窗口，记录最大长度', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有可能的起始位置，统计可收集的水果数', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的最大收集数', isCorrect: false },
+      { id: 'D', text: '哈希表计数：统计所有可能的两种水果组合的最大连续长度', isCorrect: false }
+    ];
+    totalFruit.explanation = '滑动窗口解法：①哈希表记录窗口内水果种类及数量；②右指针扩展窗口，加入水果；③当种类>2时，左指针移动并减少对应水果数量，移除数量为0的种类；④更新最大窗口长度。时间O(n)，空间O(1)（最多两种水果）。';
+    totalFruit.hint = '问题等价于寻找包含最多两种元素的最长连续子数组，用滑动窗口高效求解';
+    problems.push(totalFruit);
+
+    // 3011
+    const equalSubstring = new ProblemModel();
+    equalSubstring.id = 3011;
+    equalSubstring.title = '尽可能使字符串相等';
+    equalSubstring.description = '给你两个长度相同的字符串，s 和 t。将 s 中的第 i 个字符变到 t 中的第 i 个字符需要 |s[i] - t[i]| 的开销（开销可能为 0）。用于变更字符串的最大预算是 maxCost。在转化字符串时，总开销应当小于等于该预算，这也意味着字符串的转化可能是不完全的。如果你可以将 s 的子字符串转化为它在 t 中对应的子字符串，则返回可以转化的最大长度。如果 s 中没有子字符串可以转化成 t 中对应的子字符串，则返回 0。';
+    equalSubstring.difficulty = ProblemDifficulty.MEDIUM;
+    equalSubstring.category = ProblemCategory.SLIDING_WINDOW;
+    equalSubstring.choices = [
+      { id: 'A', text: '滑动窗口：计算每个位置的开销，维护总开销≤maxCost的最大窗口', isCorrect: true },
+      { id: 'B', text: '前缀和+二分：计算前缀和后，二分查找每个起点的最大窗口', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子字符串计算总开销', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]表示以i结尾的最大长度', isCorrect: false }
+    ];
+    equalSubstring.explanation = '滑动窗口解法：①计算开销数组cost[i] = |s[i]-t[i]|；②left=0，currentCost=0，maxLen=0；③右指针遍历：currentCost += cost[right]；④当currentCost>maxCost，currentCost -= cost[left]，left++；⑤更新maxLen。时间O(n)，空间O(n)（可优化为O(1)）。';
+    equalSubstring.hint = '将问题转化为"总开销不超过maxCost的最长子数组"，用滑动窗口实时维护总开销';
+    problems.push(equalSubstring);
+
+    // 3012
+    const containsNearbyDuplicate = new ProblemModel();
+    containsNearbyDuplicate.id = 3012;
+    containsNearbyDuplicate.title = '存在重复元素 II';
+    containsNearbyDuplicate.description = '给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。如果存在，返回 true ；否则，返回 false 。';
+    containsNearbyDuplicate.difficulty = ProblemDifficulty.EASY;
+    containsNearbyDuplicate.category = ProblemCategory.SLIDING_WINDOW;
+    containsNearbyDuplicate.choices = [
+      { id: 'A', text: '滑动窗口+哈希表：维护大小为k的窗口，记录元素是否在窗口中出现', isCorrect: true },
+      { id: 'B', text: '哈希表存最后索引：遍历记录每个元素最后出现的索引，判断当前索引差', isCorrect: false },
+      { id: 'C', text: '暴力法：对每个元素检查后续k个元素', isCorrect: false },
+      { id: 'D', text: '排序+双指针：排序后比较相邻元素的索引差', isCorrect: false }
+    ];
+    containsNearbyDuplicate.explanation = '滑动窗口解法：①哈希表存储窗口内的元素；②右指针遍历：若nums[right]在哈希表中，返回true；③加入nums[right]到哈希表；④若窗口大小>k，移除nums[right-k]。时间O(n)，空间O(k)。';
+    containsNearbyDuplicate.hint = '窗口大小固定为k+1，只需判断当前元素是否在窗口内出现过';
+    problems.push(containsNearbyDuplicate);
+
+    // 3013
+    const maxSubarraySumCircular = new ProblemModel();
+    maxSubarraySumCircular.id = 3013;
+    maxSubarraySumCircular.title = '环形子数组的最大和';
+    maxSubarraySumCircular.description = '给定一个长度为 n 的环形整数数组 nums ，返回 nums 的非空 子数组 的最大可能和 。环形数组 意味着数组的末端将会与开头相连呈环状。形式上， nums[i] 的下一个元素是 nums[(i + 1) % n] ， nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。子数组 最多只能包含固定缓冲区 nums 中的每个元素一次。';
+    maxSubarraySumCircular.difficulty = ProblemDifficulty.MEDIUM;
+    maxSubarraySumCircular.category = ProblemCategory.SLIDING_WINDOW;
+    maxSubarraySumCircular.choices = [
+      { id: 'A', text: '滑动窗口+总扣最小：最大环形和=max(最大子数组和, 总 sum-最小子数组和)', isCorrect: true },
+      { id: 'B', text: '动态规划：分别计算最大子数组和与环形情况', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有可能的环形子数组', isCorrect: false },
+      { id: 'D', text: '前缀和：计算前缀和后找最大差值', isCorrect: false }
+    ];
+    maxSubarraySumCircular.explanation = '滑动窗口变种解法：①计算非环形的最大子数组和（用Kadane算法）；②计算非环形的最小子数组和；③环形最大和 = max(非环形最大和, 总sum - 最小子数组和)（需排除全负情况）。时间O(n)，空间O(1)。';
+    maxSubarraySumCircular.hint = '环形子数组的最大和要么是普通最大子数组和，要么是总和减去最小子数组和';
+    problems.push(maxSubarraySumCircular);
+
+    // 3014
+    const maxSumOfThreeSubarrays = new ProblemModel();
+    maxSumOfThreeSubarrays.id = 3014;
+    maxSumOfThreeSubarrays.title = '三个无重叠子数组的最大和';
+    maxSumOfThreeSubarrays.description = '给你一个整数数组 nums 和一个整数 k ，找出并返回长度为 k 的三个非重叠子数组的最大和。以下标的数组形式返回这三个子数组，返回的下标从左到右必须按顺序排列，即第一个子数组的下标 i ，第二个子数组的下标 j 满足 i + k <= j ，第三个子数组的下标 l 满足 j + k <= l 。如果有多个结果，返回字典序最小的一个。';
+    maxSumOfThreeSubarrays.difficulty = ProblemDifficulty.HARD;
+    maxSumOfThreeSubarrays.category = ProblemCategory.SLIDING_WINDOW;
+    maxSumOfThreeSubarrays.choices = [
+      { id: 'A', text: '滑动窗口+前缀和+左右最值：预计算子数组和，左存左侧最大和索引，右存右侧最大和索引', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有可能的三个子数组', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i][j]表示前i个元素中j个子数组的最大和', isCorrect: false },
+      { id: 'D', text: '贪心算法：每次选择当前最大的子数组', isCorrect: false }
+    ];
+    maxSumOfThreeSubarrays.explanation = '前缀和+左右最值解法：①计算每个长度k的子数组和sums；②left数组：left[i]是sums[0..i]的最大和索引；③right数组：right[i]是sums[i..n-1]的最大和索引；④遍历中间子数组位置，计算三者和的最大值。时间O(n)，空间O(n)。';
+    maxSumOfThreeSubarrays.hint = '通过预处理左右侧的最大子数组和索引，将三重循环优化为单重循环';
+    problems.push(maxSumOfThreeSubarrays);
+
+    // 一、排序算法类（10题）
+    // 1015
+    const insertionSortList = new ProblemModel();
+    insertionSortList.id = 1015;
+    insertionSortList.title = '对链表进行插入排序';
+    insertionSortList.description = '给定单个链表的头 head ，使用 插入排序 对链表进行排序，并返回 排序后链表的头 。插入排序 算法的步骤：1. 插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。2. 每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。3. 重复直到所有输入数据插入完为止。';
+    insertionSortList.difficulty = ProblemDifficulty.MEDIUM;
+    insertionSortList.category = ProblemCategory.SORT;
+    insertionSortList.choices = [
+      { id: 'A', text: '链表插入排序：维护已排序部分，将未排序节点插入正确位置', isCorrect: true },
+      { id: 'B', text: '转换为数组排序后重建链表：空间O(n)，非原地排序', isCorrect: false },
+      { id: 'C', text: '归并排序：时间更优但非插入排序', isCorrect: false },
+      { id: 'D', text: '快速排序：不适用于链表插入排序场景', isCorrect: false }
+    ];
+    insertionSortList.explanation = '插入排序解法：①创建哑节点作为已排序部分的头；②current指向待排序节点，prev指向已排序部分的最后；③每次从待排序节点中取一个，从已排序头部开始找到插入位置（prev.next.val > current.val）；④插入current到prev之后。时间O(n²)，空间O(1)。';
+    insertionSortList.hint = '链表插入排序需维护已排序部分的指针，通过指针调整实现元素插入，无需额外空间';
+    problems.push(insertionSortList);
+
+    // 1016
+    const findMissingNumber = new ProblemModel();
+    findMissingNumber.id = 1016;
+    findMissingNumber.title = '寻找丢失的数字';
+    findMissingNumber.description = '给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。';
+    findMissingNumber.difficulty = ProblemDifficulty.EASY;
+    findMissingNumber.category = ProblemCategory.SORT;
+    findMissingNumber.choices = [
+      { id: 'A', text: '排序后遍历：排序数组，检查索引与值是否一致，不一致则为缺失数', isCorrect: true },
+      { id: 'B', text: '数学公式：n*(n+1)/2 - 数组和', isCorrect: false },
+      { id: 'C', text: '哈希表：存储出现的数字，再检查0~n中缺失的', isCorrect: false },
+      { id: 'D', text: '位运算：异或所有索引和值，结果为缺失数', isCorrect: false }
+    ];
+    findMissingNumber.explanation = '排序解法：①对数组排序；②遍历数组，若nums[i] != i，则返回i；③遍历结束后返回n（最后一个数缺失）。时间O(n log n)（排序耗时），空间O(1)（忽略排序栈空间）。';
+    findMissingNumber.hint = '排序后数组应满足nums[i] = i，通过一次遍历即可找到缺失的数字';
+    problems.push(findMissingNumber);
+
+    // 1018
+    const sortTransformedArray = new ProblemModel();
+    sortTransformedArray.id = 1018;
+    sortTransformedArray.title = '有序转化数组';
+    sortTransformedArray.description = '给你一个已经 排好序 的整数数组 nums 和整数 a、b、c。请你按照函数 f(x) = ax² + bx + c 来转化数组中的每个元素。请你返回转换后的数组，要求转换后的数组仍然是有序的。';
+    sortTransformedArray.difficulty = ProblemDifficulty.MEDIUM;
+    sortTransformedArray.category = ProblemCategory.SORT;
+    sortTransformedArray.choices = [
+      { id: 'A', text: '双指针：根据抛物线开口方向（a的符号），从两端向中间合并', isCorrect: true },
+      { id: 'B', text: '直接转换后排序：时间O(n log n)，未利用原有序性', isCorrect: false },
+      { id: 'C', text: '归并排序：转换后对两半分别排序再合并', isCorrect: false },
+      { id: 'D', text: '插入排序：逐个转换并插入到正确位置', isCorrect: false }
+    ];
+    sortTransformedArray.explanation = '双指针解法：①a>0时抛物线开口向上，两端值较大，从后往前填充结果；②a<0时开口向下，两端值较小，从前往后填充；③比较两端点的函数值，选择较大（或较小）的放入结果，推进对应指针。时间O(n)，空间O(n)。';
+    sortTransformedArray.hint = '二次函数的对称性使转换后数组呈现两端大中间小或两端小中间大的特性，可双指针高效合并';
+    problems.push(sortTransformedArray);
+
+    // 1019
+    const customSortString = new ProblemModel();
+    customSortString.id = 1019;
+    customSortString.title = '自定义字符串排序';
+    customSortString.description = '给定两个字符串 order 和 s。order 的所有字符都是 唯一 的。s 中的每个字符在 order 中都存在。请根据 order 中字符的顺序对 s 中的字符进行排序。更具体地说，如果 order 中字符 x 位于字符 y 之前，那么在排序后的字符串中，x 也应位于 y 之前。';
+    customSortString.difficulty = ProblemDifficulty.MEDIUM;
+    customSortString.category = ProblemCategory.SORT;
+    customSortString.choices = [
+      { id: 'A', text: '自定义排序：根据字符在order中的索引定义比较规则', isCorrect: true },
+      { id: 'B', text: '计数排序：统计s中字符频率，按order顺序输出', isCorrect: false },
+      { id: 'C', text: '插入排序：参照order顺序插入字符', isCorrect: false },
+      { id: 'D', text: '哈希映射：直接映射字符到目标位置', isCorrect: false }
+    ];
+    customSortString.explanation = '自定义排序解法：①创建order的字符到索引的映射；②将s转为字符数组，按映射的索引排序；③将排序后的数组转为字符串。时间O(n log n)（n为s长度），空间O(1)（字符集固定）。';
+    customSortString.hint = '通过映射将自定义顺序转化为可比较的索引值，利用内置排序函数实现';
+    problems.push(customSortString);
+
+    // 1021
+    const mergeSortedArray = new ProblemModel();
+    mergeSortedArray.id = 1021;
+    mergeSortedArray.title = '合并两个有序数组';
+    mergeSortedArray.description = '给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。';
+    mergeSortedArray.difficulty = ProblemDifficulty.EASY;
+    mergeSortedArray.category = ProblemCategory.SORT;
+    mergeSortedArray.choices = [
+      { id: 'A', text: '双指针从后往前：比较两数组末尾元素，较大者放入nums1末尾', isCorrect: true },
+      { id: 'B', text: '双指针从前往后：需额外空间存储nums1元素', isCorrect: false },
+      { id: 'C', text: '合并后排序：直接将nums2放入nums1后排序，时间O((m+n)log(m+n))', isCorrect: false },
+      { id: 'D', text: '插入排序：将nums2元素逐个插入nums1', isCorrect: false }
+    ];
+    mergeSortedArray.explanation = '后向双指针解法：①i=m-1，j=n-1，k=m+n-1；②当i≥0且j≥0时，若nums1[i]≥nums2[j]，则nums1[k--]=nums1[i--]，否则nums1[k--]=nums2[j--]；③将剩余nums2元素放入nums1。时间O(m+n)，空间O(1)。';
+    mergeSortedArray.hint = '利用nums1的额外空间，从后往前填充可避免覆盖未处理的元素';
+    problems.push(mergeSortedArray);
+
+    // 1022
+    const sortArrayByParity = new ProblemModel();
+    sortArrayByParity.id = 1022;
+    sortArrayByParity.title = '按奇偶排序数组';
+    sortArrayByParity.description = '给你一个整数数组 nums，将数组中的元素按奇偶性进行排序，使得所有偶数元素都位于奇数元素之前。返回排序后的数组。你可以返回满足此条件的 任何 一个数组作为答案。';
+    sortArrayByParity.difficulty = ProblemDifficulty.EASY;
+    sortArrayByParity.category = ProblemCategory.SORT;
+    sortArrayByParity.choices = [
+      { id: 'A', text: '双指针：左指针找奇数，右指针找偶数，交换位置', isCorrect: true },
+      { id: 'B', text: '两次遍历：先收集偶数，再收集奇数', isCorrect: false },
+      { id: 'C', text: '自定义排序：偶数在前，奇数在后', isCorrect: false },
+      { id: 'D', text: '插入排序：将偶数插入前端', isCorrect: false }
+    ];
+    sortArrayByParity.explanation = '双指针解法：①left=0，right=nums.length-1；②left向右找奇数（nums[left]%2!==0），right向左找偶数（nums[right]%2===0）；③交换nums[left]和nums[right]，重复直到left≥right。时间O(n)，空间O(1)。';
+    sortArrayByParity.hint = '双指针一次遍历即可完成奇偶分离，无需额外空间存储元素';
+    problems.push(sortArrayByParity);
+
+    // 1023
+    const largestPerimeter = new ProblemModel();
+    largestPerimeter.id = 1023;
+    largestPerimeter.title = '三角形的最大周长';
+    largestPerimeter.description = '给定由一些正数（代表长度）组成的数组 nums ，返回 由其中三个长度组成的、面积不为零的三角形的最大周长 。如果不能形成任何面积不为零的三角形，返回 0 。';
+    largestPerimeter.difficulty = ProblemDifficulty.EASY;
+    largestPerimeter.category = ProblemCategory.SORT;
+    largestPerimeter.choices = [
+      { id: 'A', text: '排序后贪心：排序数组，从大到小检查连续三个数是否满足a < b + c', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有三元组判断能否组成三角形', isCorrect: false },
+      { id: 'C', text: '动态规划：记录最大可能的周长', isCorrect: false },
+      { id: 'D', text: '堆：维护最大的三个元素', isCorrect: false }
+    ];
+    largestPerimeter.explanation = '排序贪心解法：①将数组降序排序；②遍历数组，对每个i（从0到n-3），检查nums[i] < nums[i+1] + nums[i+2]；③第一个满足条件的三元组和为最大周长，返回sum；④无则返回0。时间O(n log n)，空间O(1)。';
+    largestPerimeter.hint = '三角形两边之和大于第三边，排序后只需检查连续三个最大数即可高效找到最大周长';
+    problems.push(largestPerimeter);
+
+    // 1024
+    const maximumProduct = new ProblemModel();
+    maximumProduct.id = 1024;
+    maximumProduct.title = '三个数的最大乘积';
+    maximumProduct.description = '给你一个整型数组 nums ，在数组中找出由三个数组成的最大乘积，并输出这个乘积。';
+    maximumProduct.difficulty = ProblemDifficulty.EASY;
+    maximumProduct.category = ProblemCategory.SORT;
+    maximumProduct.choices = [
+      { id: 'A', text: '排序后取最值：最大乘积为max(前两负*最后正, 最后三正)', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有三元组乘积', isCorrect: false },
+      { id: 'C', text: '堆：找出最大的三个数和最小的两个数', isCorrect: false },
+      { id: 'D', text: '动态规划：记录最大乘积组合', isCorrect: false }
+    ];
+    maximumProduct.explanation = '排序解法：①排序数组；②可能的最大乘积来自两种情况：最大的三个正数相乘，或最小的两个负数（乘积为正）与最大的正数相乘；③返回两种情况的最大值。时间O(n log n)，空间O(1)。';
+    maximumProduct.hint = '负数的存在可能影响结果，排序后只需比较两种关键组合即可';
+    problems.push(maximumProduct);
+
+
+    // 二、前缀和类（10题）
+    // 2015
+    const matrixBlockSum = new ProblemModel();
+    matrixBlockSum.id = 2015;
+    matrixBlockSum.title = '矩阵区域和';
+    matrixBlockSum.description = '给你一个 m x n 的矩阵 mat 和一个整数 k ，请你返回一个矩阵 answer ，其中每个 answer[i][j] 是所有满足下述条件的元素 mat[r][c] 的和：i - k <= r <= i + k，j - k <= c <= j + k 且 (r, c) 在矩阵内。';
+    matrixBlockSum.difficulty = ProblemDifficulty.MEDIUM;
+    matrixBlockSum.category = ProblemCategory.PREFIX_SUM;
+    matrixBlockSum.choices = [
+      { id: 'A', text: '二维前缀和：预处理前缀和矩阵，用容斥原理计算每个区域和', isCorrect: true },
+      { id: 'B', text: '暴力法：对每个位置遍历其k范围内的元素求和', isCorrect: false },
+      { id: 'C', text: '逐行前缀和：每行计算前缀和，再按行累加区域', isCorrect: false },
+      { id: 'D', text: '滑动窗口：在二维矩阵上滑动窗口计算和', isCorrect: false }
+    ];
+    matrixBlockSum.explanation = '二维前缀和解法：①计算前缀和矩阵prefix，prefix[i][j]为(0,0)到(i-1,j-1)的和；②对每个(i,j)，确定区域边界r1=max(0,i-k), r2=min(m-1,i+k), c1=max(0,j-k), c2=min(n-1,j+k)；③answer[i][j] = prefix[r2+1][c2+1] - prefix[r1][c2+1] - prefix[r2+1][c1] + prefix[r1][c1]。时间O(mn)，空间O(mn)。';
+    matrixBlockSum.hint = '二维前缀和结合边界处理，可在O(1)时间计算任意矩形区域的和';
+    problems.push(matrixBlockSum);
+
+    // 2016
+    const findPivotIndex = new ProblemModel();
+    findPivotIndex.id = 2016;
+    findPivotIndex.title = '寻找数组的中心下标';
+    findPivotIndex.description = '给你一个整数数组 nums ，请计算数组的 中心下标 。数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1 。';
+    findPivotIndex.difficulty = ProblemDifficulty.EASY;
+    findPivotIndex.category = ProblemCategory.PREFIX_SUM;
+    findPivotIndex.choices = [
+      { id: 'A', text: '前缀和：计算总 sum，遍历中左侧和 leftSum，右侧和为 sum - leftSum - nums[i]', isCorrect: true },
+      { id: 'B', text: '暴力法：对每个下标计算左右和', isCorrect: false },
+      { id: 'C', text: '动态规划：记录左右和数组', isCorrect: false },
+      { id: 'D', text: '双指针：从两端向中间移动，调整左右和', isCorrect: false }
+    ];
+    findPivotIndex.explanation = '前缀和解法：①计算数组总和 total；②遍历数组，leftSum 累加左侧元素和；③右侧和 = total - leftSum - nums[i]，若 leftSum == 右侧和，返回当前索引；④遍历结束返回-1。时间O(n)，空间O(1)。';
+    findPivotIndex.hint = '利用总 sum 快速计算右侧和，避免重复累加，优化时间复杂度';
+    problems.push(findPivotIndex);
+
+    // 2017
+    const subarraySumsDivisibleByKII = new ProblemModel();
+    subarraySumsDivisibleByKII.id = 2017;
+    subarraySumsDivisibleByKII.title = '和可被 K 整除的子数组（扩展）';
+    subarraySumsDivisibleByKII.description = '给定一个整数数组 A 和整数 K，返回其中元素之和可被 K 整除的 最长 连续子数组的长度。如果不存在这样的子数组，返回 0。';
+    subarraySumsDivisibleByKII.difficulty = ProblemDifficulty.MEDIUM;
+    subarraySumsDivisibleByKII.category = ProblemCategory.PREFIX_SUM;
+    subarraySumsDivisibleByKII.choices = [
+      { id: 'A', text: '前缀和+哈希表：记录每个余数首次出现的索引，相同余数的最大间距为最长子数组', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算和并判断', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的最长符合条件的子数组', isCorrect: false },
+      { id: 'D', text: '滑动窗口：仅适用于非负数场景', isCorrect: false }
+    ];
+    subarraySumsDivisibleByKII.explanation = '前缀和余数解法：①计算前缀和mod K（处理负余数）；②哈希表firstOccurrence记录余数首次出现的索引，初始{0: -1}；③遍历中，若余数已存在，计算当前索引-首次索引，更新最大长度；否则记录首次出现索引。时间O(n)，空间O(K)。';
+    subarraySumsDivisibleByKII.hint = '相同余数的前缀和之差可被K整除，通过记录首次出现索引计算最大间距';
+    problems.push(subarraySumsDivisibleByKII);
+
+    // 2018
+    const maxSumTwoNoOverlap = new ProblemModel();
+    maxSumTwoNoOverlap.id = 2018;
+    maxSumTwoNoOverlap.title = '两个非重叠子数组的最大和';
+    maxSumTwoNoOverlap.description = '给你一个整数数组 nums 和两个整数 firstLen 和 secondLen，请你找出并返回两个非重叠 子数组 中元素的最大和，长度分别为 firstLen 和 secondLen 。长度为 firstLen 的子数组可以出现在长度为 secondLen 的子数组之前或之后，但二者必须是不重叠的。子数组是数组的 连续 部分。';
+    maxSumTwoNoOverlap.difficulty = ProblemDifficulty.MEDIUM;
+    maxSumTwoNoOverlap.category = ProblemCategory.PREFIX_SUM;
+    maxSumTwoNoOverlap.choices = [
+      { id: 'A', text: '前缀和+左右最值：预计算子数组和，左存左侧最大和，右存右侧最大和', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举两个子数组的位置', isCorrect: false },
+      { id: 'C', text: '滑动窗口：分别滑动两个窗口计算和', isCorrect: false },
+      { id: 'D', text: '动态规划：记录不同位置的最大和', isCorrect: false }
+    ];
+    maxSumTwoNoOverlap.explanation = '前缀和+左右最值解法：①计算前缀和，预先生成长度为L和M的子数组和；②分两种情况：L在左M在右，或M在左L在右；③对每种情况，计算左侧最大和+右侧当前和的最大值。时间O(n)，空间O(n)。';
+    maxSumTwoNoOverlap.hint = '通过预处理左右侧的最大子数组和，避免重复计算，高效找到最优组合';
+    problems.push(maxSumTwoNoOverlap);
+
+    // 2019
+    const xorOperation = new ProblemModel();
+    xorOperation.id = 2019;
+    xorOperation.title = '数组异或操作';
+    xorOperation.description = '给你两个整数，n 和 start 。数组 nums 定义为：nums[i] = start + 2*i（下标从 0 开始）且 n == nums.length 。请返回 nums 中所有元素按位异或（XOR）后得到的结果。';
+    xorOperation.difficulty = ProblemDifficulty.EASY;
+    xorOperation.category = ProblemCategory.PREFIX_SUM;
+    xorOperation.choices = [
+      { id: 'A', text: '前缀异或：遍历数组，累计异或结果', isCorrect: true },
+      { id: 'B', text: '数学公式：利用异或的周期性规律计算', isCorrect: false },
+      { id: 'C', text: '暴力法：生成数组后计算异或', isCorrect: false },
+      { id: 'D', text: '递归：递归计算前n-1个元素的异或', isCorrect: false }
+    ];
+    xorOperation.explanation = '前缀异或解法：①初始化result=0；②遍历i从0到n-1，result ^= (start + 2*i)；③返回result。时间O(n)，空间O(1)。';
+    xorOperation.hint = '异或操作具有累积性，可边生成元素边计算结果，无需额外存储数组';
+    problems.push(xorOperation);
+
+    // 2020
+    const countTriplets = new ProblemModel();
+    countTriplets.id = 2020;
+    countTriplets.title = '统计异或值在范围内的三元组数目';
+    countTriplets.description = '给你一个整数数组 arr 和两个整数 a 和 b ，请你统计其中满足 0 <= i < j < k < arr.length 且 a <= (arr[i] XOR arr[j] XOR arr[k]) <= b 的三元组 (i, j, k) 的数目。';
+    countTriplets.difficulty = ProblemDifficulty.HARD;
+    countTriplets.category = ProblemCategory.PREFIX_SUM;
+    countTriplets.choices = [
+      { id: 'A', text: '前缀异或+哈希表：利用x^y^z = prefix[k+1]^prefix[i]，统计符合范围的对数', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有三元组计算异或', isCorrect: false },
+      { id: 'C', text: '动态规划：记录不同位置的异或结果', isCorrect: false },
+      { id: 'D', text: '前缀和：转化为和的范围问题', isCorrect: false }
+    ];
+    countTriplets.explanation = '前缀异或解法：①计算前缀异或prefix，prefix[0]=0，prefix[k+1]=arr[0]^...^arr[k]；②三元组异或=prefix[k+1]^prefix[i]；③对每个k，统计i<k中满足a<=prefix[k+1]^prefix[i]<=b的i的数量，累加总和。时间O(n²)，空间O(n)。';
+    countTriplets.hint = '利用异或性质将三元组异或转化为两个前缀异或的异或，简化问题复杂度';
+    problems.push(countTriplets);
+
+    // 2021
+    const numSubarraysWithSum = new ProblemModel();
+    numSubarraysWithSum.id = 2021;
+    numSubarraysWithSum.title = '和为S的子数组数目';
+    numSubarraysWithSum.description = '给你一个二元数组 nums 和一个整数 goal ，请你统计并返回有多少个和为 goal 的 非空 子数组。';
+    numSubarraysWithSum.difficulty = ProblemDifficulty.MEDIUM;
+    numSubarraysWithSum.category = ProblemCategory.PREFIX_SUM;
+    numSubarraysWithSum.choices = [
+      { id: 'A', text: '前缀和+哈希表：统计前缀和出现次数，sum[i]-sum[j]=goal即count+=map[sum[i]-goal]', isCorrect: true },
+      { id: 'B', text: '滑动窗口：利用数组元素为0/1的特性，维护窗口和', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子数组计算和', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]表示以i结尾的和为goal的子数组数', isCorrect: false }
+    ];
+    numSubarraysWithSum.explanation = '前缀和解法：①计算前缀和sum，map记录sum出现次数，初始map[0]=1；②遍历数组，sum += nums[i]；③若sum-goal在map中，累加map[sum-goal]；④更新map[sum]++。时间O(n)，空间O(n)。';
+    numSubarraysWithSum.hint = '二元数组的和问题可直接用前缀和哈希表解决，无需特殊优化';
+    problems.push(numSubarraysWithSum);
+
+    // 2022
+    const minimumAverageDifference = new ProblemModel();
+    minimumAverageDifference.id = 2022;
+    minimumAverageDifference.title = '最小平均差';
+    minimumAverageDifference.description = '给你一个下标从 0 开始长度为 n 的整数数组 nums 。平均差 是指数组中一个下标 i 对应的 绝对 差值：左边部分的平均值与右边部分的平均值之差。左边部分为 nums[0..i] ，右边部分为 nums[i+1..n-1] 。两个部分都可能为空。两个部分的平均值都是 整数除法 。请你返回产生 最小平均差 的下标。如果有多个下标最小平均差相同，则返回 最小 的一个下标。';
+    minimumAverageDifference.difficulty = ProblemDifficulty.MEDIUM;
+    minimumAverageDifference.category = ProblemCategory.PREFIX_SUM;
+    minimumAverageDifference.choices = [
+      { id: 'A', text: '前缀和：计算前缀和数组，遍历计算左右平均差', isCorrect: true },
+      { id: 'B', text: '暴力法：每次计算左右和并求平均差', isCorrect: false },
+      { id: 'C', text: '滑动窗口：动态更新左右和', isCorrect: false },
+      { id: 'D', text: '动态规划：记录左右和的变化', isCorrect: false }
+    ];
+    minimumAverageDifference.explanation = '前缀和解法：①计算前缀和数组prefix，prefix[i]为前i个元素和；②总sum=prefix[n]；③遍历i从0到n-1，左平均=prefix[i+1]/(i+1)，右平均=(sum-prefix[i+1])/(n-i-1)（处理i=n-1时右平均为0）；④计算绝对差，记录最小值及对应索引。时间O(n)，空间O(n)。';
+    minimumAverageDifference.hint = '前缀和可快速获取左右部分的和，避免重复计算，降低时间复杂度';
+    problems.push(minimumAverageDifference);
+
+    // 2023
+    const waysToSplitArray = new ProblemModel();
+    waysToSplitArray.id = 2023;
+    waysToSplitArray.title = '分割数组的方案数';
+    waysToSplitArray.description = '给你一个下标从 0 开始长度为 n 的整数数组 nums 。如果以下描述为真，那么 nums 在下标 i 处有一个 合法的分割 ：左部分 nums[0..i] 和右部分 nums[i+1..n-1] 的和相等。同时，左部分和右部分都至少有一个元素。请你返回 nums 中的 合法分割 方案数。';
+    waysToSplitArray.difficulty = ProblemDifficulty.EASY;
+    waysToSplitArray.category = ProblemCategory.PREFIX_SUM;
+    waysToSplitArray.choices = [
+      { id: 'A', text: '前缀和：计算总 sum，遍历检查前缀和是否等于 sum/2（sum需为偶数）', isCorrect: true },
+      { id: 'B', text: '暴力法：每次分割计算左右和', isCorrect: false },
+      { id: 'C', text: '双指针：从两端向中间移动，调整左右和', isCorrect: false },
+      { id: 'D', text: '动态规划：记录左侧和是否等于右侧和', isCorrect: false }
+    ];
+    waysToSplitArray.explanation = '前缀和解法：①计算总 sum = sum(nums)；②若sum为奇数，返回0；③目标leftSum = sum/2；④计算前缀和，遍历i从0到n-2，若前缀和等于leftSum，计数+1；⑤返回计数。时间O(n)，空间O(1)（可不用前缀和数组，边累加边判断）。';
+    waysToSplitArray.hint = '合法分割的左右和相等，即都等于总和的一半，总和必须为偶数';
+    problems.push(waysToSplitArray);
+
+    // 2024
+    const getAverages = new ProblemModel();
+    getAverages.id = 2024;
+    getAverages.title = '子数组平均值';
+    getAverages.description = '给你一个下标从 0 开始的数组 nums ，数组中有 n 个整数，另给你一个整数 k 。半径为 k 的子数组平均值 是指：nums 中一个以下标 i 为 中心 且 半径 为 k 的子数组中所有元素的平均值，即下标在 i - k 和 i + k 范围（含 i - k 和 i + k）内所有元素的平均值。如果 i - k < 0 或 i + k >= n ，则 不存在 这样的子数组。请你返回一个长度为 n 的数组 avgs ，其中 avgs[i] 是以下标 i 为中心的子数组的 半径为 k 的子数组平均值 。如果不存在这样的子数组，则 avgs[i] = -1 。';
+    getAverages.difficulty = ProblemDifficulty.MEDIUM;
+    getAverages.category = ProblemCategory.PREFIX_SUM;
+    getAverages.choices = [
+      { id: 'A', text: '前缀和：计算前缀和数组，对合法中心i计算区间和并求平均', isCorrect: true },
+      { id: 'B', text: '暴力法：对每个i计算范围内的元素和', isCorrect: false },
+      { id: 'C', text: '滑动窗口：维护大小为2k+1的窗口，计算平均值', isCorrect: false },
+      { id: 'D', text: '动态规划：记录区间和的变化', isCorrect: false }
+    ];
+    getAverages.explanation = '前缀和解法：①计算前缀和数组prefix；②窗口大小为2k+1，对i从0到n-1：若i-k<0或i+k>=n，avgs[i]=-1；否则区间和=prefix[i+k+1]-prefix[i-k]，avgs[i]=区间和/(2k+1)；③返回avgs。时间O(n)，空间O(n)。';
+    getAverages.hint = '前缀和可快速计算任意区间的和，结合边界判断即可高效求解';
+    problems.push(getAverages);
+
+
+    // 三、滑动窗口类（10题）
+    // 3015
+    const lengthOfLongestSubstringTwoDistinct = new ProblemModel();
+    lengthOfLongestSubstringTwoDistinct.id = 3015;
+    lengthOfLongestSubstringTwoDistinct.title = '至多包含两个不同字符的最长子串';
+    lengthOfLongestSubstringTwoDistinct.description = '给定一个字符串 s ，找出 至多 包含两个不同字符的最长子串 t ，并返回该子串的长度。';
+    lengthOfLongestSubstringTwoDistinct.difficulty = ProblemDifficulty.MEDIUM;
+    lengthOfLongestSubstringTwoDistinct.category = ProblemCategory.SLIDING_WINDOW;
+    lengthOfLongestSubstringTwoDistinct.choices = [
+      { id: 'A', text: '滑动窗口+哈希表：维护包含至多两个不同字符的窗口，记录最大长度', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子串统计不同字符数', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的最长符合条件子串长度', isCorrect: false },
+      { id: 'D', text: '哈希表+双指针：记录每个字符的最后位置', isCorrect: false }
+    ];
+    lengthOfLongestSubstringTwoDistinct.explanation = '滑动窗口解法：①left=0，maxLen=0，map记录字符最后出现索引；②右指针遍历：map[s[right]]=right；③当map.size>2时，找到最左的索引并移除，left更新为该索引+1；④更新maxLen。时间O(n)，空间O(1)（最多两种字符）。';
+    lengthOfLongestSubstringTwoDistinct.hint = '与"水果成篮"问题类似，窗口内允许最多两个不同字符，通过哈希表维护字符位置';
+    problems.push(lengthOfLongestSubstringTwoDistinct);
+
+    // 3016
+    const numKLenSubstrNoRepeats = new ProblemModel();
+    numKLenSubstrNoRepeats.id = 3016;
+    numKLenSubstrNoRepeats.title = '长度为K的无重复字符子串';
+    numKLenSubstrNoRepeats.description = '给你一个字符串 S，找出所有长度为 K 且不含重复字符的子串，请返回其数目。';
+    numKLenSubstrNoRepeats.difficulty = ProblemDifficulty.MEDIUM;
+    numKLenSubstrNoRepeats.category = ProblemCategory.SLIDING_WINDOW;
+    numKLenSubstrNoRepeats.choices = [
+      { id: 'A', text: '滑动窗口+哈希表：维护大小为K的窗口，检查窗口内是否有重复字符', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有长度为K的子串判断', isCorrect: false },
+      { id: 'C', text: '滑动窗口+数组计数：用数组代替哈希表记录字符出现次数', isCorrect: false },
+      { id: 'D', text: '前缀和：记录字符出现位置', isCorrect: false }
+    ];
+    numKLenSubstrNoRepeats.explanation = '滑动窗口解法：①若K>s.length，返回0；②left=0，count=0，map记录窗口内字符频率；③右指针遍历到K-1，初始化窗口；④若窗口无重复（map.size=K），count++；⑤滑动窗口：移除left字符，添加right+1字符，重复检查。时间O(n)，空间O(1)（字符集固定）。';
+    numKLenSubstrNoRepeats.hint = '固定窗口大小为K，通过哈希表实时维护字符频率，快速判断是否有重复';
+    problems.push(numKLenSubstrNoRepeats);
+
+    // 3017
+    const maxConsecutiveAnswers = new ProblemModel();
+    maxConsecutiveAnswers.id = 3017;
+    maxConsecutiveAnswers.title = '最大连续1的个数 IV（扩展）';
+    maxConsecutiveAnswers.description = '给你一个二进制字符串 s 和一个整数 k 。你可以最多翻转 k 个 0 到 1 ，返回 经过翻转后，最长连续 1 的数目 。';
+    maxConsecutiveAnswers.difficulty = ProblemDifficulty.MEDIUM;
+    maxConsecutiveAnswers.category = ProblemCategory.SLIDING_WINDOW;
+    maxConsecutiveAnswers.choices = [
+      { id: 'A', text: '滑动窗口：维护最多含k个0的窗口，窗口长度即为最长连续1', isCorrect: true },
+      { id: 'B', text: '前缀和+二分：计算前缀0的个数，二分查找最大窗口', isCorrect: false },
+      { id: 'C', text: '动态规划：记录翻转j个0的最大长度', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举每个位置计算可翻转k个0的最大长度', isCorrect: false }
+    ];
+    maxConsecutiveAnswers.explanation = '滑动窗口解法：①left=0，zeroCount=0，maxLen=0；②右指针遍历：若s[right]为0则zeroCount++；③当zeroCount>k时，若s[left]为0则zeroCount--，left++；④更新maxLen为right-left+1。时间O(n)，空间O(1)。';
+    maxConsecutiveAnswers.hint = '与"最大连续1的个数III"相同，将字符串视为0和1的数组处理';
+    problems.push(maxConsecutiveAnswers);
+
+    // 3018
+    const longestRepeatingCharacterReplacement = new ProblemModel();
+    longestRepeatingCharacterReplacement.id = 3018;
+    longestRepeatingCharacterReplacement.title = '替换后的最长重复字符';
+    longestRepeatingCharacterReplacement.description = '给你一个字符串 s 和一个整数 k 。你可以选择字符串中的任一字符，并将其更改为任何其他大写英文字符。该操作最多可执行 k 次。在执行上述操作后，找到包含相同字母的最长子串的长度。';
+    longestRepeatingCharacterReplacement.difficulty = ProblemDifficulty.MEDIUM;
+    longestRepeatingCharacterReplacement.category = ProblemCategory.SLIDING_WINDOW;
+    longestRepeatingCharacterReplacement.choices = [
+      { id: 'A', text: '滑动窗口+字符计数：维护窗口内出现最多的字符数，窗口长度- maxCount ≤k', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举每个字符和每个位置计算最大长度', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个位置的最大可能长度', isCorrect: false },
+      { id: 'D', text: '前缀和：统计每个字符的前缀出现次数', isCorrect: false }
+    ];
+    longestRepeatingCharacterReplacement.explanation = '滑动窗口解法：①left=0，maxCount=0，count数组记录字符频率；②右指针遍历：更新count[s[right]]并记录maxCount；③当窗口长度- maxCount >k时，左移left并更新count；④更新maxLen。时间O(n)，空间O(1)（26个字母）。';
+    longestRepeatingCharacterReplacement.hint = '窗口内需要替换的字符数为窗口长度减最多字符数，以此判断窗口合法性';
+    problems.push(longestRepeatingCharacterReplacement);
+
+    // 3019
+    const minimumWindowSubsequence = new ProblemModel();
+    minimumWindowSubsequence.id = 3019;
+    minimumWindowSubsequence.title = '最小窗口子序列';
+    minimumWindowSubsequence.description = '给定字符串 S 和 T，找出 S 中最短的（连续）子串 W ，使得 T 是 W 的子序列 。如果 S 中没有窗口可以包含 T 作为子序列，则返回空字符串 ""。如果有多个最短长度的窗口，返回开始位置最靠左的那个。';
+    minimumWindowSubsequence.difficulty = ProblemDifficulty.HARD;
+    minimumWindowSubsequence.category = ProblemCategory.SLIDING_WINDOW;
+    minimumWindowSubsequence.choices = [
+      { id: 'A', text: '滑动窗口+双指针：先找到包含T的窗口，再收缩左边界优化', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子串判断是否包含T', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i][j]表示S前i个字符包含T前j个字符的最小窗口', isCorrect: false },
+      { id: 'D', text: '前缀和：记录字符位置信息', isCorrect: false }
+    ];
+    minimumWindowSubsequence.explanation = '滑动窗口解法：①i=0（T的指针），left=0，minLen=∞；②遍历S的right指针，若S[right]==T[i]则i++；③当i==T.length时，记录当前right，从right向左找T的最后一个字符，调整left到最小位置；④更新minLen和结果。时间O(n*m)（n为S长度，m为T长度），空间O(1)。';
+    minimumWindowSubsequence.hint = '先扩展窗口包含整个T，再从右向左收缩左边界，找到最小窗口';
+    problems.push(minimumWindowSubsequence);
+
+    // 3020
+    const numSubarraysWithSumII = new ProblemModel();
+    numSubarraysWithSumII.id = 3020;
+    numSubarraysWithSumII.title = '和在[lower, upper]范围内的子数组数目';
+    numSubarraysWithSumII.description = '给定一个整数数组 nums ，返回满足 子数组元素之和 在 [lower, upper] 范围内的 非空 子数组的数目。';
+    numSubarraysWithSumII.difficulty = ProblemDifficulty.HARD;
+    numSubarraysWithSumII.category = ProblemCategory.SLIDING_WINDOW;
+    numSubarraysWithSumII.choices = [
+      { id: 'A', text: '前缀和+有序集合：前缀和存入有序集合，查询[sum-upper, sum-lower]的数量', isCorrect: true },
+      { id: 'B', text: '滑动窗口：仅适用于非负数数组', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子数组计算和', isCorrect: false },
+      { id: 'D', text: '动态规划：记录不同和的子数组数', isCorrect: false }
+    ];
+    numSubarraysWithSumII.explanation = '前缀和+有序集合解法：①计算前缀和sum，初始化有序集合含0；②对每个sum，查询集合中在[sum-upper, sum-lower]范围内的元素个数，累加计数；③将sum加入集合。时间O(n log n)，空间O(n)。';
+    numSubarraysWithSumII.hint = '利用有序集合快速查询符合条件的前缀和数量，处理含负数的情况';
+    problems.push(numSubarraysWithSumII);
+
+    // 3021
+    const findMaxConsecutiveOnes = new ProblemModel();
+    findMaxConsecutiveOnes.id = 3021;
+    findMaxConsecutiveOnes.title = '最大连续1的个数';
+    findMaxConsecutiveOnes.description = '给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。';
+    findMaxConsecutiveOnes.difficulty = ProblemDifficulty.EASY;
+    findMaxConsecutiveOnes.category = ProblemCategory.SLIDING_WINDOW;
+    findMaxConsecutiveOnes.choices = [
+      { id: 'A', text: '滑动窗口：遇到1扩展窗口，遇到0重置窗口，记录最大长度', isCorrect: true },
+      { id: 'B', text: '前缀和：计算前缀和后找最长的1序列', isCorrect: false },
+      { id: 'C', text: '暴力法：遍历记录每个连续1的长度', isCorrect: false },
+      { id: 'D', text: '动态规划：dp[i]表示以i结尾的连续1的长度', isCorrect: false }
+    ];
+    findMaxConsecutiveOnes.explanation = '滑动窗口解法：①current=0，maxLen=0；②遍历nums：若num=1则current++，并更新maxLen；否则current=0；③返回maxLen。时间O(n)，空间O(1)。';
+    findMaxConsecutiveOnes.hint = '简单的单指针滑动窗口，无需复杂判断，直接累计连续1的长度';
+    problems.push(findMaxConsecutiveOnes);
+
+    // 3022
+    const countGoodSubstrings = new ProblemModel();
+    countGoodSubstrings.id = 3022;
+    countGoodSubstrings.title = '统计好子字符串';
+    countGoodSubstrings.description = '给你一个字符串 s ，请你返回长度为 3 的 好子字符串 的数量。注意，如果 s 的长度小于 3 ，则返回 0 。一个字符串是 好 的，如果这个字符串中所有字符都不相同。';
+    countGoodSubstrings.difficulty = ProblemDifficulty.EASY;
+    countGoodSubstrings.category = ProblemCategory.SLIDING_WINDOW;
+    countGoodSubstrings.choices = [
+      { id: 'A', text: '滑动窗口：固定窗口大小为3，检查窗口内字符是否全不同', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有长度为3的子串判断', isCorrect: false },
+      { id: 'C', text: '哈希表：记录每个字符的位置', isCorrect: false },
+      { id: 'D', text: '前缀和：统计字符出现次数', isCorrect: false }
+    ];
+    countGoodSubstrings.explanation = '滑动窗口解法：①若s.length<3，返回0；②count=0；③遍历i从0到s.length-3：检查s[i]、s[i+1]、s[i+2]是否互不相同，是则count++；④返回count。时间O(n)，空间O(1)。';
+    countGoodSubstrings.hint = '固定窗口大小为3，一次遍历即可完成检查，无需复杂数据结构';
+    problems.push(countGoodSubstrings);
+
+    // 3023
+    const maxVowels = new ProblemModel();
+    maxVowels.id = 3023;
+    maxVowels.title = '字符串中元音的最大数目';
+    maxVowels.description = '给你字符串 s 和整数 k 。请返回字符串 s 中长度为 k 的单个子字符串中可能包含的最大元音字母数。元音字母包括 a、e、i、o、u。';
+    maxVowels.difficulty = ProblemDifficulty.MEDIUM;
+    maxVowels.category = ProblemCategory.SLIDING_WINDOW;
+    maxVowels.choices = [
+      { id: 'A', text: '滑动窗口：计算初始窗口元音数，滑动时更新并记录最大值', isCorrect: true },
+      { id: 'B', text: '暴力法：计算每个长度为k的子串的元音数', isCorrect: false },
+      { id: 'C', text: '前缀和：计算前缀元音数，差值即为窗口元音数', isCorrect: false },
+      { id: 'D', text: '动态规划：记录每个位置的最大元音数', isCorrect: false }
+    ];
+    maxVowels.explanation = '滑动窗口解法：①初始化当前窗口元音数current=0，遍历前k个字符计算current；②maxVowels=current；③滑动窗口：移除左字符（若为元音则current--），添加右字符（若为元音则current++），更新maxVowels；④返回maxVowels。时间O(n)，空间O(1)。';
+    maxVowels.hint = '固定窗口大小为k，通过增量更新元音数，避免重复计算';
+    problems.push(maxVowels);
+
+    // 3024
+    const maxSatisfied = new ProblemModel();
+    maxSatisfied.id = 3024;
+    maxSatisfied.title = '爱生气的书店老板';
+    maxSatisfied.description = '有一个书店老板，他的书店开了 n 分钟。每分钟都有一些顾客进入这家商店。给定一个数组 customers ，其中 customers[i] 是在第 i 分钟开始时进入商店的顾客数量，所有这些顾客在第 i 分钟结束后离开。在某些分钟内，书店老板会生气。如果书店老板在第 i 分钟生气，那么那一分钟的顾客就会不满意，否则他们就会满意。给定一个数组 grumpy ，其中 grumpy[i] 是 1 表示书店老板在第 i 分钟生气，0 表示不生气。书店老板知道一个秘密技巧，能让自己连续 m 分钟不生气，但只能使用一次。请你返回这一天营业下来，最多有多少顾客能够感到满意。';
+    maxSatisfied.difficulty = ProblemDifficulty.MEDIUM;
+    maxSatisfied.category = ProblemCategory.SLIDING_WINDOW;
+    maxSatisfied.choices = [
+      { id: 'A', text: '滑动窗口：计算基础满意顾客数，再找m分钟内最多的额外满意顾客', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有m分钟窗口计算总满意数', isCorrect: false },
+      { id: 'C', text: '前缀和：计算前缀满意数和前缀生气时的顾客数', isCorrect: false },
+      { id: 'D', text: '动态规划：记录使用技巧后的最大满意数', isCorrect: false }
+    ];
+    maxSatisfied.explanation = '滑动窗口解法：①计算基础满意数（grumpy[i]=0时的customers[i]）；②计算初始窗口（前m分钟）的额外满意数（grumpy[i]=1时的customers[i]）；③滑动窗口找最大额外满意数；④总满意数=基础满意数+最大额外满意数。时间O(n)，空间O(1)。';
+    maxSatisfied.hint = '将问题拆分为基础满意数和可挽回的满意数，用滑动窗口找可挽回的最大值';
+    problems.push(maxSatisfied);
+
+
+    // 1026
+    const reconstructQueue = new ProblemModel();
+    reconstructQueue.id = 1026;
+    reconstructQueue.title = '根据身高重建队列';
+    reconstructQueue.description = '假设有打乱顺序的一群人站成一个队列，数组 people 表示队列中一些人的属性（不一定按顺序）。每个 people[i] = [h, k] 表示第 i 个人的身高为 h ，前面 正好 有 k 个身高大于或等于 h 的人。请你重新构造并返回输入数组 people 所表示的队列。返回的队列应该格式化为数组 queue ，其中 queue[j] = [hj, kj] 是队列中第 j 个人的属性（queue[0] 是排在队列前面的人）。';
+    reconstructQueue.difficulty = ProblemDifficulty.MEDIUM;
+    reconstructQueue.category = ProblemCategory.SORT;
+    reconstructQueue.choices = [
+      { id: 'A', text: '贪心+排序：先按身高降序排序（同身高按k升序），再按k插入对应位置', isCorrect: true },
+      { id: 'B', text: '暴力法：逐个插入并维护k的正确性', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个位置的最优排列', isCorrect: false },
+      { id: 'D', text: '哈希表：存储身高与位置的映射', isCorrect: false }
+    ];
+    reconstructQueue.explanation = '贪心排序解法：①按身高h降序排序，h相同则按k升序；②创建结果数组，遍历排序后的people，将每个人插入到索引k的位置；③插入时，由于前面的人都≥当前身高，k值即为正确位置。时间O(n²)（插入操作耗时），空间O(n)。';
+    reconstructQueue.hint = '先处理高个子，再插入矮个子时不会影响已插入者的k值，确保每次插入位置正确';
+    problems.push(reconstructQueue);
+
+
+
+    // 1031
+    const findDuplicates = new ProblemModel();
+    findDuplicates.id = 1031;
+    findDuplicates.title = '找到所有数组中消失的数字 II';
+    findDuplicates.description = '给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数。你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。';
+    findDuplicates.difficulty = ProblemDifficulty.MEDIUM;
+    findDuplicates.category = ProblemCategory.SORT;
+    findDuplicates.choices = [
+      { id: 'A', text: '原地标记：通过正负号标记数字是否出现过，第二次出现时加入结果', isCorrect: true },
+      { id: 'B', text: '哈希表：统计出现次数，需额外O(n)空间', isCorrect: false },
+      { id: 'C', text: '排序后遍历：相邻元素相等则为重复，时间O(n log n)', isCorrect: false },
+      { id: 'D', text: '暴力法：对每个数字检查是否存在重复', isCorrect: false }
+    ];
+    findDuplicates.explanation = '原地标记解法：①遍历数组，对每个num=abs(nums[i])；②若nums[num-1]为正，标记为负；③若nums[num-1]为负，说明已出现过，加入结果。时间O(n)，空间O(1)。';
+    findDuplicates.hint = '利用数组索引与数字范围的对应关系，通过正负号实现原地计数';
+    problems.push(findDuplicates);
+
+    // 1032
+    const hIndex = new ProblemModel();
+    hIndex.id = 1032;
+    hIndex.title = 'H 指数';
+    hIndex.description = '给你一个整数数组 citations ，其中 citations[i] 表示研究者的第 i 篇论文被引用的次数。计算并返回该研究者的 h 指数。h 指数的定义：h 代表"高引用次数"（high citations），一名科研人员的 h 指数是指他（她）的 （n 篇论文中）总共有 h 篇论文分别被引用了至少 h 次。且其余的 n - h 篇论文每篇被引用次数 不超过 h 次。';
+    hIndex.difficulty = ProblemDifficulty.MEDIUM;
+    hIndex.category = ProblemCategory.SORT;
+    hIndex.choices = [
+      { id: 'A', text: '排序+遍历：降序排序后，找到最大h满足citations[h-1]≥h', isCorrect: true },
+      { id: 'B', text: '计数排序：统计各引用次数的论文数，从高到低累计找到h', isCorrect: false },
+      { id: 'C', text: '暴力法：从n到0检查是否满足h指数条件', isCorrect: false },
+      { id: 'D', text: '二分查找：在可能的h值范围内二分查找', isCorrect: false }
+    ];
+    hIndex.explanation = '排序解法：①将数组降序排序；②遍历i从0到n-1，若citations[i] > i，则h至少为i+1；③最大的i+1即为h指数（若所有citations[i]≤i，则h=0）。时间O(n log n)，空间O(1)。';
+    hIndex.hint = '排序后，论文按引用次数从高到低排列，h指数是满足"第h篇论文引用≥h"的最大值';
+    problems.push(hIndex);
+
+    // 2026
+    const rangeSumQuery2DImmutable = new ProblemModel();
+    rangeSumQuery2DImmutable.id = 2026;
+    rangeSumQuery2DImmutable.title = '二维区域和检索 - Immutable';
+    rangeSumQuery2DImmutable.description = '给定一个二维矩阵 matrix，以下类型的多个请求：计算其子矩形范围内元素的总和，该子矩阵的 左上角 为 (row1, col1) ，右下角 为 (row2, col2) 。实现 NumMatrix 类：NumMatrix(int[][] matrix) 给定整数矩阵 matrix 进行初始化。int sumRegion(int row1, int col1, int row2, int col2) 返回 左上角 (row1, col1) 、右下角 (row2, col2) 所描述的子矩阵的元素 总和 。';
+    rangeSumQuery2DImmutable.difficulty = ProblemDifficulty.MEDIUM;
+    rangeSumQuery2DImmutable.category = ProblemCategory.PREFIX_SUM;
+    rangeSumQuery2DImmutable.choices = [
+      { id: 'A', text: '二维前缀和：预处理前缀和矩阵，用容斥原理计算区域和', isCorrect: true },
+      { id: 'B', text: '逐行前缀和：每行计算前缀和，查询时逐行累加', isCorrect: false },
+      { id: 'C', text: '暴力法：每次查询遍历子矩阵计算和', isCorrect: false },
+      { id: 'D', text: '哈希表：存储所有可能子矩阵的和', isCorrect: false }
+    ];
+    rangeSumQuery2DImmutable.explanation = '二维前缀和解法：①前缀和矩阵prefix[i][j]表示(0,0)到(i-1,j-1)的和；②prefix[i][j] = matrix[i-1][j-1] + prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]；③查询时sum = prefix[row2+1][col2+1] - prefix[row1][col2+1] - prefix[row2+1][col1] + prefix[row1][col1]。初始化O(mn)，查询O(1)。';
+    rangeSumQuery2DImmutable.hint = '二维前缀和通过容斥原理消除重叠区域的重复计算，实现快速查询';
+    problems.push(rangeSumQuery2DImmutable);
+
+    // 2027
+    const findTheLongestSubstring = new ProblemModel();
+    findTheLongestSubstring.id = 2027;
+    findTheLongestSubstring.title = '每个元音包含偶数次的最长子字符串';
+    findTheLongestSubstring.description = '给你一个字符串 s ，请你返回满足以下条件的最长子字符串的长度：每个元音字母（a, e, i, o, u）在子字符串中都恰好出现了偶数次。';
+    findTheLongestSubstring.difficulty = ProblemDifficulty.MEDIUM;
+    findTheLongestSubstring.category = ProblemCategory.PREFIX_SUM;
+    findTheLongestSubstring.choices = [
+      { id: 'A', text: '前缀异或+哈希表：用二进制记录元音奇偶状态，相同状态的最大间距为结果', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子串统计元音次数', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个位置的元音状态', isCorrect: false },
+      { id: 'D', text: '滑动窗口：维护元音偶数次的窗口', isCorrect: false }
+    ];
+    findTheLongestSubstring.explanation = '前缀异或解法：①用5位二进制mask表示元音a/e/i/o/u的奇偶（0偶数，1奇数）；②map记录mask首次出现的索引，初始{0: -1}；③遍历字符，更新mask；④若mask已存在，计算当前索引-首次索引，更新最大长度；否则记录首次索引。时间O(n)，空间O(1)（mask最多32种）。';
+    findTheLongestSubstring.hint = '元音的奇偶状态可压缩为二进制掩码，相同掩码的前缀意味着中间子串元音均为偶数次';
+    problems.push(findTheLongestSubstring);
+
+    // 2028
+    const pivotIndex = new ProblemModel();
+    pivotIndex.id = 2028;
+    pivotIndex.title = '寻找数组的中心索引 II';
+    pivotIndex.description = '给你一个整数数组 nums ，请计算数组的 中心下标 。数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1 。（进阶：数组可能包含负数）';
+    pivotIndex.difficulty = ProblemDifficulty.EASY;
+    pivotIndex.category = ProblemCategory.PREFIX_SUM;
+    pivotIndex.choices = [
+      { id: 'A', text: '前缀和：计算总 sum，遍历中左侧和 leftSum，右侧和为 sum - leftSum - nums[i]', isCorrect: true },
+      { id: 'B', text: '双指针：从两端向中间移动，调整左右和（不适用于负数）', isCorrect: false },
+      { id: 'C', text: '暴力法：对每个下标计算左右和', isCorrect: false },
+      { id: 'D', text: '动态规划：记录左右和数组', isCorrect: false }
+    ];
+    pivotIndex.explanation = '前缀和解法：①计算数组总和 total；②遍历数组，leftSum 累加左侧元素和；③右侧和 = total - leftSum - nums[i]，若 leftSum == 右侧和，返回当前索引；④遍历结束返回-1。时间O(n)，空间O(1)。';
+    pivotIndex.hint = '即使包含负数，前缀和方法依然适用，核心是用总 sum 快速计算右侧和';
+    problems.push(pivotIndex);
+
+    // 2029
+    const subarraySumsDivisibleByK = new ProblemModel();
+    subarraySumsDivisibleByK.id = 2029;
+    subarraySumsDivisibleByK.title = '和可被 K 整除的子数组';
+    subarraySumsDivisibleByK.description = '给定一个整数数组 A 和一个整数 K，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。';
+    subarraySumsDivisibleByK.difficulty = ProblemDifficulty.MEDIUM;
+    subarraySumsDivisibleByK.category = ProblemCategory.PREFIX_SUM;
+    subarraySumsDivisibleByK.choices = [
+      { id: 'A', text: '前缀和+哈希表：记录前缀和余数出现次数，相同余数的组合数为C(n,2)', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算和', isCorrect: false },
+      { id: 'C', text: '滑动窗口：仅适用于非负数场景', isCorrect: false },
+      { id: 'D', text: '动态规划：记录每个位置的余数', isCorrect: false }
+    ];
+    subarraySumsDivisibleByK.explanation = '前缀和余数解法：①计算前缀和mod K（处理负余数：(sum % K + K) % K）；②map记录余数出现次数，初始{0: 1}；③遍历中，count += map[remainder]，再更新map[remainder]++。时间O(n)，空间O(K)。';
+    subarraySumsDivisibleByK.hint = '若两个前缀和的余数相同，则它们的差可被K整除，利用组合数计算子数组数量';
+    problems.push(subarraySumsDivisibleByK);
+
+    // 2030
+    const checkSubarraySum = new ProblemModel();
+    checkSubarraySum.id = 2030;
+    checkSubarraySum.title = '连续的子数组和';
+    checkSubarraySum.description = '给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：子数组长度 至少为 2 ，且子数组元素总和为 k 的倍数。如果存在，返回 true ；否则，返回 false 。';
+    checkSubarraySum.difficulty = ProblemDifficulty.MEDIUM;
+    checkSubarraySum.category = ProblemCategory.PREFIX_SUM;
+    checkSubarraySum.choices = [
+      { id: 'A', text: '前缀和+哈希表：记录余数首次出现索引，若相同余数索引差≥2则返回true', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有长度≥2的子数组', isCorrect: false },
+      { id: 'C', text: '滑动窗口：不适用于含负数和k=0的情况', isCorrect: false },
+      { id: 'D', text: '动态规划：记录子数组和', isCorrect: false }
+    ];
+    checkSubarraySum.explanation = '前缀和余数解法：①计算前缀和mod k（k=0时特殊处理）；②map记录余数首次出现的索引，初始{0: -1}；③遍历中，若余数已存在且当前索引-首次索引≥2，返回true；否则记录首次索引。时间O(n)，空间O(min(n,k))。';
+    checkSubarraySum.hint = '关键是判断是否存在两个前缀和余数相同且索引差≥2，需特别处理k=0的情况';
+    problems.push(checkSubarraySum);
+
+    // 2032
+    const sumOfSubarrayMinimums = new ProblemModel();
+    sumOfSubarrayMinimums.id = 2032;
+    sumOfSubarrayMinimums.title = '子数组的最小值之和';
+    sumOfSubarrayMinimums.description = '给定一个整数数组 arr，找到子数组中每个元素作为最小值的总和。一个子数组定义为原数组中的一个连续子序列。请你返回这个总和。由于答案可能很大，所以请返回 10^9 + 7 的模。';
+    sumOfSubarrayMinimums.difficulty = ProblemDifficulty.MEDIUM;
+    sumOfSubarrayMinimums.category = ProblemCategory.PREFIX_SUM;
+    sumOfSubarrayMinimums.choices = [
+      { id: 'A', text: '单调栈+前缀和：找到每个元素作为最小值的左右边界，计算贡献', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组找最小值并累加', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[i]表示以i结尾的子数组最小值之和', isCorrect: false },
+      { id: 'D', text: '前缀和：直接计算子数组和的最小值', isCorrect: false }
+    ];
+    sumOfSubarrayMinimums.explanation = '单调栈解法：①用单调栈找到每个元素左侧第一个更小元素left[i]和右侧第一个更小或等于元素right[i]；②元素arr[i]的贡献为arr[i] * (i - left[i]) * (right[i] - i)；③累加所有贡献。时间O(n)，空间O(n)。';
+    sumOfSubarrayMinimums.hint = '每个元素的贡献取决于它能作为最小值的子数组数量，通过单调栈高效找到边界';
+    problems.push(sumOfSubarrayMinimums);
+
+    // 2033
+    const countRangeSum = new ProblemModel();
+    countRangeSum.id = 2033;
+    countRangeSum.title = '区间和的个数';
+    countRangeSum.description = '给你一个整数数组 nums 以及两个整数 lower 和 upper 。求数组中，值位于范围 [lower, upper] （包含 lower 和 upper）之内的 区间和的个数 。区间和 S(i, j) 表示在 nums 中，位置从 i 到 j 的元素之和，包含 i 和 j (i ≤ j)。';
+    countRangeSum.difficulty = ProblemDifficulty.HARD;
+    countRangeSum.category = ProblemCategory.PREFIX_SUM;
+    countRangeSum.choices = [
+      { id: 'A', text: '前缀和+归并排序：在归并过程中统计符合条件的前缀和对', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算和', isCorrect: false },
+      { id: 'C', text: '前缀和+有序集合：查询[sum-upper, sum-lower]的数量', isCorrect: false },
+      { id: 'D', text: '动态规划：记录区间和的数量', isCorrect: false }
+    ];
+    countRangeSum.explanation = '归并排序解法：①计算前缀和数组；②在归并排序过程中，对右半部分每个sum[j]，在左半部分找满足sum[j]-upper ≤ sum[i] ≤ sum[j]-lower的i的数量；③累加计数并完成排序。时间O(n log n)，空间O(n)。';
+    countRangeSum.hint = '利用归并排序的分治思想，在排序过程中高效统计符合条件的前缀和对，避免O(n²)时间';
+    problems.push(countRangeSum);
+
+
+    // 3030
+    const numSubarrayProductLessThanK = new ProblemModel();
+    numSubarrayProductLessThanK.id = 3030;
+    numSubarrayProductLessThanK.title = '乘积小于K的子数组';
+    numSubarrayProductLessThanK.description = '给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。';
+    numSubarrayProductLessThanK.difficulty = ProblemDifficulty.MEDIUM;
+    numSubarrayProductLessThanK.category = ProblemCategory.SLIDING_WINDOW;
+    numSubarrayProductLessThanK.choices = [
+      { id: 'A', text: '滑动窗口：维护乘积小于k的窗口，右移时累加窗口长度到结果', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有子数组计算乘积', isCorrect: false },
+      { id: 'C', text: '前缀积：乘积可能溢出且无法直接相除', isCorrect: false },
+      { id: 'D', text: '动态规划：记录以i结尾的子数组乘积', isCorrect: false }
+    ];
+    numSubarrayProductLessThanK.explanation = '滑动窗口解法：①若k≤1，返回0；②left=0，product=1，count=0；③遍历right：product *= nums[right]；④当product≥k时，product /= nums[left]，left++；⑤count += right - left + 1（新增的以right结尾的子数组）。时间O(n)，空间O(1)。';
+    numSubarrayProductLessThanK.hint = '窗口内所有子数组的乘积都小于k，右移时新增的子数组数量等于窗口长度';
+    problems.push(numSubarrayProductLessThanK);
+
+
+    // 3032
+    const minOperations = new ProblemModel();
+    minOperations.id = 3032;
+    minOperations.title = '最少交换次数来组合所有的1 II';
+    minOperations.description = '交换 定义为选中一个数组中的两个 不同 位置并交换二者的值。环形 数组是一个数组，可以认为 第一个 元素和 最后一个 元素 相邻 。给你一个 二进制环形 数组 nums ，返回在 任意位置 将数组中的所有 1 聚集在一起需要的最少交换次数。';
+    minOperations.id = 3032;
+    minOperations.difficulty = ProblemDifficulty.HARD;
+    minOperations.category = ProblemCategory.SLIDING_WINDOW;
+    minOperations.choices = [
+      { id: 'A', text: '滑动窗口：将环形转为线性（双倍长度），找含最多1的窗口，交换次数=总1数-窗口1数', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有可能的聚集位置', isCorrect: false },
+      { id: 'C', text: '前缀和：计算环形数组中1的分布', isCorrect: false },
+      { id: 'D', text: '动态规划：记录不同位置的交换次数', isCorrect: false }
+    ];
+    minOperations.explanation = '滑动窗口解法：①计算总1数totalOnes，若为0返回0；②将nums复制一份拼接（处理环形）；③滑动窗口大小为totalOnes，计算窗口内1的最大数maxOnes；④最少交换次数=totalOnes - maxOnes。时间O(n)，空间O(n)。';
+    minOperations.hint = '环形数组可通过双倍长度转为线性问题，核心是找到包含最多1的窗口以减少交换次数';
+    problems.push(minOperations);
+
+    // 3033
+    const maxSatisfiedII = new ProblemModel();
+    maxSatisfiedII.id = 3033;
+    maxSatisfiedII.title = '爱生气的书店老板 II';
+    maxSatisfiedII.description = '有一个书店老板，他的书店开了 n 分钟。每分钟都有一些顾客进入这家商店。给定一个数组 customers ，其中 customers[i] 是在第 i 分钟开始时进入商店的顾客数量，所有这些顾客在第 i 分钟结束后离开。在某些分钟内，书店老板会生气。如果书店老板在第 i 分钟生气，那么那一分钟的顾客就会不满意，否则他们就会满意。给定一个数组 grumpy ，其中 grumpy[i] 是 1 表示书店老板在第 i 分钟生气，0 表示不生气。书店老板知道一个秘密技巧，能让自己连续 m 分钟不生气，但可以使用 多次 （可重叠）。请你返回这一天营业下来，最多有多少顾客能够感到满意。';
+    maxSatisfiedII.difficulty = ProblemDifficulty.MEDIUM;
+    maxSatisfiedII.category = ProblemCategory.SLIDING_WINDOW;
+    maxSatisfiedII.choices = [
+      { id: 'A', text: '滑动窗口：计算基础满意数，再找所有m分钟窗口的额外满意数之和（可重叠）', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有可能的m分钟窗口组合', isCorrect: false },
+      { id: 'C', text: '前缀和：计算每个窗口的额外满意数', isCorrect: false },
+      { id: 'D', text: '动态规划：记录使用技巧次数的最大满意数', isCorrect: false }
+    ];
+    maxSatisfiedII.explanation = '滑动窗口解法：①计算基础满意数（grumpy[i]=0时的customers[i]）；②计算每个m分钟窗口的额外满意数（grumpy[i]=1时的customers[i]）；③由于可多次使用，累加所有窗口的额外满意数（注意重叠部分不重复计算）；④总满意数=基础满意数+累加的额外满意数。时间O(n)，空间O(1)。';
+    maxSatisfiedII.hint = '多次使用技巧时，重叠窗口的额外满意数只需计算一次，本质是收集所有生气时的顾客';
+    problems.push(maxSatisfiedII);
+
+    // 3034
+    const characterReplacementII = new ProblemModel();
+    characterReplacementII.id = 3034;
+    characterReplacementII.title = '替换后的最长重复字符 II';
+    characterReplacementII.description = '给你一个字符串 s 和一个整数 k 。你可以选择字符串中的任一字符，并将其更改为任何其他大写英文字符。该操作最多可执行 任意次 ，但每次操作后必须保证替换后的子串是 连续的 。返回包含相同字母的最长子串的长度。';
+    characterReplacementII.difficulty = ProblemDifficulty.MEDIUM;
+    characterReplacementII.category = ProblemCategory.SLIDING_WINDOW;
+    characterReplacementII.choices = [
+      { id: 'A', text: '滑动窗口+字符计数：与原版相同，允许任意次替换时窗口可无限扩展（返回字符串长度）', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举每个字符和替换次数', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个位置的最大可能长度', isCorrect: false },
+      { id: 'D', text: '前缀和：统计每个字符的前缀出现次数', isCorrect: false }
+    ];
+    characterReplacementII.explanation = '特殊情况处理：①当k≥s.length时，可将所有字符替换为同一字符，返回s.length；②否则与原版解法相同：维护窗口内出现最多的字符数，窗口长度- maxCount ≤k时扩展，否则收缩。时间O(n)，空间O(1)。';
+    characterReplacementII.hint = '当允许任意次替换时，最长子串即为字符串本身长度，需特殊处理此边界条件';
+    problems.push(characterReplacementII);
+
+    // 6. 不同的二叉搜索树 II
+    const generateTrees = new ProblemModel();
+    generateTrees.id = 1006;
+    generateTrees.title = '不同的二叉搜索树 II';
+    generateTrees.description = '给你一个整数 n ，请你生成并返回所有由 n 个节点组成且节点值从 1 到 n 互不相同的不同 二叉搜索树 。可以按 任意顺序 返回答案。';
+    generateTrees.difficulty = ProblemDifficulty.MEDIUM;
+    generateTrees.category = ProblemCategory.DIVIDE_CONQUER;
+    generateTrees.choices = [
+      { id: 'A', text: '分治：以i为根，递归生成左子树（1~i-1）和右子树（i+1~n），组合所有可能', isCorrect: true },
+      { id: 'B', text: '动态规划：记录n-1的结果推导n的结果', isCorrect: false },
+      { id: 'C', text: '回溯法：尝试所有节点组合', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有可能结构', isCorrect: false }
+    ];
+    generateTrees.explanation = '分治解法：①若n=0，返回空列表；②定义递归函数生成[start, end]的所有BST；③遍历i从start到end，作为根节点；④递归生成左子树[start, i-1]和右子树[i+1, end]；⑤组合根节点与所有左右子树的可能配对。时间O(4^n / n^(1/2))（卡特兰数），空间O(4^n / n^(1/2))。';
+    generateTrees.hint = '利用BST的性质（左小右大），通过根节点分割左右子树区间，递归组合所有可能';
+    problems.push(generateTrees);
+
+
+    // 10. 为运算表达式设计优先级
+    const diffWaysToCompute = new ProblemModel();
+    diffWaysToCompute.id = 1010;
+    diffWaysToCompute.title = '为运算表达式设计优先级';
+    diffWaysToCompute.description = '给你一个由数字和运算符组成的字符串 expression ，按不同优先级组合数字和运算符，计算并返回所有可能的结果。你可以 按任意顺序 返回答案。';
+    diffWaysToCompute.difficulty = ProblemDifficulty.MEDIUM;
+    diffWaysToCompute.category = ProblemCategory.DIVIDE_CONQUER;
+    diffWaysToCompute.choices = [
+      { id: 'A', text: '分治：以每个运算符为分割点，递归计算左右表达式结果，再组合运算', isCorrect: true },
+      { id: 'B', text: '动态规划：记录子表达式的所有可能结果', isCorrect: false },
+      { id: 'C', text: '栈：模拟运算优先级', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有括号组合', isCorrect: false }
+    ];
+    diffWaysToCompute.explanation = '分治解法：①若表达式为纯数字，返回该数字；②遍历表达式，遇运算符则分割为左右子表达式；③递归计算左右子表达式的所有可能结果；④对左右结果的每个组合应用当前运算符，收集所有结果。时间O(2^n)，空间O(2^n)。';
+    diffWaysToCompute.hint = '每个运算符都可以作为最后一步运算，通过递归分解问题并组合结果';
+    problems.push(diffWaysToCompute);
+
+    // 13. 给表达式添加括号
+    const generateParenthesisDivide = new ProblemModel();
+    generateParenthesisDivide.id = 1013;
+    generateParenthesisDivide.title = '给表达式添加括号';
+    generateParenthesisDivide.description = '数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。';
+    generateParenthesisDivide.difficulty = ProblemDifficulty.MEDIUM;
+    generateParenthesisDivide.category = ProblemCategory.DIVIDE_CONQUER;
+    generateParenthesisDivide.choices = [
+      { id: 'A', text: '分治：有效括号组合可表示为"(A)B"，其中A和B为有效组合（可能为空）', isCorrect: true },
+      { id: 'B', text: '回溯：递归过程中保证左括号数≥右括号数', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[n]基于dp[0..n-1]组合生成', isCorrect: false },
+      { id: 'D', text: '暴力法：生成所有可能再筛选有效组合', isCorrect: false }
+    ];
+    generateParenthesisDivide.explanation = '分治解法：①基线条件：n=0返回[""]；②对每个i从0到n-1，递归生成A=dp[i]和B=dp[n-1-i]；③组合所有"(a)b"形式（a∈A，b∈B）。时间O(4^n / n^(1/2))，空间O(4^n / n^(1/2))。';
+    generateParenthesisDivide.hint = '将问题分解为子问题，利用有效括号的结构递归构建所有可能组合';
+    problems.push(generateParenthesisDivide);
+
+    // 14. 区间子数组个数
+    const numSubarrayBoundedMax = new ProblemModel();
+    numSubarrayBoundedMax.id = 1014;
+    numSubarrayBoundedMax.title = '区间子数组个数';
+    numSubarrayBoundedMax.description = '给你一个整数数组 nums 和两个整数 left 和 right 。找出 nums 中连续、非空且其中最大元素在范围 [left, right] 内的子数组数目。';
+    numSubarrayBoundedMax.difficulty = ProblemDifficulty.MEDIUM;
+    numSubarrayBoundedMax.category = ProblemCategory.DIVIDE_CONQUER;
+    numSubarrayBoundedMax.choices = [
+      { id: 'A', text: '分治：找到数组最大值位置，分左右子数组计算，再处理跨区间的有效子数组', isCorrect: true },
+      { id: 'B', text: '动态规划：记录以i结尾的有效子数组数', isCorrect: false },
+      { id: 'C', text: '暴力法：枚举所有子数组并检查最大值', isCorrect: false },
+      { id: 'D', text: '滑动窗口：维护最大值在区间内的窗口', isCorrect: false }
+    ];
+    numSubarrayBoundedMax.explanation = '分治解法：①若数组为空，返回0；②找到数组最大值位置mid；③若最大值<left，返回左右子数组结果之和；④若最大值>right，返回左右子数组结果之和；⑤否则返回左结果+右结果+左长度*右长度+1（跨区间的子数组）。时间O(n log n)，空间O(log n)。';
+    numSubarrayBoundedMax.hint = '通过最大值位置分割数组，根据最大值与区间的关系决定是否计入跨区间子数组';
+    problems.push(numSubarrayBoundedMax);
+
+    // 15. 最大二叉树
+    const constructMaximumBinaryTree = new ProblemModel();
+    constructMaximumBinaryTree.id = 1015;
+    constructMaximumBinaryTree.title = '最大二叉树';
+    constructMaximumBinaryTree.description = '给定一个不重复的整数数组 nums 。 最大二叉树 可以用下面的算法从 nums 递归地构建:创建一个根节点，其值为 nums 中的最大值。递归地在最大值 左边 的 子数组前缀上 构建左子树。递归地在最大值 右边 的 子数组后缀上 构建右子树。返回 nums 构建的 最大二叉树 。';
+    constructMaximumBinaryTree.difficulty = ProblemDifficulty.MEDIUM;
+    constructMaximumBinaryTree.category = ProblemCategory.DIVIDE_CONQUER;
+    constructMaximumBinaryTree.choices = [
+      { id: 'A', text: '分治：找到数组最大值作为根，递归构建左右子树', isCorrect: true },
+      { id: 'B', text: '栈：单调栈寻找每个元素的左右边界', isCorrect: false },
+      { id: 'C', text: '暴力法：每次扫描找最大值', isCorrect: false },
+      { id: 'D', text: '动态规划：记录子数组的最大值位置', isCorrect: false }
+    ];
+    constructMaximumBinaryTree.explanation = '分治解法：①若数组为空，返回null；②找到数组最大值及其索引maxIdx；③创建根节点，值为最大值；④递归构建左子树（nums[0..maxIdx-1]）和右子树（nums[maxIdx+1..end]）；⑤返回根节点。时间O(n²)（最坏情况），空间O(n)。';
+    constructMaximumBinaryTree.hint = '直接按照题目描述的递归构建方法实现，利用分治思想将数组分割为左右子区间';
+    problems.push(constructMaximumBinaryTree);
+
+
+    // 18. 计算右侧小于当前元素的个数
+    const countSmaller = new ProblemModel();
+    countSmaller.id = 1018;
+    countSmaller.title = '计算右侧小于当前元素的个数';
+    countSmaller.description = '给你一个整数数组 nums ，按要求返回一个新数组 counts 。数组 counts 有该性质： counts[i] 的值是 nums[i] 右侧小于 nums[i] 的元素的数量。';
+    countSmaller.difficulty = ProblemDifficulty.HARD;
+    countSmaller.category = ProblemCategory.DIVIDE_CONQUER;
+    countSmaller.choices = [
+      { id: 'A', text: '分治（归并排序）：合并时统计右侧小于左侧元素的数量', isCorrect: true },
+      { id: 'B', text: 'Fenwick树：通过坐标压缩和前缀和统计', isCorrect: false },
+      { id: 'C', text: '暴力法：对每个元素遍历右侧计数', isCorrect: false },
+      { id: 'D', text: '二叉搜索树：插入时统计小于当前值的节点数', isCorrect: false }
+    ];
+    countSmaller.explanation = '归并解法：①将数组元素与索引绑定；②归并排序过程中，当右元素<左元素时，累加右数组剩余元素数到左元素的计数；③合并有序数组；④最终按原索引返回计数。时间O(n log n)，空间O(n)。';
+    countSmaller.hint = '利用归并排序的合并阶段，高效统计右侧较小元素的数量，避免重复比较';
+    problems.push(countSmaller);
+
+    // 2. 2的幂
+    const isPowerOfTwo = new ProblemModel();
+    isPowerOfTwo.id = 2002;
+    isPowerOfTwo.title = '2的幂';
+    isPowerOfTwo.description = '给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。如果存在一个整数 x 使得 n == 2^x ，则认为 n 是 2 的幂次方。';
+    isPowerOfTwo.difficulty = ProblemDifficulty.EASY;
+    isPowerOfTwo.category = ProblemCategory.BIT_MANIPULATION;
+    isPowerOfTwo.choices = [
+      { id: 'A', text: '位运算：n > 0 且 n & (n-1) == 0（二进制只有一个1）', isCorrect: true },
+      { id: 'B', text: '循环除法：反复除以2，检查是否有余数', isCorrect: false },
+      { id: 'C', text: '数学对数：计算log2(n)是否为整数', isCorrect: false },
+      { id: 'D', text: '查表法：预存2的幂值', isCorrect: false }
+    ];
+    isPowerOfTwo.explanation = '位运算解法：①若n≤0，返回false；②检查n & (n-1)是否为0。2的幂的二进制表示只有一个1，n-1则全为1，与运算结果为0。时间O(1)，空间O(1)。';
+    isPowerOfTwo.hint = '2的幂在二进制中具有唯一的1，利用此特性通过一次位运算即可判断';
+    problems.push(isPowerOfTwo);
+
+    // 3. 两整数之和
+    const getSum = new ProblemModel();
+    getSum.id = 2003;
+    getSum.title = '两整数之和';
+    getSum.description = '给你两个整数 a 和 b ，不使用 运算符 + 和 -，计算并返回两整数之和。';
+    getSum.difficulty = ProblemDifficulty.MEDIUM;
+    getSum.category = ProblemCategory.BIT_MANIPULATION;
+    getSum.choices = [
+      { id: 'A', text: '位运算：异或求无进位和，与运算左移求进位，递归直到无进位', isCorrect: true },
+      { id: 'B', text: '库函数：使用Math.add()（实际不存在）', isCorrect: false },
+      { id: 'C', text: '自增自减：循环累加', isCorrect: false },
+      { id: 'D', text: '字符串转换：模拟加法运算', isCorrect: false }
+    ];
+    getSum.explanation = '位运算解法：①a ^ b 得到无进位的和；②(a & b) << 1 得到进位；③递归计算无进位和与进位的和，直到进位为0。时间O(log(max(a,b)))，空间O(log(max(a,b)))。';
+    getSum.hint = '将加法分解为无进位相加和进位两部分，通过位运算分别计算并组合';
+    problems.push(getSum);
+
+    // 4. 只出现一次的数字
+    const singleNumber = new ProblemModel();
+    singleNumber.id = 2004;
+    singleNumber.title = '只出现一次的数字';
+    singleNumber.description = '给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。说明：你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？';
+    singleNumber.difficulty = ProblemDifficulty.EASY;
+    singleNumber.category = ProblemCategory.BIT_MANIPULATION;
+    singleNumber.choices = [
+      { id: 'A', text: '异或运算：x ^ x = 0，x ^ 0 = x，所有元素异或结果即为目标', isCorrect: true },
+      { id: 'B', text: '哈希表：统计出现次数', isCorrect: false },
+      { id: 'C', text: '排序：遍历找单独的元素', isCorrect: false },
+      { id: 'D', text: '数学公式：2*(a+b+c) - (a+a+b+b+c) = c', isCorrect: false }
+    ];
+    singleNumber.explanation = '异或解法：①初始化result=0；②遍历数组，result ^= num；③返回result。异或满足交换律和结合律，成对元素抵消，剩余即为单独元素。时间O(n)，空间O(1)。';
+    singleNumber.hint = '利用异或的特性（自反性和恒等性），无需额外空间即可找到唯一出现一次的元素';
+    problems.push(singleNumber);
+
+    // 5. 数字范围按位与
+    const rangeBitwiseAnd = new ProblemModel();
+    rangeBitwiseAnd.id = 2005;
+    rangeBitwiseAnd.title = '数字范围按位与';
+    rangeBitwiseAnd.description = '给你两个整数 left 和 right ，表示区间 [left, right] ，返回此区间内所有数字 按位与 的结果（包含 left 和 right 端点）。';
+    rangeBitwiseAnd.difficulty = ProblemDifficulty.MEDIUM;
+    rangeBitwiseAnd.category = ProblemCategory.BIT_MANIPULATION;
+    rangeBitwiseAnd.choices = [
+      { id: 'A', text: '位运算：找到left和right的公共前缀，其余位补0', isCorrect: true },
+      { id: 'B', text: '暴力法：遍历区间所有数字依次按位与', isCorrect: false },
+      { id: 'C', text: '数学公式：计算区间内所有数字的与', isCorrect: false },
+      { id: 'D', text: '动态规划：记录每个位的状态', isCorrect: false }
+    ];
+    rangeBitwiseAnd.explanation = '公共前缀解法：①当left < right时，移除right的最后一位（right &= right-1）；②重复直到left == right，此时的值即为公共前缀；③返回该值。时间O(log n)，空间O(1)。';
+    rangeBitwiseAnd.hint = '区间内数字按位与的结果是所有数字的公共前缀，通过右移消除不同的低位';
+    problems.push(rangeBitwiseAnd);
+
+    // 6. 颠倒二进制位
+    const reverseBits = new ProblemModel();
+    reverseBits.id = 2006;
+    reverseBits.title = '颠倒二进制位';
+    reverseBits.description = '颠倒给定的 32 位无符号整数的二进制位。';
+    reverseBits.difficulty = ProblemDifficulty.EASY;
+    reverseBits.category = ProblemCategory.BIT_MANIPULATION;
+    reverseBits.choices = [
+      { id: 'A', text: '位运算：循环取出n的最低位，拼接到结果的最高位', isCorrect: true },
+      { id: 'B', text: '转为字符串：反转后转为整数', isCorrect: false },
+      { id: 'C', text: '查表法：预计算8位反转结果，分4段处理', isCorrect: false },
+      { id: 'D', text: '数学公式：计算反转后的数值', isCorrect: false }
+    ];
+    reverseBits.explanation = '位运算解法：①初始化result=0；②循环32次：result <<= 1（腾出低位），result |= n & 1（取n的最低位），n >>= 1；③返回result。时间O(1)，空间O(1)。';
+    reverseBits.hint = '通过循环逐位处理，将原数字的低位依次移到结果的高位';
+    problems.push(reverseBits);
+
+    // 7. 只出现一次的数字 II
+    const singleNumberII = new ProblemModel();
+    singleNumberII.id = 2007;
+    singleNumberII.title = '只出现一次的数字 II';
+    singleNumberII.description = '给你一个整数数组 nums ，除某个元素仅出现 一次 外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素。';
+    singleNumberII.difficulty = ProblemDifficulty.MEDIUM;
+    singleNumberII.category = ProblemCategory.BIT_MANIPULATION;
+    singleNumberII.choices = [
+      { id: 'A', text: '位运算：统计每个位出现的次数，模3后剩余的位组成目标数字', isCorrect: true },
+      { id: 'B', text: '哈希表：统计出现次数', isCorrect: false },
+      { id: 'C', text: '排序：遍历找单独的元素', isCorrect: false },
+      { id: 'D', text: '数学公式：(3*(a+b+c) - (a+a+a+b+b+b+c)) / 2 = c', isCorrect: false }
+    ];
+    singleNumberII.explanation = '位统计解法：①初始化result=0；②对每个位（0-31）：统计数组中该位为1的次数；③若次数模3为1，将该位设为1（result |= 1 << i）；④返回result。时间O(n)，空间O(1)。';
+    singleNumberII.hint = '每个位出现的总次数若为3的倍数则目标数字该位为0，否则为1';
+    problems.push(singleNumberII);
+
+    // 9. 子集
+    const subsetsBit = new ProblemModel();
+    subsetsBit.id = 2009;
+    subsetsBit.title = '子集';
+    subsetsBit.description = '给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。解集 不能 包含重复的子集。你可以按 任意顺序 返回答案。';
+    subsetsBit.difficulty = ProblemDifficulty.MEDIUM;
+    subsetsBit.category = ProblemCategory.BIT_MANIPULATION;
+    subsetsBit.choices = [
+      { id: 'A', text: '位运算：每个子集对应一个二进制数，位为1表示包含对应元素', isCorrect: true },
+      { id: 'B', text: '回溯法：递归选择或不选择每个元素', isCorrect: false },
+      { id: 'C', text: '动态规划：从空集开始，逐步添加元素生成新子集', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有可能组合', isCorrect: false }
+    ];
+    subsetsBit.explanation = '位运算解法：①n = nums.length，子集总数为2^n；②对每个mask从0到2^n-1：遍历bit位，若第i位为1则包含nums[i]；③收集所有子集。时间O(n*2^n)，空间O(n)。';
+    subsetsBit.hint = '每个元素的存在与否可用二进制位表示，通过遍历所有可能的位组合生成子集';
+    problems.push(subsetsBit);
+
+    // 10. 格雷编码
+    const grayCode = new ProblemModel();
+    grayCode.id = 2010;
+    grayCode.title = '格雷编码';
+    grayCode.description = 'n 位格雷码序列 是一个由 2^n 个整数组成的序列，其中：每个整数都在范围 [0, 2^n - 1] 内（含 0 和 2^n - 1）。第一个整数是 0。一个整数在序列中出现 不超过一次 。每对 相邻 整数的二进制表示 恰好一位不同 。 第一个 和 最后一个 整数的二进制表示 恰好一位不同 。给你一个整数 n ，返回任一有效的 n 位格雷码序列 。';
+    grayCode.difficulty = ProblemDifficulty.MEDIUM;
+    grayCode.category = ProblemCategory.BIT_MANIPULATION;
+    grayCode.choices = [
+      { id: 'A', text: '位运算：i ^ (i >> 1) 生成第i个格雷码', isCorrect: true },
+      { id: 'B', text: '递归：n+1的格雷码基于n的结果生成', isCorrect: false },
+      { id: 'C', text: '回溯：尝试生成满足条件的序列', isCorrect: false },
+      { id: 'D', text: '数学公式：转换二进制为格雷码', isCorrect: false }
+    ];
+    grayCode.explanation = '位运算解法：①初始化结果数组；②对i从0到2^n - 1：计算i ^ (i >> 1)，加入结果；③返回结果。该公式确保相邻格雷码只有一位不同。时间O(2^n)，空间O(2^n)。';
+    grayCode.hint = '利用格雷码的生成公式，通过简单的位运算即可直接计算每个位置的格雷码';
+    problems.push(grayCode);
+
+    // 11. 缺失的数字
+    const missingNumber = new ProblemModel();
+    missingNumber.id = 2011;
+    missingNumber.title = '缺失的数字';
+    missingNumber.description = '给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。';
+    missingNumber.difficulty = ProblemDifficulty.EASY;
+    missingNumber.category = ProblemCategory.BIT_MANIPULATION;
+    missingNumber.choices = [
+      { id: 'A', text: '异或运算：将数组元素与0~n异或，结果即为缺失的数字', isCorrect: true },
+      { id: 'B', text: '数学公式：n*(n+1)/2 - 数组和', isCorrect: false },
+      { id: 'C', text: '哈希表：记录出现的数字，再查找缺失的', isCorrect: false },
+      { id: 'D', text: '排序：遍历找不连续的数字', isCorrect: false }
+    ];
+    missingNumber.explanation = '异或解法：①初始化result = n；②遍历i从0到n-1：result ^= i ^ nums[i]；③返回result。成对的数字异或为0，剩余即为缺失数字。时间O(n)，空间O(1)。';
+    missingNumber.hint = '利用异或的性质，将所有存在的数字与其索引异或，最终剩余的就是缺失数字';
+    problems.push(missingNumber);
+
+    // 12. 只出现一次的数字 III
+    const singleNumberIII = new ProblemModel();
+    singleNumberIII.id = 2012;
+    singleNumberIII.title = '只出现一次的数字 III';
+    singleNumberIII.description = '给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 任意顺序 返回答案。';
+    singleNumberIII.difficulty = ProblemDifficulty.MEDIUM;
+    singleNumberIII.category = ProblemCategory.BIT_MANIPULATION;
+    singleNumberIII.choices = [
+      { id: 'A', text: '位运算：先异或所有元素得x，找x中任意为1的位，按该位将数组分为两组，分别异或得结果', isCorrect: true },
+      { id: 'B', text: '哈希表：统计出现次数', isCorrect: false },
+      { id: 'C', text: '排序：遍历找单独的元素', isCorrect: false },
+      { id: 'D', text: '暴力法：逐个检查每个元素是否出现两次', isCorrect: false }
+    ];
+    singleNumberIII.explanation = '分组异或解法：①所有元素异或得x（两个目标元素的异或）；②找到x中最低位的1（diff = x & -x）；③遍历数组，按num & diff是否为0分为两组；④每组内异或得到一个目标元素。时间O(n)，空间O(1)。';
+    singleNumberIII.hint = '通过两个目标元素的异或结果找到区分它们的位，分组后分别求解';
+    problems.push(singleNumberIII);
+
+    // 13. 整数替换
+    const integerReplacement = new ProblemModel();
+    integerReplacement.id = 2013;
+    integerReplacement.title = '整数替换';
+    integerReplacement.description = '给定一个正整数 n ，你可以做如下操作：如果 n 是偶数，则用 n / 2替换 n 。如果 n 是奇数，则可以用 n + 1或n - 1替换 n 。返回使 n 变为 1 所需的 最小替换次数 。';
+    integerReplacement.difficulty = ProblemDifficulty.MEDIUM;
+    integerReplacement.category = ProblemCategory.BIT_MANIPULATION;
+    integerReplacement.choices = [
+      { id: 'A', text: '位运算+贪心：奇数时，若末两位为11则+1（除n=3外），否则-1', isCorrect: true },
+      { id: 'B', text: '递归：尝试两种操作取最小值', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个n的最小次数', isCorrect: false },
+      { id: 'D', text: '暴力法：BFS寻找最短路径', isCorrect: false }
+    ];
+    integerReplacement.explanation = '贪心解法：①初始化count=0；②while n>1：若n为奇数，若n=3或(n&2)==0则n--，否则n++，count++；③若n为偶数，n>>=1，count++；④返回count。时间O(log n)，空间O(1)。';
+    integerReplacement.hint = '奇数时通过末两位判断最优操作，尽量减少后续步骤的次数';
+    problems.push(integerReplacement);
+
+    // 14. 两数相除
+    const divide = new ProblemModel();
+    divide.id = 2014;
+    divide.title = '两数相除';
+    divide.description = '给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。返回被除数 dividend 除以除数 divisor 得到的商。整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2。';
+    divide.difficulty = ProblemDifficulty.MEDIUM;
+    divide.category = ProblemCategory.BIT_MANIPULATION;
+    divide.choices = [
+      { id: 'A', text: '位运算：通过左移找到最大的倍数，累减计算商', isCorrect: true },
+      { id: 'B', text: '暴力法：循环减去除数计数', isCorrect: false },
+      { id: 'C', text: '数学公式：使用指数函数转换', isCorrect: false },
+      { id: 'D', text: '二分查找：查找最大的商使得除数*商≤被除数', isCorrect: false }
+    ];
+    divide.explanation = '位运算解法：①处理符号和边界（如溢出）；②将被除数和除数转为正数；③找到最大的shift使得divisor << shift ≤ dividend；④商 += 1 << shift，被除数 -= divisor << shift；⑤重复直到被除数<除数。时间O(log n)，空间O(1)。';
+    divide.hint = '利用左移等价于乘以2的特性，快速找到最大可能的倍数，减少减法次数';
+    problems.push(divide);
+
+    // 15. 最大单词长度乘积
+    const maxProduct = new ProblemModel();
+    maxProduct.id = 2015;
+    maxProduct.title = '最大单词长度乘积';
+    maxProduct.description = '给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。';
+    maxProduct.difficulty = ProblemDifficulty.MEDIUM;
+    maxProduct.category = ProblemCategory.BIT_MANIPULATION;
+    maxProduct.choices = [
+      { id: 'A', text: '位运算：用二进制表示单词含有的字母，通过与运算判断是否有公共字母', isCorrect: true },
+      { id: 'B', text: '哈希表：记录每个单词的字母集合，比较集合交集', isCorrect: false },
+      { id: 'C', text: '暴力法：逐个比较单词的字母', isCorrect: false },
+      { id: 'D', text: '排序：按长度排序后优先比较长单词', isCorrect: false }
+    ];
+    maxProduct.explanation = '位运算解法：①预处理每个单词为bitmask（每个字母对应一位）；②遍历所有单词对，若mask[i] & mask[j] == 0，计算长度乘积；③记录最大值。时间O(n² + L)（L为总字符数），空间O(n)。';
+    maxProduct.hint = '用26位二进制数表示单词的字母集合，通过与运算快速判断是否有公共字母';
+    problems.push(maxProduct);
+
+    // 16. 二进制手表
+    const readBinaryWatchBit = new ProblemModel();
+    readBinaryWatchBit.id = 2016;
+    readBinaryWatchBit.title = '二进制手表';
+    readBinaryWatchBit.description = '二进制手表顶部有 4 个 LED 代表 小时（0-11），底部的 6 个 LED 代表 分钟（0-59）。每个 LED 代表一个 0 或 1，最低位在右侧。例如，下面的二进制手表读取 "3:25" 。给你一个整数 turnedOn ，表示当前亮着的 LED 的数量，返回二进制手表可以表示的所有可能时间。你可以 按任意顺序 返回答案。小时不会以零开头：例如，"01:00" 是无效的，正确的写法应该是 "1:00" 。分钟必须由两位数组成，可能会以零开头：例如，"10:2" 是无效的，正确的写法应该是 "10:02" 。';
+    readBinaryWatchBit.difficulty = ProblemDifficulty.EASY;
+    readBinaryWatchBit.category = ProblemCategory.BIT_MANIPULATION;
+    readBinaryWatchBit.choices = [
+      { id: 'A', text: '位运算：枚举所有可能的小时和分钟，统计1的总数是否等于turnedOn', isCorrect: true },
+      { id: 'B', text: '回溯法：递归选择LED是否点亮', isCorrect: false },
+      { id: 'C', text: '暴力法：生成所有可能时间并检查', isCorrect: false },
+      { id: 'D', text: '数学公式：计算可能的组合', isCorrect: false }
+    ];
+    readBinaryWatchBit.explanation = '位运算解法：①遍历小时0-11，分钟0-59；②对每个小时h和分钟m，计算二进制中1的总数；③若总数=turnedOn，格式化时间并加入结果。时间O(1)（范围固定），空间O(1)。';
+    readBinaryWatchBit.hint = '利用位运算统计小时和分钟中亮着的LED数量（1的个数），筛选符合条件的时间';
+    problems.push(readBinaryWatchBit);
+
+    // 17. 数字的补数
+    const findComplement = new ProblemModel();
+    findComplement.id = 2017;
+    findComplement.title = '数字的补数';
+    findComplement.description = '对整数的二进制表示取反（0 变 1 ，1 变 0）后，再转换为十进制表示，可以得到这个整数的补数。例如，整数 5 的二进制表示是 "101" ，取反后得到 "010" ，再转回十进制是 2 ，所以 5 的补数是 2 。给你一个整数 num ，输出它的补数。';
+    findComplement.difficulty = ProblemDifficulty.EASY;
+    findComplement.category = ProblemCategory.BIT_MANIPULATION;
+    findComplement.choices = [
+      { id: 'A', text: '位运算：创建与num二进制位数相同的全1掩码，与num异或', isCorrect: true },
+      { id: 'B', text: '字符串转换：反转二进制字符串后转为整数', isCorrect: false },
+      { id: 'C', text: '数学计算：计算2^n - 1 - num（n为二进制位数）', isCorrect: false },
+      { id: 'D', text: '循环：逐位取反', isCorrect: false }
+    ];
+    findComplement.explanation = '掩码异或解法：①若num=0，返回1；②计算掩码mask=1，直到mask>num；③mask减1得到全1掩码；④返回num ^ mask。时间O(log num)，空间O(1)。';
+    findComplement.hint = '通过掩码确保只对有效二进制位取反，避免前导零的影响';
+    problems.push(findComplement);
+
+    // 18. 交换数字
+    const swapNumbers = new ProblemModel();
+    swapNumbers.id = 2018;
+    swapNumbers.title = '交换数字';
+    swapNumbers.description = '编写一个函数，不用临时变量，直接交换numbers = [a, b]中a与b的值。';
+    swapNumbers.difficulty = ProblemDifficulty.EASY;
+    swapNumbers.category = ProblemCategory.BIT_MANIPULATION;
+    swapNumbers.choices = [
+      { id: 'A', text: '位运算：a ^= b; b ^= a; a ^= b;', isCorrect: true },
+      { id: 'B', text: '算术运算：a = a + b; b = a - b; a = a - b;', isCorrect: false },
+      { id: 'C', text: 'ES6解构：[a, b] = [b, a]', isCorrect: false },
+      { id: 'D', text: '数组方法：使用splice交换', isCorrect: false }
+    ];
+    swapNumbers.explanation = '位运算解法：①a ^= b（a变为a^b）；②b ^= a（b变为b^(a^b)=a）；③a ^= b（a变为(a^b)^a=b）。无需额外变量，且避免算术运算的溢出问题。时间O(1)，空间O(1)。';
+    swapNumbers.hint = '利用异或的特性（x^x=0和x^0=x），通过三次异或操作完成交换';
+    problems.push(swapNumbers);
+
+    // 19. 翻转数位
+    const reverseBitsMax = new ProblemModel();
+    reverseBitsMax.id = 2019;
+    reverseBitsMax.title = '翻转数位';
+    reverseBitsMax.description = '给定一个32位整数 num，你可以将一个数位从0变为1。请编写一个程序，找出你能够获得的最长的一串1的长度。';
+    reverseBitsMax.difficulty = ProblemDifficulty.MEDIUM;
+    reverseBitsMax.category = ProblemCategory.BIT_MANIPULATION;
+    reverseBitsMax.choices = [
+      { id: 'A', text: '位运算+滑动窗口：记录前一段1的长度，遇到0时更新当前长度', isCorrect: true },
+      { id: 'B', text: '暴力法：尝试翻转每个0后计算最长1', isCorrect: false },
+      { id: 'C', text: '动态规划：记录翻转和未翻转状态的最长1', isCorrect: false },
+      { id: 'D', text: '字符串：转为二进制字符串后处理', isCorrect: false }
+    ];
+    reverseBitsMax.explanation = '滑动窗口解法：①prev=0, curr=0, maxLen=0；②遍历32位：若当前位为1，curr++；③若为0，prev = curr, curr=0；④maxLen = max(maxLen, prev + curr + 1)；⑤返回min(maxLen, 32)。时间O(1)，空间O(1)。';
+    reverseBitsMax.hint = '通过记录前一段连续1的长度，结合当前段1的长度，计算翻转一个0后的最大长度';
+    problems.push(reverseBitsMax);
+
+    // 20. 交替位二进制数
+    const hasAlternatingBits = new ProblemModel();
+    hasAlternatingBits.id = 2020;
+    hasAlternatingBits.title = '交替位二进制数';
+    hasAlternatingBits.description = '给定一个正整数，检查它的二进制表示是否总是 0、1 交替出现：换句话说，就是二进制表示中相邻两位的数字永不相同。';
+    hasAlternatingBits.difficulty = ProblemDifficulty.EASY;
+    hasAlternatingBits.category = ProblemCategory.BIT_MANIPULATION;
+    hasAlternatingBits.choices = [
+      { id: 'A', text: '位运算：n ^ (n >> 1) 结果应为全1，再检查加1是否为2的幂', isCorrect: true },
+      { id: 'B', text: '循环：检查相邻位是否相同', isCorrect: false },
+      { id: 'C', text: '字符串：检查相邻字符是否相同', isCorrect: false },
+      { id: 'D', text: '数学公式：判断是否符合交替模式', isCorrect: false }
+    ];
+    hasAlternatingBits.explanation = '位运算解法：①x = n ^ (n >> 1)；②若x & (x + 1) == 0，则返回true；否则false。交替位的数右移后异或原数结果为全1，加1后为2的幂。时间O(1)，空间O(1)。';
+    hasAlternatingBits.hint = '交替位的二进制数具有特殊的异或性质，可通过一次位运算判断';
+    problems.push(hasAlternatingBits);
+
+
+
+    // 3. 子集
+    const subsetsBacktrack = new ProblemModel();
+    subsetsBacktrack.id = 3003;
+    subsetsBacktrack.title = '子集（回溯法）';
+    subsetsBacktrack.description = '给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。解集 不能 包含重复的子集。你可以按 任意顺序 返回答案。';
+    subsetsBacktrack.difficulty = ProblemDifficulty.MEDIUM;
+    subsetsBacktrack.category = ProblemCategory.BACKTRACKING;
+    subsetsBacktrack.choices = [
+      { id: 'A', text: '回溯：递归选择或不选择每个元素，通过索引控制顺序避免重复', isCorrect: true },
+      { id: 'B', text: '位运算：每个子集对应一个二进制数', isCorrect: false },
+      { id: 'C', text: '动态规划：从空集开始逐步添加元素', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有可能', isCorrect: false }
+    ];
+    subsetsBacktrack.explanation = '回溯解法：①定义递归函数，参数为当前子集和起始索引；②将当前子集加入结果；③从起始索引遍历nums，加入元素到子集，递归（索引+1），再移除元素。时间O(n*2^n)，空间O(n)。';
+    subsetsBacktrack.hint = '通过起始索引确保每个元素只被考虑一次，避免生成重复子集';
+    problems.push(subsetsBacktrack);
+
+    // 4. N 皇后
+    const solveNQueens = new ProblemModel();
+    solveNQueens.id = 3004;
+    solveNQueens.title = 'N 皇后';
+    solveNQueens.description = '按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 \'Q\' 和 \'.\' 分别代表了皇后和空位。';
+    solveNQueens.difficulty = ProblemDifficulty.HARD;
+    solveNQueens.category = ProblemCategory.BACKTRACKING;
+    solveNQueens.choices = [
+      { id: 'A', text: '回溯+剪枝：按行放置皇后，记录列、主对角线、副对角线占用情况', isCorrect: true },
+      { id: 'B', text: '暴力法：尝试所有放置组合', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每行的有效位置', isCorrect: false },
+      { id: 'D', text: '数学公式：直接计算位置', isCorrect: false }
+    ];
+    solveNQueens.explanation = '回溯解法：①用三个集合记录列、主对角线（行-列）、副对角线（行+列）的占用；②递归函数按行放置皇后，对每行尝试所有列；③若列和对角线未占用，标记占用，递归下一行，回溯时解除标记；④生成棋盘格式的结果。时间O(n!)，空间O(n)。';
+    solveNQueens.hint = '利用集合快速判断皇后放置是否合法，按行递归减少搜索空间';
+    problems.push(solveNQueens);
+
+    // 6. 括号生成
+    const generateParenthesisBacktrack = new ProblemModel();
+    generateParenthesisBacktrack.id = 3006;
+    generateParenthesisBacktrack.title = '括号生成（回溯法）';
+    generateParenthesisBacktrack.description = '数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。';
+    generateParenthesisBacktrack.difficulty = ProblemDifficulty.MEDIUM;
+    generateParenthesisBacktrack.category = ProblemCategory.BACKTRACKING;
+    generateParenthesisBacktrack.choices = [
+      { id: 'A', text: '回溯+剪枝：记录左右括号数量，左括号数≤n且右括号数≤左括号时继续', isCorrect: true },
+      { id: 'B', text: '分治：基于子问题组合生成', isCorrect: false },
+      { id: 'C', text: '动态规划：dp[n]基于dp[0..n-1]生成', isCorrect: false },
+      { id: 'D', text: '暴力法：生成所有可能再筛选', isCorrect: false }
+    ];
+    generateParenthesisBacktrack.explanation = '回溯解法：①定义递归函数，参数为当前字符串、左括号数、右括号数；②若长度为2n，加入结果；③若左括号数<n，添加\'(\'并递归；④若右括号数<左括号数，添加\')\'并递归。时间O(4^n / n^(1/2))，空间O(n)。';
+    generateParenthesisBacktrack.hint = '通过控制左右括号的数量和顺序，确保生成的括号组合有效，避免无效尝试';
+    problems.push(generateParenthesisBacktrack);
+    // 11. 复原 IP 地址
+    const restoreIpAddresses = new ProblemModel();
+    restoreIpAddresses.id = 3011;
+    restoreIpAddresses.title = '复原 IP 地址';
+    restoreIpAddresses.description = '有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 \'.\' 分隔。例如："0.1.2.201" 和 "192.168.1.1" 是 有效 IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 "192.168@1.1" 是 无效 IP 地址。给定一个只包含数字的字符串 s ，用以表示一个 IP 地址，返回所有可能的有效 IP 地址，这些地址可以通过在 s 中插入 \'.\' 来形成。你 不能 重新排序或删除 s 中的任何数字。你可以按 任何 顺序返回答案。';
+    restoreIpAddresses.difficulty = ProblemDifficulty.MEDIUM;
+    restoreIpAddresses.category = ProblemCategory.BACKTRACKING;
+    restoreIpAddresses.choices = [
+      { id: 'A', text: '回溯+剪枝：递归分割字符串为4段，每段满足IP段规则', isCorrect: true },
+      { id: 'B', text: '暴力法：枚举所有可能的分割点', isCorrect: false },
+      { id: 'C', text: '动态规划：记录分割为i段的有效方案', isCorrect: false },
+      { id: 'D', text: '正则表达式：匹配所有可能的IP格式', isCorrect: false }
+    ];
+    restoreIpAddresses.explanation = '回溯解法：①定义递归函数，参数为当前IP、起始索引、段数；②若段数=4且起始索引=s长度，加入结果；③否则遍历可能的段长度（1-3），检查是否越界；④截取子串，检查是否为有效IP段（0-255，无前置0）；⑤递归下一段，回溯。时间O(1)（最多27种可能），空间O(1)。';
+    restoreIpAddresses.hint = '通过限制每段的长度和内容规则，剪枝掉无效的分割方式';
+    problems.push(restoreIpAddresses);
+
+    // 12. 解数独
+    const solveSudoku = new ProblemModel();
+    solveSudoku.id = 3012;
+    solveSudoku.title = '解数独';
+    solveSudoku.description = '编写一个程序，通过填充空格来解决数独问题。数独的解法需 遵循如下规则：数字 1-9 在每一行只能出现一次。数字 1-9 在每一列只能出现一次。数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。空白格用 \'.\' 表示。';
+    solveSudoku.difficulty = ProblemDifficulty.HARD;
+    solveSudoku.category = ProblemCategory.BACKTRACKING;
+    solveSudoku.choices = [
+      { id: 'A', text: '回溯+优化：记录每行、列、九宫格的可用数字，递归尝试填充', isCorrect: true },
+      { id: 'B', text: '暴力法：尝试所有可能数字', isCorrect: false },
+      { id: 'C', text: '启发式算法：选择空格最少的行或列优先填充', isCorrect: false },
+      { id: 'D', text: '动态规划：记录每个位置的可能数字', isCorrect: false }
+    ];
+    solveSudoku.explanation = '回溯解法：①用三个二维数组记录行、列、九宫格的数字使用情况；②找到第一个空白格；③遍历1-9，若数字可用则填充，标记使用，递归；④若递归成功返回true，否则回溯（恢复空白和标记）；⑤若填满所有格子返回true。时间O(9^m)（m为空白格数），空间O(1)。';
+    solveSudoku.hint = '通过记录数字使用情况快速判断合法性，递归填充每个空白格并回溯';
+    problems.push(solveSudoku);
+
+    // 14. 路径总和 II
+    const pathSum = new ProblemModel();
+    pathSum.id = 3014;
+    pathSum.title = '路径总和 II';
+    pathSum.description = '给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。叶子节点 是指没有子节点的节点。';
+    pathSum.difficulty = ProblemDifficulty.MEDIUM;
+    pathSum.category = ProblemCategory.BACKTRACKING;
+    pathSum.choices = [
+      { id: 'A', text: '回溯+DFS：递归遍历树，记录路径和当前和，到达叶子时检查是否等于目标', isCorrect: true },
+      { id: 'B', text: 'BFS：层序遍历记录路径', isCorrect: false },
+      { id: 'C', text: '动态规划：记录每个节点的路径和', isCorrect: false },
+      { id: 'D', text: '暴力法：枚举所有路径', isCorrect: false }
+    ];
+    pathSum.explanation = '回溯解法：①定义递归函数，参数为当前节点、当前路径、当前和；②若节点为null，返回；③将节点值加入路径和当前和；④若为叶子节点且当前和=targetSum，加入结果；⑤否则递归左右子树；⑥回溯时移除节点值。时间O(n)，空间O(h)（h为树高）。';
+    pathSum.hint = '通过深度优先搜索遍历所有根到叶子的路径，记录路径和并在叶子节点处检查';
+    problems.push(pathSum);
+
+
+    // 16. 二进制手表
+    const readBinaryWatchBacktrack = new ProblemModel();
+    readBinaryWatchBacktrack.id = 3016;
+    readBinaryWatchBacktrack.title = '二进制手表（回溯法）';
+    readBinaryWatchBacktrack.description = '二进制手表顶部有 4 个 LED 代表 小时（0-11），底部的 6 个 LED 代表 分钟（0-59）。每个 LED 代表一个 0 或 1，最低位在右侧。例如，下面的二进制手表读取 "3:25" 。给你一个整数 turnedOn ，表示当前亮着的 LED 的数量，返回二进制手表可以表示的所有可能时间。你可以 按任意顺序 返回答案。小时不会以零开头：例如，"01:00" 是无效的，正确的写法应该是 "1:00" 。分钟必须由两位数组成，可能会以零开头：例如，"10:2" 是无效的，正确的写法应该是 "10:02" 。';
+    readBinaryWatchBacktrack.difficulty = ProblemDifficulty.EASY;
+    readBinaryWatchBacktrack.category = ProblemCategory.BACKTRACKING;
+    readBinaryWatchBacktrack.choices = [
+      { id: 'A', text: '回溯：递归选择LED是否点亮，统计小时和分钟的有效性', isCorrect: true },
+      { id: 'B', text: '位运算：枚举所有可能的小时和分钟', isCorrect: false },
+      { id: 'C', text: '暴力法：生成所有可能时间并检查', isCorrect: false },
+      { id: 'D', text: '数学公式：计算可能的组合', isCorrect: false }
+    ];
+    readBinaryWatchBacktrack.explanation = '回溯解法：①定义递归函数，参数为已点亮的LED数、当前位置（0-9）、小时、分钟；②若位置=10，检查LED数是否等于turnedOn和时间有效性，有效则加入结果；③否则尝试不点亮当前LED，递归下一位；④若LED数<turnedOn，尝试点亮当前LED（更新小时或分钟），递归下一位。时间O(2^10)，空间O(1)。';
+    readBinaryWatchBacktrack.hint = '通过递归选择每个LED的状态，控制点亮总数并检查时间有效性';
+    problems.push(readBinaryWatchBacktrack);
+
+    // 18. 优美的排列
+    const countArrangement = new ProblemModel();
+    countArrangement.id = 3018;
+    countArrangement.title = '优美的排列';
+    countArrangement.description = '假设有从 1 到 n 的 n 个整数。用这些整数构造一个数组 perm（下标从 1 开始），只要满足下述条件 之一 ，该数组就是一个 优美的排列 ：perm[i] 能够被 i 整除。i 能够被 perm[i] 整除。给你一个整数 n ，返回可以构造的 优美排列 的 数量 。';
+    countArrangement.difficulty = ProblemDifficulty.MEDIUM;
+    countArrangement.category = ProblemCategory.BACKTRACKING;
+    countArrangement.choices = [
+      { id: 'A', text: '回溯：递归填充每个位置，尝试所有符合条件的未使用数字', isCorrect: true },
+      { id: 'B', text: '动态规划：状态压缩记录使用的数字', isCorrect: false },
+      { id: 'C', text: '数学公式：计算排列数', isCorrect: false },
+      { id: 'D', text: '暴力法：生成所有排列并检查', isCorrect: false }
+    ];
+    countArrangement.explanation = '回溯解法：①定义递归函数，参数为当前位置和已使用标记；②若位置>n，计数+1；③否则遍历1-n，若未使用且满足整除条件，标记使用，递归下一个位置，回溯时解除标记。时间O(k)（k为优美排列数量），空间O(n)。';
+    countArrangement.hint = '通过递归为每个位置选择符合条件的数字，利用标记避免重复使用';
+    problems.push(countArrangement);
+
+    // 19. 字母大小写全排列
+    const letterCasePermutation = new ProblemModel();
+    letterCasePermutation.id = 3019;
+    letterCasePermutation.title = '字母大小写全排列';
+    letterCasePermutation.description = '给定一个字符串 s ，通过将字符串 s 中的每个字母转变大小写，我们可以获得一个新的字符串。返回 所有可能得到的字符串集合 。以 任意顺序 返回输出。';
+    letterCasePermutation.difficulty = ProblemDifficulty.MEDIUM;
+    letterCasePermutation.category = ProblemCategory.BACKTRACKING;
+    letterCasePermutation.choices = [
+      { id: 'A', text: '回溯：递归处理每个字符，字母则尝试大小写两种情况，数字直接添加', isCorrect: true },
+      { id: 'B', text: '位运算：用二进制表示字母的大小写选择', isCorrect: false },
+      { id: 'C', text: '动态规划：基于前i个字符的结果生成', isCorrect: false },
+      { id: 'D', text: '暴力法：生成所有可能组合', isCorrect: false }
+    ];
+    letterCasePermutation.explanation = '回溯解法：①定义递归函数，参数为当前字符串和索引；②若索引=s长度，加入结果；③否则获取当前字符，若为数字，添加后递归下一位；④若为字母，分别添加小写和大写形式，递归下一位，回溯。时间O(n*2^k)（k为字母数），空间O(n)。';
+    letterCasePermutation.hint = '对每个字母递归尝试两种大小写状态，数字则直接处理，生成所有可能组合';
+    problems.push(letterCasePermutation);
+
+    return problems;
   }
 }

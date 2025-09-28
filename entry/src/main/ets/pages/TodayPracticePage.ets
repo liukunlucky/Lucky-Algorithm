@@ -795,31 +795,30 @@ export struct TodayPracticePage {
   }
 
   private getCategoryColor(categoryName: string): string {
-    const colorMap: Record<string, string> = {
-      '数组与字符串': '#1890ff',
-      '链表操作': '#52c41a',
-      '字符串算法': '#fa8c16',
-      '二叉树': '#13c2c2',
-      '双指针技巧': '#722ed1',
-      '动态规划': '#eb2f96',
-      '二分查找': '#f5222d',
-      '数学算法': '#fa541c',
-      '栈与队列': '#52c41a',
-      '哈希表': '#2f54eb',
-      '回溯算法': '#722ed1',
-      '贪心算法': '#52c41a',
-      '位运算': '#13c2c2',
-      '设计题': '#fa8c16',
-      '分治算法': '#eb2f96',
-      '滑动窗口': '#f5222d',
-      '前缀和': '#fa541c',
-      '单调栈': '#1890ff',
-      '字典树': '#722ed1',
-      '图算法': '#13c2c2',
-      '排序算法': '#52c41a'
-    };
-    
-    return colorMap[categoryName] || '#666666';
+    switch (categoryName) {
+      case '数组与字符串': return '#1890ff';
+      case '链表操作': return '#52c41a';
+      case '字符串算法': return '#fa8c16';
+      case '二叉树': return '#13c2c2';
+      case '双指针技巧': return '#722ed1';
+      case '动态规划': return '#eb2f96';
+      case '二分查找': return '#f5222d';
+      case '数学算法': return '#fa541c';
+      case '栈与队列': return '#52c41a';
+      case '哈希表': return '#2f54eb';
+      case '回溯算法': return '#722ed1';
+      case '贪心算法': return '#52c41a';
+      case '位运算': return '#13c2c2';
+      case '设计题': return '#fa8c16';
+      case '分治算法': return '#eb2f96';
+      case '滑动窗口': return '#f5222d';
+      case '前缀和': return '#fa541c';
+      case '单调栈': return '#1890ff';
+      case '字典树': return '#722ed1';
+      case '图算法': return '#13c2c2';
+      case '排序算法': return '#52c41a';
+      default: return '#666666';
+    }
   }
 
   private async loadCategoryProgress(): Promise<void> {
@@ -920,7 +919,7 @@ export struct TodayPracticePage {
     Column({ space: 16 }) {
       // 笔试专区标题
       Row() {
-        Text('笔试专区')
+        Text('功能专区')
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
@@ -948,22 +947,20 @@ export struct TodayPracticePage {
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround)
 
-      // 面试专区标题
-      Row() {
-        Text('面试专区')
-          .fontSize(18)
-          .fontWeight(FontWeight.Bold)
-          .fontColor('#333333')
+      // 第三行：学习笔记、错题本、我的收藏、学习日记
+      Row({ space: 20 }) {
+        this.buildFunctionItem($r('app.media.icon_fun_baodian'), '面试宝典', () => this.navigateToPage('pages/InterviewGuideePage'))
+        this.buildFunctionItem($r('app.media.icon_fun_dachang'), '大厂真题', () => this.navigateToPage('pages/BigCompanyPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_mianshi'), '面试记录', () => this.navigateToPage('pages/MyRecordPage'))
+        this.buildFunctionItem($r('app.media.icon_fun_offer'), '我的offer', () => this.navigateToPage('pages/MyOfferPage'))
       }
       .width('100%')
-      .justifyContent(FlexAlign.Start)
-      .padding({ left: 4, top: 16 })
+      .justifyContent(FlexAlign.SpaceAround)
 
-      // 面试专区图标
+      // 第三行：学习笔记、错题本、我的收藏、学习日记
       Row({ space: 20 }) {
-        this.buildFunctionItem($r('app.media.icon_fun_center'), '面试题库', () => this.navigateToPage('pages/InterviewBankPage'))
-        this.buildFunctionItem($r('app.media.icon_fun_baodian'), '面试宝典', () => this.navigateToPage('pages/InterviewGuideePage'))
-        // 占位空间，保持对齐
+        this.buildFunctionItem($r('app.media.icon_vs'), 'offer对比', () => this.navigateToPage('pages/OfferComparisonPage'))
+        Column().width(60)
         Column().width(60)
         Column().width(60)
       }
